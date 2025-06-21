@@ -1,7 +1,7 @@
 ![](web/assets/img/logo.png)  
 Welcome to the Botania repository.  
 
-Botania is a [Minecraft](https://minecraft.net/) tech mod themed around natural magic. It's inspired by other magic mods, such as [Thaumcraft](https://www.curseforge.com/minecraft/mc-mods/thaumcraft) or [Blood Magic](https://www.curseforge.com/minecraft/mc-mods/blood-magic).  
+Botania is a [Minecraft](https://minecraft.net/) tech mod themed around natural magic.  It's inspired by other magic mods, such as [Thaumcraft](https://www.curseforge.com/minecraft/mc-mods/thaumcraft) or [Blood Magic](https://www.curseforge.com/minecraft/mc-mods/blood-magic).  
 
 Botania is licensed under the [Botania License](http://botaniamod.net/license.php)
 
