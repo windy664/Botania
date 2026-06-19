@@ -41,7 +41,7 @@ public class EquestrianVirusItem extends Item {
 	@Override
 	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity living, InteractionHand hand) {
 		if (living.isAlive() && living instanceof Horse horse) {
-			if (player.level().isClientSide) {
+			if (player.level().isClientSide()) {
 				return InteractionResult.SUCCESS;
 			}
 			if (horse.isTamed()) {

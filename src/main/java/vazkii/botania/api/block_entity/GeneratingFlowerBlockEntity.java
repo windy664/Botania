@@ -45,7 +45,7 @@ public abstract class GeneratingFlowerBlockEntity extends BindableSpecialFlowerB
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (getLevel().isClientSide) {
+		if (getLevel().isClientSide()) {
 			double particleChance = 1F - (double) getMana() / (double) getMaxMana() / 3.5F;
 			int color = getColor();
 			float red = (color >> 16 & 0xFF) / 255F;

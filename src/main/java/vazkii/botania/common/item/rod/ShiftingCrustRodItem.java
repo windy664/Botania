@@ -88,7 +88,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 				setHitPos(stack, ctx.getClickLocation());
 
 				displayRemainderCounter(player, stack);
-				return InteractionResult.sidedSuccess(world.isClientSide());
+				return InteractionResult.sidedSuccess(world.isClientSide()());
 			}
 		} else if (canExchange(stack) && !stack.has(BotaniaDataComponents.SWAPPING)) {
 			Item replacement = getItemToPlace(stack);
@@ -101,7 +101,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 			}
 		}
 
-		return InteractionResult.sidedSuccess(world.isClientSide());
+		return InteractionResult.sidedSuccess(world.isClientSide()());
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 		ItemStack stack = player.getItemInHand(hand);
 		if (!stack.isEmpty() && stack.is(this)) {
 			// Skip logic on the client, the server will replace the block when it receives the action packet
-			if (world.isClientSide()) {
+			if (world.isClientSide()()) {
 				return InteractionResult.SUCCESS;
 			}
 
@@ -163,7 +163,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 				return;
 			}
 
-			BlockPos coords = swap.get(world.random.nextInt(swap.size()));
+			BlockPos coords = swap.get(world.getRandom().nextInt(swap.size()));
 			int exchange = exchange(world, player, coords, stack, replacement);
 			if (exchange > 0) {
 				ManaItemHandler.instance().requestManaForTool(stack, player, exchange, true);
@@ -234,7 +234,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 			if (!stateAt.isAir() && stateAt.getDestroyProgress(player, world, pos) > 0
 					&& stateAt.getBlock().asItem() != replacement) {
 				float hardness = stateAt.getDestroySpeed(world, pos);
-				if (!world.isClientSide) {
+				if (!world.isClientSide()) {
 					final NeighborUpdater neighborUpdater = ((LevelAccessor) world).getNeighborUpdater();
 					try {
 						if (neighborUpdater instanceof CollectingNeighborUpdaterAccess access) {
@@ -370,7 +370,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 	}
 
 	public void displayRemainderCounter(Player player, ItemStack stack) {
-		if (!player.level().isClientSide) {
+		if (!player.level().isClientSide()) {
 			Item item = getItemToPlace(stack);
 			int count = getInventoryItemCount(player, stack, item);
 			ItemsRemainingRenderHandler.send(player, new ItemStack(item), count);

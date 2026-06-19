@@ -251,7 +251,7 @@ public class ManaSpreaderBlockEntity extends ExposedSimpleInventoryBlockEntity i
 			self.tryShootBurst();
 		}
 
-		if (self.receiverLastTick != self.receiver && !level.isClientSide) {
+		if (self.receiverLastTick != self.receiver && !level.isClientSide()) {
 			self.requestsClientUpdate = true;
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(self);
 		}
@@ -348,7 +348,7 @@ public class ManaSpreaderBlockEntity extends ExposedSimpleInventoryBlockEntity i
 			}
 		}
 
-		if (level != null && level.isClientSide) {
+		if (level != null && level.isClientSide()) {
 			hasReceivedInitialPacket = true;
 		}
 	}
@@ -384,7 +384,7 @@ public class ManaSpreaderBlockEntity extends ExposedSimpleInventoryBlockEntity i
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 		} else {
 			BlockHitResult bpos = LexicaBotaniaItem.doRayTrace(level, player, ClipContext.Fluid.NONE);
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				double x = bpos.getLocation().x - getBlockPos().getX() - 0.5;
 				double y = bpos.getLocation().y - getBlockPos().getY() - 0.5;
 				double z = bpos.getLocation().z - getBlockPos().getZ() - 0.5;
@@ -411,7 +411,7 @@ public class ManaSpreaderBlockEntity extends ExposedSimpleInventoryBlockEntity i
 	}
 
 	private boolean needsNewBurstSimulation() {
-		if (level.isClientSide && !hasReceivedInitialPacket) {
+		if (level.isClientSide() && !hasReceivedInitialPacket) {
 			return false;
 		}
 
@@ -435,7 +435,7 @@ public class ManaSpreaderBlockEntity extends ExposedSimpleInventoryBlockEntity i
 			if (canShootBurst && (redstone || receiver.canReceiveManaFromBursts() && !receiver.isFull())) {
 				ManaBurstEntity burst = getBurst(false);
 				if (burst != null) {
-					if (!level.isClientSide) {
+					if (!level.isClientSide()) {
 						this.receiveMana(-burst.getStartingMana());
 						burst.setShooterUUID(getIdentifier());
 						level.addFreshEntity(burst);
@@ -601,7 +601,7 @@ public class ManaSpreaderBlockEntity extends ExposedSimpleInventoryBlockEntity i
 	public void setChanged() {
 		super.setChanged();
 		if (level != null) {
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				checkForReceiver();
 				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 			}

@@ -58,7 +58,7 @@ public class ManaUpgradeRecipe extends ShapedRecipe {
 		return SERIALIZER;
 	}
 
-	private static class Serializer implements WrappingRecipeSerializer<ManaUpgradeRecipe> {
+	private static class Serializer extends WrappingRecipeSerializer<ManaUpgradeRecipe> {
 		public static final MapCodec<ManaUpgradeRecipe> CODEC = SHAPED_RECIPE.codec()
 				.xmap(ManaUpgradeRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, ManaUpgradeRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()

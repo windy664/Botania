@@ -165,7 +165,7 @@ public class ManaPoolBlockEntity extends BotaniaBlockEntity implements ManaPool,
 	}
 
 	public boolean collideEntityItem(ItemEntity item) {
-		if (level.isClientSide || !item.isAlive() || item.getItem().isEmpty()) {
+		if (level.isClientSide() || !item.isAlive() || item.getItem().isEmpty()) {
 			return false;
 		}
 
@@ -222,7 +222,7 @@ public class ManaPoolBlockEntity extends BotaniaBlockEntity implements ManaPool,
 	public boolean triggerEvent(int event, int param) {
 		switch (event) {
 			case CRAFT_EFFECT_EVENT: {
-				if (level.isClientSide) {
+				if (level.isClientSide()) {
 					for (int i = 0; i < 25; i++) {
 						float red = (float) Math.random();
 						float green = (float) Math.random();
@@ -235,13 +235,13 @@ public class ManaPoolBlockEntity extends BotaniaBlockEntity implements ManaPool,
 				return true;
 			}
 			case CHARGE_EFFECT_EVENT: {
-				if (level.isClientSide && BotaniaConfig.common().chargingAnimationEnabled()) {
+				if (level.isClientSide() && BotaniaConfig.common().chargingAnimationEnabled()) {
 					chargingParticles.computeIfAbsent(param, i -> new MutableInt(15)).setValue(15);
 				}
 				return true;
 			}
 			case DRAIN_EFFECT_EVENT: {
-				if (level.isClientSide && BotaniaConfig.common().chargingAnimationEnabled()) {
+				if (level.isClientSide() && BotaniaConfig.common().chargingAnimationEnabled()) {
 					drainingParticles.computeIfAbsent(param, i -> new MutableInt(15)).setValue(15);
 				}
 				return true;

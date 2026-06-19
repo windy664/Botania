@@ -70,7 +70,7 @@ public class BaseBrewItem extends Item implements BrewItem, CustomCreativeTabCon
 
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity living) {
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			for (MobEffectInstance effect : getBrew(stack).getPotionEffects(stack)) {
 				MobEffectInstance newEffect = new MobEffectInstance(effect.getEffect(), effect.getDuration(), effect.getAmplifier(), true, true);
 				if (effect.getEffect().value().isInstantenous()) {
@@ -80,7 +80,7 @@ public class BaseBrewItem extends Item implements BrewItem, CustomCreativeTabCon
 				}
 			}
 
-			if (world.random.nextBoolean()) {
+			if (world.getRandom().nextBoolean()) {
 				world.playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 1F, 1F);
 			}
 

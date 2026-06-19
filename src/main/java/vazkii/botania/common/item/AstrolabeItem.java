@@ -67,7 +67,7 @@ public class AstrolabeItem extends Item {
 		if (player != null && player.isSecondaryUseActive()) {
 			if (setBlock(stack, state)) {
 				displayRemainderCounter(player, stack);
-				return InteractionResult.sidedSuccess(player.level().isClientSide());
+				return InteractionResult.sidedSuccess(player.level().isClientSide()());
 			}
 		} else if (player != null) {
 			boolean did = placeAllBlocks(stack, player, ctx.getHand());
@@ -86,14 +86,14 @@ public class AstrolabeItem extends Item {
 		ItemStack stack = playerIn.getItemInHand(hand);
 		if (playerIn.isSecondaryUseActive()) {
 			playerIn.playSound(BotaniaSounds.astrolabeConfigure, 1F, 1F);
-			if (!worldIn.isClientSide) {
+			if (!worldIn.isClientSide()) {
 				int size = getSize(stack);
 				int newSize = size == 11 ? 3 : size + 2;
 				setSize(stack, newSize);
 				ItemsRemainingRenderHandler.send(playerIn, stack, 0, Component.literal(newSize + "x" + newSize));
 			}
 
-			return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide());
+			return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide()());
 		}
 
 		return InteractionResultHolder.pass(stack);
@@ -259,7 +259,7 @@ public class AstrolabeItem extends Item {
 	public void displayRemainderCounter(Player player, ItemStack stack) {
 		Block block = getBlock(stack, player.level().holderLookup(Registries.BLOCK));
 		int count = ShiftingCrustRodItem.getInventoryItemCount(player, stack, block.asItem());
-		if (!player.level().isClientSide) {
+		if (!player.level().isClientSide()) {
 			ItemsRemainingRenderHandler.send(player, new ItemStack(block), count);
 		}
 	}

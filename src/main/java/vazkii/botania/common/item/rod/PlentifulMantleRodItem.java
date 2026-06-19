@@ -48,15 +48,15 @@ public class PlentifulMantleRodItem extends Item {
 	public InteractionResultHolder<ItemStack> use(Level world, Player p, InteractionHand hand) {
 		ItemStack stack = p.getItemInHand(hand);
 		if (ManaItemHandler.instance().requestManaExactForTool(stack, p, COST, true)) {
-			if (world.isClientSide) {
+			if (world.isClientSide()) {
 				int range = ManaItemHandler.instance().hasProficiency(p, stack) ? 20 : 15;
-				long seedxor = world.random.nextLong();
+				long seedxor = world.getRandom().nextLong();
 				doHighlight(world, p.blockPosition(), range, seedxor);
 			} else {
 				world.playSound(null, p.getX(), p.getY(), p.getZ(), BotaniaSounds.divinationRod, SoundSource.PLAYERS, 1F, 1F);
 				p.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
 			}
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide);
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 		}
 
 		return InteractionResultHolder.pass(stack);
@@ -71,7 +71,7 @@ public class PlentifulMantleRodItem extends Item {
 			if (state.is(XplatAbstractions.INSTANCE.getOreTag())) {
 				Random rand = new Random(BuiltInRegistries.BLOCK.getKey(block).hashCode() ^ seedxor);
 				WispParticleData data = WispParticleData.wisp(0.25F, rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 8, false);
-				world.addParticle(data, true, pos_.getX() + world.random.nextFloat(), pos_.getY() + world.random.nextFloat(), pos_.getZ() + world.random.nextFloat(), 0, 0, 0);
+				world.addParticle(data, true, pos_.getX() + world.getRandom().nextFloat(), pos_.getY() + world.getRandom().nextFloat(), pos_.getZ() + world.getRandom().nextFloat(), 0, 0, 0);
 			}
 		}
 	}

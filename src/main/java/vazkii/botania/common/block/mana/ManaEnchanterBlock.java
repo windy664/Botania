@@ -84,7 +84,7 @@ public class ManaEnchanterBlock extends BotaniaBlock implements EntityBlock {
 			enchanter.sync();
 		}
 
-		return ItemInteractionResult.sidedSuccess(world.isClientSide());
+		return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 	}
 
 	@Override

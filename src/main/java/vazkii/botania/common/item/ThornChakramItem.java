@@ -30,7 +30,7 @@ public class ThornChakramItem extends Item {
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			ItemStack copy = stack.copy();
 			copy.setCount(1);
 			ThornChakramEntity c = new ThornChakramEntity(player, world, copy);
@@ -47,7 +47,7 @@ public class ThornChakramItem extends Item {
 			stack.shrink(1);
 		}
 
-		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
 	}
 
 }

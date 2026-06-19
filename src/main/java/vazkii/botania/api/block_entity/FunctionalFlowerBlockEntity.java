@@ -64,7 +64,7 @@ public abstract class FunctionalFlowerBlockEntity extends BindableSpecialFlowerB
 			}
 		}
 
-		if (getLevel().isClientSide) {
+		if (getLevel().isClientSide()) {
 			double particleChance = 1F - (double) mana / (double) getMaxMana() / 3.5F;
 			int color = getColor();
 			float red = (color >> 16 & 0xFF) / 255F;

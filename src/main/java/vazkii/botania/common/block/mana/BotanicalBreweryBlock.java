@@ -62,7 +62,7 @@ public class BotanicalBreweryBlock extends BotaniaWaterloggedBlock implements En
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 		if (!state.getValue(BlockStateProperties.POWERED) && level.getBlockEntity(pos) instanceof BreweryBlockEntity brew) {
 			InventoryHelper.withdrawFromInventory(brew, player);
-			return InteractionResult.sidedSuccess(level.isClientSide());
+			return InteractionResult.sidedSuccess(level.isClientSide()());
 		}
 		return InteractionResult.PASS;
 	}
@@ -70,7 +70,7 @@ public class BotanicalBreweryBlock extends BotaniaWaterloggedBlock implements En
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		return level.getBlockEntity(pos) instanceof BreweryBlockEntity brew && brew.addItem(player, stack, hand)
-				? ItemInteractionResult.sidedSuccess(level.isClientSide())
+				? ItemInteractionResult.sidedSuccess(level.isClientSide()())
 				: ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 	}
 

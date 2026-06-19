@@ -62,7 +62,7 @@ public abstract class FluidGeneratorBlockEntity extends GeneratingFlowerBlockEnt
 			}
 		}
 
-		if (!getLevel().isClientSide) {
+		if (!getLevel().isClientSide()) {
 			if (burnTime > 0 && ticksExisted % getGenerationDelay() == 0) {
 				addMana(manaPerTick);
 				sync();
@@ -70,7 +70,7 @@ public abstract class FluidGeneratorBlockEntity extends GeneratingFlowerBlockEnt
 		}
 
 		if (burnTime == 0) {
-			if (getMana() < getMaxMana() && !getLevel().isClientSide) {
+			if (getMana() < getMaxMana() && !getLevel().isClientSide()) {
 				List<BlockPos> offsets = Arrays.asList(OFFSETS);
 				Collections.shuffle(offsets);
 

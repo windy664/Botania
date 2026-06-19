@@ -37,7 +37,7 @@ public class LivingwoodSlingshotItem extends Item {
 	public void releaseUsing(ItemStack stack, Level world, LivingEntity living, int duration) {
 		int j = getUseDuration(stack, living) - duration;
 
-		if (!world.isClientSide && (!(living instanceof Player player) || player.getAbilities().instabuild || PlayerHelper.hasAmmo(player, AMMO_FUNC))) {
+		if (!world.isClientSide() && (!(living instanceof Player player) || player.getAbilities().instabuild || PlayerHelper.hasAmmo(player, AMMO_FUNC))) {
 			float f = j / 20.0F;
 			f = (f * f + f * 2.0F) / 3.0F;
 

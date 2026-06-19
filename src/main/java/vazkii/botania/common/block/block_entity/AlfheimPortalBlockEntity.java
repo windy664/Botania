@@ -143,12 +143,12 @@ public class AlfheimPortalBlockEntity extends BotaniaBlockEntity implements Wand
 
 		if (self.ticksOpen > 60) {
 			self.ticksSinceLastItem++;
-			if (level.isClientSide && BotaniaConfig.client().elfPortalParticlesEnabled()) {
+			if (level.isClientSide() && BotaniaConfig.client().elfPortalParticlesEnabled()) {
 				self.blockParticle(state);
 			}
 
 			List<ItemEntity> items = level.getEntitiesOfClass(ItemEntity.class, aabb);
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				for (ItemEntity item : items) {
 					if (!item.isAlive()) {
 						continue;
@@ -167,13 +167,13 @@ public class AlfheimPortalBlockEntity extends BotaniaBlockEntity implements Wand
 				}
 			}
 
-			if (!level.isClientSide && !self.stacksIn.isEmpty() && self.ticksSinceLastItem >= 4) {
+			if (!level.isClientSide() && !self.stacksIn.isEmpty() && self.ticksSinceLastItem >= 4) {
 				self.resolveRecipes();
 			}
 		}
 
 		if (self.closeNow) {
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				level.setBlockAndUpdate(worldPosition, BotaniaBlocks.alfPortal.defaultBlockState());
 			}
 			for (int i = 0; i < 36; i++) {
@@ -187,7 +187,7 @@ public class AlfheimPortalBlockEntity extends BotaniaBlockEntity implements Wand
 				}
 			}
 
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				level.setBlockAndUpdate(worldPosition, blockState.setValue(BotaniaStateProperties.ALFPORTAL_STATE, newState));
 			}
 		} else if (self.explode) {
@@ -195,7 +195,7 @@ public class AlfheimPortalBlockEntity extends BotaniaBlockEntity implements Wand
 					3f, Level.ExplosionInteraction.NONE);
 			self.explode = false;
 
-			if (!level.isClientSide && self.breadPlayer != null) {
+			if (!level.isClientSide() && self.breadPlayer != null) {
 				Player entity = level.getPlayerByUUID(self.breadPlayer);
 				if (entity instanceof ServerPlayer serverPlayer) {
 					AlfheimPortalBreadTrigger.INSTANCE.trigger(serverPlayer, worldPosition);
@@ -225,7 +225,7 @@ public class AlfheimPortalBlockEntity extends BotaniaBlockEntity implements Wand
 
 	private void blockParticle(AlfheimPortalState state) {
 		// Pick one of the inner positions, offsets [-1,+1] and [+1,+3]
-		int rnd = level.random.nextInt(9);
+		int rnd = level.getRandom().nextInt(9);
 		double dh = (rnd / 3) - 1;
 		double dy = (rnd % 3) + 1;
 		double dx = state == AlfheimPortalState.ON_X ? 0 : dh;
@@ -454,7 +454,7 @@ public class AlfheimPortalBlockEntity extends BotaniaBlockEntity implements Wand
 				if (pool.getCurrentMana() < costPer) {
 					closeNow = closeNow || close;
 					return false;
-				} else if (!level.isClientSide) {
+				} else if (!level.isClientSide()) {
 					consumePools.add(pool);
 					consumed += costPer;
 				}

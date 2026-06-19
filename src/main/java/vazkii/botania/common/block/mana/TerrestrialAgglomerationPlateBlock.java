@@ -55,7 +55,7 @@ public class TerrestrialAgglomerationPlateBlock extends BotaniaWaterloggedBlock 
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
 			Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (usesItem(stack, level)) {
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				ItemStack target = stack.split(1);
 				ItemEntity item = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, target);
 				item.setPickUpDelay(40);
@@ -63,7 +63,7 @@ public class TerrestrialAgglomerationPlateBlock extends BotaniaWaterloggedBlock 
 				level.addFreshEntity(item);
 			}
 
-			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+			return ItemInteractionResult.sidedSuccess(level.isClientSide()());
 		}
 
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -93,7 +93,7 @@ public class TerrestrialAgglomerationPlateBlock extends BotaniaWaterloggedBlock 
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			return createTickerHelper(type, BotaniaBlockEntities.TERRA_PLATE, TerrestrialAgglomerationPlateBlockEntity::serverTick);
 		}
 		return null;

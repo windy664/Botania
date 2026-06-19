@@ -274,7 +274,7 @@ public abstract class SpecialFlowerBlockEntity extends BlockEntity implements Fl
 	}
 
 	public void emitParticle(ParticleOptions options, double xOffset, double yOffset, double zOffset, double xSpeed, double ySpeed, double zSpeed) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			return;
 		}
 		Vec3 offset = level.getBlockState(getEffectivePos()).getOffset(level, getEffectivePos());

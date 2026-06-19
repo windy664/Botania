@@ -62,11 +62,11 @@ public class ExtrapolatedBucketItem extends Item {
 						}
 						level.gameEvent(player, GameEvent.FLUID_PICKUP, blockPos);
 						ItemStack itemStack3 = itemStack; // Botania: don't overwrite ourselves
-						if (!level.isClientSide) {
+						if (!level.isClientSide()) {
 							CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, itemStack2);
 						}
 
-						return InteractionResultHolder.sidedSuccess(itemStack3, level.isClientSide());
+						return InteractionResultHolder.sidedSuccess(itemStack3, level.isClientSide()());
 					}
 				}
 

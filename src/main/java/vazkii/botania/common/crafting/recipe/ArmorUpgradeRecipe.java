@@ -51,7 +51,7 @@ public class ArmorUpgradeRecipe extends ShapedRecipe {
 		return SERIALIZER;
 	}
 
-	private static class Serializer implements WrappingRecipeSerializer<ArmorUpgradeRecipe> {
+	private static class Serializer extends WrappingRecipeSerializer<ArmorUpgradeRecipe> {
 		public static final MapCodec<ArmorUpgradeRecipe> CODEC = SHAPED_RECIPE.codec()
 				.xmap(ArmorUpgradeRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, ArmorUpgradeRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()

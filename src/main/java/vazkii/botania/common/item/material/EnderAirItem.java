@@ -53,7 +53,7 @@ public class EnderAirItem extends Item implements ProjectileItem {
 		if ((world.dimension() == Level.END && isClearFromDragonBreath(world, player.getBoundingBox().inflate(3.5)) && notAimingAtFluid(world, player))
 				|| pickupFromEntity(world, player.getBoundingBox().inflate(1.0))) {
 
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				ItemStack enderAir = new ItemStack(BotaniaItems.enderAirBottle);
 				player.getInventory().placeItemBackInInventory(enderAir);
 				stack.shrink(1);
@@ -61,7 +61,7 @@ public class EnderAirItem extends Item implements ProjectileItem {
 				world.gameEvent(player, GameEvent.FLUID_PICKUP, player.position());
 			}
 
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
 		}
 
 		return InteractionResultHolder.pass(stack);
@@ -101,12 +101,12 @@ public class EnderAirItem extends Item implements ProjectileItem {
 
 		world.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.enderAirThrow, SoundSource.PLAYERS, 1F, 0.4F / (player.getRandom().nextFloat() * 0.4F + 0.8F));
 
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			EnderAirBottleEntity b = new EnderAirBottleEntity(player, world);
 			b.shootFromRotation(player, player.getXRot(), player.getYRot(), 0F, 1.5F, 1F);
 			world.addFreshEntity(b);
 		}
-		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide);
+		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 	}
 
 	@Override

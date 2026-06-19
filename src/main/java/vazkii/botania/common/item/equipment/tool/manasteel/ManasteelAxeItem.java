@@ -69,7 +69,7 @@ public class ManasteelAxeItem extends AxeItem implements CustomDamageItem, Sorta
 					ItemStack displayStack = stackAt.copy();
 					var result = PlayerHelper.substituteUse(ctx, stackAt);
 					if (result.consumesAction()) {
-						if (!ctx.getLevel().isClientSide) {
+						if (!ctx.getLevel().isClientSide()) {
 							ItemsRemainingRenderHandler.send(player, displayStack, SAPLING_PATTERN);
 						}
 						return result;
@@ -83,7 +83,7 @@ public class ManasteelAxeItem extends AxeItem implements CustomDamageItem, Sorta
 
 	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-		if (!world.isClientSide && entity instanceof Player player && stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, getManaPerDamage() * 2, true)) {
+		if (!world.isClientSide() && entity instanceof Player player && stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, getManaPerDamage() * 2, true)) {
 			stack.setDamageValue(stack.getDamageValue() - 1);
 		}
 	}

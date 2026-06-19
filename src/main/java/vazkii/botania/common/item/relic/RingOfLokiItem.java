@@ -83,7 +83,7 @@ public class RingOfLokiItem extends RelicBaubleItem implements WireframeCoordina
 		BlockPos hit = lookPos.getBlockPos();
 		if (stack.isEmpty() && hand == InteractionHand.MAIN_HAND) {
 			GlobalPos originCoords = getBindingCenter(lokiRing);
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				if (originCoords == null || originCoords.dimension() != world.dimension()) {
 					// Initiate a new pending list of positions
 					setBindingCenter(lokiRing, GlobalPos.of(world.dimension(), hit));
@@ -152,7 +152,7 @@ public class RingOfLokiItem extends RelicBaubleItem implements WireframeCoordina
 	public static void breakOnAllCursors(Player player, ItemStack stack, BlockPos pos, Direction side) {
 		Item item = stack.getItem();
 		ItemStack lokiRing = getLokiRing(player);
-		if (lokiRing.isEmpty() || player.level().isClientSide || !(item instanceof SequentialBreaker breaker)) {
+		if (lokiRing.isEmpty() || player.level().isClientSide() || !(item instanceof SequentialBreaker breaker)) {
 			return;
 		}
 

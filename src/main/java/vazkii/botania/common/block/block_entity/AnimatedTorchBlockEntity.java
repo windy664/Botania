@@ -70,7 +70,7 @@ public class AnimatedTorchBlockEntity extends BotaniaBlockEntity implements Mana
 	}
 
 	public void handRotate() {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			level.blockEvent(getBlockPos(), BotaniaBlocks.animatedTorch, 0, (side + 1) % 4);
 		}
 	}
@@ -90,9 +90,9 @@ public class AnimatedTorchBlockEntity extends BotaniaBlockEntity implements Mana
 	}
 
 	public void toggle() {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			level.blockEvent(getBlockPos(), BotaniaBlocks.animatedTorch, 0, torchMode.modeSwitcher.rotate(this, side));
-			nextRandomRotation = level.random.nextInt(4);
+			nextRandomRotation = level.getRandom().nextInt(4);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 		}
 	}
@@ -184,7 +184,7 @@ public class AnimatedTorchBlockEntity extends BotaniaBlockEntity implements Mana
 			self.rotation = self.side * 90;
 		}
 
-		if (level.isClientSide) {
+		if (level.isClientSide()) {
 			int amt = self.rotating ? 3 : Math.random() < 0.1 ? 1 : 0;
 			double x = worldPosition.getX() + 0.5 + Math.cos((self.rotation + 90) / 180.0 * Math.PI) * 0.35;
 			double y = worldPosition.getY() + 0.2;
@@ -216,7 +216,7 @@ public class AnimatedTorchBlockEntity extends BotaniaBlockEntity implements Mana
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		side = cmp.getInt(TAG_SIDE);
 		rotating = cmp.getBoolean(TAG_ROTATING);
-		if (level != null && !level.isClientSide) {
+		if (level != null && !level.isClientSide()) {
 			rotationTicks = cmp.getInt(TAG_ROTATION_TICKS);
 		}
 		anglePerTick = cmp.getDouble(TAG_ANGLE_PER_TICK);

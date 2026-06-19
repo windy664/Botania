@@ -38,7 +38,7 @@ public class FloralFertilizerItem extends Item {
 	public InteractionResult useOn(UseOnContext ctx) {
 		Level world = ctx.getLevel();
 		BlockPos pos = ctx.getClickedPos();
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			Optional<HolderSet.Named<Block>> flowersTag =
 					BuiltInRegistries.BLOCK.getTag(BotaniaTags.Blocks.MYSTICAL_FLOWERS);
 			Optional<HolderSet.Named<Block>> mushroomsTag =
@@ -60,20 +60,20 @@ public class FloralFertilizerItem extends Item {
 				}
 			}
 
-			int petalCount = world.random.nextIntBetweenInclusive(5, 7);
+			int petalCount = world.getRandom().nextIntBetweenInclusive(5, 7);
 			while (petalCount > 0 && !validCoords.isEmpty()) {
 				petalCount--;
-				BlockPos coords = validCoords.get(world.random.nextInt(validCoords.size()));
+				BlockPos coords = validCoords.get(world.getRandom().nextInt(validCoords.size()));
 				validCoords.remove(coords);
 				BlockState belowState = world.getBlockState(coords.below());
 				boolean tryPlaceFlower = flowersAvailable && canPlaceFlower(belowState, world);
 				boolean tryPlaceMushroom = mushroomsAvailable && canPlaceMushroom(belowState);
 
 				Optional<Holder<Block>> toPlace;
-				if (tryPlaceMushroom && (!tryPlaceFlower || world.random.nextInt(3) == 0)) {
-					toPlace = mushroomsTag.get().getRandomElement(world.random);
+				if (tryPlaceMushroom && (!tryPlaceFlower || world.getRandom().nextInt(3) == 0)) {
+					toPlace = mushroomsTag.get().getRandomElement(world.getRandom());
 				} else if (tryPlaceFlower) {
-					toPlace = flowersTag.get().getRandomElement(world.random);
+					toPlace = flowersTag.get().getRandomElement(world.getRandom());
 					petalCount--;
 				} else {
 					continue;
@@ -86,9 +86,9 @@ public class FloralFertilizerItem extends Item {
 			ctx.getItemInHand().shrink(1);
 		} else {
 			for (int i = 0; i < 15; i++) {
-				double x = pos.getX() - RANGE + world.random.nextInt(RANGE * 2 + 1) + Math.random();
+				double x = pos.getX() - RANGE + world.getRandom().nextInt(RANGE * 2 + 1) + Math.random();
 				double y = pos.getY() + 1;
-				double z = pos.getZ() - RANGE + world.random.nextInt(RANGE * 2 + 1) + Math.random();
+				double z = pos.getZ() - RANGE + world.getRandom().nextInt(RANGE * 2 + 1) + Math.random();
 				float red = (float) Math.random();
 				float green = (float) Math.random();
 				float blue = (float) Math.random();
@@ -97,7 +97,7 @@ public class FloralFertilizerItem extends Item {
 			}
 		}
 
-		return InteractionResult.sidedSuccess(world.isClientSide());
+		return InteractionResult.sidedSuccess(world.isClientSide()());
 	}
 
 	private static boolean canPlaceMushroom(BlockState belowState) {

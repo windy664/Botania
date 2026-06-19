@@ -29,7 +29,7 @@ public abstract class RelicBaubleItem extends BaubleItem {
 
 	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean held) {
-		if (!world.isClientSide && entity instanceof Player player) {
+		if (!world.isClientSide() && entity instanceof Player player) {
 			var relic = XplatAbstractions.INSTANCE.findRelic(stack);
 			if (relic != null) {
 				relic.tickBinding(player);

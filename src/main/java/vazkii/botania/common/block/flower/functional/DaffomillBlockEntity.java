@@ -116,7 +116,7 @@ public class DaffomillBlockEntity extends FunctionalFlowerBlockEntity implements
 			return false;
 		}
 
-		if (!player.level().isClientSide) {
+		if (!player.level().isClientSide()) {
 			orientation = orientation.getClockWise();
 			sync();
 		}
@@ -168,7 +168,7 @@ public class DaffomillBlockEntity extends FunctionalFlowerBlockEntity implements
 	}
 
 	private boolean isRedstonePowered() {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			boolean powered = redstoneSignal != 0;
 			if (powered != redstonePowered) {
 				redstonePowered = powered;

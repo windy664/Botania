@@ -103,10 +103,10 @@ public class TerraShattererItem extends ManasteelPickaxeItem implements Sequenti
 
 			if (tier != 0 && blockhitresult.getType() != HitResult.Type.BLOCK) {
 				setEnabled(stack, !isEnabled(stack));
-				if (!level.isClientSide) {
+				if (!level.isClientSide()) {
 					level.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.terraPickMode, SoundSource.PLAYERS, 1F, 1F);
 				}
-				return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+				return InteractionResultHolder.sidedSuccess(stack, level.isClientSide()());
 			}
 		}
 		return InteractionResultHolder.pass(stack);
@@ -140,7 +140,7 @@ public class TerraShattererItem extends ManasteelPickaxeItem implements Sequenti
 	@Override
 	public void onBlockStartBreak(ServerLevel level, ItemStack stack, BlockPos pos, Player player) {
 		BlockHitResult raycast = ToolCommons.raytraceFromEntity(player, 10, false);
-		if (!player.level().isClientSide && raycast.getType() == HitResult.Type.BLOCK) {
+		if (!player.level().isClientSide() && raycast.getType() == HitResult.Type.BLOCK) {
 			Direction face = raycast.getDirection();
 			breakOtherBlock(player, stack, pos, pos, face);
 			if (player.isSecondaryUseActive()) {

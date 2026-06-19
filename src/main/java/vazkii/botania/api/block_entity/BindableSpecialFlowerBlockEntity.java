@@ -72,7 +72,7 @@ public abstract class BindableSpecialFlowerBlockEntity<T> extends SpecialFlowerB
 		//the typical setPlacedBy method that player-placements do.
 		if (Bound.UNBOUND_POS.equals(bindingPos)) {
 			setBindingPos(null);
-		} else if (ticksExisted == 1 && !level.isClientSide) {
+		} else if (ticksExisted == 1 && !level.isClientSide()) {
 			//Situations to consider:
 			// the flower has been placed in the void, and there is nothing for it to bind to;
 			// the flower has been placed next to a bind target, and I want to automatically bind to it;

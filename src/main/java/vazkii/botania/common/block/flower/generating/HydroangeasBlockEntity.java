@@ -40,7 +40,7 @@ public class HydroangeasBlockEntity extends FluidGeneratorBlockEntity {
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (!getLevel().isClientSide) {
+		if (!getLevel().isClientSide()) {
 			if (++passiveDecayTicks > DECAY_TIME) {
 				getLevel().destroyBlock(getBlockPos(), false);
 				if (Blocks.DEAD_BUSH.defaultBlockState().canSurvive(getLevel(), getBlockPos())) {

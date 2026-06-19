@@ -196,7 +196,7 @@ public class GaiaGuardianEntity extends Mob {
 	public GaiaGuardianEntity(EntityType<GaiaGuardianEntity> type, Level world) {
 		super(type, world);
 		xpReward = 825;
-		if (world.isClientSide) {
+		if (world.isClientSide()) {
 			Proxy.INSTANCE.addBoss(this);
 		}
 	}
@@ -211,7 +211,7 @@ public class GaiaGuardianEntity extends Mob {
 
 		//check difficulty
 		if (world.getDifficulty() == Difficulty.PEACEFUL) {
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				player.sendSystemMessage(Component.translatable("botaniamisc.peacefulNoob").withStyle(ChatFormatting.RED));
 			}
 			return false;
@@ -220,7 +220,7 @@ public class GaiaGuardianEntity extends Mob {
 		//check pylons
 		List<BlockPos> invalidPylonBlocks = checkPylons(world, pos);
 		if (!invalidPylonBlocks.isEmpty()) {
-			if (world.isClientSide) {
+			if (world.isClientSide()) {
 				warnInvalidBlocks(world, invalidPylonBlocks);
 			} else {
 				player.sendSystemMessage(Component.translatable("botaniamisc.needsCatalysts").withStyle(ChatFormatting.RED));
@@ -232,7 +232,7 @@ public class GaiaGuardianEntity extends Mob {
 		//check arena shape
 		List<BlockPos> invalidArenaBlocks = checkArena(world, pos);
 		if (!invalidArenaBlocks.isEmpty()) {
-			if (world.isClientSide) {
+			if (world.isClientSide()) {
 				warnInvalidBlocks(world, invalidArenaBlocks);
 			} else {
 				XplatAbstractions.INSTANCE.sendToPlayer(player, new BotaniaEffectPacket(EffectType.ARENA_INDICATOR, pos.getX(), pos.getY(), pos.getZ()));
@@ -244,7 +244,7 @@ public class GaiaGuardianEntity extends Mob {
 		}
 
 		//all checks ok, spawn the boss
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			stack.shrink(1);
 
 			GaiaGuardianEntity e = BotaniaEntities.DOPPLEGANGER.create(world);
@@ -477,7 +477,7 @@ public class GaiaGuardianEntity extends Mob {
 		super.die(source);
 		LivingEntity lastAttacker = getKillCredit();
 
-		if (!level().isClientSide) {
+		if (!level().isClientSide()) {
 			for (UUID u : playersWhoAttacked) {
 				Player player = level().getPlayerByUUID(u);
 				if (!isTruePlayer(player)) {
@@ -563,7 +563,7 @@ public class GaiaGuardianEntity extends Mob {
 
 	@Override
 	public void remove(RemovalReason reason) {
-		if (level().isClientSide) {
+		if (level().isClientSide()) {
 			Proxy.INSTANCE.removeBoss(this);
 		}
 		super.remove(reason);
@@ -751,7 +751,7 @@ public class GaiaGuardianEntity extends Mob {
 
 		int invul = getInvulTime();
 
-		if (level().isClientSide) {
+		if (level().isClientSide()) {
 			particles();
 			Player player = Proxy.INSTANCE.getClientPlayer();
 			if (getPlayersAround().contains(player)) {

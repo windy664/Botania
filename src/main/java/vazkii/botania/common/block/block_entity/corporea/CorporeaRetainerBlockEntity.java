@@ -160,7 +160,7 @@ public class CorporeaRetainerBlockEntity extends BotaniaBlockEntity implements W
 
 	@Override
 	public boolean onUsedByWand(Player player, ItemStack stack, Direction side) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			retainMissing = !retainMissing;
 			setChanged();
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);

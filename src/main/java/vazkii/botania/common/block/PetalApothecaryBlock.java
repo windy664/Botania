@@ -89,7 +89,7 @@ public class PetalApothecaryBlock extends BotaniaBlock implements EntityBlock {
 
 	@Override
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-		if (!world.isClientSide && entity instanceof ItemEntity itemEntity) {
+		if (!world.isClientSide() && entity instanceof ItemEntity itemEntity) {
 			PetalApothecaryBlockEntity tile = (PetalApothecaryBlockEntity) world.getBlockEntity(pos);
 			if (tile.collideEntityItem(itemEntity)) {
 				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(tile);
@@ -105,7 +105,7 @@ public class PetalApothecaryBlock extends BotaniaBlock implements EntityBlock {
 
 		PetalApothecaryBlockEntity apothecary = level.getBlockEntity(pos, BotaniaBlockEntities.ALTAR).orElseThrow();
 		if (tryWithdrawFluid(player, hand, apothecary, pos) || tryDepositFluid(player, hand, apothecary, pos)) {
-			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+			return ItemInteractionResult.sidedSuccess(level.isClientSide()());
 		}
 
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -120,14 +120,14 @@ public class PetalApothecaryBlock extends BotaniaBlock implements EntityBlock {
 		} else if (!apothecary.isEmpty()) {
 			InventoryHelper.withdrawFromInventory(apothecary, player);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(apothecary);
-			return InteractionResult.sidedSuccess(level.isClientSide());
+			return InteractionResult.sidedSuccess(level.isClientSide()());
 		}
 		return InteractionResult.PASS;
 	}
 
 	@Override
 	public void handlePrecipitation(BlockState state, Level world, BlockPos pos, Biome.Precipitation precipitation) {
-		if (precipitation == Biome.Precipitation.RAIN && world.random.nextInt(20) == 1) {
+		if (precipitation == Biome.Precipitation.RAIN && world.getRandom().nextInt(20) == 1) {
 			if (state.getValue(FLUID) == State.EMPTY) {
 				world.setBlockAndUpdate(pos, state.setValue(FLUID, State.WATER));
 				world.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
@@ -209,7 +209,7 @@ public class PetalApothecaryBlock extends BotaniaBlock implements EntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		if (level.isClientSide) {
+		if (level.isClientSide()) {
 			return createTickerHelper(type, BotaniaBlockEntities.ALTAR, PetalApothecaryBlockEntity::clientTick);
 		} else {
 			return createTickerHelper(type, BotaniaBlockEntities.ALTAR, PetalApothecaryBlockEntity::serverTick);

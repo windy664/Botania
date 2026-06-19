@@ -92,7 +92,7 @@ public class ManaInfusionRecipe implements vazkii.botania.api.recipe.ManaInfusio
 		return output;
 	}
 
-	public static class Serializer implements RecipeSerializer<ManaInfusionRecipe> {
+	public static class Serializer extends RecipeSerializer<ManaInfusionRecipe> {
 		public static final MapCodec<ManaInfusionRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				ItemStack.CODEC.fieldOf("output").forGetter(ManaInfusionRecipe::getOutput),
 				Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(ManaInfusionRecipe::getInput),

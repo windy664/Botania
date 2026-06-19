@@ -77,7 +77,7 @@ public class LexiconElvenTradeRecipe implements ElvenTradeRecipe {
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<LexiconElvenTradeRecipe> {
+	public static class Serializer extends RecipeSerializer<LexiconElvenTradeRecipe> {
 		@Override
 		public MapCodec<LexiconElvenTradeRecipe> codec() {
 			return MapCodec.unit(() -> LexiconElvenTradeRecipe.INSTANCE);

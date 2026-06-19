@@ -50,7 +50,7 @@ public class MarimorphosisRecipe extends OrechidRecipe {
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<MarimorphosisRecipe> {
+	public static class Serializer extends RecipeSerializer<MarimorphosisRecipe> {
 		public static final MapCodec<MarimorphosisRecipe> CODEC = OrechidRecipe.SERIALIZER.codec()
 				.xmap(MarimorphosisRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, MarimorphosisRecipe> STREAM_CODEC = OrechidRecipe.SERIALIZER.streamCodec()

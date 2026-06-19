@@ -109,7 +109,7 @@ public class LensItem extends Item implements ControlLensItem, CompositableLensI
 
 	@Override
 	public void updateBurst(ManaBurst burst, ItemStack stack) {
-		if (isLensRainbow(stack) && burst.entity().level().isClientSide) {
+		if (isLensRainbow(stack) && burst.entity().level().isClientSide()) {
 			burst.setColor(getLensColor(stack, burst.entity().level()));
 		}
 

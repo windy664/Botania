@@ -31,8 +31,8 @@ public class CacophoniumBlockEntity extends BotaniaBlockEntity {
 
 	public void annoyDirewolf() {
 		CacophoniumItem.playSound(level, stack, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), SoundSource.BLOCKS, 1F);
-		if (!level.isClientSide) {
-			float noteColor = level.random.nextInt(25) / 24.0F;
+		if (!level.isClientSide()) {
+			float noteColor = level.getRandom().nextInt(25) / 24.0F;
 			((ServerLevel) level).sendParticles(ParticleTypes.NOTE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.2, worldPosition.getZ() + 0.5, 0, noteColor, 0, 0, 1);
 			level.gameEvent(null, GameEvent.NOTE_BLOCK_PLAY, getBlockPos());
 		}

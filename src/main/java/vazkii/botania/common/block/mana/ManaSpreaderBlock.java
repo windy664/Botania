@@ -195,7 +195,7 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 
 				world.playSound(player, pos, BotaniaSounds.spreaderScaffold, SoundSource.BLOCKS, 1F, 1F);
 			}
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 		}
 
 		if (state.getValue(BotaniaStateProperties.HAS_SCAFFOLDING) && player.isSecondaryUseActive()) {
@@ -208,7 +208,7 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 
 			world.playSound(player, pos, BotaniaSounds.spreaderUnScaffold, SoundSource.BLOCKS, 1F, 1F);
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 		}
 		if (!lens.isEmpty() && (mainHandEmpty || lensIsSame)) {
 			player.getInventory().placeItemBackInInventory(lens);
@@ -216,7 +216,7 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 
 			world.playSound(player, pos, BotaniaSounds.spreaderRemoveLens, SoundSource.BLOCKS, 1F, 1F);
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 		}
 		if (spreader.paddingColor != null && (mainHandEmpty || woolIsSame)) {
 			player.getInventory().placeItemBackInInventory(wool);
@@ -225,7 +225,7 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 
 			world.playSound(player, pos, BotaniaSounds.spreaderUncover, SoundSource.BLOCKS, 1F, 1F);
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 		}
 
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

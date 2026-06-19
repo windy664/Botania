@@ -310,7 +310,7 @@ public class ForgeCommonInitializer {
 		bus.addListener((LootTableLoadEvent e) -> LootHandler.lootLoad(e.getName(), b -> e.getTable().addPool(b.build())));
 		bus.addListener((ManaNetworkEvent e) -> ManaNetworkHandler.instance.onNetworkEvent(e.getReceiver(), e.getType(), e.getAction()));
 		bus.addListener((EntityJoinLevelEvent e) -> {
-			if (!e.getLevel().isClientSide) {
+			if (!e.getLevel().isClientSide()) {
 				TigerseyeBlockEntity.pacifyAfterLoad(e.getEntity(), (ServerLevel) e.getLevel());
 			}
 		});
@@ -430,7 +430,7 @@ public class ForgeCommonInitializer {
 				}
 			});
 			bus.addListener(EventPriority.LOW, (CriticalHitEvent e) -> {
-				if (e.getEntity().level().isClientSide
+				if (e.getEntity().level().isClientSide()
 						|| !e.isCriticalHit()
 						|| !TerrasteelHelmItem.hasTerraArmorSet(e.getEntity())
 						|| !(e.getTarget() instanceof LivingEntity target)) {

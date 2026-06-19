@@ -52,7 +52,7 @@ public class ForceRelayBlock extends BotaniaBlock {
 
 	@Override
 	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			var data = WorldData.get(world);
 
 			Direction movementContextDirection = ForcePushHelper.getMovementContextDirection();
@@ -91,7 +91,7 @@ public class ForceRelayBlock extends BotaniaBlock {
 	}
 
 	public boolean onUsedByWand(@Nullable Player player, ItemStack stack, Level world, BlockPos pos) {
-		if (world.isClientSide) {
+		if (world.isClientSide()) {
 			return false;
 		}
 

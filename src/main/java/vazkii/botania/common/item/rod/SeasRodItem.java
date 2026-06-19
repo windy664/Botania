@@ -71,7 +71,7 @@ public class SeasRodItem extends Item {
 					for (int i = 0; i < 6; i++) {
 						player.level().addParticle(data, blockPos3.getX() + Math.random(), blockPos3.getY() + Math.random(), blockPos3.getZ() + Math.random(), 0, 0, 0);
 					}
-					return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+					return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide()());
 				} else {
 					return InteractionResultHolder.fail(itemStack);
 				}

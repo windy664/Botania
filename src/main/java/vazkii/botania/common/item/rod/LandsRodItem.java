@@ -110,7 +110,7 @@ public class LandsRodItem extends Item {
 			BlockEntity te = (BlockEntity) tile;
 			Level world = te.getLevel();
 			ManaReceiver receiver = XplatAbstractions.INSTANCE.findManaReceiver(world, te.getBlockPos(), te.getBlockState(), te, null);
-			if (!world.isClientSide && receiver.getCurrentMana() >= COST && tile.getElapsedFunctionalTicks() % 4 == 0 && world.random.nextInt(8) == 0 && tile.isEnabled()) {
+			if (!world.isClientSide() && receiver.getCurrentMana() >= COST && tile.getElapsedFunctionalTicks() % 4 == 0 && world.getRandom().nextInt(8) == 0 && tile.isEnabled()) {
 				BlockPos pos = te.getBlockPos().relative(tile.getAvatarFacing());
 				BlockState state = world.getBlockState(pos);
 				if (state.isAir()) {

@@ -58,7 +58,7 @@ public class EyeOfTheFlugelItem extends RelicItem {
 		Player player = ctx.getPlayer();
 
 		if (player != null && player.isSecondaryUseActive()) {
-			if (world.isClientSide) {
+			if (world.isClientSide()) {
 				for (int i = 0; i < 10; i++) {
 					float x1 = (float) (pos.getX() + Math.random());
 					float y1 = pos.getY() + 1;
@@ -75,7 +75,7 @@ public class EyeOfTheFlugelItem extends RelicItem {
 				world.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.flugelEyeBind, SoundSource.PLAYERS, 1F, 1F);
 			}
 
-			return InteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.sidedSuccess(world.isClientSide()());
 		}
 
 		return InteractionResult.PASS;
@@ -83,7 +83,7 @@ public class EyeOfTheFlugelItem extends RelicItem {
 
 	@Override
 	public void onUseTick(Level world, LivingEntity living, ItemStack stack, int count) {
-		if (world.isClientSide) {
+		if (world.isClientSide()) {
 			float x = (float) (living.getX() - Math.random() * living.getBbWidth());
 			float y = (float) (living.getY() + Math.random());
 			float z = (float) (living.getZ() - Math.random() * living.getBbWidth());

@@ -38,7 +38,7 @@ public class EntropinnyumBlockEntity extends GeneratingFlowerBlockEntity {
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (!getLevel().isClientSide && getMana() == 0) {
+		if (!getLevel().isClientSide() && getMana() == 0) {
 			List<PrimedTnt> tnts = getLevel().getEntitiesOfClass(PrimedTnt.class, new AABB(getEffectivePos()).inflate(RANGE));
 			for (PrimedTnt tnt : tnts) {
 				FluidState fluid = getLevel().getFluidState(tnt.blockPosition());
@@ -59,7 +59,7 @@ public class EntropinnyumBlockEntity extends GeneratingFlowerBlockEntity {
 	@Override
 	public boolean triggerEvent(int event, int param) {
 		if (event == EXPLODE_EFFECT_EVENT) {
-			if (getLevel().isClientSide && getLevel().getEntity(param) instanceof PrimedTnt) {
+			if (getLevel().isClientSide() && getLevel().getEntity(param) instanceof PrimedTnt) {
 				Entity e = getLevel().getEntity(param);
 
 				for (int i = 0; i < 50; i++) {
@@ -71,7 +71,7 @@ public class EntropinnyumBlockEntity extends GeneratingFlowerBlockEntity {
 			}
 			return true;
 		} else if (event == ANGRY_EFFECT_EVENT) {
-			if (getLevel().isClientSide && getLevel().getEntity(param) instanceof PrimedTnt) {
+			if (getLevel().isClientSide() && getLevel().getEntity(param) instanceof PrimedTnt) {
 				Entity e = getLevel().getEntity(param);
 
 				for (int i = 0; i < 50; i++) {

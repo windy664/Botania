@@ -59,11 +59,11 @@ public class DiceOfFateItem extends RelicItem {
 		var relic = XplatAbstractions.INSTANCE.findRelic(stack);
 
 		if (relic != null && relic.isRightPlayer(player)) {
-			if (world.isClientSide) {
+			if (world.isClientSide()) {
 				return InteractionResultHolder.success(stack);
 			}
 
-			world.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.diceOfFate, SoundSource.PLAYERS, 1F, 0.4F / (world.random.nextFloat() * 0.4F + 0.8F));
+			world.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.diceOfFate, SoundSource.PLAYERS, 1F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
 
 			List<Integer> possible = new ArrayList<>();
 			for (int i = 0; i < 6; i++) {
@@ -73,12 +73,12 @@ public class DiceOfFateItem extends RelicItem {
 			}
 
 			if (!possible.isEmpty()) {
-				int relicIdx = possible.get(world.random.nextInt(possible.size()));
+				int relicIdx = possible.get(world.getRandom().nextInt(possible.size()));
 				player.sendSystemMessage(Component.translatable("botaniamisc.diceRoll", relicIdx + 1).withStyle(ChatFormatting.DARK_GREEN));
 				var toGive = RELIC_STACKS.get().get(relicIdx).copy();
 				return InteractionResultHolder.consume(toGive);
 			} else {
-				int roll = world.random.nextInt(6) + 1;
+				int roll = world.getRandom().nextInt(6) + 1;
 				LootTable table = world.getServer().reloadableRegistries().getLootTable(BotaniaLootTables.getDiceRollTable(roll));
 				LootParams context = new LootParams.Builder((ServerLevel) world)
 						.withParameter(LootContextParams.THIS_ENTITY, player)

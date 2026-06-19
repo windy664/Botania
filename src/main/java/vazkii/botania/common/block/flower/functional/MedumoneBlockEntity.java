@@ -33,7 +33,7 @@ public class MedumoneBlockEntity extends FunctionalFlowerBlockEntity {
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (!getLevel().isClientSide && getMana() > 0 && redstoneSignal == 0) {
+		if (!getLevel().isClientSide() && getMana() > 0 && redstoneSignal == 0) {
 			List<LivingEntity> entities = getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(getEffectivePos()).inflate(RANGE));
 
 			for (LivingEntity entity : entities) {

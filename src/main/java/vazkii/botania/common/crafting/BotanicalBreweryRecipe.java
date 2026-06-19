@@ -127,7 +127,7 @@ public class BotanicalBreweryRecipe implements vazkii.botania.api.recipe.Botanic
 				&& inputs.equals(brewRecipe.inputs);
 	}
 
-	public static class Serializer implements RecipeSerializer<BotanicalBreweryRecipe> {
+	public static class Serializer extends RecipeSerializer<BotanicalBreweryRecipe> {
 		public static final MapCodec<BotanicalBreweryRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				BotaniaAPI.instance().getBrewRegistry().byNameCodec().fieldOf("brew").forGetter(BotanicalBreweryRecipe::getBrew),
 				ExtraCodecs.nonEmptyList(Ingredient.CODEC_NONEMPTY.listOf()).fieldOf("ingredients").forGetter(BotanicalBreweryRecipe::getIngredients)

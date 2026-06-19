@@ -114,7 +114,7 @@ public class ManaPrismBlock extends BotaniaWaterloggedBlock implements EntityBlo
 			prism.getItemHandler().setItem(0, toInsert);
 			world.playSound(player, pos, BotaniaSounds.prismAddLens, SoundSource.BLOCKS, 1F, 1F);
 			world.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 		}
 		if (!lens.isEmpty() && (mainHandEmpty || lensIsSame)) {
 			player.getInventory().placeItemBackInInventory(lens);
@@ -122,7 +122,7 @@ public class ManaPrismBlock extends BotaniaWaterloggedBlock implements EntityBlo
 
 			world.playSound(player, pos, BotaniaSounds.prismRemoveLens, SoundSource.BLOCKS, 1F, 1F);
 			world.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 		}
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
@@ -140,7 +140,7 @@ public class ManaPrismBlock extends BotaniaWaterloggedBlock implements EntityBlo
 		boolean power = world.getBestNeighborSignal(pos) > 0;
 		boolean powered = state.getValue(BlockStateProperties.POWERED);
 
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			if (power && !powered) {
 				world.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.POWERED, true));
 			} else if (!power && powered) {

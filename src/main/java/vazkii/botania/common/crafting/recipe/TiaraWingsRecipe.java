@@ -115,7 +115,7 @@ public class TiaraWingsRecipe extends CustomRecipe {
 		return SERIALIZER;
 	}
 
-	private static class Serializer implements RecipeSerializer<TiaraWingsRecipe> {
+	private static class Serializer extends RecipeSerializer<TiaraWingsRecipe> {
 		private static final MapCodec<TiaraWingsRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				CraftingBookCategory.CODEC.fieldOf("category").orElse(CraftingBookCategory.EQUIPMENT).forGetter(TiaraWingsRecipe::category),
 				Ingredient.CODEC.fieldOf("material").forGetter(TiaraWingsRecipe::material),

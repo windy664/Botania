@@ -49,7 +49,7 @@ public class ElementiumShearsItem extends ManasteelShearsItem {
 
 	@Override
 	public void onUseTick(Level world, LivingEntity living, ItemStack stack, int count) {
-		if (world.isClientSide) {
+		if (world.isClientSide()) {
 			return;
 		}
 

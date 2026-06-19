@@ -100,7 +100,7 @@ public class WandOfTheForestItem extends Item implements CustomCreativeTabConten
 		Direction.Axis axis = ManaEnchanterBlockEntity.canEnchanterExist(world, pos);
 
 		if (axis != null) {
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				world.setBlockAndUpdate(pos, BotaniaBlocks.enchanter.defaultBlockState().setValue(BotaniaStateProperties.ENCHANTER_DIRECTION, axis));
 				world.playSound(null, pos, BotaniaSounds.enchanterForm, SoundSource.BLOCKS, 1F, 1F);
 				PlayerHelper.grantCriterion((ServerPlayer) ctx.getPlayer(), botaniaRL("main/enchanter_make"), "code_triggered");
@@ -200,7 +200,7 @@ public class WandOfTheForestItem extends Item implements CustomCreativeTabConten
 				setBindingAttempt(stack, globalPos);
 			}
 
-			if (world.isClientSide) {
+			if (world.isClientSide()) {
 				player.playSound(BotaniaSounds.ding, 0.11F, 1F);
 			}
 
@@ -212,7 +212,7 @@ public class WandOfTheForestItem extends Item implements CustomCreativeTabConten
 			}
 		}
 
-		if (!world.isClientSide && getBindMode(stack) && tryCompletePistonRelayBinding(ctx)) {
+		if (!world.isClientSide() && getBindMode(stack) && tryCompletePistonRelayBinding(ctx)) {
 			return InteractionResult.SUCCESS;
 		}
 
@@ -399,7 +399,7 @@ public class WandOfTheForestItem extends Item implements CustomCreativeTabConten
 	}
 
 	public static void doParticleBeam(Level world, Vec3 orig, Vec3 end) {
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			return;
 		}
 
@@ -437,7 +437,7 @@ public class WandOfTheForestItem extends Item implements CustomCreativeTabConten
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (player.isSecondaryUseActive()) {
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				setBindMode(stack, !getBindMode(stack));
 			} else {
 				player.playSound(BotaniaSounds.ding, 0.1F, 1F);

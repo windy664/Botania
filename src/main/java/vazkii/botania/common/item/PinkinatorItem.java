@@ -44,7 +44,7 @@ public class PinkinatorItem extends Item {
 		List<WitherBoss> withers = world.getEntitiesOfClass(WitherBoss.class, new AABB(player.getX() - range, player.getY() - range, player.getZ() - range, player.getX() + range, player.getY() + range, player.getZ() + range));
 		for (WitherBoss wither : withers) {
 			if (wither.isAlive() && !(wither instanceof PinkWitherEntity)) {
-				if (!world.isClientSide) {
+				if (!world.isClientSide()) {
 					wither.discard();
 					PinkWitherEntity pink = BotaniaEntities.PINK_WITHER.create(world);
 					pink.moveTo(wither.getX(), wither.getY(), wither.getZ(), wither.getYRot(), wither.getXRot());
@@ -56,11 +56,11 @@ public class PinkinatorItem extends Item {
 					pink.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(pink.blockPosition()), MobSpawnType.CONVERSION, null);
 					world.addFreshEntity(pink);
 					pink.spawnAnim();
-					pink.playSound(BotaniaSounds.pinkinator, 1F, (1F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F);
+					pink.playSound(BotaniaSounds.pinkinator, 1F, (1F + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.2F) * 0.7F);
 					UseItemSuccessTrigger.INSTANCE.trigger((ServerPlayer) player, stack, (ServerLevel) world, player.getX(), player.getY(), player.getZ());
 					stack.shrink(1);
 				}
-				return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+				return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
 			}
 		}
 

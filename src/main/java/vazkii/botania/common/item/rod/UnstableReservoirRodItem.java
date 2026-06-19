@@ -62,7 +62,7 @@ public class UnstableReservoirRodItem extends Item {
 		}
 
 		if (count != getUseDuration(stack, living) && count % (ManaItemHandler.instance().hasProficiency(player, stack) ? 1 : 2) == 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, COST_PER, false)) {
-			if (!world.isClientSide && spawnMissile(world, player, player.getX() + (Math.random() - 0.5 * 0.1), player.getY() + 2.4 + (Math.random() - 0.5 * 0.1), player.getZ() + (Math.random() - 0.5 * 0.1))) {
+			if (!world.isClientSide() && spawnMissile(world, player, player.getX() + (Math.random() - 0.5 * 0.1), player.getY() + 2.4 + (Math.random() - 0.5 * 0.1), player.getZ() + (Math.random() - 0.5 * 0.1))) {
 				ManaItemHandler.instance().requestManaExactForTool(stack, player, COST_PER, true);
 			}
 
@@ -81,8 +81,8 @@ public class UnstableReservoirRodItem extends Item {
 
 		missile.setPos(x, y, z);
 		if (missile.findTarget()) {
-			if (!world.isClientSide) {
-				missile.playSound(world.random.nextInt(100) == 0 ? BotaniaSounds.missileFunny : BotaniaSounds.missile, 1F, 0.8F + (float) Math.random() * 0.2F);
+			if (!world.isClientSide()) {
+				missile.playSound(world.getRandom().nextInt(100) == 0 ? BotaniaSounds.missileFunny : BotaniaSounds.missile, 1F, 0.8F + (float) Math.random() * 0.2F);
 				world.addFreshEntity(missile);
 			}
 
@@ -105,7 +105,7 @@ public class UnstableReservoirRodItem extends Item {
 			ManaReceiver receiver = XplatAbstractions.INSTANCE.findManaReceiver(world, te.getBlockPos(), te.getBlockState(), te, null);
 			if (receiver != null && receiver.getCurrentMana() >= COST_AVATAR && tile.getElapsedFunctionalTicks() % 3 == 0 && tile.isEnabled()) {
 				if (spawnMissile(world, null, pos.getX() + 0.5 + (Math.random() - 0.5 * 0.1), pos.getY() + 2.5 + (Math.random() - 0.5 * 0.1), pos.getZ() + (Math.random() - 0.5 * 0.1))) {
-					if (!world.isClientSide) {
+					if (!world.isClientSide()) {
 						receiver.receiveMana(-COST_AVATAR);
 					}
 					SparkleParticleData data = SparkleParticleData.sparkle(6F, 1F, 0.4F, 1F, 6);

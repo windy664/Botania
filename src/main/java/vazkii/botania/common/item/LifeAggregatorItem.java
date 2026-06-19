@@ -64,7 +64,7 @@ public class LifeAggregatorItem extends Item {
 			return placeSpawner(ctx);
 		} else {
 			return captureSpawner(ctx)
-					? InteractionResult.sidedSuccess(ctx.getLevel().isClientSide())
+					? InteractionResult.sidedSuccess(ctx.getLevel().isClientSide()())
 					: InteractionResult.PASS;
 		}
 	}
@@ -78,7 +78,7 @@ public class LifeAggregatorItem extends Item {
 			BlockPos pos = res.getSecond();
 			ItemStack mover = ctx.getItemInHand();
 
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				Player player = ctx.getPlayer();
 				if (player != null) {
 					player.onEquippedItemBroken(this, LivingEntity.getSlotForHand(ctx.getHand()));
@@ -110,7 +110,7 @@ public class LifeAggregatorItem extends Item {
 
 		// TODO: support trial spawners
 		if (world.getBlockState(pos).is(Blocks.SPAWNER)) {
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				SpawnerBlockEntity spawnerBlockEntity = (SpawnerBlockEntity) world.getBlockEntity(pos);
 				Entity displayEntity = spawnerBlockEntity.getSpawner().getOrCreateDisplayEntity(world, pos);
 				if (displayEntity != null) {

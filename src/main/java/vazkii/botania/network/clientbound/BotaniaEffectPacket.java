@@ -80,7 +80,7 @@ public record BotaniaEffectPacket(EffectType effectType, double x, double y, dou
 							int g = (hex & 0xFF00) >> 8;
 							int b = hex & 0xFF;
 							for (int i = 0; i < 10; i++) {
-								BlockPos pos = BlockPos.containing(x, y, z).relative(Direction.getRandom(world.random));
+								BlockPos pos = BlockPos.containing(x, y, z).relative(Direction.getRandom(world.getRandom()));
 								SparkleParticleData data = SparkleParticleData.sparkle(0.6F + (float) Math.random() * 0.5F, r / 255F, g / 255F, b / 255F, 5);
 								world.addParticle(data, pos.getX() + (float) Math.random(), pos.getY() + (float) Math.random(), pos.getZ() + (float) Math.random(), 0, 0, 0);
 							}
@@ -161,10 +161,10 @@ public record BotaniaEffectPacket(EffectType effectType, double x, double y, dou
 							float r = ((color >> 16) & 0xFF) / 255.0F;
 							float g = ((color >> 8) & 0xFF) / 255.0F;
 							float b = (color & 0xFF) / 255.0F;
-							if (world.random.nextFloat() < 0.25) {
-								r += 0.2F * (float) world.random.nextGaussian();
-								g += 0.2F * (float) world.random.nextGaussian();
-								b += 0.2F * (float) world.random.nextGaussian();
+							if (world.getRandom().nextFloat() < 0.25) {
+								r += 0.2F * (float) world.getRandom().nextGaussian();
+								g += 0.2F * (float) world.getRandom().nextGaussian();
+								b += 0.2F * (float) world.getRandom().nextGaussian();
 							}
 							float size = 0.125F + 0.125F * (float) Math.random();
 

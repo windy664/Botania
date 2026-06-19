@@ -74,7 +74,7 @@ public class WaterBottleMatchingRecipe extends ShapedRecipe {
 		return SERIALIZER;
 	}
 
-	private static class Serializer implements WrappingRecipeSerializer<WaterBottleMatchingRecipe> {
+	private static class Serializer extends WrappingRecipeSerializer<WaterBottleMatchingRecipe> {
 		public static final MapCodec<WaterBottleMatchingRecipe> CODEC = SHAPED_RECIPE.codec()
 				.xmap(WaterBottleMatchingRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, WaterBottleMatchingRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()

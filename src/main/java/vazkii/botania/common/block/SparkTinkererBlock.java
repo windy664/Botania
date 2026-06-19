@@ -70,12 +70,12 @@ public class SparkTinkererBlock extends BotaniaWaterloggedBlock implements Entit
 		if (!cstack.isEmpty()) {
 			changer.getItemHandler().setItem(0, ItemStack.EMPTY);
 			player.getInventory().placeItemBackInInventory(cstack);
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 		} else if (!pstack.isEmpty() && pstack.getItem() instanceof SparkAugmentItem) {
 			changer.getItemHandler().setItem(0, pstack.split(1));
 			changer.setChanged();
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 		}
 
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

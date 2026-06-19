@@ -46,7 +46,7 @@ public class ShulkMeNotBlockEntity extends GeneratingFlowerBlockEntity {
 		Level world = getLevel();
 		BlockPos pos = getEffectivePos();
 		Vec3 posD = new Vec3(pos.getX(), pos.getY(), pos.getZ());
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			List<Shulker> shulkers = world.getEntitiesOfClass(Shulker.class, new AABB(pos).inflate(RADIUS));
 			for (Shulker shulker : shulkers) {
 				if (getMaxMana() - getMana() < generate) {

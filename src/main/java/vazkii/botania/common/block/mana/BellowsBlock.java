@@ -72,7 +72,7 @@ public class BellowsBlock extends BotaniaBlock implements EntityBlock {
 	public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
 		if (PlayerHelper.isTruePlayer(player)) {
 			((BellowsBlockEntity) world.getBlockEntity(pos)).interact();
-			return InteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.sidedSuccess(world.isClientSide()());
 		}
 		return InteractionResult.PASS;
 	}

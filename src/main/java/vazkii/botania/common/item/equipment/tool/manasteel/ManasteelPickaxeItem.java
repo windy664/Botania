@@ -68,7 +68,7 @@ public class ManasteelPickaxeItem extends PickaxeItem implements CustomDamageIte
 					ItemStack displayStack = stackAt.copy();
 					InteractionResult did = PlayerHelper.substituteUse(ctx, stackAt);
 					if (did.consumesAction()) {
-						if (!ctx.getLevel().isClientSide) {
+						if (!ctx.getLevel().isClientSide()) {
 							ItemsRemainingRenderHandler.send(player, displayStack, TORCH_PATTERN);
 						}
 						player.getCooldowns().addCooldown(this, TIME);
@@ -86,7 +86,7 @@ public class ManasteelPickaxeItem extends PickaxeItem implements CustomDamageIte
 
 	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-		if (!world.isClientSide && entity instanceof Player player && stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_PER_DAMAGE * 2, true)) {
+		if (!world.isClientSide() && entity instanceof Player player && stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_PER_DAMAGE * 2, true)) {
 			stack.setDamageValue(stack.getDamageValue() - 1);
 		}
 	}

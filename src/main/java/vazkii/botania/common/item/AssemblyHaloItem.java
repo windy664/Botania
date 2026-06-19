@@ -82,7 +82,7 @@ public class AssemblyHaloItem extends Item {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			int segment = getSegmentLookedAt(stack, player);
 			RecipeHolder<? extends Recipe<CraftingInput>> recipe = getSavedRecipe(world, stack, segment);
 
@@ -106,7 +106,7 @@ public class AssemblyHaloItem extends Item {
 			}
 		}
 
-		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
 	}
 
 	@Override

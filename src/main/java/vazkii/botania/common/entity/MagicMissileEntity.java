@@ -91,7 +91,7 @@ public class MagicMissileEntity extends ThrowableProjectile {
 
 		super.tick();
 
-		if (!level().isClientSide && (!findTarget() || time > 40)) {
+		if (!level().isClientSide() && (!findTarget() || time > 40)) {
 			discard();
 			return;
 		}
@@ -235,7 +235,7 @@ public class MagicMissileEntity extends ThrowableProjectile {
 	protected void onHitBlock(BlockHitResult hit) {
 		super.onHitBlock(hit);
 		BlockState state = level().getBlockState(hit.getBlockPos());
-		if (!level().isClientSide
+		if (!level().isClientSide()
 				&& !(state.getBlock() instanceof BushBlock)
 				&& !state.is(BlockTags.LEAVES)) {
 			discard();
@@ -245,7 +245,7 @@ public class MagicMissileEntity extends ThrowableProjectile {
 	@Override
 	protected void onHitEntity(EntityHitResult hit) {
 		super.onHitEntity(hit);
-		if (!level().isClientSide && hit.getEntity() == getTargetEntity()) {
+		if (!level().isClientSide() && hit.getEntity() == getTargetEntity()) {
 			discard();
 		}
 	}

@@ -49,7 +49,7 @@ public class RosaArcanaBlockEntity extends GeneratingFlowerBlockEntity {
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (level.isClientSide || getMana() >= getMaxMana()) {
+		if (level.isClientSide() || getMana() >= getMaxMana()) {
 			return;
 		}
 
@@ -81,7 +81,7 @@ public class RosaArcanaBlockEntity extends GeneratingFlowerBlockEntity {
 				if (count == 1) {
 					orb.discard();
 				}
-				float pitch = (level.random.nextFloat() - level.random.nextFloat()) * 0.35F + 0.9F;
+				float pitch = (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.35F + 0.9F;
 				//Usage of vanilla sound event: Subtitle is "Experience gained", and this is about gaining experience anyways.
 				level.playSound(null, getEffectivePos(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.07F, pitch);
 				sync();
@@ -103,7 +103,7 @@ public class RosaArcanaBlockEntity extends GeneratingFlowerBlockEntity {
 					newEntity.setDeltaMovement(entity.getDeltaMovement());
 					level.addFreshEntity(newEntity);
 
-					level.playSound(null, getEffectivePos(), BotaniaSounds.arcaneRoseDisenchant, SoundSource.BLOCKS, 1F, this.level.random.nextFloat() * 0.1F + 0.9F);
+					level.playSound(null, getEffectivePos(), BotaniaSounds.arcaneRoseDisenchant, SoundSource.BLOCKS, 1F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
 					while (xp > 0) {
 						int i = ExperienceOrb.getExperienceValue(xp);
 						xp -= i;

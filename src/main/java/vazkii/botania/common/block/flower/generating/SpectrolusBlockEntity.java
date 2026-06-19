@@ -56,7 +56,7 @@ public class SpectrolusBlockEntity extends GeneratingFlowerBlockEntity {
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (getLevel().isClientSide) {
+		if (getLevel().isClientSide()) {
 			return;
 		}
 
@@ -71,7 +71,7 @@ public class SpectrolusBlockEntity extends GeneratingFlowerBlockEntity {
 			if (target instanceof Sheep sheep) {
 				if (!sheep.isSheared() && sheep.getColor() == nextColor) {
 					addManaAndCycle(sheep.isBaby() ? BABY_SHEEP_GEN : SHEEP_GEN);
-					float pitch = sheep.isBaby() ? (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.5F : (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F;
+					float pitch = sheep.isBaby() ? (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.5F : (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F;
 					//Usage of vanilla sound event: this sheep do be dying though. And generic sounds are meant to be reused.
 					sheep.playSound(SoundEvents.SHEEP_DEATH, 0.9F, pitch);
 					sheep.playSound(SoundEvents.GENERIC_EAT, 1, 1);

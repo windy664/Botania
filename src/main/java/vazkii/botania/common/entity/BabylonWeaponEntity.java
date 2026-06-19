@@ -88,12 +88,12 @@ public class BabylonWeaponEntity extends LegallyDistinctThrowableProjectile {
 	public void tick() {
 		Entity thrower = getOwner();
 		if (!(thrower instanceof Player player) || !thrower.isAlive()) {
-			if (!level().isClientSide) {
+			if (!level().isClientSide()) {
 				discard();
 			}
 			return;
 		}
-		if (!level().isClientSide) {
+		if (!level().isClientSide()) {
 			ItemStack stack = PlayerHelper.getFirstHeldItem(player, BotaniaItems.kingKey);
 			boolean newCharging = !stack.isEmpty() && KeyOfTheKingsLawItem.isCharging(stack);
 			if (isCharging() != newCharging) {
@@ -134,7 +134,7 @@ public class BabylonWeaponEntity extends LegallyDistinctThrowableProjectile {
 				level().playSound(null, getX(), getY(), getZ(), BotaniaSounds.babylonAttack, SoundSource.PLAYERS, 2F, 0.1F + level().random.nextFloat() * 3F);
 			}
 
-			if (!level().isClientSide) {
+			if (!level().isClientSide()) {
 				setLiveTicks(liveTime + 1);
 				AABB axis = new AABB(getX(), getY(), getZ(), xOld, yOld, zOld).inflate(2);
 				List<LivingEntity> entities = level().getEntitiesOfClass(LivingEntity.class, axis);
@@ -157,12 +157,12 @@ public class BabylonWeaponEntity extends LegallyDistinctThrowableProjectile {
 		// Apply after super tick so drag is not applied by super
 		setDeltaMovement(mot);
 
-		if (level().isClientSide && liveTime > delay) {
+		if (level().isClientSide() && liveTime > delay) {
 			WispParticleData data = WispParticleData.wisp(0.3F, 1F, 1F, 0F, 1);
 			level().addParticle(data, getX(), getY(), getZ(), 0, -0F, 0);
 		}
 
-		if (!level().isClientSide && liveTime > 200 + delay) {
+		if (!level().isClientSide() && liveTime > 200 + delay) {
 			discard();
 		}
 	}
@@ -182,7 +182,7 @@ public class BabylonWeaponEntity extends LegallyDistinctThrowableProjectile {
 	}
 
 	private void explodeAndDie() {
-		if (!level().isClientSide) {
+		if (!level().isClientSide()) {
 			Holder<DamageType> type = level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(BotaniaDamageTypes.KEY_EXPLOSION);
 			DamageSource source = new DamageSource(type, this, this.getOwner());
 			level().explode(this, source, null, getX(), getY(), getZ(), 3F, false, Level.ExplosionInteraction.NONE);

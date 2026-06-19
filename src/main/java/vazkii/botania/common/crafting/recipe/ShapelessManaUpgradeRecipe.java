@@ -40,7 +40,7 @@ public class ShapelessManaUpgradeRecipe extends ShapelessRecipe {
 		return SERIALIZER;
 	}
 
-	private static class Serializer implements WrappingRecipeSerializer<ShapelessManaUpgradeRecipe> {
+	private static class Serializer extends WrappingRecipeSerializer<ShapelessManaUpgradeRecipe> {
 		public static final MapCodec<ShapelessManaUpgradeRecipe> CODEC = SHAPELESS_RECIPE.codec()
 				.xmap(ShapelessManaUpgradeRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, ShapelessManaUpgradeRecipe> STREAM_CODEC = SHAPELESS_RECIPE.streamCodec()

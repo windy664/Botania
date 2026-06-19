@@ -91,7 +91,7 @@ public class ThornChakramEntity extends ThrowableProjectile implements ItemSuppl
 		}
 
 		// Client FX
-		if (level().isClientSide && isFire()) {
+		if (level().isClientSide() && isFire()) {
 			double r = 0.1;
 			double m = 0.1;
 			for (int i = 0; i < 3; i++) {
@@ -100,7 +100,7 @@ public class ThornChakramEntity extends ThrowableProjectile implements ItemSuppl
 		}
 
 		// Server state control
-		if (!level().isClientSide && (getTimesBounced() >= MAX_BOUNCES || tickCount > 60)) {
+		if (!level().isClientSide() && (getTimesBounced() >= MAX_BOUNCES || tickCount > 60)) {
 			Entity thrower = getOwner();
 			if (thrower == null) {
 				dropAndKill();
@@ -151,7 +151,7 @@ public class ThornChakramEntity extends ThrowableProjectile implements ItemSuppl
 			setDeltaMovement(movementVec);
 			bounced = true;
 
-			if (!level().isClientSide) {
+			if (!level().isClientSide()) {
 				setTimesBounced(getTimesBounced() + 1);
 			}
 		}
@@ -160,7 +160,7 @@ public class ThornChakramEntity extends ThrowableProjectile implements ItemSuppl
 	@Override
 	protected void onHitEntity(EntityHitResult hit) {
 		super.onHitEntity(hit);
-		if (!level().isClientSide && hit.getEntity() instanceof LivingEntity hitEntity && hit.getEntity() != getOwner()) {
+		if (!level().isClientSide() && hit.getEntity() instanceof LivingEntity hitEntity && hit.getEntity() != getOwner()) {
 			Entity thrower = getOwner();
 			DamageSource src = damageSources().generic();
 			if (thrower instanceof Player) {

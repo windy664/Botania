@@ -90,7 +90,7 @@ public class TerrestrialAgglomerationRecipe implements vazkii.botania.api.recipe
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<TerrestrialAgglomerationRecipe> {
+	public static class Serializer extends RecipeSerializer<TerrestrialAgglomerationRecipe> {
 		public static final MapCodec<TerrestrialAgglomerationRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				ExtraCodecs.nonEmptyList(Ingredient.CODEC_NONEMPTY.listOf()).fieldOf("ingredients")
 						.forGetter(TerrestrialAgglomerationRecipe::getIngredients),

@@ -103,7 +103,7 @@ public class FlugelTiaraItem extends BaubleItem implements CustomCreativeTabCont
 			if (shouldPlayerHaveFlight(player)) {
 				player.getAbilities().mayfly = true;
 				if (player.getAbilities().flying) {
-					if (!player.level().isClientSide) {
+					if (!player.level().isClientSide()) {
 						if (!player.isCreative() && !player.isSpectator()) {
 							ManaItemHandler.instance().requestManaExact(tiara, player, getCost(tiara, left), true);
 						}
@@ -184,7 +184,7 @@ public class FlugelTiaraItem extends BaubleItem implements CustomCreativeTabCont
 	}
 
 	private static String playerStr(Player player) {
-		return player.getGameProfile().getName() + ":" + player.level().isClientSide;
+		return player.getGameProfile().getName() + ":" + player.level().isClientSide();
 	}
 
 	private static boolean shouldPlayerHaveFlight(Player player) {

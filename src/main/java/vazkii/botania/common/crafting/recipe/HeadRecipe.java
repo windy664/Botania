@@ -83,7 +83,7 @@ public class HeadRecipe extends RunicAltarRecipe {
 		return stack;
 	}
 
-	public static class Serializer implements RecipeSerializer<HeadRecipe> {
+	public static class Serializer extends RecipeSerializer<HeadRecipe> {
 		public static final MapCodec<HeadRecipe> CODEC = RunicAltarRecipe.Serializer.CODEC
 				.xmap(HeadRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, HeadRecipe> STREAM_CODEC = RunicAltarRecipe.Serializer.STREAM_CODEC

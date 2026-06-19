@@ -27,7 +27,7 @@ public class RelicItem extends Item {
 
 	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-		if (!world.isClientSide && entity instanceof Player player) {
+		if (!world.isClientSide() && entity instanceof Player player) {
 			var relic = XplatAbstractions.INSTANCE.findRelic(stack);
 			if (relic != null) {
 				relic.tickBinding(player);

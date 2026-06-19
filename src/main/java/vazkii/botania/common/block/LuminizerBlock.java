@@ -67,7 +67,7 @@ public class LuminizerBlock extends BotaniaWaterloggedBlock implements EntityBlo
 		if (te instanceof LuminizerBlockEntity relay) {
 			if (!stack.is(Items.ENDER_PEARL) && !(stack.getItem() instanceof PhantomInkItem)) {
 				relay.mountEntity(player);
-				return ItemInteractionResult.sidedSuccess(world.isClientSide());
+				return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 			}
 		}
 
@@ -76,7 +76,7 @@ public class LuminizerBlock extends BotaniaWaterloggedBlock implements EntityBlo
 
 	@Override
 	public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-		if (!worldIn.isClientSide && variant == LuminizerVariant.TOGGLE) {
+		if (!worldIn.isClientSide() && variant == LuminizerVariant.TOGGLE) {
 			if (state.getValue(BlockStateProperties.POWERED) && !worldIn.hasNeighborSignal(pos)) {
 				worldIn.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.POWERED, false));
 			} else if (!state.getValue(BlockStateProperties.POWERED) && worldIn.hasNeighborSignal(pos)) {
@@ -114,7 +114,7 @@ public class LuminizerBlock extends BotaniaWaterloggedBlock implements EntityBlo
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, BotaniaBlockEntities.LIGHT_RELAY, level.isClientSide ? LuminizerBlockEntity::clientTick : LuminizerBlockEntity::serverTick);
+		return createTickerHelper(type, BotaniaBlockEntities.LIGHT_RELAY, level.isClientSide() ? LuminizerBlockEntity::clientTick : LuminizerBlockEntity::serverTick);
 	}
 
 }

@@ -43,7 +43,7 @@ public class ManufactoryHaloItem extends AssemblyHaloItem {
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int pos, boolean equipped) {
 		super.inventoryTick(stack, world, entity, pos, equipped);
 
-		if (!world.isClientSide && entity instanceof Player player && !equipped && isActive(stack)) {
+		if (!world.isClientSide() && entity instanceof Player player && !equipped && isActive(stack)) {
 
 			for (int i = 1; i < SEGMENTS; i++) {
 				tryCraft(player, stack, i, false);
@@ -70,7 +70,7 @@ public class ManufactoryHaloItem extends AssemblyHaloItem {
 		ItemStack stack = player.getItemInHand(hand);
 		if (getSegmentLookedAt(stack, player) == 0 && player.isSecondaryUseActive()) {
 			togglePassive(stack, player, world);
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
 		}
 
 		return super.use(world, player, hand);

@@ -115,7 +115,7 @@ public class TinyPotatoBlockEntity extends ExposedSimpleInventoryBlockEntity imp
 	}
 
 	public void interact(Player player, InteractionHand hand, ItemStack stack, Direction side) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			int index = side.get3DDataValue();
 			ItemStack stackAt = getItemHandler().getItem(index);
 			if (!stackAt.isEmpty() && stack.isEmpty()) {
@@ -191,8 +191,8 @@ public class TinyPotatoBlockEntity extends ExposedSimpleInventoryBlockEntity imp
 			self.jumpTicks--;
 		}
 
-		if (!level.isClientSide) {
-			if (level.random.nextInt(100) == 0) {
+		if (!level.isClientSide()) {
+			if (level.getRandom().nextInt(100) == 0) {
 				self.jump();
 			}
 			if (self.nextDoIt > 0) {
@@ -264,7 +264,7 @@ public class TinyPotatoBlockEntity extends ExposedSimpleInventoryBlockEntity imp
 	@Override
 	public void setChanged() {
 		super.setChanged();
-		if (level != null && !level.isClientSide) {
+		if (level != null && !level.isClientSide()) {
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 		}
 	}

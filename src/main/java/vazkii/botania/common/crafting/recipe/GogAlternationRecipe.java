@@ -85,7 +85,7 @@ public class GogAlternationRecipe<C extends RecipeInput> implements Recipe<C> {
 		return getRecipe().getType();
 	}
 
-	private static class Serializer implements RecipeSerializer<GogAlternationRecipe<?>> {
+	private static class Serializer extends RecipeSerializer<GogAlternationRecipe<?>> {
 		private static final MapCodec<GogAlternationRecipe<?>> RAW_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				Recipe.CODEC.fieldOf("base").forGetter(GogAlternationRecipe::getBaseRecipe),
 				Recipe.CODEC.fieldOf("gog").forGetter(GogAlternationRecipe::getGogRecipe)

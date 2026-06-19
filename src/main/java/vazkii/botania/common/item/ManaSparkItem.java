@@ -28,7 +28,7 @@ public class ManaSparkItem extends Item {
 	@Override
 	public InteractionResult useOn(UseOnContext ctx) {
 		return attachSpark(ctx.getLevel(), ctx.getClickedPos(), ctx.getItemInHand())
-				? InteractionResult.sidedSuccess(ctx.getLevel().isClientSide)
+				? InteractionResult.sidedSuccess(ctx.getLevel().isClientSide())
 				: InteractionResult.PASS;
 	}
 
@@ -36,7 +36,7 @@ public class ManaSparkItem extends Item {
 		var attach = XplatAbstractions.INSTANCE.findSparkAttachable(world, pos, world.getBlockState(pos), world.getBlockEntity(pos), Direction.UP);
 		if (attach != null) {
 			if (attach.canAttachSpark(stack) && attach.getAttachedSpark() == null) {
-				if (!world.isClientSide) {
+				if (!world.isClientSide()) {
 					stack.shrink(1);
 					ManaSparkEntity spark = new ManaSparkEntity(world);
 					spark.setPos(pos.getX() + 0.5, pos.getY() + 1.25, pos.getZ() + 0.5);

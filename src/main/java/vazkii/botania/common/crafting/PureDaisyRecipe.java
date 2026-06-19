@@ -90,7 +90,7 @@ public class PureDaisyRecipe implements vazkii.botania.api.recipe.PureDaisyRecip
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<PureDaisyRecipe> {
+	public static class Serializer extends RecipeSerializer<PureDaisyRecipe> {
 		public static final MapCodec<PureDaisyRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				StateIngredients.TYPED_CODEC.fieldOf("input").forGetter(PureDaisyRecipe::getInput),
 				StateIngredients.TYPED_CODEC.fieldOf("output").forGetter(PureDaisyRecipe::getOutput),

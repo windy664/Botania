@@ -55,7 +55,7 @@ public class OrechidIgnemRecipe extends OrechidRecipe {
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<OrechidIgnemRecipe> {
+	public static class Serializer extends RecipeSerializer<OrechidIgnemRecipe> {
 		public static final MapCodec<OrechidIgnemRecipe> CODEC = OrechidRecipe.SERIALIZER.codec()
 				.xmap(OrechidIgnemRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, OrechidIgnemRecipe> STREAM_CODEC = OrechidRecipe.SERIALIZER.streamCodec()

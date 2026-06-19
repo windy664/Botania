@@ -38,7 +38,7 @@ public class ManastormChargeBlock extends BotaniaBlock {
 
 		@Override
 		public void onBurstCollision(ManaBurst burst) {
-			if (!burst.isFake() && !world.isClientSide) {
+			if (!burst.isFake() && !world.isClientSide()) {
 				world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(state));
 				world.removeBlock(pos, false);
 				ManaStormEntity storm = BotaniaEntities.MANA_STORM.create(world);

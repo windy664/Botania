@@ -90,7 +90,7 @@ public abstract class ColoredContentsPouchItem extends Item {
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			ItemStack stack = player.getItemInHand(hand);
 			XplatAbstractions.INSTANCE.openMenu((ServerPlayer) player, new MenuProvider() {
 				@Override
@@ -104,7 +104,7 @@ public abstract class ColoredContentsPouchItem extends Item {
 				}
 			}, hand == InteractionHand.MAIN_HAND, ByteBufCodecs.BOOL);
 		}
-		return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), world.isClientSide());
+		return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), world.isClientSide()());
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public abstract class ColoredContentsPouchItem extends Item {
 
 		if ((ctx.getPlayer() == null || ctx.getPlayer().isSecondaryUseActive())
 				&& XplatAbstractions.INSTANCE.hasInventory(world, pos, side)) {
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				Container bagInv = getInventory(ctx.getItemInHand());
 				for (int i = 0; i < bagInv.getContainerSize(); i++) {
 					ItemStack flower = bagInv.getItem(i);
@@ -125,7 +125,7 @@ public abstract class ColoredContentsPouchItem extends Item {
 
 			}
 
-			return InteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.sidedSuccess(world.isClientSide()());
 		}
 		return InteractionResult.PASS;
 	}

@@ -70,7 +70,7 @@ public class FlameRingEntity extends Entity {
 			level().playLocalSound(getX(), getY(), getZ(), SoundEvents.FIRE_AMBIENT, SoundSource.BLOCKS, 1F, 1F, false);
 		}
 
-		if (level().isClientSide) {
+		if (level().isClientSide()) {
 			return;
 		}
 

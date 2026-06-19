@@ -79,7 +79,7 @@ public class LuminizerBlockEntity extends BotaniaBlockEntity implements WandBind
 
 	public void mountEntity(Entity e) {
 		BlockPos nextDest = getNextDestination();
-		if (e.isPassenger() || level.isClientSide || nextDest == null || !isValidBinding()) {
+		if (e.isPassenger() || level.isClientSide() || nextDest == null || !isValidBinding()) {
 			return;
 		}
 
@@ -267,7 +267,7 @@ public class LuminizerBlockEntity extends BotaniaBlockEntity implements WandBind
 		if (isNoParticle()) {
 			return false;
 		}
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			if (player == null || !player.getAbilities().instabuild) {
 				stack.shrink(1);
 			}
@@ -322,7 +322,7 @@ public class LuminizerBlockEntity extends BotaniaBlockEntity implements WandBind
 		public void tick() {
 			super.tick();
 
-			if (getPassengers().isEmpty() && !level().isClientSide) {
+			if (getPassengers().isEmpty() && !level().isClientSide()) {
 				discard();
 				return;
 			}
@@ -338,7 +338,7 @@ public class LuminizerBlockEntity extends BotaniaBlockEntity implements WandBind
 			BlockPos pos = blockPosition();
 			BlockPos exitPos = getExitPos();
 
-			if (!level().isClientSide && pos.equals(exitPos)) {
+			if (!level().isClientSide() && pos.equals(exitPos)) {
 				boolean done = true;
 				BlockEntity tile = level().getBlockEntity(pos);
 				if (tile instanceof LuminizerBlockEntity relay) {

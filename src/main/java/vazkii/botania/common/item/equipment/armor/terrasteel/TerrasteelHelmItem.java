@@ -41,7 +41,7 @@ public class TerrasteelHelmItem extends TerrasteelArmorItem implements ManaDisco
 	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
 		super.inventoryTick(stack, world, entity, slot, selected);
-		if (!world.isClientSide && entity instanceof Player player
+		if (!world.isClientSide() && entity instanceof Player player
 				&& player.getInventory().armor.contains(stack)
 				&& hasArmorSet(player)) {
 			int food = player.getFoodData().getFoodLevel();

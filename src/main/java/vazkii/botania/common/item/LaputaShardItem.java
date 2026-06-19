@@ -86,9 +86,9 @@ public class LaputaShardItem extends Item implements LensEffectItem, TinyPlanetE
 		Level world = ctx.getLevel();
 		BlockPos pos = ctx.getClickedPos();
 		if (pos.getY() < world.getMaxBuildHeight() - BASE_OFFSET && !world.dimensionType().hasCeiling()) {
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				world.gameEvent(ctx.getPlayer(), GameEvent.ENTITY_PLACE, pos);
-				world.playSound(null, pos, BotaniaSounds.laputaStart, SoundSource.BLOCKS, 1.0F + world.random.nextFloat(), world.random.nextFloat() * 0.7F + 1.3F);
+				world.playSound(null, pos, BotaniaSounds.laputaStart, SoundSource.BLOCKS, 1.0F + world.getRandom().nextFloat(), world.getRandom().nextFloat() * 0.7F + 1.3F);
 				ItemStack stack = ctx.getItemInHand();
 				spawnFirstBurst(world, pos, stack);
 				if (ctx.getPlayer() != null) {
@@ -96,7 +96,7 @@ public class LaputaShardItem extends Item implements LensEffectItem, TinyPlanetE
 				}
 				stack.shrink(1);
 			}
-			return InteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.sidedSuccess(world.isClientSide()());
 		}
 
 		return InteractionResult.PASS;
@@ -108,8 +108,8 @@ public class LaputaShardItem extends Item implements LensEffectItem, TinyPlanetE
 
 	protected void spawnFirstBurst(Level world, BlockPos pos, ItemStack shard) {
 		int range = getRange(shard);
-		boolean pointy = shard.getOrDefault(BotaniaDataComponents.SHARD_POINTY, world.random.nextDouble() < 0.25);
-		float heightScale = shard.getOrDefault(BotaniaDataComponents.SHARD_HEIGHT_SCALE, (world.random.nextFloat() + 0.5f) * ((float) BASE_RANGE / range));
+		boolean pointy = shard.getOrDefault(BotaniaDataComponents.SHARD_POINTY, world.getRandom().nextDouble() < 0.25);
+		float heightScale = shard.getOrDefault(BotaniaDataComponents.SHARD_HEIGHT_SCALE, (world.getRandom().nextFloat() + 0.5f) * ((float) BASE_RANGE / range));
 		spawnNextBurst(world, pos, shard, pointy, heightScale);
 	}
 
@@ -251,7 +251,7 @@ public class LaputaShardItem extends Item implements LensEffectItem, TinyPlanetE
 		double speed = 0.35;
 		int targetDistance = BASE_OFFSET;
 		Entity entity = burst.entity();
-		if (!entity.level().isClientSide) {
+		if (!entity.level().isClientSide()) {
 			entity.setDeltaMovement(0, speed, 0);
 
 			final int spawnTicks = 2;

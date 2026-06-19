@@ -66,7 +66,7 @@ public class WandOfTheForestRecipe extends ShapedRecipe {
 		return SERIALIZER;
 	}
 
-	private static class Serializer implements WrappingRecipeSerializer<WandOfTheForestRecipe> {
+	private static class Serializer extends WrappingRecipeSerializer<WandOfTheForestRecipe> {
 		public static final MapCodec<WandOfTheForestRecipe> CODEC = SHAPED_RECIPE.codec()
 				.xmap(WandOfTheForestRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, WandOfTheForestRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()

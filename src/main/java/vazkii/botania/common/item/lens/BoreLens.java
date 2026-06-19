@@ -43,7 +43,7 @@ public class BoreLens extends Lens {
 		Entity entity = burst.entity();
 		Level world = entity.level();
 
-		if (world.isClientSide || rtr.getType() != HitResult.Type.BLOCK) {
+		if (world.isClientSide() || rtr.getType() != HitResult.Type.BLOCK) {
 			return false;
 		}
 

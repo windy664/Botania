@@ -90,7 +90,7 @@ public final class SkyblockWorldEvents {
 					SoundEvent sound = st.getBreakSound();
 					player.playSound(sound, st.getVolume() * 0.4F, st.getPitch() + (float) (Math.random() * 0.2 - 0.1));
 
-					if (world.isClientSide) {
+					if (world.isClientSide()) {
 						player.swing(hand);
 					} else if (world instanceof ServerLevel level) {
 						var table = level.getServer().reloadableRegistries().getLootTable(PEBBLES_TABLE);
@@ -111,7 +111,7 @@ public final class SkyblockWorldEvents {
 				if (rtr.getType() == HitResult.Type.BLOCK) {
 					BlockPos pos = rtr.getBlockPos();
 					if (world.getBlockState(pos).is(Blocks.WATER)) {
-						if (!world.isClientSide) {
+						if (!world.isClientSide()) {
 							equipped.shrink(1);
 
 							if (equipped.isEmpty()) {
@@ -165,15 +165,15 @@ public final class SkyblockWorldEvents {
 				startPoint,
 				startPoint,
 				new StructurePlaceSettings().addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK),
-				level.random,
+				level.getRandom(),
 				Block.UPDATE_ALL);
 		for (var info : structureBlockInfos) {
 			if ("light".equals(info.nbt().getString("metadata"))) {
 				BlockPos lightPos = startPoint.offset(info.pos());
 				if (level.setBlockAndUpdate(lightPos, BotaniaBlocks.manaFlame.defaultBlockState())) {
-					int r = 70 + level.random.nextInt(185);
-					int g = 70 + level.random.nextInt(185);
-					int b = 70 + level.random.nextInt(185);
+					int r = 70 + level.getRandom().nextInt(185);
+					int g = 70 + level.getRandom().nextInt(185);
+					int b = 70 + level.getRandom().nextInt(185);
 					int color = r << 16 | g << 8 | b;
 					((ManaFlameBlockEntity) level.getBlockEntity(lightPos)).setColor(color);
 				}

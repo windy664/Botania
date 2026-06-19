@@ -77,7 +77,7 @@ public class RannuncarpusBlockEntity extends FunctionalFlowerBlockEntity impleme
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (getLevel().isClientSide || redstoneSignal > 0) {
+		if (getLevel().isClientSide() || redstoneSignal > 0) {
 			return;
 		}
 

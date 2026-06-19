@@ -69,7 +69,7 @@ public class BellowsBlockEntity extends BotaniaBlockEntity {
 
 		if (self.movePos < max && self.active && self.moving >= 0F) {
 			if (self.moving == 0F) {
-				if (!level.isClientSide()) {
+				if (!level.isClientSide()()) {
 					level.gameEvent(null, GameEvent.BLOCK_ACTIVATE, worldPosition);
 				}
 				level.playSound(null, worldPosition, BotaniaSounds.bellows, SoundSource.BLOCKS, 1F, 1F);
@@ -93,9 +93,9 @@ public class BellowsBlockEntity extends BotaniaBlockEntity {
 					Direction enumfacing = furnace.getBlockState().getValue(FurnaceBlock.FACING);
 					Direction.Axis enumfacing$axis = enumfacing.getAxis();
 					double d3 = 0.52D;
-					double d4 = level.random.nextDouble() * 0.6D - 0.3D;
+					double d4 = level.getRandom().nextDouble() * 0.6D - 0.3D;
 					double d5 = enumfacing$axis == Direction.Axis.X ? (double) enumfacing.getStepX() * 0.52D : d4;
-					double d6 = level.random.nextDouble() * 6.0D / 16.0D;
+					double d6 = level.getRandom().nextDouble() * 6.0D / 16.0D;
 					double d7 = enumfacing$axis == Direction.Axis.Z ? (double) enumfacing.getStepZ() * 0.52D : d4;
 					level.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
 					level.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
@@ -139,7 +139,7 @@ public class BellowsBlockEntity extends BotaniaBlockEntity {
 	}
 
 	public void setActive(boolean active) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			boolean diff = this.active != active;
 			this.active = active;
 			if (diff) {

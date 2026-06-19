@@ -70,7 +70,7 @@ public class PetalApothecaryBlockEntity extends SimpleInventoryBlockEntity imple
 
 	public boolean collideEntityItem(ItemEntity item) {
 		ItemStack stack = item.getItem();
-		if (level.isClientSide || stack.isEmpty() || !item.isAlive()) {
+		if (level.isClientSide() || stack.isEmpty() || !item.isAlive()) {
 			return false;
 		}
 
@@ -195,7 +195,7 @@ public class PetalApothecaryBlockEntity extends SimpleInventoryBlockEntity imple
 		// lastRecipe is not synced. If we're calling this method we already checked that
 		// the apothecary has water and no items, so just optimistically assume
 		// success on the client.
-		if (player.level().isClientSide()) {
+		if (player.level().isClientSide()()) {
 			return InteractionResult.sidedSuccess(true);
 		}
 		boolean success = InventoryHelper.tryToSetLastRecipe(player, getItemHandler(), lastRecipe, SoundEvents.GENERIC_SPLASH);
@@ -282,7 +282,7 @@ public class PetalApothecaryBlockEntity extends SimpleInventoryBlockEntity imple
 				recipeKeepTicks = param;
 				return true;
 			case CRAFT_EFFECT_EVENT: {
-				if (level.isClientSide) {
+				if (level.isClientSide()) {
 					for (int i = 0; i < 25; i++) {
 						float red = (float) Math.random();
 						float green = (float) Math.random();

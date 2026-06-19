@@ -74,7 +74,7 @@ public class HoveringHourglassBlockEntity extends ExposedSimpleInventoryBlockEnt
 				self.time = 0;
 				self.flip = !self.flip;
 				self.flipTicks = 4;
-				if (!level.isClientSide) {
+				if (!level.isClientSide()) {
 					level.setBlock(worldPosition, state.setValue(BlockStateProperties.POWERED, true), Block.UPDATE_NEIGHBORS);
 					level.scheduleTick(worldPosition, state.getBlock(), 4);
 				}
@@ -104,7 +104,7 @@ public class HoveringHourglassBlockEntity extends ExposedSimpleInventoryBlockEnt
 
 	@Override
 	public void onBurstCollision(ManaBurst burst) {
-		if (!level.isClientSide && !burst.isFake()) {
+		if (!level.isClientSide() && !burst.isFake()) {
 			if (isDust()) {
 				time++;
 			} else {
@@ -179,7 +179,7 @@ public class HoveringHourglassBlockEntity extends ExposedSimpleInventoryBlockEnt
 	@Override
 	public void setChanged() {
 		super.setChanged();
-		if (level != null && !level.isClientSide) {
+		if (level != null && !level.isClientSide()) {
 			time = 0;
 			timeFraction = 0F;
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(HoveringHourglassBlockEntity.this);
@@ -259,7 +259,7 @@ public class HoveringHourglassBlockEntity extends ExposedSimpleInventoryBlockEnt
 	@Override
 	public boolean onUsedByWand(@Nullable Player player, ItemStack stack, Direction side) {
 		this.lock = !this.lock;
-		if (!getLevel().isClientSide) {
+		if (!getLevel().isClientSide()) {
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 		}
 		return true;

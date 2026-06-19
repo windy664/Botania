@@ -37,7 +37,7 @@ public class WorldSeedItem extends Item {
 		BlockPos coords = world.getSharedSpawnPos();
 		boolean inRange = coords.distToCenterSqr(player.getX(), player.getY(), player.getZ()) <= 24 * 24;
 		if (world.dimension() == Level.OVERWORLD && !inRange) {
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				Vec3 sourcePos = player.position();
 				player.setXRot(0F);
 				player.setYRot(0F);
@@ -55,7 +55,7 @@ public class WorldSeedItem extends Item {
 				world.gameEvent(player, GameEvent.TELEPORT, sourcePos);
 			}
 
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
 		}
 
 		return new InteractionResultHolder<>(InteractionResult.PASS, stack);

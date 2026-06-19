@@ -90,7 +90,7 @@ public class MoltenCoreRodItem extends Item {
 								data.progress--;
 								decremented = true;
 								if (data.progress <= 0) {
-									if (!world.isClientSide) {
+									if (!world.isClientSide()) {
 										world.setBlockAndUpdate(pos.getBlockPos(), Block.byItem(result.getItem()).defaultBlockState());
 										world.playSound(null, p.getX(), p.getY(), p.getZ(), BotaniaSounds.smeltRod, SoundSource.PLAYERS, 1F, 1F);
 										world.playSound(null, p.getX(), p.getY(), p.getZ(), BotaniaSounds.smeltRod2, SoundSource.PLAYERS, 1F, 1F);

@@ -81,7 +81,7 @@ public class SextantItem extends Item {
 	public void onUseTick(Level world, LivingEntity living, ItemStack stack, int count) {
 		if (getUseDuration(stack, living) - count < 10
 				|| !(living instanceof Player)
-				|| !world.isClientSide) {
+				|| !world.isClientSide()) {
 			return;
 		}
 
@@ -212,7 +212,7 @@ public class SextantItem extends Item {
 
 	private void reset(Level world, Player player, ItemStack stack) {
 		if (!stack.has(BotaniaDataComponents.BINDING_POS)) {
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				SextantMode currentMode = getMode(stack);
 				int numModes = SextantMode.values().length;
 				int nextMode = currentMode.ordinal() + 1;
@@ -223,7 +223,7 @@ public class SextantItem extends Item {
 		} else {
 			stack.remove(BotaniaDataComponents.BINDING_POS);
 		}
-		if (world.isClientSide) {
+		if (world.isClientSide()) {
 			Proxy.INSTANCE.clearSextantMultiblock();
 		}
 	}
@@ -238,7 +238,7 @@ public class SextantItem extends Item {
 		if (!player.isSecondaryUseActive()) {
 			BlockHitResult rtr = ToolCommons.raytraceFromEntity(player, 128, false);
 			if (rtr.getType() == HitResult.Type.BLOCK) {
-				if (!world.isClientSide) {
+				if (!world.isClientSide()) {
 					BlockPos pos = rtr.getBlockPos();
 					stack.set(BotaniaDataComponents.BINDING_POS, GlobalPos.of(world.dimension(), pos));
 				}

@@ -23,7 +23,7 @@ public class TeruTeruBozuBlockEntity extends BotaniaBlockEntity {
 
 	public static void serverTick(Level level, BlockPos worldPosition, BlockState state, TeruTeruBozuBlockEntity self) {
 		boolean isRaining = level.isRaining();
-		if (isRaining && level.random.nextInt(9600) == 0) {
+		if (isRaining && level.getRandom().nextInt(9600) == 0) {
 			level.getLevelData().setRaining(false);
 			resetRainTime(level);
 		}

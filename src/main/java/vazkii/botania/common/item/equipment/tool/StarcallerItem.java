@@ -53,7 +53,7 @@ public class StarcallerItem extends ManasteelSwordItem {
 		float check = haste == null ? 0.16666667F : haste.getAmplifier() == 1 ? 0.5F : 0.4F;
 
 		long timeSinceLast = world.getGameTime() - stack.getOrDefault(BotaniaDataComponents.LAST_TRIGGER_TIME, world.getGameTime());
-		if (timeSinceLast > INTERVAL && player.getMainHandItem() == stack && player.attackAnim == check && !world.isClientSide) {
+		if (timeSinceLast > INTERVAL && player.getMainHandItem() == stack && player.attackAnim == check && !world.isClientSide()) {
 			stack.set(BotaniaDataComponents.LAST_TRIGGER_TIME, world.getGameTime());
 			summonFallingStar(stack, world, player);
 		}

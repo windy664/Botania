@@ -187,7 +187,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 			return;
 		}
 
-		Pair<Identifier, LootTable> randomPick = lootTables.get(world.random.nextInt(lootTables.size()));
+		Pair<Identifier, LootTable> randomPick = lootTables.get(world.getRandom().nextInt(lootTables.size()));
 		LooniumStructureConfiguration pickedConfig = structureConfigs.getOrDefault(randomPick.key(),
 				structureConfigs.get(LooniumStructureConfiguration.DEFAULT_CONFIG_ID));
 		LootTable pickedLootTable = randomPick.value();
@@ -201,7 +201,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 			return;
 		}
 
-		LooniumMobSpawnData pickedMobType = pickedConfig.spawnedMobs.getRandom(world.random).orElse(null);
+		LooniumMobSpawnData pickedMobType = pickedConfig.spawnedMobs.getRandom(world.getRandom()).orElse(null);
 		if (pickedMobType == null) {
 			return;
 		}
@@ -217,7 +217,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 			return;
 		}
 
-		RandomSource random = world.random;
+		RandomSource random = world.getRandom();
 		double x = getEffectivePos().getX() + 0.5 - RANGE + 2 * RANGE * random.nextDouble();
 		double y = getEffectivePos().getY();
 		double z = getEffectivePos().getZ() + 0.5 - RANGE + 2 * RANGE * random.nextDouble();
@@ -365,7 +365,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 
 	private static ItemStack pickRandomLootItem(ServerLevel world, LootTable pickedLootTable) {
 		LootParams params = new LootParams.Builder(world).create(LootContextParamSets.EMPTY);
-		List<ItemStack> stacks = pickedLootTable.getRandomItems(params, world.random.nextLong());
+		List<ItemStack> stacks = pickedLootTable.getRandomItems(params, world.getRandom().nextLong());
 		stacks.removeIf(s -> s.isEmpty() || s.is(BotaniaTags.Items.LOONIUM_EXCLUDED));
 		if (stacks.isEmpty()) {
 			return ItemStack.EMPTY;

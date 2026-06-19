@@ -44,7 +44,7 @@ public class CorporeaCrystalCubeBlock extends BotaniaWaterloggedBlock implements
 
 	@Override
 	public void attack(BlockState state, Level world, BlockPos pos, Player player) {
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			CorporeaCrystalCubeBlockEntity cube = (CorporeaCrystalCubeBlockEntity) world.getBlockEntity(pos);
 			cube.doRequest(player);
 		}
@@ -63,13 +63,13 @@ public class CorporeaCrystalCubeBlock extends BotaniaWaterloggedBlock implements
 		}
 		CorporeaCrystalCubeBlockEntity cube = (CorporeaCrystalCubeBlockEntity) level.getBlockEntity(pos);
 		if (cube.locked) {
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				player.displayClientMessage(Component.translatable("botaniamisc.crystalCubeLocked"), false);
 			}
 		} else {
 			cube.setRequestTarget(stack);
 		}
-		return ItemInteractionResult.sidedSuccess(level.isClientSide());
+		return ItemInteractionResult.sidedSuccess(level.isClientSide()());
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class CorporeaCrystalCubeBlock extends BotaniaWaterloggedBlock implements
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			return createTickerHelper(type, BotaniaBlockEntities.CORPOREA_CRYSTAL_CUBE, CorporeaCrystalCubeBlockEntity::serverTick);
 		}
 		return null;

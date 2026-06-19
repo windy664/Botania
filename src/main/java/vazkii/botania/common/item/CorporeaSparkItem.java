@@ -35,7 +35,7 @@ public class CorporeaSparkItem extends Item {
 	@Override
 	public InteractionResult useOn(UseOnContext ctx) {
 		return attachSpark(ctx.getLevel(), ctx.getClickedPos(), ctx.getItemInHand())
-				? InteractionResult.sidedSuccess(ctx.getLevel().isClientSide())
+				? InteractionResult.sidedSuccess(ctx.getLevel().isClientSide()())
 				: InteractionResult.PASS;
 	}
 
@@ -55,7 +55,7 @@ public class CorporeaSparkItem extends Item {
 		spark.setPos(pos.getX() + 0.5, pos.getY() + 1.25, pos.getZ() + 0.5);
 
 		if (canPlace(world, spark) && !CorporeaHelper.instance().doesBlockHaveSpark(world, pos)) {
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				world.addFreshEntity(spark);
 				stack.shrink(1);
 			}

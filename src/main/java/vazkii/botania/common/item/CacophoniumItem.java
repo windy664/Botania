@@ -64,13 +64,13 @@ public class CacophoniumItem extends Item {
 			}
 
 			if (sound != null) {
-				if (!player.level().isClientSide) {
+				if (!player.level().isClientSide()) {
 					stack.set(DataComponents.NOTE_BLOCK_SOUND, BuiltInRegistries.SOUND_EVENT.getKey(sound));
 					stack.set(BotaniaDataComponents.MOB_TYPE, BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()));
 					player.setItemInHand(hand, stack);
 				}
 
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide());
 			}
 		}
 
@@ -86,12 +86,12 @@ public class CacophoniumItem extends Item {
 
 			Block block = world.getBlockState(pos).getBlock();
 			if (block instanceof NoteBlock) {
-				if (!world.isClientSide()) {
+				if (!world.isClientSide()()) {
 					world.setBlockAndUpdate(pos, BotaniaBlocks.cacophonium.defaultBlockState());
 					((CacophoniumBlockEntity) world.getBlockEntity(pos)).stack = stack.copy();
 					stack.shrink(1);
 				}
-				return InteractionResult.sidedSuccess(world.isClientSide());
+				return InteractionResult.sidedSuccess(world.isClientSide()());
 			}
 		}
 
@@ -127,7 +127,7 @@ public class CacophoniumItem extends Item {
 
 	@Override
 	public void onUseTick(Level world, LivingEntity living, ItemStack stack, int count) {
-		if (!world.isClientSide && count % (isDOIT(stack) ? 20 : 6) == 0) {
+		if (!world.isClientSide() && count % (isDOIT(stack) ? 20 : 6) == 0) {
 			playSound(living.level(), stack, living.getX(), living.getY(), living.getZ(), living.getSoundSource(), 0.9F);
 			living.gameEvent(GameEvent.INSTRUMENT_PLAY);
 		}
@@ -141,7 +141,7 @@ public class CacophoniumItem extends Item {
 		SoundEvent sound = getSound(stack);
 
 		if (sound != null) {
-			world.playSound(null, x, y, z, sound, category, volume, sound == BotaniaSounds.doit ? 1F : (world.random.nextFloat() - world.random.nextFloat()) * 0.2F + 1.0F);
+			world.playSound(null, x, y, z, sound, category, volume, sound == BotaniaSounds.doit ? 1F : (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.2F + 1.0F);
 		}
 	}
 

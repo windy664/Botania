@@ -34,7 +34,7 @@ public class VinculotusBlockEntity extends FunctionalFlowerBlockEntity {
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (!getLevel().isClientSide) {
+		if (!getLevel().isClientSide()) {
 			existingFlowers.add(this);
 		}
 	}

@@ -49,7 +49,7 @@ public class TeruTeruBozuBlock extends BotaniaWaterloggedBlock implements Entity
 
 	@Override
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity e) {
-		if (!world.isClientSide && e instanceof ItemEntity item) {
+		if (!world.isClientSide() && e instanceof ItemEntity item) {
 			ItemStack stack = item.getItem();
 			if (isSunflower(stack) && removeRain(world) || isBlueOrchid(stack) && startRain(world)) {
 				EntityHelper.shrinkItem(item);
@@ -64,7 +64,7 @@ public class TeruTeruBozuBlock extends BotaniaWaterloggedBlock implements Entity
 			if (!player.getAbilities().instabuild) {
 				stack.shrink(1);
 			}
-			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+			return ItemInteractionResult.sidedSuccess(level.isClientSide()());
 		}
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
@@ -88,7 +88,7 @@ public class TeruTeruBozuBlock extends BotaniaWaterloggedBlock implements Entity
 
 	private boolean startRain(Level world) {
 		if (!world.isRaining()) {
-			if (world.random.nextInt(10) == 0) {
+			if (world.getRandom().nextInt(10) == 0) {
 				world.getLevelData().setRaining(true);
 				TeruTeruBozuBlockEntity.resetRainTime(world);
 			}
@@ -120,7 +120,7 @@ public class TeruTeruBozuBlock extends BotaniaWaterloggedBlock implements Entity
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			return createTickerHelper(type, BotaniaBlockEntities.TERU_TERU_BOZU, TeruTeruBozuBlockEntity::serverTick);
 		}
 		return null;

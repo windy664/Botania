@@ -93,7 +93,7 @@ public class ManaPumpBlockEntity extends BotaniaBlockEntity {
 	}
 
 	public void setActive(boolean active) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			boolean diff = this.active != active;
 			this.active = active;
 			if (diff) {

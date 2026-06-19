@@ -48,7 +48,7 @@ public class NarslimmusBlockEntity extends GeneratingFlowerBlockEntity {
 			for (Slime slime : slimes) {
 				if (slime.isAlive() && XplatAbstractions.INSTANCE.narslimmusComponent(slime).isNaturalSpawned()) {
 					int size = slime.getSize();
-					if (!slime.level().isClientSide) {
+					if (!slime.level().isClientSide()) {
 						slime.discard();
 						slime.playSound(size > 1 ? BotaniaSounds.narslimmusEatBig : BotaniaSounds.narslimmusEatSmall, 1F, 1F);
 						addMana(manaForSize(size));

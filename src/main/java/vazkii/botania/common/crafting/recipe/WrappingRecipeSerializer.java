@@ -13,6 +13,6 @@ package vazkii.botania.common.crafting.recipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
-public interface WrappingRecipeSerializer<T extends Recipe<?>> extends RecipeSerializer<T> {
+public abstract class WrappingRecipeSerializer<T extends Recipe<?>> extends RecipeSerializer<T> {
 	T wrap(Recipe<?> recipe);
 }

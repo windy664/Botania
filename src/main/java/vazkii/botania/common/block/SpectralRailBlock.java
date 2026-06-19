@@ -75,14 +75,14 @@ public class SpectralRailBlock extends BaseRailBlock {
 
 	@SoftImplement("IBaseRailBlockExtension")
 	public void onMinecartPass(BlockState state, Level world, BlockPos pos, AbstractMinecart cart) {
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			XplatAbstractions.INSTANCE.ghostRailComponent(cart).floatTicks = 20;
 			updateFloating(cart);
 		}
 	}
 
 	public void tickCart(AbstractMinecart c) {
-		if (c.level().isClientSide || c.isRemoved()) {
+		if (c.level().isClientSide() || c.isRemoved()) {
 			return;
 		}
 

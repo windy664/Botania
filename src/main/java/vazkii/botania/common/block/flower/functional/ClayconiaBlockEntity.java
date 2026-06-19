@@ -47,7 +47,7 @@ public class ClayconiaBlockEntity extends FunctionalFlowerBlockEntity {
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (!getLevel().isClientSide && ticksExisted % 5 == 0) {
+		if (!getLevel().isClientSide() && ticksExisted % 5 == 0) {
 			if (getMana() >= COST) {
 				BlockPos coords = getCoordsToPut();
 				if (coords != null) {

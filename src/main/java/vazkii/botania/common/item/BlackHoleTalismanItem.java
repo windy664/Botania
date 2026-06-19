@@ -59,7 +59,7 @@ public class BlackHoleTalismanItem extends Item {
 		if (getBlock(stack) != null && player.isSecondaryUseActive()) {
 			DataComponentHelper.setFlag(stack, BotaniaDataComponents.ACTIVE, !stack.has(BotaniaDataComponents.ACTIVE));
 			player.playSound(BotaniaSounds.blackHoleTalismanConfigure, 1F, 1F);
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
 		}
 
 		return InteractionResultHolder.pass(stack);
@@ -75,7 +75,7 @@ public class BlackHoleTalismanItem extends Item {
 		ItemStack stack = ctx.getItemInHand();
 
 		if (!state.isAir() && setBlock(stack, state.getBlock())) {
-			return InteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.sidedSuccess(world.isClientSide()());
 		} else {
 			Block bBlock = getBlock(stack);
 
@@ -85,7 +85,7 @@ public class BlackHoleTalismanItem extends Item {
 
 			BlockEntity tile = world.getBlockEntity(pos);
 			if (tile instanceof Container container) {
-				if (!world.isClientSide) {
+				if (!world.isClientSide()) {
 					ItemStack toAdd = new ItemStack(bBlock);
 					int maxSize = toAdd.getMaxStackSize();
 					toAdd.setCount(remove(stack, maxSize));
@@ -94,14 +94,14 @@ public class BlackHoleTalismanItem extends Item {
 						add(stack, remainder.getCount());
 					}
 				}
-				return InteractionResult.sidedSuccess(world.isClientSide());
+				return InteractionResult.sidedSuccess(world.isClientSide()());
 			} else {
 				if (player == null || player.getAbilities().instabuild || getBlockCount(stack) > 0) {
 					ItemStack toUse = new ItemStack(bBlock);
 					InteractionResult result = PlayerHelper.substituteUse(ctx, toUse);
 
 					if (result.consumesAction()) {
-						if (!world.isClientSide) {
+						if (!world.isClientSide()) {
 							remove(stack, 1);
 							ItemsRemainingRenderHandler.send(player, toUse, getBlockCount(stack));
 						}
@@ -116,7 +116,7 @@ public class BlackHoleTalismanItem extends Item {
 
 	@Override
 	public void inventoryTick(ItemStack talisman, Level world, Entity entity, int slot, boolean selected) {
-		if (!(entity instanceof Player player) || entity.level().isClientSide
+		if (!(entity instanceof Player player) || entity.level().isClientSide()
 				|| !talisman.has(BotaniaDataComponents.ACTIVE)) {
 			return;
 		}

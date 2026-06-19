@@ -131,7 +131,7 @@ public class SkiesRodItem extends Item {
 			ManaItemHandler.instance().requestManaExactForTool(stack, player, COST, true);
 			setFlying(stack, true);
 			player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
 		}
 
 		return InteractionResultHolder.pass(stack);
@@ -161,10 +161,10 @@ public class SkiesRodItem extends Item {
 			Map<UUID, Integer> cooldowns = tile.getBoostCooldowns();
 			ManaReceiver receiver = XplatAbstractions.INSTANCE.findManaReceiver(world, te.getBlockPos(), te.getBlockState(), te, null);
 
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				decAvatarCooldowns(cooldowns);
 			}
-			if (!world.isClientSide && receiver.getCurrentMana() >= COST && tile.isEnabled()) {
+			if (!world.isClientSide() && receiver.getCurrentMana() >= COST && tile.isEnabled()) {
 				double range = 5.5;
 				double rangeY = 3.5;
 				List<Player> players = world.getEntitiesOfClass(Player.class, new AABB(
@@ -204,7 +204,7 @@ public class SkiesRodItem extends Item {
 				p.getDeltaMovement().y() + lookDir.y() * mult,
 				p.getDeltaMovement().z() + lookDir.z() * mult);
 
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			XplatAbstractions.INSTANCE.sendToPlayer(p, new AvatarSkiesRodPacket(true));
 			XplatAbstractions.INSTANCE.sendToTracking(p,
 					new BotaniaEffectPacket(EffectType.AVATAR_TORNADO_BOOST,
@@ -216,7 +216,7 @@ public class SkiesRodItem extends Item {
 	public static void doAvatarJump(Player p, Level world) {
 		p.setDeltaMovement(p.getDeltaMovement().x(), 2.8, p.getDeltaMovement().z());
 
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			XplatAbstractions.INSTANCE.sendToPlayer(p, new AvatarSkiesRodPacket(false));
 			XplatAbstractions.INSTANCE.sendToTracking(p,
 					new BotaniaEffectPacket(EffectType.AVATAR_TORNADO_JUMP,

@@ -126,7 +126,7 @@ public class PetalPouchItem extends ColoredContentsPouchItem {
 		if (player.isSecondaryUseActive()) {
 			DataComponentHelper.setFlag(stack, BotaniaDataComponents.ACTIVE, !isActive(stack));
 			level.playSound(player, player.getX(), player.getY(), player.getZ(), BotaniaSounds.petalPouchConfigure, SoundSource.NEUTRAL, 1f, 1f);
-			return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+			return InteractionResultHolder.sidedSuccess(stack, level.isClientSide()());
 		}
 		return super.use(level, player, hand);
 	}

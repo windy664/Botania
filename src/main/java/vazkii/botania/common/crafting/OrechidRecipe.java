@@ -111,7 +111,7 @@ public class OrechidRecipe implements vazkii.botania.api.recipe.OrechidRecipe {
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<OrechidRecipe> {
+	public static class Serializer extends RecipeSerializer<OrechidRecipe> {
 		private static final MapCodec<OrechidRecipe> RAW_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				StateIngredients.TYPED_CODEC.fieldOf("input").forGetter(OrechidRecipe::getInput),
 				StateIngredients.TYPED_CODEC.fieldOf("output").forGetter(OrechidRecipe::getOutput),

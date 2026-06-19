@@ -53,7 +53,7 @@ public class BifrostRodItem extends SelfReturningItem {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (!world.isClientSide && ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_COST, false)) {
+		if (!world.isClientSide() && ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_COST, false)) {
 			BlockState bifrost = BotaniaBlocks.bifrost.defaultBlockState();
 			Vec3 vector = player.getLookAngle().normalize();
 
@@ -111,7 +111,7 @@ public class BifrostRodItem extends SelfReturningItem {
 			}
 		}
 
-		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
 	}
 
 	private static boolean placeBridgeSegment(Level world, BlockPos center, BlockPos.MutableBlockPos placePos, int time) {
@@ -142,7 +142,7 @@ public class BifrostRodItem extends SelfReturningItem {
 			Level world = te.getLevel();
 			ManaReceiver receiver = XplatAbstractions.INSTANCE.findManaReceiver(world, te.getBlockPos(), te.getBlockState(), te, null);
 
-			if (world.isClientSide || receiver.getCurrentMana() < MANA_COST_AVATAR * 25
+			if (world.isClientSide() || receiver.getCurrentMana() < MANA_COST_AVATAR * 25
 					|| !tile.isEnabled() || world.isOutsideBuildHeight(te.getBlockPos().getY() - 1)) {
 				return;
 			}

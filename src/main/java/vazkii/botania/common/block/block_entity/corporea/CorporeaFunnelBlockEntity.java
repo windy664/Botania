@@ -44,7 +44,7 @@ public class CorporeaFunnelBlockEntity extends BaseCorporeaBlockEntity implement
 		if (spark != null && spark.getMaster() != null) {
 			WeightedRandomList<FilterHelper.WeightedItemStack> filter = getFilter();
 			if (!filter.isEmpty()) {
-				ItemStack stack = filter.getRandom(level.random)
+				ItemStack stack = filter.getRandom(level.getRandom())
 						.map(FilterHelper.WeightedItemStack::stack)
 						.orElse(ItemStack.EMPTY);
 

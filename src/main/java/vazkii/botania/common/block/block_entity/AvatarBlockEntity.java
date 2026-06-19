@@ -110,7 +110,7 @@ public class AvatarBlockEntity extends SimpleInventoryBlockEntity implements Ava
 	@Override
 	public void setChanged() {
 		super.setChanged();
-		if (level != null && !level.isClientSide) {
+		if (level != null && !level.isClientSide()) {
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 		}
 	}

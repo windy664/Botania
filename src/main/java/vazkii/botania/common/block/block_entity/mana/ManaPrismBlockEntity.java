@@ -81,7 +81,7 @@ public class ManaPrismBlockEntity extends ExposedSimpleInventoryBlockEntity impl
 	@Override
 	public void setChanged() {
 		super.setChanged();
-		if (level != null && !level.isClientSide) {
+		if (level != null && !level.isClientSide()) {
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 			BlockState state = getBlockState();
 			boolean hasLens = !getItemHandler().getItem(0).isEmpty();

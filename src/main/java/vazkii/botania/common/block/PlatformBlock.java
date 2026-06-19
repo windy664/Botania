@@ -120,11 +120,11 @@ public abstract class PlatformBlock extends BotaniaBlock implements ManaCollisio
 			if (isValidBlock(changeState, world, pos)
 					&& !(changeState.getBlock() instanceof PlatformBlock)
 					&& !changeState.isAir()) {
-				if (!world.isClientSide) {
+				if (!world.isClientSide()) {
 					camo.setCamoState(changeState);
 				}
 
-				return ItemInteractionResult.sidedSuccess(world.isClientSide());
+				return ItemInteractionResult.sidedSuccess(world.isClientSide()());
 			}
 		}
 

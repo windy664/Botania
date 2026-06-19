@@ -57,7 +57,7 @@ public class OrechidBlockEntity extends FunctionalFlowerBlockEntity {
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (getLevel().isClientSide || redstoneSignal > 0 || !canOperate()) {
+		if (getLevel().isClientSide() || redstoneSignal > 0 || !canOperate()) {
 			return;
 		}
 
@@ -90,7 +90,7 @@ public class OrechidBlockEntity extends FunctionalFlowerBlockEntity {
 			return;
 		}
 
-		BlockState state = recipe.getOutput(level, coords).pick(level.random);
+		BlockState state = recipe.getOutput(level, coords).pick(level.getRandom());
 		if (getLevel().setBlockAndUpdate(coords, state)) {
 			if (BotaniaConfig.common().blockBreakParticles()) {
 				getLevel().levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, coords, Block.getId(state));
