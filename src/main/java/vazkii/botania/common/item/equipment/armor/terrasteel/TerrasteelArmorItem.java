@@ -13,7 +13,7 @@ import com.google.common.base.Suppliers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,8 +41,8 @@ public class TerrasteelArmorItem extends ManasteelArmorItem {
 	}
 
 	@Override
-	public ResourceLocation getArmorTextureAfterInk(ItemStack stack, EquipmentSlot slot) {
-		return ResourceLocation.parse(ResourcesLib.MODEL_TERRASTEEL_NEW);
+	public Identifier getArmorTextureAfterInk(ItemStack stack, EquipmentSlot slot) {
+		return Identifier.parse(ResourcesLib.MODEL_TERRASTEEL_NEW);
 	}
 
 	//TODO Very unsure if this works

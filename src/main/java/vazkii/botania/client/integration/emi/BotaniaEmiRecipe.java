@@ -7,7 +7,7 @@ import dev.emi.emi.api.stack.EmiStack;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public abstract class BotaniaEmiRecipe implements EmiRecipe {
 	private final EmiRecipeCategory category;
-	private final ResourceLocation id;
+	private final Identifier id;
 	protected List<EmiIngredient> input = List.of();
 	protected List<EmiIngredient> catalysts = List.of();
 	protected List<EmiStack> output = List.of();
@@ -34,7 +34,7 @@ public abstract class BotaniaEmiRecipe implements EmiRecipe {
 	}
 
 	@Override
-	public @Nullable ResourceLocation getId() {
+	public @Nullable Identifier getId() {
 		return id;
 	}
 

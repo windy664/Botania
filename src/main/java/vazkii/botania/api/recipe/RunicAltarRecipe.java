@@ -10,7 +10,7 @@ package vazkii.botania.api.recipe;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -21,8 +21,8 @@ import java.util.Objects;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public interface RunicAltarRecipe extends RecipeWithReagent {
-	ResourceLocation TYPE_ID = botaniaRL("runic_altar");
-	ResourceLocation HEAD_TYPE_ID = botaniaRL("runic_altar_head");
+	Identifier TYPE_ID = botaniaRL("runic_altar");
+	Identifier HEAD_TYPE_ID = botaniaRL("runic_altar_head");
 
 	int getMana();
 

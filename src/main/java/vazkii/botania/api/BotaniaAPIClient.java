@@ -9,7 +9,7 @@
 package vazkii.botania.api;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 import vazkii.botania.api.block.FloatingFlower;
@@ -32,15 +32,15 @@ public interface BotaniaAPIClient {
 	 * Call this during NeoForge's ModelRegistryEvent. (TODO: verify)
 	 *
 	 * @param islandType The islandtype to register
-	 * @param model      The model, only {@link ResourceLocation} allowed, no
-	 *                   {@link net.minecraft.client.resources.model.ModelResourceLocation} allowed.
+	 * @param model      The model, only {@link Identifier} allowed, no
+	 *                   {@link net.minecraft.client.resources.model.ModelIdentifier} allowed.
 	 */
-	default void registerIslandTypeModel(FloatingFlower.IslandType islandType, ResourceLocation model) {}
+	default void registerIslandTypeModel(FloatingFlower.IslandType islandType, Identifier model) {}
 
 	/**
 	 * @return An immutable and live view of the registered island type model map
 	 */
-	default Map<FloatingFlower.IslandType, ResourceLocation> getRegisteredIslandTypeModels() {
+	default Map<FloatingFlower.IslandType, Identifier> getRegisteredIslandTypeModels() {
 		return Collections.emptyMap();
 	}
 

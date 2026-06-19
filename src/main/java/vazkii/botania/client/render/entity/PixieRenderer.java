@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import vazkii.botania.client.core.helper.CoreShaders;
 import vazkii.botania.client.core.proxy.ClientProxy;
@@ -40,9 +40,9 @@ public class PixieRenderer extends MobRenderer<PixieEntity, PixieModel> {
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(PixieEntity entity) {
+	public Identifier getTextureLocation(PixieEntity entity) {
 		return ClientProxy.dootDoot
-				? ResourceLocation.parse(ResourcesLib.MODEL_PIXIE_HALLOWEEN)
-				: ResourceLocation.parse(ResourcesLib.MODEL_PIXIE);
+				? Identifier.parse(ResourcesLib.MODEL_PIXIE_HALLOWEEN)
+				: Identifier.parse(ResourcesLib.MODEL_PIXIE);
 	}
 }

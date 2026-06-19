@@ -18,7 +18,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Unit;
@@ -446,7 +446,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 	}
 
 	public static Block getTargetState(ItemStack stack) {
-		ResourceLocation id = stack.get(BotaniaDataComponents.TARGET_BLOCK);
+		Identifier id = stack.get(BotaniaDataComponents.TARGET_BLOCK);
 		return BuiltInRegistries.BLOCK.get(id);
 	}
 

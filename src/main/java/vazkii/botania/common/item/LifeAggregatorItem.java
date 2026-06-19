@@ -15,7 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -51,7 +51,7 @@ public class LifeAggregatorItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> infoList, TooltipFlag flags) {
-		ResourceLocation id = stack.get(BotaniaDataComponents.MOB_TYPE);
+		Identifier id = stack.get(BotaniaDataComponents.MOB_TYPE);
 		if (id != null) {
 			BuiltInRegistries.ENTITY_TYPE.getOptional(id).ifPresent(
 					type -> infoList.add(type.getDescription().copy().withStyle(ChatFormatting.GRAY)));

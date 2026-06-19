@@ -13,7 +13,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 
@@ -24,7 +24,7 @@ import java.util.Optional;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class GaiaGuardianNoArmorTrigger extends SimpleCriterionTrigger<GaiaGuardianNoArmorTrigger.Instance> {
-	public static final ResourceLocation ID = botaniaRL("gaia_guardian_no_armor");
+	public static final Identifier ID = botaniaRL("gaia_guardian_no_armor");
 	public static final GaiaGuardianNoArmorTrigger INSTANCE = new GaiaGuardianNoArmorTrigger();
 
 	private GaiaGuardianNoArmorTrigger() {}

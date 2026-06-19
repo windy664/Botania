@@ -14,7 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntitySelector;
@@ -71,8 +71,8 @@ public class TerrestrialAgglomerationPlateBlockEntity extends BotaniaBlockEntity
 			'0', PatchouliAPI.get().tagMatcher(BotaniaTags.Blocks.TERRA_PLATE_BASE),
 			'L', PatchouliAPI.get().tagMatcher(
 					XplatAbstractions.INSTANCE.isFabric()
-							? TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "lapis_blocks"))
-							: TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/lapis")))
+							? TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("c", "lapis_blocks"))
+							: TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("forge", "storage_blocks/lapis")))
 	));
 
 	private static final String TAG_MANA = "mana";

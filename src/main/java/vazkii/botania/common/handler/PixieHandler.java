@@ -10,7 +10,7 @@ package vazkii.botania.common.handler;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -53,7 +53,7 @@ public final class PixieHandler {
 		PIXIE_SPAWN_CHANCE.register(registry);
 	}
 
-	public static AttributeModifier makeModifier(ResourceLocation slotId, double amount) {
+	public static AttributeModifier makeModifier(Identifier slotId, double amount) {
 		return new AttributeModifier(slotId, amount, AttributeModifier.Operation.ADD_VALUE);
 	}
 

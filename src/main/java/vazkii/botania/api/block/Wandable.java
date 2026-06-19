@@ -9,7 +9,7 @@
 package vazkii.botania.api.block;
 
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -22,7 +22,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
  */
 public interface Wandable {
 
-	ResourceLocation ID = botaniaRL("wandable");
+	Identifier ID = botaniaRL("wandable");
 
 	/**
 	 * Called when the block is used by a wand.

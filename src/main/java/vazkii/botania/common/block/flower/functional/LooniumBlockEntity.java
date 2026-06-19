@@ -25,7 +25,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -149,9 +149,9 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 	@Nullable
 	private ResourceKey<LootTable> lootTableOverride;
 	@Nullable
-	private Object2BooleanMap<ResourceLocation> detectedStructures;
+	private Object2BooleanMap<Identifier> detectedStructures;
 	@Nullable
-	private ResourceLocation configOverride;
+	private Identifier configOverride;
 	@Nullable
 	private String attuneDisplayOverride;
 
@@ -180,14 +180,14 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 		}
 
 		ConfigDataManager configData = BotaniaAPI.instance().getConfigData();
-		Map<ResourceLocation, LooniumStructureConfiguration> structureConfigs = determineStructureConfigs(configData, detectedStructures);
-		List<Pair<ResourceLocation, LootTable>> lootTables = determineLootTables(world, structureConfigs.keySet());
+		Map<Identifier, LooniumStructureConfiguration> structureConfigs = determineStructureConfigs(configData, detectedStructures);
+		List<Pair<Identifier, LootTable>> lootTables = determineLootTables(world, structureConfigs.keySet());
 
 		if (lootTables.isEmpty()) {
 			return;
 		}
 
-		Pair<ResourceLocation, LootTable> randomPick = lootTables.get(world.random.nextInt(lootTables.size()));
+		Pair<Identifier, LootTable> randomPick = lootTables.get(world.random.nextInt(lootTables.size()));
 		LooniumStructureConfiguration pickedConfig = structureConfigs.getOrDefault(randomPick.key(),
 				structureConfigs.get(LooniumStructureConfiguration.DEFAULT_CONFIG_ID));
 		LootTable pickedLootTable = randomPick.value();
@@ -375,9 +375,9 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 		}
 	}
 
-	private List<Pair<ResourceLocation, LootTable>> determineLootTables(ServerLevel world,
-			Set<ResourceLocation> structureIds) {
-		var lootTables = new ArrayList<Pair<ResourceLocation, LootTable>>();
+	private List<Pair<Identifier, LootTable>> determineLootTables(ServerLevel world,
+			Set<Identifier> structureIds) {
+		var lootTables = new ArrayList<Pair<Identifier, LootTable>>();
 		ReloadableServerRegistries.Holder lootData = world.getServer().reloadableRegistries();
 		Supplier<LootTable> defaultLootTableSupplier = Suppliers.memoize(() -> lootData.getLootTable(
 				BotaniaLootTables.LOONIUM_DEFAULT_LOOT));
@@ -387,7 +387,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 				lootTables.add(Pair.of(LooniumStructureConfiguration.DEFAULT_CONFIG_ID, lootTable));
 			}
 		} else {
-			for (ResourceLocation structureId : structureIds) {
+			for (Identifier structureId : structureIds) {
 				if (structureId.equals(LooniumStructureConfiguration.DEFAULT_CONFIG_ID)) {
 					continue;
 				}
@@ -420,8 +420,8 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 	 * @param structures Detected structures to work with.
 	 * @return The map, which is guaranteed to not be empty.
 	 */
-	private Map<ResourceLocation, LooniumStructureConfiguration> determineStructureConfigs(
-			ConfigDataManager configData, Object2BooleanMap<ResourceLocation> structures) {
+	private Map<Identifier, LooniumStructureConfiguration> determineStructureConfigs(
+			ConfigDataManager configData, Object2BooleanMap<Identifier> structures) {
 		if (configOverride != null) {
 			LooniumStructureConfiguration overrideConfig =
 					configData.getEffectiveLooniumStructureConfiguration(configOverride);
@@ -430,8 +430,8 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 		}
 
 		LooniumStructureConfiguration defaultConfig = getDefaultConfig(configData);
-		var structureConfigs = new HashMap<ResourceLocation, LooniumStructureConfiguration>();
-		for (Object2BooleanMap.Entry<ResourceLocation> structureEntry : structures.object2BooleanEntrySet()) {
+		var structureConfigs = new HashMap<Identifier, LooniumStructureConfiguration>();
+		for (Object2BooleanMap.Entry<Identifier> structureEntry : structures.object2BooleanEntrySet()) {
 			LooniumStructureConfiguration structureSpecificConfig =
 					configData.getEffectiveLooniumStructureConfiguration(structureEntry.getKey());
 			LooniumStructureConfiguration structureConfig = structureSpecificConfig != null ? structureSpecificConfig : defaultConfig;
@@ -453,7 +453,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 
 	private void detectStructure(ServerLevel world) {
 		// structure ID and whether the position is inside a structure piece (false = only overall bounding box)
-		var structureMap = new Object2BooleanRBTreeMap<ResourceLocation>();
+		var structureMap = new Object2BooleanRBTreeMap<Identifier>();
 		StructureManager structureManager = world.structureManager();
 		BlockPos pos = getBlockPos();
 		Map<Structure, LongSet> structures = structureManager.getAllStructuresAt(pos);
@@ -461,7 +461,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 			Structure structure = entry.getKey();
 			StructureStart start = structureManager.getStructureAt(pos, structure);
 			if (start.isValid()) {
-				ResourceLocation structureId =
+				Identifier structureId =
 						world.registryAccess().registryOrThrow(Registries.STRUCTURE).getKey(structure);
 				boolean insidePiece = structureManager.structureHasPieceAt(pos, start);
 				if (insidePiece || !structureMap.getBoolean(structureId)) {
@@ -505,10 +505,10 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
 		if (cmp.contains(TAG_LOOT_TABLE)) {
-			lootTableOverride = ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse(cmp.getString(TAG_LOOT_TABLE)));
+			lootTableOverride = ResourceKey.create(Registries.LOOT_TABLE, Identifier.parse(cmp.getString(TAG_LOOT_TABLE)));
 		}
 		if (cmp.contains(TAG_CONFIG_OVERRIDE)) {
-			configOverride = ResourceLocation.parse(cmp.getString(TAG_CONFIG_OVERRIDE));
+			configOverride = Identifier.parse(cmp.getString(TAG_CONFIG_OVERRIDE));
 		}
 		if (cmp.contains(TAG_ATTUNE_DISPLAY_OVERRIDE)) {
 			attuneDisplayOverride = cmp.getString(TAG_ATTUNE_DISPLAY_OVERRIDE);
@@ -518,16 +518,16 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 			if (rawString.isEmpty()) {
 				detectedStructures = Object2BooleanMaps.emptyMap();
 			} else {
-				List<ObjectBooleanPair<ResourceLocation>> structureList = Arrays.stream(rawString.split(",")).map(part -> {
+				List<ObjectBooleanPair<Identifier>> structureList = Arrays.stream(rawString.split(",")).map(part -> {
 					if (part.contains("|")) {
 						String[] components = part.split("\\|", 2);
-						return ObjectBooleanPair.of(ResourceLocation.parse(components[0]), Boolean.parseBoolean(components[1]));
+						return ObjectBooleanPair.of(Identifier.parse(components[0]), Boolean.parseBoolean(components[1]));
 					} else {
-						return ObjectBooleanPair.of(ResourceLocation.parse(part), false);
+						return ObjectBooleanPair.of(Identifier.parse(part), false);
 					}
 				}).toList();
 				// list should never contain more than a few entries, so array is fine and retains entry order
-				var map = new Object2BooleanArrayMap<ResourceLocation>(structureList.size());
+				var map = new Object2BooleanArrayMap<Identifier>(structureList.size());
 				structureList.forEach(entry -> map.put(entry.key(), entry.valueBoolean()));
 				detectedStructures = map;
 			}
@@ -538,7 +538,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 	public void writeToPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.writeToPacketNBT(cmp, registries);
 		if (lootTableOverride != null) {
-			cmp.putString(TAG_LOOT_TABLE, lootTableOverride.location().toString());
+			cmp.putString(TAG_LOOT_TABLE, lootTableOverride.identifier().toString());
 		}
 		if (configOverride != null) {
 			cmp.putString(TAG_CONFIG_OVERRIDE, configOverride.toString());
@@ -549,7 +549,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 		if (detectedStructures != null) {
 			var stringBuilder = new StringBuilder();
 			boolean first = true;
-			for (Object2BooleanMap.Entry<ResourceLocation> entry : detectedStructures.object2BooleanEntrySet()) {
+			for (Object2BooleanMap.Entry<Identifier> entry : detectedStructures.object2BooleanEntrySet()) {
 				if (first) {
 					first = false;
 				} else {

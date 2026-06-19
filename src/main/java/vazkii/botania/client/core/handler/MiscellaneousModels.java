@@ -10,8 +10,8 @@ package vazkii.botania.client.core.handler;
 
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.resources.model.ModelIdentifier;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.DyeColor;
 
@@ -42,39 +42,39 @@ import java.util.stream.IntStream;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class MiscellaneousModels {
-	private static final ResourceLocation goldfishModelId = botaniaRL("icon/goldfish");
-	private static final ResourceLocation phiFlowerModelId = botaniaRL("icon/phiflower");
-	private static final ResourceLocation nerfBatModelId = botaniaRL("icon/nerfbat");
-	private static final ResourceLocation bloodPendantChainId = botaniaRL("icon/blood_pendant_chain");
-	private static final ResourceLocation bloodPendantGemId = botaniaRL("icon/blood_pendant_gem");
-	private static final ResourceLocation[] kingKeyWeaponModelIds = IntStream.range(0, KeyOfTheKingsLawItem.WEAPON_TYPES)
-			.mapToObj(i -> botaniaRL("icon/gate_weapon_" + i)).toArray(ResourceLocation[]::new);
-	private static final ResourceLocation terrasteelHelmWillModelId = botaniaRL("icon/will_flame");
-	private static final ResourceLocation[] thirdEyeLayerIds = IntStream.range(0, ThirdEyeItem.Renderer.NUM_LAYERS)
-			.mapToObj(i -> botaniaRL("icon/third_eye_" + i)).toArray(ResourceLocation[]::new);
-	private static final ResourceLocation pyroclastGemId = botaniaRL("icon/lava_pendant_gem");
-	private static final ResourceLocation crimsonGemId = botaniaRL("icon/super_lava_pendant_gem");
-	private static final ResourceLocation itemFinderGemId = botaniaRL("icon/itemfinder_gem");
-	private static final ResourceLocation cirrusGemId = botaniaRL("icon/cloud_pendant_gem");
-	private static final ResourceLocation nimbusGemId = botaniaRL("icon/super_cloud_pendant_gem");
-	private static final ResourceLocation snowflakePendantGemId = botaniaRL("icon/ice_pendant_gem");
-	private static final ResourceLocation[] tiaraWingIconIds = IntStream.range(0, FlugelTiaraItem.WING_TYPES)
-			.mapToObj(i -> botaniaRL("icon/tiara_wing_" + (i + 1))).toArray(ResourceLocation[]::new);
-	private static final ResourceLocation corporeaCrystalCubeGlassId = botaniaRL("block/corporea_crystal_cube_glass");
-	private static final ResourceLocation manaPumpHead = botaniaRL("block/pump_head");
-	private static final ResourceLocation elvenSpreaderCoreId = botaniaRL("block/elven_spreader_core");
-	private static final ResourceLocation gaiaSpreaderCoreId = botaniaRL("block/gaia_spreader_core");
-	private static final ResourceLocation manaSpreaderCoreId = botaniaRL("block/mana_spreader_core");
-	private static final ResourceLocation redstoneSpreaderCoreId = botaniaRL("block/redstone_spreader_core");
-	private static final ResourceLocation manaSpreaderScaffoldingId = botaniaRL("block/mana_spreader_scaffolding");
-	private static final ResourceLocation elvenSpreaderScaffoldingId = botaniaRL("block/elven_spreader_scaffolding");
-	private static final ResourceLocation gaiaSpreaderScaffoldingId = botaniaRL("block/gaia_spreader_scaffolding");
-	private static final Map<DyeColor, ResourceLocation> spreaderPaddingIds = new EnumMap<>(ColorHelper.supportedColors().collect(Collectors.toMap(Function.identity(), color -> botaniaRL("block/" + color.getSerializedName() + "_spreader_padding"))));
+	private static final Identifier goldfishModelId = botaniaRL("icon/goldfish");
+	private static final Identifier phiFlowerModelId = botaniaRL("icon/phiflower");
+	private static final Identifier nerfBatModelId = botaniaRL("icon/nerfbat");
+	private static final Identifier bloodPendantChainId = botaniaRL("icon/blood_pendant_chain");
+	private static final Identifier bloodPendantGemId = botaniaRL("icon/blood_pendant_gem");
+	private static final Identifier[] kingKeyWeaponModelIds = IntStream.range(0, KeyOfTheKingsLawItem.WEAPON_TYPES)
+			.mapToObj(i -> botaniaRL("icon/gate_weapon_" + i)).toArray(Identifier[]::new);
+	private static final Identifier terrasteelHelmWillModelId = botaniaRL("icon/will_flame");
+	private static final Identifier[] thirdEyeLayerIds = IntStream.range(0, ThirdEyeItem.Renderer.NUM_LAYERS)
+			.mapToObj(i -> botaniaRL("icon/third_eye_" + i)).toArray(Identifier[]::new);
+	private static final Identifier pyroclastGemId = botaniaRL("icon/lava_pendant_gem");
+	private static final Identifier crimsonGemId = botaniaRL("icon/super_lava_pendant_gem");
+	private static final Identifier itemFinderGemId = botaniaRL("icon/itemfinder_gem");
+	private static final Identifier cirrusGemId = botaniaRL("icon/cloud_pendant_gem");
+	private static final Identifier nimbusGemId = botaniaRL("icon/super_cloud_pendant_gem");
+	private static final Identifier snowflakePendantGemId = botaniaRL("icon/ice_pendant_gem");
+	private static final Identifier[] tiaraWingIconIds = IntStream.range(0, FlugelTiaraItem.WING_TYPES)
+			.mapToObj(i -> botaniaRL("icon/tiara_wing_" + (i + 1))).toArray(Identifier[]::new);
+	private static final Identifier corporeaCrystalCubeGlassId = botaniaRL("block/corporea_crystal_cube_glass");
+	private static final Identifier manaPumpHead = botaniaRL("block/pump_head");
+	private static final Identifier elvenSpreaderCoreId = botaniaRL("block/elven_spreader_core");
+	private static final Identifier gaiaSpreaderCoreId = botaniaRL("block/gaia_spreader_core");
+	private static final Identifier manaSpreaderCoreId = botaniaRL("block/mana_spreader_core");
+	private static final Identifier redstoneSpreaderCoreId = botaniaRL("block/redstone_spreader_core");
+	private static final Identifier manaSpreaderScaffoldingId = botaniaRL("block/mana_spreader_scaffolding");
+	private static final Identifier elvenSpreaderScaffoldingId = botaniaRL("block/elven_spreader_scaffolding");
+	private static final Identifier gaiaSpreaderScaffoldingId = botaniaRL("block/gaia_spreader_scaffolding");
+	private static final Map<DyeColor, Identifier> spreaderPaddingIds = new EnumMap<>(ColorHelper.supportedColors().collect(Collectors.toMap(Function.identity(), color -> botaniaRL("block/" + color.getSerializedName() + "_spreader_padding"))));
 
 	public static final MiscellaneousModels INSTANCE = new MiscellaneousModels();
 
-	private final Map<ResourceLocation, Function<BakedModel, BakedModel>> afterBakeModifiers;
-	private final Map<ResourceLocation, Consumer<BakedModel>> modelConsumers;
+	private final Map<Identifier, Function<BakedModel, BakedModel>> afterBakeModifiers;
+	private final Map<Identifier, Consumer<BakedModel>> modelConsumers;
 
 	public boolean registeredModels = false;
 
@@ -106,7 +106,7 @@ public class MiscellaneousModels {
 
 	public final BakedModel[] kingKeyWeaponModels;
 
-	public void onModelRegister(ResourceManager rm, Consumer<ResourceLocation> consumer) {
+	public void onModelRegister(ResourceManager rm, Consumer<Identifier> consumer) {
 		modelConsumers.keySet().forEach(consumer);
 
 		registerIslands();
@@ -130,8 +130,8 @@ public class MiscellaneousModels {
 		BotaniaAPIClient.instance().registerIslandTypeModel(FloatingFlower.IslandType.MUTATED, botaniaRL("block/islands/island_mutated"));
 	}
 
-	private static void registerTaters(ResourceManager rm, Consumer<ResourceLocation> consumer) {
-		for (ResourceLocation model : rm.listResources(ResourcesLib.PREFIX_MODELS + ResourcesLib.PREFIX_TINY_POTATO, s -> s.getPath().endsWith(ResourcesLib.ENDING_JSON)).keySet()) {
+	private static void registerTaters(ResourceManager rm, Consumer<Identifier> consumer) {
+		for (Identifier model : rm.listResources(ResourcesLib.PREFIX_MODELS + ResourcesLib.PREFIX_TINY_POTATO, s -> s.getPath().endsWith(ResourcesLib.ENDING_JSON)).keySet()) {
 			if (LibMisc.MOD_ID.equals(model.getNamespace())) {
 				String path = model.getPath();
 				path = path.substring(ResourcesLib.PREFIX_MODELS.length(), path.length() - ResourcesLib.ENDING_JSON.length());
@@ -141,20 +141,20 @@ public class MiscellaneousModels {
 	}
 
 	// NeoForge
-	public void onModelBake(ModelBakery loader, Map<ModelResourceLocation, BakedModel> map) {
+	public void onModelBake(ModelBakery loader, Map<ModelIdentifier, BakedModel> map) {
 		if (!registeredModels) {
 			BotaniaAPI.LOGGER.error("Additional models failed to register! Aborting baking models to avoid early crashing.");
 			return;
 		}
 		afterBakeModifiers.forEach((resourceLocation, afterBakeModifier) -> map
-				.computeIfPresent(new ModelResourceLocation(resourceLocation, "standalone"),
+				.computeIfPresent(new ModelIdentifier(resourceLocation, "standalone"),
 						(resourceLoc, bakedModel) -> afterBakeModifier.apply(bakedModel)));
 		modelConsumers.forEach((resourceLocation, bakedModelConsumer) -> bakedModelConsumer
-				.accept(map.get(new ModelResourceLocation(resourceLocation, "standalone"))));
+				.accept(map.get(new ModelIdentifier(resourceLocation, "standalone"))));
 	}
 
 	// Fabric
-	public BakedModel modifyModelAfterbake(BakedModel bakedModel, @Nullable ResourceLocation id) {
+	public BakedModel modifyModelAfterbake(BakedModel bakedModel, @Nullable Identifier id) {
 		if (id == null) {
 			return bakedModel;
 		}
@@ -202,7 +202,7 @@ public class MiscellaneousModels {
 		tiaraWingIcons = getBakedModels(modelConsumers, tiaraWingIconIds);
 	}
 
-	private static BakedModel[] getBakedModels(Map<ResourceLocation, Consumer<BakedModel>> consumers, ResourceLocation[] ids) {
+	private static BakedModel[] getBakedModels(Map<Identifier, Consumer<BakedModel>> consumers, Identifier[] ids) {
 		final BakedModel[] bakedModels = new BakedModel[ids.length];
 		for (int i = 0; i < ids.length; i++) {
 			int index = i;

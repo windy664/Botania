@@ -13,7 +13,7 @@ package vazkii.botania.data.loot;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
@@ -52,10 +52,10 @@ public class BotaniaGenericLoot implements LootTableSubProvider {
 			.of(VillageLoot.CARTOGRAPHER, VillageLoot.FLETCHER, VillageLoot.TANNERY, VillageLoot.TOOLSMITH, VillageLoot.WEAPONSMITH);
 
 	public static ResourceKey<LootTable> getStructureId(ResourceKey<Structure> structureKey) {
-		return getStructureId(structureKey.location());
+		return getStructureId(structureKey.identifier());
 	}
 
-	public static ResourceKey<LootTable> getStructureId(ResourceLocation structureId) {
+	public static ResourceKey<LootTable> getStructureId(Identifier structureId) {
 		return ResourceKey.create(
 				Registries.LOOT_TABLE, botaniaRL("loonium/%s/%s".formatted(structureId.getNamespace(), structureId.getPath())));
 	}

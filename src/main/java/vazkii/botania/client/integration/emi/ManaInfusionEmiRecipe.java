@@ -4,7 +4,7 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -20,7 +20,7 @@ import java.util.List;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class ManaInfusionEmiRecipe extends BotaniaEmiRecipe {
-	private static final ResourceLocation TEXTURE = botaniaRL("textures/gui/pure_daisy_overlay.png");
+	private static final Identifier TEXTURE = botaniaRL("textures/gui/pure_daisy_overlay.png");
 	private static final EmiStack POOL;
 	private final int mana;
 

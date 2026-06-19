@@ -11,7 +11,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
@@ -163,7 +163,7 @@ public interface XplatAbstractions {
 
 	// Registrations
 	<T extends BlockEntity> BlockEntityType<T> createBlockEntityType(BiFunction<BlockPos, BlockState, T> func, Block... blocks);
-	void registerReloadListener(PackType type, ResourceLocation id, PreparableReloadListener listener);
+	void registerReloadListener(PackType type, Identifier id, PreparableReloadListener listener);
 	Item.Properties defaultItemBuilder();
 
 	default Item.Properties defaultItemBuilderWithCustomDamageOnFabric() {
@@ -221,7 +221,7 @@ public interface XplatAbstractions {
 
 	@FunctionalInterface
 	interface RecipeAcceptor {
-		void accept(ResourceLocation location, Recipe<?> recipe, @Nullable AdvancementHolder advancement);
+		void accept(Identifier location, Recipe<?> recipe, @Nullable AdvancementHolder advancement);
 	}
 
 	XplatAbstractions INSTANCE = ServiceUtil.findService(XplatAbstractions.class, null);

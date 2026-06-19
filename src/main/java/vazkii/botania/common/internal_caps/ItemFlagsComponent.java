@@ -10,13 +10,13 @@ package vazkii.botania.common.internal_caps;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 // Component for misc internal Botania flags
 public class ItemFlagsComponent extends SerializableComponent {
-	public static final ResourceLocation ID = botaniaRL("iitem");
+	public static final Identifier ID = botaniaRL("iitem");
 	public boolean elvenPortalSpawned = false;
 	public boolean apothecarySpawned = false;
 	public boolean manaInfusionSpawned = false;

@@ -13,7 +13,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
@@ -22,7 +22,7 @@ import java.util.Optional;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class LokiPlaceTrigger extends SimpleCriterionTrigger<LokiPlaceTrigger.Instance> {
-	public static final ResourceLocation ID = botaniaRL("loki_placed_blocks");
+	public static final Identifier ID = botaniaRL("loki_placed_blocks");
 	public static final LokiPlaceTrigger INSTANCE = new LokiPlaceTrigger();
 
 	private LokiPlaceTrigger() {}

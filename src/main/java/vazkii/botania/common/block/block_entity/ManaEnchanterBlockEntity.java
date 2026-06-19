@@ -21,7 +21,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.Clearable;
@@ -424,7 +424,7 @@ public class ManaEnchanterBlockEntity extends BotaniaBlockEntity implements Mana
 			String[] enchTokens = enchStr.split(",");
 			for (String token : enchTokens) {
 				String[] entryTokens = token.split("=");
-				ResourceLocation enchantmentId = ResourceLocation.parse(entryTokens[0]);
+				Identifier enchantmentId = Identifier.parse(entryTokens[0]);
 				ResourceKey<Enchantment> enchantmentKey = ResourceKey.create(Registries.ENCHANTMENT, enchantmentId);
 				int lvl = Integer.parseInt(entryTokens[1]);
 				registries.lookupOrThrow(Registries.ENCHANTMENT).get(enchantmentKey)

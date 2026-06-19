@@ -10,7 +10,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -36,7 +36,7 @@ public class PottedPlantModelProvider implements DataProvider {
 	public CompletableFuture<?> run(CachedOutput cache) {
 		List<Tuple<String, JsonElement>> jsons = new ArrayList<>();
 		for (Block b : BuiltInRegistries.BLOCK) {
-			ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(b);
+			Identifier blockId = BuiltInRegistries.BLOCK.getKey(b);
 			if (LibMisc.MOD_ID.equals(blockId.getNamespace()) && b instanceof FlowerPotBlock) {
 				String name = blockId.getPath();
 				String nonPotted = name.replace(LibBlockNames.POTTED_PREFIX, "").replace("_motif", "");
@@ -58,7 +58,7 @@ public class PottedPlantModelProvider implements DataProvider {
 		return CompletableFuture.allOf(output.toArray(CompletableFuture[]::new));
 	}
 
-	static MultiVariantGenerator createSimpleBlock(Block block, ResourceLocation resourceLocation) {
+	static MultiVariantGenerator createSimpleBlock(Block block, Identifier resourceLocation) {
 		return MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourceLocation));
 	}
 

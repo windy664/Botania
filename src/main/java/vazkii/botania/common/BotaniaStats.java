@@ -10,20 +10,20 @@ package vazkii.botania.common;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
 
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class BotaniaStats {
-	public static final ResourceLocation CORPOREA_ITEMS_REQUESTED =
+	public static final Identifier CORPOREA_ITEMS_REQUESTED =
 			makeCustomStat("corporea_items_requested", StatFormatter.DEFAULT);
 
-	public static final ResourceLocation LUMINIZER_ONE_CM =
+	public static final Identifier LUMINIZER_ONE_CM =
 			makeCustomStat("luminizer_one_cm", StatFormatter.DISTANCE);
 
-	public static final ResourceLocation TINY_POTATOES_PETTED =
+	public static final Identifier TINY_POTATOES_PETTED =
 			makeCustomStat("tiny_potatoes_petted", StatFormatter.DEFAULT);
 
 	public static void init() {
@@ -31,8 +31,8 @@ public class BotaniaStats {
 	}
 
 	// [VanillaCopy] net.minecraft.stats.Stats#makeCustomStat, except applying Botania namespace instead of hardcoded Minecraft namespace
-	private static ResourceLocation makeCustomStat(String key, StatFormatter formatter) {
-		ResourceLocation resourcelocation = botaniaRL(key);
+	private static Identifier makeCustomStat(String key, StatFormatter formatter) {
+		Identifier resourcelocation = botaniaRL(key);
 		Registry.register(BuiltInRegistries.CUSTOM_STAT, key, resourcelocation);
 		Stats.CUSTOM.get(resourcelocation, formatter);
 		return resourcelocation;

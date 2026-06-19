@@ -10,7 +10,7 @@ package vazkii.botania.common.internal_caps;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Objects;
@@ -18,7 +18,7 @@ import java.util.Objects;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class LooniumComponent extends SerializableComponent {
-	public static final ResourceLocation ID = botaniaRL("loonium_drop");
+	public static final Identifier ID = botaniaRL("loonium_drop");
 	protected static final String TAG_TO_DROP = "toDrop";
 	protected static final String TAG_OVERRIDE_DROP = "overrideDrop";
 	protected static final String TAG_SLOW_DESPAWN = "slowDespawn";

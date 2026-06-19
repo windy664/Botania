@@ -35,8 +35,8 @@ public class BotaniaGlobalLootModifierProvider extends GlobalLootModifierProvide
 		for (ResourceKey<LootTable> lootTable : BotaniaLootTables.all()) {
 			ResourceKey<LootTable> targetTable = BotaniaLootTables.getInjectionTargetLootTable(lootTable);
 			if (targetTable != null) {
-				add(lootTable.location().getPath(), new AddTableLootModifier(
-						new LootItemCondition[] { LootTableIdCondition.builder(targetTable.location()).build() },
+				add(lootTable.identifier().getPath(), new AddTableLootModifier(
+						new LootItemCondition[] { LootTableIdCondition.builder(targetTable.identifier()).build() },
 						lootTable)
 				);
 			}
@@ -44,11 +44,11 @@ public class BotaniaGlobalLootModifierProvider extends GlobalLootModifierProvide
 /* Not for Botania itself, but useful for producing the GoG extra seeds injection:
 		add("extra_seeds", new AddTableLootModifier(new LootItemCondition[] {
 				AnyOfCondition.anyOf(
-						LootTableIdCondition.builder(Blocks.SHORT_GRASS.getLootTable().location()),
-						LootTableIdCondition.builder(Blocks.TALL_GRASS.getLootTable().location())
+						LootTableIdCondition.builder(Blocks.SHORT_GRASS.getLootTable().identifier()),
+						LootTableIdCondition.builder(Blocks.TALL_GRASS.getLootTable().identifier())
 				).build()
 		}, ResourceKey.create(Registries.LOOT_TABLE,
-				ResourceLocation.fromNamespaceAndPath(BotaniaAPI.GOG_MODID, "extra_seeds"))));
+				Identifier.fromNamespaceAndPath(BotaniaAPI.GOG_MODID, "extra_seeds"))));
 */
 	}
 }

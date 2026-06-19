@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.InventoryMenu;
 
 import org.jetbrains.annotations.NotNull;
@@ -98,7 +98,7 @@ public abstract class BaseSparkRenderer<T extends SparkBaseEntity> extends Entit
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(SparkBaseEntity entity) {
+	public Identifier getTextureLocation(SparkBaseEntity entity) {
 		return InventoryMenu.BLOCK_ATLAS;
 	}
 

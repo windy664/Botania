@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -46,7 +46,7 @@ public class ForgeFloatingFlowerModel implements IUnbakedGeometry<ForgeFloatingF
 	}
 
 	@Override
-	public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter, IGeometryBakingContext context) {
+	public void resolveParents(Function<Identifier, UnbakedModel> modelGetter, IGeometryBakingContext context) {
 		this.unbakedFlower.resolveParents(modelGetter);
 		for (var e : BotaniaAPIClient.instance().getRegisteredIslandTypeModels().entrySet()) {
 			UnbakedModel islandModel = modelGetter.apply(e.getValue());

@@ -10,7 +10,7 @@ package vazkii.botania.common.item.rod;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -37,7 +37,7 @@ import vazkii.botania.xplat.XplatAbstractions;
 
 public class LandsRodItem extends Item {
 
-	private static final ResourceLocation avatarOverlay = ResourceLocation.parse(ResourcesLib.MODEL_AVATAR_DIRT);
+	private static final Identifier avatarOverlay = Identifier.parse(ResourcesLib.MODEL_AVATAR_DIRT);
 
 	static final int COST = 75;
 
@@ -122,7 +122,7 @@ public class LandsRodItem extends Item {
 		}
 
 		@Override
-		public ResourceLocation getOverlayResource(Avatar tile) {
+		public Identifier getOverlayResource(Avatar tile) {
 			return avatarOverlay;
 		}
 	}

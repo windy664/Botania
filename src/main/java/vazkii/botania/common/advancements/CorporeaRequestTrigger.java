@@ -14,7 +14,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -23,7 +23,7 @@ import java.util.Optional;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class CorporeaRequestTrigger extends SimpleCriterionTrigger<CorporeaRequestTrigger.Instance> {
-	public static final ResourceLocation ID = botaniaRL("corporea_index_request");
+	public static final Identifier ID = botaniaRL("corporea_index_request");
 	public static final CorporeaRequestTrigger INSTANCE = new CorporeaRequestTrigger();
 
 	private CorporeaRequestTrigger() {}

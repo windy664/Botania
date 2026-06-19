@@ -10,13 +10,13 @@ package vazkii.botania.common.internal_caps;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class NarslimmusComponent extends SerializableComponent {
 	public static final String TAG_WORLD_SPAWNED = "botania:world_spawned";
-	public static final ResourceLocation ID = botaniaRL("narslimmus");
+	public static final Identifier ID = botaniaRL("narslimmus");
 	private boolean naturalSpawned = false;
 
 	@Override

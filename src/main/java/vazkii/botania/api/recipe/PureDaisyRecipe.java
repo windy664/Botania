@@ -12,7 +12,7 @@ import net.minecraft.commands.CacheableFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -26,7 +26,7 @@ import java.util.Optional;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public interface PureDaisyRecipe extends Recipe<RecipeInput> {
-	ResourceLocation TYPE_ID = botaniaRL("pure_daisy");
+	Identifier TYPE_ID = botaniaRL("pure_daisy");
 
 	/**
 	 * This gets called every tick, please be careful with your checks.

@@ -30,7 +30,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
@@ -173,9 +173,9 @@ public class GaiaGuardianEntity extends Mob {
 			new BlockPos(-4, 1, -4)
 	);
 
-	private static final List<ResourceLocation> CHEATY_BLOCKS = Arrays.asList(
-			ResourceLocation.fromNamespaceAndPath("openblocks", "beartrap"),
-			ResourceLocation.fromNamespaceAndPath("thaumictinkerer", "magnet")
+	private static final List<Identifier> CHEATY_BLOCKS = Arrays.asList(
+			Identifier.fromNamespaceAndPath("openblocks", "beartrap"),
+			Identifier.fromNamespaceAndPath("thaumictinkerer", "magnet")
 	);
 
 	private boolean spawnLandmines = false;

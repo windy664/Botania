@@ -24,7 +24,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.recipebook.ServerPlaceRecipe;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.*;
 import net.minecraft.world.Container;
@@ -70,7 +70,7 @@ import java.util.Optional;
 
 public class AssemblyHaloItem extends Item {
 
-	private static final ResourceLocation glowTexture = ResourceLocation.parse(ResourcesLib.MISC_GLOW_GREEN);
+	private static final Identifier glowTexture = Identifier.parse(ResourcesLib.MISC_GLOW_GREEN);
 	private static final ItemStack craftingTable = new ItemStack(Blocks.CRAFTING_TABLE);
 
 	public static final int SEGMENTS = 12;
@@ -257,11 +257,11 @@ public class AssemblyHaloItem extends Item {
 		}
 
 		var storedRecipes = halo.getOrDefault(BotaniaDataComponents.STORED_RECIPES, StoredIds.EMPTY);
-		ResourceLocation id = storedRecipes.getSlot(segment - 1);
+		Identifier id = storedRecipes.getSlot(segment - 1);
 		return id != null ? getRecipeHolder(world, id) : null;
 	}
 
-	private static void saveRecipe(ItemStack halo, @Nullable ResourceLocation id, int segment) {
+	private static void saveRecipe(ItemStack halo, @Nullable Identifier id, int segment) {
 		if (segment <= 0 || segment >= SEGMENTS) {
 			return;
 		}
@@ -304,18 +304,18 @@ public class AssemblyHaloItem extends Item {
 		});
 	}
 
-	private static void rememberLastRecipe(ResourceLocation recipeId, ItemStack halo) {
+	private static void rememberLastRecipe(Identifier recipeId, ItemStack halo) {
 		DataComponentHelper.setOptional(halo, BotaniaDataComponents.LAST_RECIPE_ID, recipeId);
 	}
 
 	@Nullable
 	private static RecipeHolder<CraftingRecipe> getLastRecipe(Level world, ItemStack halo) {
-		ResourceLocation id = halo.get(BotaniaDataComponents.LAST_RECIPE_ID);
+		Identifier id = halo.get(BotaniaDataComponents.LAST_RECIPE_ID);
 		return id != null ? getRecipeHolder(world, id) : null;
 	}
 
 	@SuppressWarnings("unchecked")
-	private static @Nullable RecipeHolder<CraftingRecipe> getRecipeHolder(Level world, ResourceLocation id) {
+	private static @Nullable RecipeHolder<CraftingRecipe> getRecipeHolder(Level world, Identifier id) {
 		Optional<RecipeHolder<?>> recipeHolder = world.getRecipeManager().byKey(id);
 		return recipeHolder.isPresent() && recipeHolder.get().value().getType() == RecipeType.CRAFTING
 				? (RecipeHolder<CraftingRecipe>) recipeHolder.get()
@@ -338,7 +338,7 @@ public class AssemblyHaloItem extends Item {
 		stack.set(BotaniaDataComponents.HALO_ROTATION_BASE, rotation);
 	}
 
-	public ResourceLocation getGlowResource(ItemStack stack) {
+	public Identifier getGlowResource(ItemStack stack) {
 		return glowTexture;
 	}
 

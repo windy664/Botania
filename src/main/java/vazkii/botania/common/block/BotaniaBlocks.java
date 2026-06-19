@@ -11,7 +11,7 @@ package vazkii.botania.common.block;
 import net.minecraft.core.*;
 import net.minecraft.core.dispenser.*;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -943,13 +943,13 @@ public final class BotaniaBlocks {
 		return orig + "_chibi";
 	}
 
-	public static void registerBlocks(BiConsumer<Block, ResourceLocation> r) {
+	public static void registerBlocks(BiConsumer<Block, Identifier> r) {
 		for (var e : ALL.entrySet()) {
 			r.accept(e.getValue(), botaniaRL(e.getKey()));
 		}
 	}
 
-	public static void registerItemBlocks(BiConsumer<Item, ResourceLocation> r) {
+	public static void registerItemBlocks(BiConsumer<Item, Identifier> r) {
 		Item.Properties props = BotaniaItems.defaultBuilder();
 		Stream.<Function<DyeColor, Block>>of(
 				BotaniaBlocks::getFlower,
@@ -1803,11 +1803,11 @@ public final class BotaniaBlocks {
 		};
 	}
 
-	public static void registerFlowerPotPlants(BiConsumer<ResourceLocation, Supplier<? extends Block>> consumer) {
+	public static void registerFlowerPotPlants(BiConsumer<Identifier, Supplier<? extends Block>> consumer) {
 		registerBlocks((block, resourceLocation) -> {
 			if (block instanceof FlowerPotBlock) {
 				var id = BuiltInRegistries.BLOCK.getKey(block);
-				consumer.accept(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath().substring(LibBlockNames.POTTED_PREFIX.length())), () -> block);
+				consumer.accept(Identifier.fromNamespaceAndPath(id.getNamespace(), id.getPath().substring(LibBlockNames.POTTED_PREFIX.length())), () -> block);
 			}
 		});
 	}

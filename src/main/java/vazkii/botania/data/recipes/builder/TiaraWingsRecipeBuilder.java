@@ -19,7 +19,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import vazkii.botania.common.crafting.recipe.TiaraWingsRecipe;
@@ -51,8 +51,8 @@ public class TiaraWingsRecipeBuilder {
 	}
 
 	public void save(RecipeOutput recipeOutput) {
-		ResourceLocation tiaraId = BuiltInRegistries.ITEM.getKey(BotaniaItems.flightTiara);
-		ResourceLocation id = ResourceLocation.fromNamespaceAndPath(tiaraId.getNamespace(), tiaraId.getPath() + "_" + variant);
+		Identifier tiaraId = BuiltInRegistries.ITEM.getKey(BotaniaItems.flightTiara);
+		Identifier id = Identifier.fromNamespaceAndPath(tiaraId.getNamespace(), tiaraId.getPath() + "_" + variant);
 		Advancement.Builder builder = recipeOutput.advancement()
 				.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
 				.rewards(AdvancementRewards.Builder.recipe(id))

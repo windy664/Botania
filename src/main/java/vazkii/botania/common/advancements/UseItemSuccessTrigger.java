@@ -13,7 +13,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +26,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 // Catch-all "used an item and it succeeded" trigger for Botania items, because making a separate
 // trigger for each one is dumb.
 public class UseItemSuccessTrigger extends SimpleCriterionTrigger<UseItemSuccessTrigger.Instance> {
-	public static final ResourceLocation ID = botaniaRL("use_item_success");
+	public static final Identifier ID = botaniaRL("use_item_success");
 	public static final UseItemSuccessTrigger INSTANCE = new UseItemSuccessTrigger();
 
 	private UseItemSuccessTrigger() {}

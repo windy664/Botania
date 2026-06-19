@@ -21,7 +21,7 @@ import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.Container;
@@ -67,7 +67,7 @@ public final class HUDHandler {
 
 	private HUDHandler() {}
 
-	public static final ResourceLocation manaBar = ResourceLocation.parse(ResourcesLib.GUI_MANA_HUD);
+	public static final Identifier manaBar = Identifier.parse(ResourcesLib.GUI_MANA_HUD);
 
 	private static boolean didOptifineDetection = false;
 

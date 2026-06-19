@@ -8,7 +8,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,8 +22,8 @@ import vazkii.botania.api.block.WandHUD;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public interface ClientXplatAbstractions {
-	ResourceLocation FLOATING_FLOWER_MODEL_LOADER_ID = botaniaRL("floating_flower");
-	ResourceLocation MANA_GUN_MODEL_LOADER_ID = botaniaRL("mana_gun");
+	Identifier FLOATING_FLOWER_MODEL_LOADER_ID = botaniaRL("floating_flower");
+	Identifier MANA_GUN_MODEL_LOADER_ID = botaniaRL("mana_gun");
 
 	// Event firing
 	void fireRenderTinyPotato(BlockEntity potato, Component name, float tickDelta, PoseStack ms, MultiBufferSource buffers, int light, int overlay);

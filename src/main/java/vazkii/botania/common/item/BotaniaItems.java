@@ -10,7 +10,7 @@ package vazkii.botania.common.item;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Unit;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -467,13 +467,13 @@ public final class BotaniaItems {
 		return defaultBuilder().stacksTo(1);
 	}
 
-	public static void registerItems(BiConsumer<Item, ResourceLocation> r) {
+	public static void registerItems(BiConsumer<Item, Identifier> r) {
 		for (var e : ALL.entrySet()) {
 			r.accept(e.getValue(), botaniaRL(e.getKey()));
 		}
 	}
 
-	public static void registerMenuTypes(BiConsumer<MenuType<?>, ResourceLocation> consumer) {
+	public static void registerMenuTypes(BiConsumer<MenuType<?>, Identifier> consumer) {
 		consumer.accept(BAUBLE_BOX_CONTAINER, botaniaRL(LibItemNames.BAUBLE_BOX));
 		consumer.accept(COLORED_CONTENTS_POUCH_CONTAINER, botaniaRL(LibItemNames.FLOWER_BAG));
 	}

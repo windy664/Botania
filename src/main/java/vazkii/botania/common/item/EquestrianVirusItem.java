@@ -8,7 +8,7 @@
  */
 package vazkii.botania.common.item;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
@@ -74,7 +74,7 @@ public class EquestrianVirusItem extends Item {
 					newInv.setItem(0, saddle);
 				}
 
-				ResourceLocation virusId = BotaniaAPI.botaniaRL("ermergerd_virus");
+				Identifier virusId = BotaniaAPI.botaniaRL("ermergerd_virus");
 
 				AttributeInstance movementSpeed = newHorse.getAttribute(Attributes.MOVEMENT_SPEED);
 				movementSpeed.setBaseValue(horse.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue());

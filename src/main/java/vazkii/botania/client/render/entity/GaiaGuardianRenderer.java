@@ -20,7 +20,7 @@ import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.resources.DefaultPlayerSkin;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import vazkii.botania.client.core.helper.CoreShaders;
 import vazkii.botania.client.core.helper.RenderHelper;
@@ -71,7 +71,7 @@ public class GaiaGuardianRenderer extends HumanoidMobRenderer<GaiaGuardianEntity
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(GaiaGuardianEntity entity) {
+	public Identifier getTextureLocation(GaiaGuardianEntity entity) {
 		Minecraft mc = Minecraft.getInstance();
 
 		if (!(mc.getCameraEntity() instanceof AbstractClientPlayer clientPlayer)) {

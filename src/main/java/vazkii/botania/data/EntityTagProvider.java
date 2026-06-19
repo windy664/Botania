@@ -12,7 +12,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 
 import vazkii.botania.common.entity.BotaniaEntities;
@@ -34,11 +34,11 @@ public class EntityTagProvider extends IntrinsicHolderTagsProvider<EntityType<?>
 				.add(EntityType.HORSE, EntityType.DONKEY, EntityType.WOLF, EntityType.OCELOT,
 						EntityType.CAT, EntityType.PARROT, EntityType.LLAMA, EntityType.FOX,
 						EntityType.PANDA, EntityType.TURTLE, EntityType.GOAT, EntityType.CAMEL)
-				.addOptional(ResourceLocation.fromNamespaceAndPath("quark", "frog"));
+				.addOptional(Identifier.fromNamespaceAndPath("quark", "frog"));
 
 		tag(BotaniaTags.Entities.COCOON_COMMON_AQUATIC)
 				.add(EntityType.COD, EntityType.SALMON, EntityType.TROPICAL_FISH, EntityType.PUFFERFISH, EntityType.SQUID, EntityType.FROG)
-				.addOptional(ResourceLocation.fromNamespaceAndPath("quark", "crab"));
+				.addOptional(Identifier.fromNamespaceAndPath("quark", "crab"));
 		tag(BotaniaTags.Entities.COCOON_RARE_AQUATIC).add(EntityType.DOLPHIN, EntityType.GLOW_SQUID, EntityType.AXOLOTL);
 
 		tag(BotaniaTags.Entities.DRUM_MILKABLE).add(EntityType.COW, EntityType.MOOSHROOM, EntityType.GOAT);

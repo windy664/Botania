@@ -1,7 +1,7 @@
 package vazkii.botania.api.block;
 
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -13,7 +13,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
  * Any block with this component can have phantom ink used on it.
  */
 public interface PhantomInkableBlock {
-	ResourceLocation ID = botaniaRL("phantom_inkable");
+	Identifier ID = botaniaRL("phantom_inkable");
 
 	/**
 	 * Called when the block is clicked with phantom ink.

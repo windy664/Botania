@@ -13,7 +13,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -225,8 +225,8 @@ public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
 		tag(BotaniaTags.Blocks.HORN_OF_THE_WILD_BREAKABLE)
 				.add(Blocks.MOSS_CARPET)
-				.addOptional(ResourceLocation.fromNamespaceAndPath("biomesoplenty", "high_grass"))
-				.addOptional(ResourceLocation.fromNamespaceAndPath("biomesoplenty", "high_grass_plant"));
+				.addOptional(Identifier.fromNamespaceAndPath("biomesoplenty", "high_grass"))
+				.addOptional(Identifier.fromNamespaceAndPath("biomesoplenty", "high_grass_plant"));
 		tag(BotaniaTags.Blocks.HORN_OF_THE_WILD_IMMUNE)
 				.addTag(BotaniaTags.Blocks.SHINY_FLOWERS)
 				.addTag(BotaniaTags.Blocks.SHIMMERING_MUSHROOMS);
@@ -245,7 +245,7 @@ public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 				.add(Blocks.DIRT, Blocks.GRASS_BLOCK, Blocks.MYCELIUM, Blocks.PODZOL, Blocks.ROOTED_DIRT)
 				.add(grassBlockVariants);
 
-		tag(BotaniaTags.Blocks.UNETHICAL_TNT_CHECK).addOptional(ResourceLocation.fromNamespaceAndPath("ae2", "tiny_tnt"));
+		tag(BotaniaTags.Blocks.UNETHICAL_TNT_CHECK).addOptional(Identifier.fromNamespaceAndPath("ae2", "tiny_tnt"));
 
 		tag(BotaniaTags.Blocks.SINGLE_ITEM_INSERT).add(Blocks.CRAFTER);
 

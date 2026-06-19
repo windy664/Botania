@@ -11,7 +11,7 @@ package vazkii.botania.data.recipes.builder;
 
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import vazkii.botania.common.crafting.recipe.GogAlternationRecipe;
 
@@ -61,7 +61,7 @@ public class GogAlternationRecipeBuilder {
 		save(recipeOutput, (builder, output) -> builder.save(output, recipeId));
 	}
 
-	public void save(RecipeOutput recipeOutput, ResourceLocation recipeId) {
+	public void save(RecipeOutput recipeOutput, Identifier recipeId) {
 		save(recipeOutput, (builder, output) -> builder.save(output, recipeId));
 	}
 

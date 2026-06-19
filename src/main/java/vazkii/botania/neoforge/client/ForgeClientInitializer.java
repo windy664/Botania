@@ -9,11 +9,11 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.resources.model.ModelIdentifier;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -73,7 +73,7 @@ import java.util.stream.Stream;
 
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
-@EventBusSubscriber(modid = BotaniaAPI.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = BotaniaAPI.MODID, value = Dist.CLIENT)
 public class ForgeClientInitializer {
 	@SubscribeEvent
 	public static void registerGuiOverlays(RegisterGuiLayersEvent e) {
@@ -181,7 +181,7 @@ public class ForgeClientInitializer {
 	public static void onModelRegister(ModelEvent.RegisterAdditional evt) {
 		var resourceManager = Minecraft.getInstance().getResourceManager();
 		MiscellaneousModels.INSTANCE.onModelRegister(resourceManager,
-				id -> evt.register(ModelResourceLocation.standalone(id)));
+				id -> evt.register(ModelIdentifier.standalone(id)));
 		BotaniaItemProperties.init((item, id, prop) -> ItemProperties.register(item.asItem(), id, prop));
 	}
 
@@ -201,7 +201,7 @@ public class ForgeClientInitializer {
 		List<Item> armorItems = new ArrayList<>();
 		for (var entry : BuiltInRegistries.ITEM.entrySet()) {
 			Item item = entry.getValue();
-			ResourceLocation id = entry.getKey().location();
+			Identifier id = entry.getKey().identifier();
 			if (item instanceof ManasteelArmorItem armor && id.getNamespace().equals(LibMisc.MOD_ID)) {
 				armorItems.add(armor);
 			}

@@ -10,12 +10,12 @@ package vazkii.botania.common.internal_caps;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class TigerseyeComponent extends SerializableComponent {
-	public static final ResourceLocation ID = botaniaRL("tigerseye_pacified");
+	public static final Identifier ID = botaniaRL("tigerseye_pacified");
 	private static final String TAG_PACIFIED = "botania:tigerseye_pacified";
 	private boolean pacified = false;
 

@@ -15,7 +15,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -123,10 +123,10 @@ public class ItemTagProvider extends ItemTagsProvider {
 				Items.TUFF, Items.CALCITE, Items.STONE, Items.BASALT, Items.BLACKSTONE,
 				Items.DEEPSLATE, Items.DRIPSTONE_BLOCK, Items.POINTED_DRIPSTONE, Items.MOSS_BLOCK,
 				Items.SANDSTONE, Items.RED_SANDSTONE)
-				.addOptional(ResourceLocation.fromNamespaceAndPath("quark", "jasper"))
-				.addOptional(ResourceLocation.fromNamespaceAndPath("quark", "limestone"))
-				.addOptional(ResourceLocation.fromNamespaceAndPath("quark", "marble"))
-				.addOptional(ResourceLocation.fromNamespaceAndPath("quark", "slate"));
+				.addOptional(Identifier.fromNamespaceAndPath("quark", "jasper"))
+				.addOptional(Identifier.fromNamespaceAndPath("quark", "limestone"))
+				.addOptional(Identifier.fromNamespaceAndPath("quark", "marble"))
+				.addOptional(Identifier.fromNamespaceAndPath("quark", "slate"));
 
 		this.copy(BotaniaTags.Blocks.BLOCKS_QUARTZ, BotaniaTags.Items.BLOCKS_QUARTZ);
 
@@ -239,7 +239,7 @@ public class ItemTagProvider extends ItemTagsProvider {
 
 		this.tag(BotaniaTags.Items.SEED_APOTHECARY_REAGENT)
 				.add(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS)
-				.addOptionalTag(ResourceLocation.fromNamespaceAndPath("forge", "seeds"));
+				.addOptionalTag(Identifier.fromNamespaceAndPath("forge", "seeds"));
 	}
 
 	private static Item[] getItems(Predicate<Item> predicate) {

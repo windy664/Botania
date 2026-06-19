@@ -14,7 +14,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FastColor;
 
 import org.jetbrains.annotations.Nullable;
@@ -31,8 +31,8 @@ import java.util.Random;
 
 public class TeruTeruBozuBlockEntityRenderer implements BlockEntityRenderer<TeruTeruBozuBlockEntity> {
 
-	private static final ResourceLocation texture = ResourceLocation.parse(ResourcesLib.MODEL_TERU_TERU_BOZU);
-	private static final ResourceLocation textureHalloween = ResourceLocation.parse(ResourcesLib.MODEL_TERU_TERU_BOZU_HALLOWEEN);
+	private static final Identifier texture = Identifier.parse(ResourcesLib.MODEL_TERU_TERU_BOZU);
+	private static final Identifier textureHalloween = Identifier.parse(ResourcesLib.MODEL_TERU_TERU_BOZU_HALLOWEEN);
 	private final TeruTeruBozuModel model;
 
 	public TeruTeruBozuBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {

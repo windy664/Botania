@@ -11,7 +11,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
@@ -420,7 +420,7 @@ public class ForgeXplatImpl implements XplatAbstractions {
 	}
 
 	@Override
-	public void registerReloadListener(PackType type, ResourceLocation id, PreparableReloadListener listener) {
+	public void registerReloadListener(PackType type, Identifier id, PreparableReloadListener listener) {
 		switch (type) {
 			case CLIENT_RESOURCES -> NeoForge.EVENT_BUS.addListener(
 					(RegisterClientReloadListenersEvent e) -> e.registerReloadListener(listener));
@@ -566,7 +566,7 @@ public class ForgeXplatImpl implements XplatAbstractions {
 			}
 
 			@Override
-			public void accept(ResourceLocation id, Recipe<?> recipe, @Nullable AdvancementHolder advancement, ICondition... conditions) {
+			public void accept(Identifier id, Recipe<?> recipe, @Nullable AdvancementHolder advancement, ICondition... conditions) {
 				if (conditions.length > 0) {
 					throw new UnsupportedOperationException("Conditions are not supported");
 				}

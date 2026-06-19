@@ -11,7 +11,7 @@ package vazkii.botania.api.mana.spark;
 import com.google.common.base.Predicates;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -30,7 +30,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
  */
 public interface SparkAttachable {
 
-	ResourceLocation ID = botaniaRL("spark_attachable");
+	Identifier ID = botaniaRL("spark_attachable");
 
 	/**
 	 * Can this block have a Spark attached to it. Note that this will not

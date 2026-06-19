@@ -1,7 +1,7 @@
 package vazkii.botania.neoforge.internal_caps;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -35,7 +35,7 @@ public final class ForgeInternalEntityCapabilities {
 	public static final Supplier<AttachmentType<ForgeTigerseyeComponent>> TIGERSEYE =
 			registerComponentAttachmentType(ForgeTigerseyeComponent.ID, ForgeTigerseyeComponent::new);
 
-	private static <T extends SerializableComponent & INBTSerializable<CompoundTag>> DeferredHolder<AttachmentType<?>, AttachmentType<T>> registerComponentAttachmentType(ResourceLocation componentId, Supplier<T> componentSupplier) {
+	private static <T extends SerializableComponent & INBTSerializable<CompoundTag>> DeferredHolder<AttachmentType<?>, AttachmentType<T>> registerComponentAttachmentType(Identifier componentId, Supplier<T> componentSupplier) {
 		return ATTACHMENT_TYPES.register(componentId.getPath(), AttachmentType.serializable(componentSupplier)::build);
 	}
 

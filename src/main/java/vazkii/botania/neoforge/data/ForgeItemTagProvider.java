@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -71,15 +71,15 @@ public class ForgeItemTagProvider extends ItemTagsProvider {
 		);
 
 		tag(TagKey.create(Registries.ITEM,
-				ResourceLocation.fromNamespaceAndPath("quark", "big_harvesting_hoes")))
+				Identifier.fromNamespaceAndPath("quark", "big_harvesting_hoes")))
 				.add(elementiumHoe);
 
 		tag(TagKey.create(Registries.ITEM,
-				ResourceLocation.fromNamespaceAndPath("quark", "reacharound_able")))
+				Identifier.fromNamespaceAndPath("quark", "reacharound_able")))
 				.add(dirtRod, skyDirtRod, cobbleRod, blackHoleTalisman);
 	}
 
 	private static TagKey<Item> accessory(String name) {
-		return ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", name));
+		return ItemTags.create(Identifier.fromNamespaceAndPath("curios", name));
 	}
 }

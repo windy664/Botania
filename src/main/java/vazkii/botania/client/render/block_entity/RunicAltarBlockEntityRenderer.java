@@ -21,7 +21,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +37,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class RunicAltarBlockEntityRenderer implements BlockEntityRenderer<RunicAltarBlockEntity> {
 	private final ModelPart spinningCube;
-	private static final ResourceLocation cubeTex = botaniaRL("textures/block/runic_altar_cube.png");
+	private static final Identifier cubeTex = botaniaRL("textures/block/runic_altar_cube.png");
 
 	public RunicAltarBlockEntityRenderer(BlockEntityRendererProvider.Context manager) {
 		var mesh = new MeshDefinition();

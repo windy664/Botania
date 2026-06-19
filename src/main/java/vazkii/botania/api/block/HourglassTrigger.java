@@ -8,7 +8,7 @@
  */
 package vazkii.botania.api.block;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
@@ -19,7 +19,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
  */
 public interface HourglassTrigger {
 
-	ResourceLocation ID = botaniaRL("hourglass_trigger");
+	Identifier ID = botaniaRL("hourglass_trigger");
 
 	void onTriggeredByHourglass(BlockEntity hourglass);
 

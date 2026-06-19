@@ -15,7 +15,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -103,7 +103,7 @@ public class BotaniaBlockLoot extends BlockLootSubProvider {
 		).forEach((stone, cobble) -> specialCases.put(stone, createSingleItemTableWithSilkTouch(stone, cobble)));
 
 		for (Block block : BuiltInRegistries.BLOCK) {
-			ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
+			Identifier blockId = BuiltInRegistries.BLOCK.getKey(block);
 			if (!LibMisc.MOD_ID.equals(blockId.getNamespace()) || specialHandling.contains(block)) {
 				continue;
 			}

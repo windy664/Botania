@@ -11,7 +11,7 @@ package vazkii.botania.common.item.relic;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -68,9 +68,9 @@ public class EyeOfTheFlugelItem extends RelicItem {
 				}
 			} else {
 				ItemStack stack = ctx.getItemInHand();
-				Map<ResourceLocation, BlockPos> boundPositions = new HashMap<>(stack.getOrDefault(
+				Map<Identifier, BlockPos> boundPositions = new HashMap<>(stack.getOrDefault(
 						BotaniaDataComponents.BOUND_POSITIONS, Collections.emptyMap()));
-				boundPositions.put(world.dimension().location(), pos);
+				boundPositions.put(world.dimension().identifier(), pos);
 				stack.set(BotaniaDataComponents.BOUND_POSITIONS, boundPositions);
 				world.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.flugelEyeBind, SoundSource.PLAYERS, 1F, 1F);
 			}
@@ -99,8 +99,8 @@ public class EyeOfTheFlugelItem extends RelicItem {
 
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity living) {
-		BlockPos loc = stack.getOrDefault(BotaniaDataComponents.BOUND_POSITIONS, Map.<ResourceLocation, BlockPos>of())
-				.get(world.dimension().location());
+		BlockPos loc = stack.getOrDefault(BotaniaDataComponents.BOUND_POSITIONS, Map.<Identifier, BlockPos>of())
+				.get(world.dimension().identifier());
 		if (loc == null) {
 			return stack;
 		}
@@ -147,8 +147,8 @@ public class EyeOfTheFlugelItem extends RelicItem {
 		@Nullable
 		@Override
 		public BlockPos getBinding(Level world) {
-			return stack.getOrDefault(BotaniaDataComponents.BOUND_POSITIONS, Map.<ResourceLocation, BlockPos>of())
-					.get(world.dimension().location());
+			return stack.getOrDefault(BotaniaDataComponents.BOUND_POSITIONS, Map.<Identifier, BlockPos>of())
+					.get(world.dimension().identifier());
 		}
 	}
 
@@ -172,7 +172,7 @@ public class EyeOfTheFlugelItem extends RelicItem {
 			return;
 
 		BlockPos binding = coordBoundItem.getBinding(level);
-		Component worldText = Component.literal(level.dimension().location().toString()).withStyle(ChatFormatting.GREEN);
+		Component worldText = Component.literal(level.dimension().identifier().toString()).withStyle(ChatFormatting.GREEN);
 
 		if (binding == null) {
 			tooltip.add(Component.translatable("botaniamisc.flugelUnbound", worldText).withStyle(ChatFormatting.GRAY));

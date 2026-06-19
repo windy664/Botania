@@ -14,7 +14,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.player.Player;
@@ -36,14 +36,14 @@ public class ElementiumArmorItem extends ManasteelArmorItem {
 		super(type, BotaniaAPI.instance().getElementiumArmorMaterial(),
 				props.component(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.builder()
 						.add(PixieHandler.PIXIE_SPAWN_CHANCE,
-								PixieHandler.makeModifier(ResourceLocation.withDefaultNamespace("armor." + type.getName()), pixieChance),
+								PixieHandler.makeModifier(Identifier.withDefaultNamespace("armor." + type.getName()), pixieChance),
 								EquipmentSlotGroup.bySlot(type.getSlot()))
 						.build()));
 	}
 
 	@Override
-	public ResourceLocation getArmorTextureAfterInk(ItemStack stack, EquipmentSlot slot) {
-		return ResourceLocation.parse(ResourcesLib.MODEL_ELEMENTIUM_NEW);
+	public Identifier getArmorTextureAfterInk(ItemStack stack, EquipmentSlot slot) {
+		return Identifier.parse(ResourcesLib.MODEL_ELEMENTIUM_NEW);
 	}
 
 	private static final Supplier<ItemStack[]> armorSet = Suppliers.memoize(() -> new ItemStack[] {

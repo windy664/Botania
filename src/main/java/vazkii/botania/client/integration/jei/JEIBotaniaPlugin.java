@@ -25,7 +25,7 @@ import mezz.jei.api.runtime.IJeiRuntime;
 import mezz.jei.api.runtime.IRecipesGui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -68,7 +68,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 @JeiPlugin
 public class JEIBotaniaPlugin implements IModPlugin {
-	private static final ResourceLocation ID = botaniaRL("main");
+	private static final Identifier ID = botaniaRL("main");
 
 	@SuppressWarnings("removal")
 	@Override
@@ -239,7 +239,7 @@ public class JEIBotaniaPlugin implements IModPlugin {
 	}
 
 	@Override
-	public ResourceLocation getPluginUid() {
+	public Identifier getPluginUid() {
 		return ID;
 	}
 

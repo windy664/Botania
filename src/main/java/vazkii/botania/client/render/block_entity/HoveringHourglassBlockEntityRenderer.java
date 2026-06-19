@@ -14,7 +14,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.ItemStack;
 
@@ -31,7 +31,7 @@ import java.util.Random;
 
 public class HoveringHourglassBlockEntityRenderer implements BlockEntityRenderer<HoveringHourglassBlockEntity> {
 
-	final ResourceLocation texture = ResourceLocation.parse(ResourcesLib.MODEL_HOURGLASS);
+	final Identifier texture = Identifier.parse(ResourcesLib.MODEL_HOURGLASS);
 	private final HourglassModel model;
 
 	public HoveringHourglassBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {

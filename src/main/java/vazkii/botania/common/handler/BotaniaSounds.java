@@ -11,7 +11,7 @@ package vazkii.botania.common.handler;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 
 import vazkii.botania.common.helper.RegistryHelper;
@@ -131,7 +131,7 @@ public final class BotaniaSounds {
 	}
 
 	private static Holder<SoundEvent> makeSoundEventHolder(String name) {
-		ResourceLocation id = botaniaRL(name);
+		Identifier id = botaniaRL(name);
 		RegistryHelper.HolderProxy<SoundEvent> proxy = RegistryHelper.holderProxy(Registries.SOUND_EVENT, id,
 				SoundEvent.createVariableRangeEvent(id));
 		EVENTS.add(proxy);

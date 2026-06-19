@@ -17,7 +17,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
@@ -42,7 +42,7 @@ public class LexicaBotaniaItem extends Item implements CustomCreativeTabContents
 	@SuppressWarnings("unchecked")
 	public static final Supplier<DataComponentType<Component>> AKASHIC_DISPLAY_NAME_TYPE_SUPPLIER = Suppliers.memoize(() -> {
 		ResourceKey<DataComponentType<?>> resourceKey = ResourceKey.create(Registries.DATA_COMPONENT_TYPE,
-				ResourceLocation.fromNamespaceAndPath("akashictome", "og_display_name"));
+				Identifier.fromNamespaceAndPath("akashictome", "og_display_name"));
 		return (DataComponentType<Component>) BuiltInRegistries.DATA_COMPONENT_TYPE.get(resourceKey);
 	});
 

@@ -8,13 +8,13 @@
  */
 package vazkii.botania.api;
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.resources.model.ModelIdentifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -53,12 +53,12 @@ public interface BotaniaAPI {
 		return INSTANCE;
 	}
 
-	static ResourceLocation botaniaRL(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MODID, path);
+	static Identifier botaniaRL(String path) {
+		return Identifier.fromNamespaceAndPath(MODID, path);
 	}
 
-	static ModelResourceLocation botaniaModelRL(String path, String variant) {
-		return new ModelResourceLocation(botaniaRL(path), variant);
+	static ModelIdentifier botaniaModelRL(String path, String variant) {
+		return new ModelIdentifier(botaniaRL(path), variant);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public interface BotaniaAPI {
 		return null;
 	}
 
-	default Map<ResourceLocation, Function<DyeColor, Block>> getPaintableBlocks() {
+	default Map<Identifier, Function<DyeColor, Block>> getPaintableBlocks() {
 		return Collections.emptyMap();
 	}
 
@@ -96,7 +96,7 @@ public interface BotaniaAPI {
 	 * @param blockId     The block ID
 	 * @param transformer Function from color to a new block
 	 */
-	default void registerPaintableBlock(ResourceLocation blockId, Function<DyeColor, Block> transformer) {
+	default void registerPaintableBlock(Identifier blockId, Function<DyeColor, Block> transformer) {
 
 	}
 

@@ -7,7 +7,7 @@ import com.mojang.math.Transformation;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
 import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
@@ -18,15 +18,15 @@ import vazkii.botania.client.model.ManaBlasterBakedModel;
 import java.util.function.Function;
 
 public class ForgeManaBlasterModel implements IUnbakedGeometry<ForgeManaBlasterModel> {
-	private final ResourceLocation gunNoClip, gunClip;
+	private final Identifier gunNoClip, gunClip;
 
-	public ForgeManaBlasterModel(ResourceLocation gunNoClip, ResourceLocation gunClip) {
+	public ForgeManaBlasterModel(Identifier gunNoClip, Identifier gunClip) {
 		this.gunNoClip = gunNoClip;
 		this.gunClip = gunClip;
 	}
 
 	@Override
-	public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter, IGeometryBakingContext context) {
+	public void resolveParents(Function<Identifier, UnbakedModel> modelGetter, IGeometryBakingContext context) {
 		modelGetter.apply(this.gunNoClip).resolveParents(modelGetter);
 		modelGetter.apply(this.gunClip).resolveParents(modelGetter);
 	}
@@ -50,8 +50,8 @@ public class ForgeManaBlasterModel implements IUnbakedGeometry<ForgeManaBlasterM
 		@Override
 		public ForgeManaBlasterModel read(JsonObject json, JsonDeserializationContext deserializationContext) {
 			return new ForgeManaBlasterModel(
-					ResourceLocation.parse(GsonHelper.getAsString(json, "gun_noclip")),
-					ResourceLocation.parse(GsonHelper.getAsString(json, "gun_clip"))
+					Identifier.parse(GsonHelper.getAsString(json, "gun_noclip")),
+					Identifier.parse(GsonHelper.getAsString(json, "gun_clip"))
 			);
 		}
 	}

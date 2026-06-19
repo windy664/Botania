@@ -10,7 +10,7 @@ package vazkii.botania.api.block;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
@@ -20,7 +20,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
  */
 public interface WandHUD {
 
-	ResourceLocation ID = botaniaRL("wand_hud");
+	Identifier ID = botaniaRL("wand_hud");
 
 	void renderHUD(GuiGraphics gui, Minecraft mc);
 

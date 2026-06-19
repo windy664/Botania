@@ -8,7 +8,7 @@
  */
 package vazkii.botania.api.item;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 
 import org.jetbrains.annotations.Nullable;
@@ -23,7 +23,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
  */
 public interface Relic {
 
-	ResourceLocation ID = botaniaRL("relic");
+	Identifier ID = botaniaRL("relic");
 
 	/**
 	 * Binds to the UUID passed in.
@@ -45,7 +45,7 @@ public interface Relic {
 	 * Get the advancement granted when this relic binds
 	 */
 	@Nullable
-	default ResourceLocation getAdvancement() {
+	default Identifier getAdvancement() {
 		return null;
 	}
 
