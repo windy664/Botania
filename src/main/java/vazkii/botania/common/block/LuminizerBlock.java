@@ -67,7 +67,7 @@ public class LuminizerBlock extends BotaniaWaterloggedBlock implements EntityBlo
 		if (te instanceof LuminizerBlockEntity relay) {
 			if (!stack.is(Items.ENDER_PEARL) && !(stack.getItem() instanceof PhantomInkItem)) {
 				relay.mountEntity(player);
-				return ItemInteractionResult.sidedSuccess(world.isClientSide()());
+				return ItemInteractionResult.sidedSuccess(world.isClientSide());
 			}
 		}
 

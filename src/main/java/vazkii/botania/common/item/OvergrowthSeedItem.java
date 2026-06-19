@@ -40,7 +40,7 @@ public class OvergrowthSeedItem extends Item {
 				world.setBlockAndUpdate(pos, BotaniaBlocks.enchantedSoil.defaultBlockState());
 				ctx.getItemInHand().shrink(1);
 			}
-			return InteractionResult.sidedSuccess(world.isClientSide()());
+			return InteractionResult.sidedSuccess(world.isClientSide());
 		}
 		return InteractionResult.PASS;
 	}

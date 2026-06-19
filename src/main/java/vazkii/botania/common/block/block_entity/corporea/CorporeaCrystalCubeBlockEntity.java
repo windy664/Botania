@@ -184,7 +184,7 @@ public class CorporeaCrystalCubeBlockEntity extends BaseCorporeaBlockEntity impl
 		if (hideCount) {
 			return false;
 		}
-		if (!level.isClientSide()()) {
+		if (!level.isClientSide()) {
 			if (player == null || !player.getAbilities().instabuild) {
 				stack.shrink(1);
 			}

@@ -104,7 +104,7 @@ public abstract class ColoredContentsPouchItem extends Item {
 				}
 			}, hand == InteractionHand.MAIN_HAND, ByteBufCodecs.BOOL);
 		}
-		return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), world.isClientSide()());
+		return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), world.isClientSide());
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public abstract class ColoredContentsPouchItem extends Item {
 
 			}
 
-			return InteractionResult.sidedSuccess(world.isClientSide()());
+			return InteractionResult.sidedSuccess(world.isClientSide());
 		}
 		return InteractionResult.PASS;
 	}

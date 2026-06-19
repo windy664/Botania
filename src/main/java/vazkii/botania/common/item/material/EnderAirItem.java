@@ -61,7 +61,7 @@ public class EnderAirItem extends Item implements ProjectileItem {
 				world.gameEvent(player, GameEvent.FLUID_PICKUP, player.position());
 			}
 
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 		}
 
 		return InteractionResultHolder.pass(stack);

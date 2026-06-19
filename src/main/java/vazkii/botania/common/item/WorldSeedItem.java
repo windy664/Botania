@@ -55,7 +55,7 @@ public class WorldSeedItem extends Item {
 				world.gameEvent(player, GameEvent.TELEPORT, sourcePos);
 			}
 
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 		}
 
 		return new InteractionResultHolder<>(InteractionResult.PASS, stack);

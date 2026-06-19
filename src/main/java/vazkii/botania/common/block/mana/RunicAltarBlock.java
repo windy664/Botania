@@ -63,7 +63,7 @@ public class RunicAltarBlock extends BotaniaWaterloggedBlock implements EntityBl
 		boolean result = altar.addItem(player, stack, hand);
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(altar);
 		if (result) {
-			return ItemInteractionResult.sidedSuccess(level.isClientSide()());
+			return ItemInteractionResult.sidedSuccess(level.isClientSide());
 		}
 
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -78,7 +78,7 @@ public class RunicAltarBlock extends BotaniaWaterloggedBlock implements EntityBl
 		} else if (!altar.isEmpty() && altar.manaToGet == 0) {
 			InventoryHelper.withdrawFromInventory(altar, player);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(altar);
-			return InteractionResult.sidedSuccess(level.isClientSide()());
+			return InteractionResult.sidedSuccess(level.isClientSide());
 		}
 		return InteractionResult.PASS;
 	}

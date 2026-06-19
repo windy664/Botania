@@ -50,7 +50,7 @@ public abstract class PistonBaseBlockMixin {
 	)
 	private void preMoveBlocks(Level level, BlockPos pos, Direction dir, boolean extending,
 			CallbackInfoReturnable<Boolean> cir) {
-		if (!level.isClientSide()()) {
+		if (!level.isClientSide()) {
 			EthicalTntHelper.startTrackingTntEntities();
 			ForcePushHelper.pushMovementTypeContext(extending, dir);
 		}
@@ -62,7 +62,7 @@ public abstract class PistonBaseBlockMixin {
 	)
 	private void postMoveBlocks(Level level, BlockPos pos, Direction dir, boolean extending,
 			CallbackInfoReturnable<Boolean> cir) {
-		if (!level.isClientSide()()) {
+		if (!level.isClientSide()) {
 			ForcePushHelper.popMovementTypeContext();
 			EthicalTntHelper.endTrackingTntEntitiesAndCheck();
 		}

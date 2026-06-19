@@ -59,7 +59,7 @@ public class BlackHoleTalismanItem extends Item {
 		if (getBlock(stack) != null && player.isSecondaryUseActive()) {
 			DataComponentHelper.setFlag(stack, BotaniaDataComponents.ACTIVE, !stack.has(BotaniaDataComponents.ACTIVE));
 			player.playSound(BotaniaSounds.blackHoleTalismanConfigure, 1F, 1F);
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 		}
 
 		return InteractionResultHolder.pass(stack);
@@ -75,7 +75,7 @@ public class BlackHoleTalismanItem extends Item {
 		ItemStack stack = ctx.getItemInHand();
 
 		if (!state.isAir() && setBlock(stack, state.getBlock())) {
-			return InteractionResult.sidedSuccess(world.isClientSide()());
+			return InteractionResult.sidedSuccess(world.isClientSide());
 		} else {
 			Block bBlock = getBlock(stack);
 
@@ -94,7 +94,7 @@ public class BlackHoleTalismanItem extends Item {
 						add(stack, remainder.getCount());
 					}
 				}
-				return InteractionResult.sidedSuccess(world.isClientSide()());
+				return InteractionResult.sidedSuccess(world.isClientSide());
 			} else {
 				if (player == null || player.getAbilities().instabuild || getBlockCount(stack) > 0) {
 					ItemStack toUse = new ItemStack(bBlock);

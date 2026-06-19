@@ -66,7 +66,7 @@ public class ExtrapolatedBucketItem extends Item {
 							CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, itemStack2);
 						}
 
-						return InteractionResultHolder.sidedSuccess(itemStack3, level.isClientSide()());
+						return InteractionResultHolder.sidedSuccess(itemStack3, level.isClientSide());
 					}
 				}
 

@@ -60,7 +60,7 @@ public class PinkinatorItem extends Item {
 					UseItemSuccessTrigger.INSTANCE.trigger((ServerPlayer) player, stack, (ServerLevel) world, player.getX(), player.getY(), player.getZ());
 					stack.shrink(1);
 				}
-				return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
+				return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 			}
 		}
 

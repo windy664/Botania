@@ -69,7 +69,7 @@ public class CorporeaCrystalCubeBlock extends BotaniaWaterloggedBlock implements
 		} else {
 			cube.setRequestTarget(stack);
 		}
-		return ItemInteractionResult.sidedSuccess(level.isClientSide()());
+		return ItemInteractionResult.sidedSuccess(level.isClientSide());
 	}
 
 	@Override

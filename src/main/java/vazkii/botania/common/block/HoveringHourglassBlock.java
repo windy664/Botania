@@ -78,11 +78,11 @@ public class HoveringHourglassBlock extends BotaniaWaterloggedBlock implements E
 		if (hgStack.isEmpty() && HoveringHourglassBlockEntity.getStackItemTime(stack) > 0) {
 			hourglass.getItemHandler().setItem(0, stack.copy());
 			stack.setCount(0);
-			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide());
 		} else if (!hgStack.isEmpty()) {
 			player.getInventory().placeItemBackInInventory(hgStack);
 			hourglass.getItemHandler().setItem(0, ItemStack.EMPTY);
-			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide());
 		}
 
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

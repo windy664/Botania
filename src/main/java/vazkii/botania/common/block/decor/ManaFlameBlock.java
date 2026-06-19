@@ -59,7 +59,7 @@ public class ManaFlameBlock extends BotaniaWaterloggedBlock implements EntityBlo
 				stack.shrink(1);
 				player.getInventory().placeItemBackInInventory(new ItemStack(BotaniaItems.lexicon));
 			}
-			return ItemInteractionResult.sidedSuccess(level.isClientSide()());
+			return ItemInteractionResult.sidedSuccess(level.isClientSide());
 		}
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}

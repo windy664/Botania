@@ -47,7 +47,7 @@ public class ThornChakramItem extends Item {
 			stack.shrink(1);
 		}
 
-		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
+		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 	}
 
 }

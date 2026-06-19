@@ -111,7 +111,7 @@ public class BifrostRodItem extends SelfReturningItem {
 			}
 		}
 
-		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
+		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 	}
 
 	private static boolean placeBridgeSegment(Level world, BlockPos center, BlockPos.MutableBlockPos placePos, int time) {

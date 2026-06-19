@@ -67,7 +67,7 @@ public class AstrolabeItem extends Item {
 		if (player != null && player.isSecondaryUseActive()) {
 			if (setBlock(stack, state)) {
 				displayRemainderCounter(player, stack);
-				return InteractionResult.sidedSuccess(player.level().isClientSide()());
+				return InteractionResult.sidedSuccess(player.level().isClientSide());
 			}
 		} else if (player != null) {
 			boolean did = placeAllBlocks(stack, player, ctx.getHand());
@@ -93,7 +93,7 @@ public class AstrolabeItem extends Item {
 				ItemsRemainingRenderHandler.send(playerIn, stack, 0, Component.literal(newSize + "x" + newSize));
 			}
 
-			return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide()());
+			return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide());
 		}
 
 		return InteractionResultHolder.pass(stack);

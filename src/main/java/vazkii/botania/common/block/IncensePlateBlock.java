@@ -88,7 +88,7 @@ public class IncensePlateBlock extends BotaniaWaterloggedBlock implements Entity
 		}
 	
 		return did
-				? InteractionResult.sidedSuccess(world.isClientSide()())
+				? InteractionResult.sidedSuccess(world.isClientSide())
 				: InteractionResult.PASS;
 	}
 	 */
@@ -122,7 +122,7 @@ public class IncensePlateBlock extends BotaniaWaterloggedBlock implements Entity
 		}
 
 		return did
-				? ItemInteractionResult.sidedSuccess(world.isClientSide()())
+				? ItemInteractionResult.sidedSuccess(world.isClientSide())
 				: ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 

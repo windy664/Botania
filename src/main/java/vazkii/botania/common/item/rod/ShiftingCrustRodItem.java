@@ -88,7 +88,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 				setHitPos(stack, ctx.getClickLocation());
 
 				displayRemainderCounter(player, stack);
-				return InteractionResult.sidedSuccess(world.isClientSide()());
+				return InteractionResult.sidedSuccess(world.isClientSide());
 			}
 		} else if (canExchange(stack) && !stack.has(BotaniaDataComponents.SWAPPING)) {
 			Item replacement = getItemToPlace(stack);
@@ -101,7 +101,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 			}
 		}
 
-		return InteractionResult.sidedSuccess(world.isClientSide()());
+		return InteractionResult.sidedSuccess(world.isClientSide());
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class ShiftingCrustRodItem extends Item implements WireframeCoordinateLis
 		ItemStack stack = player.getItemInHand(hand);
 		if (!stack.isEmpty() && stack.is(this)) {
 			// Skip logic on the client, the server will replace the block when it receives the action packet
-			if (world.isClientSide()()) {
+			if (world.isClientSide()) {
 				return InteractionResult.SUCCESS;
 			}
 

@@ -106,7 +106,7 @@ public class TerraShattererItem extends ManasteelPickaxeItem implements Sequenti
 				if (!level.isClientSide()) {
 					level.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.terraPickMode, SoundSource.PLAYERS, 1F, 1F);
 				}
-				return InteractionResultHolder.sidedSuccess(stack, level.isClientSide()());
+				return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
 			}
 		}
 		return InteractionResultHolder.pass(stack);

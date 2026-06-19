@@ -49,7 +49,7 @@ public class HellsRodItem extends Item {
 		BlockPos pos = ctx.getClickedPos();
 
 		if (player != null && ManaItemHandler.instance().requestManaExactForTool(stack, player, COST, false)) {
-			if (!world.isClientSide()()) {
+			if (!world.isClientSide()) {
 				FlameRingEntity entity = BotaniaEntities.FLAME_RING.create(world);
 				entity.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 				world.addFreshEntity(entity);
@@ -64,7 +64,7 @@ public class HellsRodItem extends Item {
 			}
 		}
 
-		return InteractionResult.sidedSuccess(world.isClientSide()());
+		return InteractionResult.sidedSuccess(world.isClientSide());
 	}
 
 	public static class AvatarBehavior implements AvatarWieldable {

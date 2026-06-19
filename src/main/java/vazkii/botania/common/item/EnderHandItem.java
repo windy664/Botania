@@ -47,7 +47,7 @@ public class EnderHandItem extends Item {
 				ManaItemHandler.instance().requestManaExact(stack, player, COST_SELF, true);
 			}
 			player.playSound(SoundEvents.ENDER_CHEST_OPEN, 1F, 1F);
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 		}
 		return InteractionResultHolder.pass(stack);
 	}
@@ -60,7 +60,7 @@ public class EnderHandItem extends Item {
 				ManaItemHandler.instance().requestManaExact(stack, player, COST_OTHER, true);
 			}
 			player.playSound(SoundEvents.ENDER_CHEST_OPEN, 1F, 1F);
-			return InteractionResult.sidedSuccess(player.level().isClientSide()());
+			return InteractionResult.sidedSuccess(player.level().isClientSide());
 		}
 
 		return InteractionResult.PASS;

@@ -99,7 +99,7 @@ public class CocoonBlock extends BotaniaWaterloggedBlock implements EntityBlock 
 				}
 			}
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide()());
+			return ItemInteractionResult.sidedSuccess(world.isClientSide());
 		}
 
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

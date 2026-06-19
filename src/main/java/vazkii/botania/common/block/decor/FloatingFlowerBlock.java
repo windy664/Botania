@@ -106,7 +106,7 @@ public class FloatingFlowerBlock extends BotaniaWaterloggedBlock implements Enti
 				if (!player.getAbilities().instabuild) {
 					stack.shrink(1);
 				}
-				return ItemInteractionResult.sidedSuccess(level.isClientSide()());
+				return ItemInteractionResult.sidedSuccess(level.isClientSide());
 			}
 		}
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

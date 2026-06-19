@@ -69,7 +69,7 @@ public class BellowsBlockEntity extends BotaniaBlockEntity {
 
 		if (self.movePos < max && self.active && self.moving >= 0F) {
 			if (self.moving == 0F) {
-				if (!level.isClientSide()()) {
+				if (!level.isClientSide()) {
 					level.gameEvent(null, GameEvent.BLOCK_ACTIVATE, worldPosition);
 				}
 				level.playSound(null, worldPosition, BotaniaSounds.bellows, SoundSource.BLOCKS, 1F, 1F);

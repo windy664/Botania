@@ -97,7 +97,7 @@ public class FloralFertilizerItem extends Item {
 			}
 		}
 
-		return InteractionResult.sidedSuccess(world.isClientSide()());
+		return InteractionResult.sidedSuccess(world.isClientSide());
 	}
 
 	private static boolean canPlaceMushroom(BlockState belowState) {

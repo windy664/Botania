@@ -36,7 +36,7 @@ public class CraftingPatternItem extends Item {
 		if (state.is(BotaniaBlocks.craftCrate)) {
 			if (pattern != state.getValue(BotaniaStateProperties.CRATE_PATTERN)) {
 				world.setBlockAndUpdate(pos, state.setValue(BotaniaStateProperties.CRATE_PATTERN, this.pattern));
-				return InteractionResult.sidedSuccess(world.isClientSide()());
+				return InteractionResult.sidedSuccess(world.isClientSide());
 			}
 		}
 

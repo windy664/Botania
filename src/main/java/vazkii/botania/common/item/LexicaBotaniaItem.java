@@ -78,7 +78,7 @@ public class LexicaBotaniaItem extends Item implements CustomCreativeTabContents
 			playerIn.playSound(BotaniaSounds.lexiconOpen, 1F, (float) (0.7 + Math.random() * 0.4));
 		}
 
-		return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide()());
+		return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide());
 	}
 
 	public static Component getEdition() {

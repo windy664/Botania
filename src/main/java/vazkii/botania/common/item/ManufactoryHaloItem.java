@@ -70,7 +70,7 @@ public class ManufactoryHaloItem extends AssemblyHaloItem {
 		ItemStack stack = player.getItemInHand(hand);
 		if (getSegmentLookedAt(stack, player) == 0 && player.isSecondaryUseActive()) {
 			togglePassive(stack, player, world);
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide()());
+			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
 		}
 
 		return super.use(world, player, hand);

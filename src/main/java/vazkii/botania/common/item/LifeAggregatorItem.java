@@ -64,7 +64,7 @@ public class LifeAggregatorItem extends Item {
 			return placeSpawner(ctx);
 		} else {
 			return captureSpawner(ctx)
-					? InteractionResult.sidedSuccess(ctx.getLevel().isClientSide()())
+					? InteractionResult.sidedSuccess(ctx.getLevel().isClientSide())
 					: InteractionResult.PASS;
 		}
 	}

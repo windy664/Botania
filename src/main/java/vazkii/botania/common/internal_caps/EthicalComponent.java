@@ -27,7 +27,7 @@ public class EthicalComponent extends SerializableComponent {
 	}
 
 	public EthicalComponent(PrimedTnt entity) {
-		if (!entity.level().isClientSide()()) {
+		if (!entity.level().isClientSide()) {
 			EthicalTntHelper.addTrackedTntEntity(entity);
 		}
 	}
