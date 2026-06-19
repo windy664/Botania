@@ -1,0 +1,39 @@
+modLoader = "javafml"
+loaderVersion = "${neoforge_loader_version_range}"
+license = "${license}"
+issueTrackerURL = "${issues_url}"
+
+[[mods]]
+modId = "botania"
+version = "${version}"
+displayName = "${mod_name}"
+displayURL = "${website_url}"
+logoFile = "logo.png"
+description = '''${description}'''
+authors = "Vazkii, wiiv, williewillus, dylan4ever, Hubry, Alwinfy, artemisSystem, Falkory220, Wormbo"
+
+[[mixins]]
+config = "${mod_id}.xplat.mixins.json"
+
+[[mixins]]
+config = "${mod_id}.neoforge.mixins.json"
+
+[[dependencies.botania]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neo_version},)"
+
+[[dependencies.botania]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+
+[[dependencies.botania]]
+modId = "patchouli"
+type = "optional"
+versionRange = "*"
+
+[[dependencies.botania]]
+modId = "curios"
+type = "optional"
+versionRange = "*"

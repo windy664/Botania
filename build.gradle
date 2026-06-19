@@ -1,30 +1,175 @@
 plugins {
-    id 'com.diffplug.spotless' version '7.0.2' apply false
-    id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
-    // see https://fabricmc.net/develop/ for new versions
-    id 'fabric-loom' version '1.9.2' apply false
-    // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
-    id 'net.neoforged.moddev' version '2.0.78' apply false
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.141'
 }
 
-subprojects {
-    apply plugin: 'pmd'
-    apply plugin: 'com.diffplug.spotless'
+version = mod_version
+group = group
 
-    pmd {
-        toolVersion = '6.55.0'
-        incrementalAnalysis.set(true)
-        ruleSetFiles = rootProject.files("spotless/pmd-ruleset.xml")
+base {
+    archivesName = mod_id
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(java_version)
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << "-Xmaxerrs" << "2000"
+}
+
+sourceSets.main.resources {
+    srcDir('src/generated/resources')
+    exclude '.cache'
+    exclude '**/*.bbmodel'
+}
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
     }
 
-    spotless {
-        enforceCheck = false // workaround around jenkins having wrong line endings in some files
-        // we explicitly check in github actions builds
-        java {
-            indentWithTabs()
-            eclipse().configFile rootProject.file('spotless/eclipseformat.xml')
-            removeUnusedImports()
-            importOrderFile rootProject.file('spotless/eclipse.importorder')
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            systemProperty('fml.earlyprogresswindow', 'false')
+            systemProperty('forge.logging.markers', 'REGISTRIES')
+            logLevel = org.slf4j.event.Level.DEBUG
+            gameDirectory = file('../run/')
         }
+
+        client {
+            client()
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+        }
+
+        data {
+            type = 'clientData'
+            programArguments.addAll '--mod', mod_id, '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'NeoForge'
+        url = 'https://maven.neoforged.net/releases'
+    }
+    maven {
+        name = 'ParchmentMC'
+        url = 'https://maven.parchmentmc.org/'
+    }
+    maven {
+        name = 'BlameJared'
+        url = 'https://maven.blamejared.com'
+    }
+    maven {
+        name = 'C4'
+        url = 'https://maven.theillusivec4.top/'
+    }
+}
+
+dependencies {
+    // Patchouli
+    compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}-NEOFORGE"
+
+    // Curios
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
+    // Mixin (compile-only for Xplat mixin classes)
+    compileOnly 'net.fabricmc:sponge-mixin:0.15.2+mixin.0.8.7'
+    compileOnly 'io.github.llamalad7:mixinextras-common:0.4.1'
+    annotationProcessor 'io.github.llamalad7:mixinextras-common:0.4.1'
+
+    // Annotations
+    compileOnly 'org.jetbrains:annotations:26.0.2'
+}
+
+processResources {
+    from 'contributors.properties'
+    exclude '.cache'
+
+    var expandProps = [
+            'version'                      : version,
+            'build_number'                 : build_number,
+            'group'                        : project.group,
+            'minecraft_version'            : minecraft_version,
+            'minecraft_version_range'      : minecraft_version_range,
+            'neo_version'                  : neo_version,
+            'neoforge_loader_version_range': neoforge_loader_version_range,
+            'mod_name'                     : mod_name,
+            'mod_author'                   : mod_author,
+            'mod_id'                       : mod_id,
+            'license'                      : license,
+            'description'                  : 'Botania is a tech mod themed around natural magic',
+            'website_url'                  : 'https://botaniamod.net',
+            'sources_url'                  : 'https://github.com/VazkiiMods/Botania',
+            'issues_url'                   : 'https://github.com/Vazkii/Botania/issues',
+            'java_version'                 : java_version
+    ]
+
+    filesMatching(['pack.mcmeta', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {
+        expand(expandProps)
+    }
+    filesMatching('data/botania/patchouli_books/lexicon/book.json') {
+        filter {
+            it.replace('${build_number}', build_number as String)
+        }
+    }
+
+    inputs.properties(expandProps)
+}
+
+jar {
+    from(rootProject.file('LICENSE.txt')) {
+        rename { "${it}_${mod_name}" }
+    }
+    exclude '**/*.bat', '**/*.psd', '**/*.ase', '**/*.exe', '**/unused', '.cache'
+    manifest {
+        attributes([
+                'Specification-Title'   : mod_name,
+                'Specification-Vendor'  : mod_author,
+                'Specification-Version' : project.jar.archiveVersion,
+                'Implementation-Title'  : project.name,
+                'Implementation-Version': project.jar.archiveVersion,
+                'Implementation-Vendor' : mod_author,
+                'Built-On-Minecraft'    : minecraft_version
+        ])
+    }
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            artifactId = base.archivesName.get()
+            from components.java
+        }
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
     }
 }
