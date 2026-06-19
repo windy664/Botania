@@ -45,7 +45,6 @@ import vazkii.botania.client.gui.ManaBarTooltipComponent;
 import vazkii.botania.client.gui.TooltipHandler;
 import vazkii.botania.client.gui.bag.ColoredContentsPouchScreen;
 import vazkii.botania.client.gui.box.BaubleBoxGui;
-import vazkii.botania.client.integration.ears.EarsIntegration;
 import vazkii.botania.client.model.BotaniaLayerDefinitions;
 import vazkii.botania.client.model.armor.ArmorModels;
 import vazkii.botania.client.render.BlockRenderLayers;
@@ -139,9 +138,6 @@ public class ForgeClientInitializer {
 		// Etc
 		ClientProxy.initSeasonal();
 
-		if (XplatAbstractions.INSTANCE.isModLoaded("ears")) {
-			EarsIntegration.register();
-		}
 	}
 
 	@SubscribeEvent

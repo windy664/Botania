@@ -87,7 +87,7 @@ repositories {
 
 dependencies {
     // Patchouli
-    compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}-NEOFORGE"
+    compileOnly "vazkii.patchouli:patchouli-neoforge:${patchouli_version}-SNAPSHOT"
 
     // Curios
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
