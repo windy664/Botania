@@ -39,7 +39,10 @@ DelegatedModel
 DiggerItem
 DirectionProperty
 DropRule
+EntityEquipmentPredicate
+EntityFlagsPredicate
 EntityPredicate
+EntityTypePredicate
 ExistingFileHelper
 Factory
 FarmBlock
@@ -50,6 +53,7 @@ GameRules
 GameTest
 GlStateManager
 GuiGraphics
+Horse
 IGeometryBakingContext
 IGeometryLoader
 INBTSerializable
@@ -81,17 +85,21 @@ MobSpawnType
 Mode
 ModelData
 ModelIdentifier
+ModelLocationUtils
 ModelProperty
 ModelState
 ModelTemplate
+ModelTemplates
 MultiBufferSource
 MultiVariantGenerator
 MushroomCow
+NbtPredicate
 PickaxeItem
 PlayerModel
 PlayerRenderer
 Properties
 PropertyDispatch
+RecipeUnlockedTrigger
 RegisterAdditional
 RegisterClientReloadListenersEvent
 RegisterGeometryLoaders
@@ -104,6 +112,7 @@ SimpleCraftingRecipeSerializer
 SimpleCriterionTrigger
 SimpleInstance
 Skeleton
+SkeletonHorse
 SkullModelBase
 Slime
 SpreadingSnowyDirtBlock
@@ -119,7 +128,9 @@ TieredItem
 TooltipContext
 TriState
 TrimMaterial
+TrimMaterials
 TrimPattern
+TrimPatterns
 Tuple
 Type
 UseAnim
@@ -137,3 +148,4 @@ WeightedEntry
 WeightedRandomList
 WitherSkeleton
 Zombie
+ZombieHorse

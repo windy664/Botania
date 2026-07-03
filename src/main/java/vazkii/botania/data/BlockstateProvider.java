@@ -16,7 +16,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.blockstates.*;
-import net.minecraft.data.models.model.*;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.*;
@@ -49,8 +49,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static net.minecraft.data.models.model.ModelLocationUtils.getModelLocation;
-import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
+import static net.minecraft.client.data.models.model.ModelLocationUtils.getModelLocation;
+import static net.minecraft.client.data.models.model.TextureMapping.getBlockTexture;
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 import static vazkii.botania.common.block.BotaniaBlocks.*;
 

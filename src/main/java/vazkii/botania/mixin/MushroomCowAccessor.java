@@ -1,6 +1,6 @@
 package vazkii.botania.mixin;
 
-import net.minecraft.world.entity.animal.MushroomCow;
+import net.minecraft.world.entity.animal.cow.MushroomCow;
 import net.minecraft.world.item.component.SuspiciousStewEffects;
 
 import org.jetbrains.annotations.Nullable;

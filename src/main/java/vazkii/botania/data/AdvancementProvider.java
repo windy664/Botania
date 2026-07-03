@@ -11,7 +11,7 @@ package vazkii.botania.data;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentPredicate;
+import net.minecraft.core.component.predicates.DataComponentPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementSubProvider;

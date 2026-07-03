@@ -14,8 +14,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.minecraft.data.models.model.TextureMapping;
-import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.resources.Identifier;
 
 import java.util.*;
@@ -24,7 +24,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * Copy of {@link net.minecraft.data.models.model.ModelTemplate} with support for generating item predicate overrides.
+ * Copy of {@link net.minecraft.client.data.models.model.ModelTemplate} with support for generating item predicate overrides.
  */
 public class ModelWithOverrides {
 	private final Identifier parent;

@@ -8,10 +8,10 @@
  */
 package vazkii.botania.mixin;
 
-import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.data.models.blockstates.BlockStateGenerator;
-import net.minecraft.data.models.blockstates.PropertyDispatch;
-import net.minecraft.data.models.blockstates.Variant;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
+import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 

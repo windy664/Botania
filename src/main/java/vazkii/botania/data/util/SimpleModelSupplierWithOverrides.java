@@ -12,7 +12,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.minecraft.data.models.model.DelegatedModel;
+import net.minecraft.client.data.models.model.DelegatedModel;
 import net.minecraft.resources.Identifier;
 
 public class SimpleModelSupplierWithOverrides extends DelegatedModel {
