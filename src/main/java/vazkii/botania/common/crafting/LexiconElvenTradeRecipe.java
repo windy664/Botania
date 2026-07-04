@@ -45,7 +45,6 @@ public class LexiconElvenTradeRecipe implements ElvenTradeRecipe {
 		return NonNullList.withSize(1, Ingredient.of(BotaniaItems.lexicon));
 	}
 
-	@Override
 	public ItemStack getToastSymbol() {
 		return new ItemStack(BotaniaBlocks.alfPortal);
 	}

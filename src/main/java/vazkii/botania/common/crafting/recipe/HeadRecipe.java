@@ -11,7 +11,6 @@ package vazkii.botania.common.crafting.recipe;
 import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.serialization.MapCodec;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -70,8 +69,8 @@ public class HeadRecipe extends RunicAltarRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(RecipeInput inv, HolderLookup.Provider registries) {
-		ItemStack stack = getResultItem(registries).copy();
+	public ItemStack assemble(RecipeInput inv) {
+		ItemStack stack = getResultItem(null).copy();
 		for (int i = 0; i < inv.size(); i++) {
 			ItemStack ingr = inv.getItem(i);
 			if (ingr.is(Items.NAME_TAG)) {

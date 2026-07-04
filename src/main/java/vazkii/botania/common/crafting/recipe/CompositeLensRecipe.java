@@ -53,7 +53,7 @@ public class CompositeLensRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput inv) {
 		ItemStack lens = ItemStack.EMPTY;
 		ItemStack secondLens = ItemStack.EMPTY;
 
@@ -85,10 +85,6 @@ public class CompositeLensRecipe extends CustomRecipe {
 		return ItemStack.EMPTY;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width * height >= 3;
-	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {

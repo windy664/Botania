@@ -50,7 +50,7 @@ public class CosmeticAttachRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput inv) {
 		ItemStack cosmeticItem = ItemStack.EMPTY;
 		ItemStack attachableItem = ItemStack.EMPTY;
 
@@ -78,10 +78,6 @@ public class CosmeticAttachRecipe extends CustomRecipe {
 		return copy;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width * height >= 2;
-	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {

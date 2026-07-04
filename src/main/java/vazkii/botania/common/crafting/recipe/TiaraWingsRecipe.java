@@ -71,26 +71,20 @@ public class TiaraWingsRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput input) {
 		ItemStack tiara = input.items().stream().filter(stack -> stack.is(BotaniaItems.flightTiara))
 				.findFirst().orElseThrow().copy();
 		FlugelTiaraItem.setVariant(tiara, variant);
 		return tiara;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width * height >= 2;
-	}
 
-	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		return material.isEmpty()
 				? NonNullList.of(Ingredient.EMPTY, Ingredient.of(BotaniaItems.flightTiara))
 				: NonNullList.of(Ingredient.EMPTY, Ingredient.of(BotaniaItems.flightTiara), material);
 	}
 
-	@Override
 	public ItemStack getResultItem(HolderLookup.Provider registries) {
 		ItemStack tiara = new ItemStack(BotaniaItems.flightTiara);
 		FlugelTiaraItem.setVariant(tiara, variant);
@@ -98,7 +92,7 @@ public class TiaraWingsRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public String getGroup() {
+	public String group() {
 		return "botania:flight_tiara_wings";
 	}
 

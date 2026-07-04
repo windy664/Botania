@@ -71,16 +71,14 @@ public class TerrestrialAgglomerationRecipe implements vazkii.botania.api.recipe
 	}
 
 	@Override
-	public ItemStack assemble(RecipeInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(RecipeInput inv) {
 		return output.copy();
 	}
 
-	@Override
 	public ItemStack getResultItem(HolderLookup.Provider registries) {
 		return output;
 	}
 
-	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		return ingredients;
 	}

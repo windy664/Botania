@@ -107,7 +107,7 @@ public class TerrestrialAgglomerationPlateBlockEntity extends BotaniaBlockEntity
 
 				if (self.mana >= recipe.value().getMana()) {
 					Player player = getCraftingPlayer(itemEntities);
-					ItemStack result = recipe.value().assemble(inv, level.registryAccess());
+					ItemStack result = recipe.value().assemble(inv);
 					if (player != null) {
 						player.triggerRecipeCrafted(recipe, List.of(result));
 						result.onCraftedBy(level, player, result.getCount());

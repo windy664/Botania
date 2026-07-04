@@ -48,14 +48,13 @@ public class PetalApothecaryRecipe implements vazkii.botania.api.recipe.PetalApo
 		return RecipeUtils.matches(ingredients, null, inv, null, null);
 	}
 
-	@Override
 	public final ItemStack getResultItem(HolderLookup.Provider registries) {
 		return output;
 	}
 
 	@Override
-	public ItemStack assemble(RecipeInput inv, HolderLookup.Provider registries) {
-		return getResultItem(registries).copy();
+	public ItemStack assemble(RecipeInput inv) {
+		return getResultItem(null).copy();
 	}
 
 	public ItemStack getOutput() {
@@ -67,12 +66,10 @@ public class PetalApothecaryRecipe implements vazkii.botania.api.recipe.PetalApo
 		return reagent;
 	}
 
-	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-	@Override
 	public ItemStack getToastSymbol() {
 		return new ItemStack(BotaniaBlocks.defaultAltar);
 	}

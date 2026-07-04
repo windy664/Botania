@@ -52,7 +52,7 @@ public class AncientWillRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput inv) {
 		ItemStack item = ItemStack.EMPTY;
 		AncientWillContainer.AncientWillType will = null;
 
@@ -77,10 +77,6 @@ public class AncientWillRecipe extends CustomRecipe {
 		return copy;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width > 1 || height > 1;
-	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {

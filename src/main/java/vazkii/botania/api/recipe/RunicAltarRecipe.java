@@ -28,7 +28,6 @@ public interface RunicAltarRecipe extends RecipeWithReagent {
 
 	NonNullList<Ingredient> getCatalysts();
 
-	@Override
 	NonNullList<ItemStack> getRemainingItems(RecipeInput container);
 
 	@Override

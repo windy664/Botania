@@ -110,7 +110,7 @@ public class PetalApothecaryBlockEntity extends SimpleInventoryBlockEntity imple
 			var recipe = maybeRecipe.get();
 			if (recipe.value().getReagent().test(item.getItem())) {
 				saveLastRecipe(recipe.value().getReagent());
-				ItemStack output = recipe.value().assemble(getRecipeInput(), getLevel().registryAccess());
+				ItemStack output = recipe.value().assemble(getRecipeInput());
 				Entity thrower = item.getOwner();
 
 				for (int i = 0; i < inventorySize(); i++) {
@@ -354,7 +354,7 @@ public class PetalApothecaryBlockEntity extends SimpleInventoryBlockEntity imple
 					RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 					RenderHelper.drawTexturedModalRect(gui, HUDHandler.manaBar, xc + radius + 9, yc - 8, 0, 8, 22, 15);
 
-					ItemStack stack = recipe.value().assemble(altar.getRecipeInput(), altar.getLevel().registryAccess());
+					ItemStack stack = recipe.value().assemble(altar.getRecipeInput());
 					gui.renderFakeItem(stack, xc + radius + 32, yc - 8);
 
 					var reagents = recipe.value().getReagent().getItems();

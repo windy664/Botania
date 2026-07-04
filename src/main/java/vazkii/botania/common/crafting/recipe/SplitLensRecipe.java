@@ -29,11 +29,11 @@ public class SplitLensRecipe extends CustomRecipe {
 
 	@Override
 	public boolean matches(CraftingInput inv, Level level) {
-		return !assemble(inv, level.registryAccess()).isEmpty();
+		return !assemble(inv).isEmpty();
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput inv) {
 		ItemStack found = ItemStack.EMPTY;
 		for (int i = 0; i < inv.size(); i++) {
 			ItemStack candidate = inv.getItem(i);
@@ -72,10 +72,6 @@ public class SplitLensRecipe extends CustomRecipe {
 		return remaining;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width * height >= 1;
-	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {

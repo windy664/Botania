@@ -47,7 +47,7 @@ public class ManaBlasterRemoveLensRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput inv) {
 		ItemStack gun = ItemStack.EMPTY;
 
 		for (int i = 0; i < inv.size(); i++) {
@@ -65,10 +65,6 @@ public class ManaBlasterRemoveLensRecipe extends CustomRecipe {
 		return gunCopy;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width * height > 0;
-	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {

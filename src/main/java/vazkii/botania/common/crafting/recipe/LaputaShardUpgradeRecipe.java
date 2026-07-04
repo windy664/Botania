@@ -50,12 +50,10 @@ public class LaputaShardUpgradeRecipe extends CustomRecipe {
 		return foundShard && foundSpirit;
 	}
 
-	@Override
 	public ItemStack getResultItem(HolderLookup.Provider registries) {
 		return new ItemStack(BotaniaItems.laputaShard);
 	}
 
-	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		return NonNullList.of(Ingredient.EMPTY,
 				Ingredient.of(BotaniaItems.laputaShard),
@@ -63,7 +61,7 @@ public class LaputaShardUpgradeRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput inv) {
 		for (int i = 0; i < inv.size(); i++) {
 			ItemStack stack = inv.getItem(i);
 			if (stack.is(BotaniaItems.laputaShard)) {
@@ -75,10 +73,6 @@ public class LaputaShardUpgradeRecipe extends CustomRecipe {
 		return ItemStack.EMPTY;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width * height >= 2;
-	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {

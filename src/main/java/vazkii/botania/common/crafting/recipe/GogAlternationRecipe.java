@@ -13,11 +13,12 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -61,18 +62,8 @@ public class GogAlternationRecipe<C extends RecipeInput> implements Recipe<C> {
 	}
 
 	@Override
-	public ItemStack assemble(@NotNull C container, HolderLookup.Provider registryAccess) {
-		return getRecipe().assemble(container, registryAccess);
-	}
-
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return getRecipe().canCraftInDimensions(width, height);
-	}
-
-	@Override
-	public ItemStack getResultItem(HolderLookup.Provider registryAccess) {
-		return getRecipe().getResultItem(registryAccess);
+	public ItemStack assemble(@NotNull C container) {
+		return getRecipe().assemble(container);
 	}
 
 	@Override
@@ -83,6 +74,26 @@ public class GogAlternationRecipe<C extends RecipeInput> implements Recipe<C> {
 	@Override
 	public RecipeType<?> getType() {
 		return getRecipe().getType();
+	}
+
+	@Override
+	public String group() {
+		return getRecipe().group();
+	}
+
+	@Override
+	public boolean showNotification() {
+		return getRecipe().showNotification();
+	}
+
+	@Override
+	public PlacementInfo placementInfo() {
+		return getRecipe().placementInfo();
+	}
+
+	@Override
+	public RecipeBookCategory recipeBookCategory() {
+		return getRecipe().recipeBookCategory();
 	}
 
 	private static class Serializer {

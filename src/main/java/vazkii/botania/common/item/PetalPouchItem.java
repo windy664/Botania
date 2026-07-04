@@ -54,7 +54,7 @@ public class PetalPouchItem extends ColoredContentsPouchItem {
 			craft.setItem(0, pickupStack.copyWithCount(1));
 			return RECIPE_CACHE.get(level, craft.asCraftInput())
 					.map(RecipeHolder::value)
-					.map(recipe -> recipe.assemble(craft.asCraftInput(), level.registryAccess()))
+					.map(recipe -> recipe.assemble(craft.asCraftInput()))
 					.map(stack -> super.findCandidateSlots(level, pouch, stack))
 					.orElseGet(IntList::of);
 		}
@@ -84,7 +84,7 @@ public class PetalPouchItem extends ColoredContentsPouchItem {
 		CraftingContainer craft = getCraftingContainer();
 		craft.setItem(0, pickupStack.copyWithCount(1));
 		var convertedStackOptional = RECIPE_CACHE.get(level, craft.asCraftInput()).map(RecipeHolder::value)
-				.map(recipe -> recipe.assemble(craft.asCraftInput(), level.registryAccess()));
+				.map(recipe -> recipe.assemble(craft.asCraftInput()));
 		if (convertedStackOptional.map(ItemStack::isEmpty).orElse(true)) {
 			return false;
 		}

@@ -81,12 +81,10 @@ public class BotanicalBreweryRecipe implements vazkii.botania.api.recipe.Botanic
 		return inputsMissing.isEmpty();
 	}
 
-	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		return inputs;
 	}
 
-	@Override
 	public ItemStack getToastSymbol() {
 		return new ItemStack(BotaniaBlocks.brewery);
 	}

@@ -49,7 +49,7 @@ public class SpellbindingClothRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput inv) {
 		ItemStack stackToDisenchant = ItemStack.EMPTY;
 		for (int i = 0; i < inv.size(); i++) {
 			ItemStack stack = inv.getItem(i);
@@ -69,10 +69,6 @@ public class SpellbindingClothRecipe extends CustomRecipe {
 		return stackToDisenchant;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width * height >= 2;
-	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {

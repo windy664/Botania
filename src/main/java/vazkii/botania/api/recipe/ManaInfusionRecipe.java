@@ -13,7 +13,10 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategories;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -40,7 +43,6 @@ public interface ManaInfusionRecipe extends Recipe<RecipeInput> {
 	 *
 	 * @return The output stack of the recipe.
 	 */
-	@Override
 	ItemStack getResultItem(HolderLookup.Provider registries);
 
 	/**
@@ -73,7 +75,7 @@ public interface ManaInfusionRecipe extends Recipe<RecipeInput> {
 	// Ignored IRecipe stuff
 
 	@Override
-	default ItemStack assemble(RecipeInput inv, HolderLookup.Provider registries) {
+	default ItemStack assemble(RecipeInput inv) {
 		return ItemStack.EMPTY;
 	}
 
@@ -83,12 +85,27 @@ public interface ManaInfusionRecipe extends Recipe<RecipeInput> {
 	}
 
 	@Override
-	default boolean canCraftInDimensions(int width, int height) {
+	default boolean isSpecial() {
+		return true;
+	}
+
+	@Override
+	default String group() {
+		return "";
+	}
+
+	@Override
+	default boolean showNotification() {
 		return false;
 	}
 
 	@Override
-	default boolean isSpecial() {
-		return true;
+	default PlacementInfo placementInfo() {
+		return PlacementInfo.NOT_PLACEABLE;
+	}
+
+	@Override
+	default RecipeBookCategory recipeBookCategory() {
+		return RecipeBookCategories.CRAFTING_MISC;
 	}
 }

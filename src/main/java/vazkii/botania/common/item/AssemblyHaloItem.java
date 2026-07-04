@@ -172,7 +172,7 @@ public class AssemblyHaloItem extends Item {
 			return;
 		}
 
-		ItemStack result = recipe.value().assemble(craftInput, player.level().registryAccess());
+		ItemStack result = recipe.value().assemble(craftInput);
 
 		// Check if we have room for the result
 		if (!hasRoomFor(player.getInventory(), result)) {

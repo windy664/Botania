@@ -97,17 +97,15 @@ public class RunicAltarRecipe implements vazkii.botania.api.recipe.RunicAltarRec
 		return foundCatalysts;
 	}
 
-	@Override
 	public final ItemStack getResultItem(HolderLookup.Provider registries) {
 		return output;
 	}
 
 	@Override
-	public ItemStack assemble(RecipeInput inv, HolderLookup.Provider registries) {
-		return getResultItem(registries).copy();
+	public ItemStack assemble(RecipeInput inv) {
+		return getResultItem(null).copy();
 	}
 
-	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		return ingredients;
 	}
@@ -117,7 +115,6 @@ public class RunicAltarRecipe implements vazkii.botania.api.recipe.RunicAltarRec
 		return catalysts;
 	}
 
-	@Override
 	public ItemStack getToastSymbol() {
 		return new ItemStack(BotaniaBlocks.runeAltar);
 	}

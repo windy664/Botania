@@ -87,17 +87,19 @@ public class ManaInfusionRecipe implements vazkii.botania.api.recipe.ManaInfusio
 		return output;
 	}
 
-	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		return NonNullList.of(Ingredient.EMPTY, input);
 	}
 
 	@Override
+	public String group() {
+		return group;
+	}
+
 	public String getGroup() {
 		return group;
 	}
 
-	@Override
 	public ItemStack getToastSymbol() {
 		return new ItemStack(BotaniaBlocks.manaPool);
 	}

@@ -55,7 +55,7 @@ public class BlackHoleTalismanExtractRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput inv) {
 		ItemStack talisman = ItemStack.EMPTY;
 
 		for (int i = 0; i < inv.size(); i++) {
@@ -76,10 +76,6 @@ public class BlackHoleTalismanExtractRecipe extends CustomRecipe {
 		return ItemStack.EMPTY;
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width * height > 0;
-	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
