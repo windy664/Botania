@@ -8,7 +8,8 @@
  */
 package vazkii.botania.common.entity;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -80,10 +81,10 @@ public class MagicLandmineEntity extends Entity {
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag var1) {}
+	protected void readAdditionalSaveData(ValueInput var1) {}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag var1) {}
+	protected void addAdditionalSaveData(ValueOutput var1) {}
 
 	@Override
 	public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity entity) {

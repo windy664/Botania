@@ -8,7 +8,8 @@
  */
 package vazkii.botania.common.entity;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -158,13 +159,13 @@ public class MagicMissileEntity extends ThrowableProjectile {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag cmp) {
+	public void addAdditionalSaveData(ValueOutput cmp) {
 		super.addAdditionalSaveData(cmp);
 		cmp.putInt(TAG_TIME, time);
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag cmp) {
+	public void readAdditionalSaveData(ValueInput cmp) {
 		super.readAdditionalSaveData(cmp);
 		time = cmp.getIntOr(TAG_TIME, 0);
 	}

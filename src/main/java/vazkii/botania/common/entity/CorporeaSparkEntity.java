@@ -15,7 +15,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -307,14 +308,14 @@ public class CorporeaSparkEntity extends SparkBaseEntity implements CorporeaSpar
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag cmp) {
+	protected void readAdditionalSaveData(ValueInput cmp) {
 		super.readAdditionalSaveData(cmp);
 		setMaster(cmp.getBooleanOr(TAG_MASTER, false));
 		setCreative(cmp.getBooleanOr(TAG_CREATIVE, false));
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag cmp) {
+	protected void addAdditionalSaveData(ValueOutput cmp) {
 		super.addAdditionalSaveData(cmp);
 		cmp.putBoolean(TAG_MASTER, isMaster());
 		cmp.putBoolean(TAG_CREATIVE, isCreative());

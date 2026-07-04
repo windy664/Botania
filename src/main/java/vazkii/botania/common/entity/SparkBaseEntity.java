@@ -9,7 +9,8 @@
 package vazkii.botania.common.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -63,13 +64,13 @@ public abstract class SparkBaseEntity extends Entity implements SparkEntity {
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag compound) {
+	protected void readAdditionalSaveData(ValueInput compound) {
 		setInvisible(compound.getBooleanOr(TAG_INVIS, false));
 		setNetwork(DyeColor.byId(compound.getIntOr(TAG_NETWORK, 0)));
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag compound) {
+	protected void addAdditionalSaveData(ValueOutput compound) {
 		compound.putBoolean(TAG_INVIS, isInvisible());
 		compound.putInt(TAG_NETWORK, getNetwork().getId());
 	}

@@ -10,7 +10,8 @@ package vazkii.botania.common.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -181,13 +182,13 @@ public class ManaPoolMinecartEntity extends AbstractMinecart {
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag cmp) {
+	protected void addAdditionalSaveData(ValueOutput cmp) {
 		super.addAdditionalSaveData(cmp);
 		cmp.putInt(TAG_MANA, getMana());
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag cmp) {
+	protected void readAdditionalSaveData(ValueInput cmp) {
 		super.readAdditionalSaveData(cmp);
 		setMana(cmp.getIntOr(TAG_MANA, 0));
 	}

@@ -20,7 +20,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -377,7 +378,7 @@ public class GaiaGuardianEntity extends Mob {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag cmp) {
+	public void addAdditionalSaveData(ValueOutput cmp) {
 		super.addAdditionalSaveData(cmp);
 		cmp.putInt(TAG_INVUL_TIME, getInvulTime());
 		cmp.putBoolean(TAG_AGGRO, aggro);
@@ -392,7 +393,7 @@ public class GaiaGuardianEntity extends Mob {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag cmp) {
+	public void readAdditionalSaveData(ValueInput cmp) {
 		super.readAdditionalSaveData(cmp);
 		setInvulTime(cmp.getIntOr(TAG_INVUL_TIME, 0));
 		aggro = cmp.getBooleanOr(TAG_AGGRO, false);
@@ -404,11 +405,7 @@ public class GaiaGuardianEntity extends Mob {
 		source = new BlockPos(x, y, z);
 
 		hardMode = cmp.getBooleanOr(TAG_HARD_MODE, false);
-		if (cmp.contains(TAG_PLAYER_COUNT)) {
-			playerCount = cmp.getIntOr(TAG_PLAYER_COUNT, 0);
-		} else {
-			playerCount = 1;
-		}
+		playerCount = cmp.getIntOr(TAG_PLAYER_COUNT, 1);
 
 		if (this.hasCustomName()) {
 			this.bossInfo.setName(this.getDisplayName());

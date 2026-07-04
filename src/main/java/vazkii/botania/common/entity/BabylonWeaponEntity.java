@@ -10,7 +10,8 @@ package vazkii.botania.common.entity;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -191,7 +192,7 @@ public class BabylonWeaponEntity extends LegallyDistinctThrowableProjectile {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag cmp) {
+	public void addAdditionalSaveData(ValueOutput cmp) {
 		super.addAdditionalSaveData(cmp);
 		cmp.putBoolean(TAG_CHARGING, isCharging());
 		cmp.putInt(TAG_VARIETY, getVariety());
@@ -202,7 +203,7 @@ public class BabylonWeaponEntity extends LegallyDistinctThrowableProjectile {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag cmp) {
+	public void readAdditionalSaveData(ValueInput cmp) {
 		super.readAdditionalSaveData(cmp);
 		setCharging(cmp.getBooleanOr(TAG_CHARGING, false));
 		setVariety(cmp.getIntOr(TAG_VARIETY, 0));

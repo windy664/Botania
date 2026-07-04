@@ -8,7 +8,8 @@
  */
 package vazkii.botania.common.entity;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -85,7 +86,7 @@ public class ManaStormEntity extends Entity {
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag cmp) {
+	protected void readAdditionalSaveData(ValueInput cmp) {
 		liveTime = cmp.getIntOr(TAG_TIME, 0);
 		burstColor = cmp.getIntOr(TAG_BURST_COLOR, 0);
 		burstsFired = cmp.getIntOr(TAG_BURSTS_FIRED, 0);
@@ -93,7 +94,7 @@ public class ManaStormEntity extends Entity {
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag cmp) {
+	protected void addAdditionalSaveData(ValueOutput cmp) {
 		cmp.putInt(TAG_TIME, liveTime);
 		cmp.putInt(TAG_BURST_COLOR, burstColor);
 		cmp.putInt(TAG_BURSTS_FIRED, burstsFired);
