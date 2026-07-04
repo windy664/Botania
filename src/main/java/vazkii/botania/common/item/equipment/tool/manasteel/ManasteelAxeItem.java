@@ -8,14 +8,15 @@
  */
 package vazkii.botania.common.item.equipment.tool.manasteel;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import org.jetbrains.annotations.Nullable;
@@ -38,11 +39,11 @@ public class ManasteelAxeItem extends AxeItem implements CustomDamageItem, Sorta
 	private static final int MANA_PER_DAMAGE = 60;
 
 	public ManasteelAxeItem(Properties props) {
-		this(BotaniaAPI.instance().getManasteelItemTier(), props.attributes(ManasteelAxeItem.createAttributes(BotaniaAPI.instance().getManasteelItemTier(), 6F, -3.1F)));
+		this(BotaniaAPI.instance().getManasteelItemTier(), 6F, -3.1F, props);
 	}
 
-	public ManasteelAxeItem(Tier mat, Properties props) {
-		super(mat, props);
+	public ManasteelAxeItem(ToolMaterial mat, float attackDamage, float attackSpeed, Properties props) {
+		super(mat, attackDamage, attackSpeed, props);
 	}
 
 	@Override
@@ -82,8 +83,8 @@ public class ManasteelAxeItem extends AxeItem implements CustomDamageItem, Sorta
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-		if (!world.isClientSide() && entity instanceof Player player && stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, getManaPerDamage() * 2, true)) {
+	public void inventoryTick(ItemStack stack, ServerLevel world, Entity entity, EquipmentSlot slot) {
+		if (entity instanceof Player player && stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, getManaPerDamage() * 2, true)) {
 			stack.setDamageValue(stack.getDamageValue() - 1);
 		}
 	}

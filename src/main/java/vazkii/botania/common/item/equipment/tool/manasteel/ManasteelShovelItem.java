@@ -8,14 +8,15 @@
  */
 package vazkii.botania.common.item.equipment.tool.manasteel;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.level.block.state.BlockState;
 
 import org.jetbrains.annotations.Nullable;
@@ -36,8 +37,8 @@ public class ManasteelShovelItem extends ShovelItem implements CustomDamageItem,
 		this(BotaniaAPI.instance().getManasteelItemTier(), props);
 	}
 
-	public ManasteelShovelItem(Tier mat, Properties props) {
-		super(mat, props.attributes(ManasteelShovelItem.createAttributes(mat, 1.5F, -3.0F)));
+	public ManasteelShovelItem(ToolMaterial mat, Properties props) {
+		super(mat, 1.5F, -3.0F, props);
 	}
 
 	@Override
@@ -51,8 +52,8 @@ public class ManasteelShovelItem extends ShovelItem implements CustomDamageItem,
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-		if (!world.isClientSide() && entity instanceof Player player && stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, getManaPerDamage() * 2, true)) {
+	public void inventoryTick(ItemStack stack, ServerLevel world, Entity entity, EquipmentSlot slot) {
+		if (entity instanceof Player player && stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, getManaPerDamage() * 2, true)) {
 			stack.setDamageValue(stack.getDamageValue() - 1);
 		}
 	}

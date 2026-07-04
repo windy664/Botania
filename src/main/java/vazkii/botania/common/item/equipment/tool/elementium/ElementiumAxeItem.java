@@ -23,7 +23,7 @@ import vazkii.botania.common.item.equipment.tool.manasteel.ManasteelAxeItem;
 public class ElementiumAxeItem extends ManasteelAxeItem {
 
 	public ElementiumAxeItem(Properties props) {
-		super(BotaniaAPI.instance().getElementiumItemTier(), props.attributes(ElementiumAxeItem.createAttributes(BotaniaAPI.instance().getElementiumItemTier(), 6F, -3.1F)));
+		super(BotaniaAPI.instance().getElementiumItemTier(), 6F, -3.1F, props);
 	}
 
 	@SoftImplement("IItemExtension")
