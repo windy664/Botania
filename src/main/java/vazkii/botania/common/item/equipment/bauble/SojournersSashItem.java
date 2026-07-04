@@ -17,7 +17,7 @@ import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -163,7 +163,7 @@ public class SojournersSashItem extends BaubleItem {
 
 			Identifier texture = ((SojournersSashItem) stack.getItem()).getRenderTexture();
 			VertexConsumer buffer = buffers.getBuffer(model.renderType(texture));
-			model.body.render(ms, buffer, light, OverlayTexture.NO_OVERLAY, FastColor.ARGB32.color(1, 1, 1, 1));
+			model.body.render(ms, buffer, light, OverlayTexture.NO_OVERLAY, ARGB.color(1, 1, 1, 1));
 		}
 	}
 

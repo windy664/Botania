@@ -59,8 +59,8 @@ public class BaseBrewItem extends Item implements BrewItem, CustomCreativeTabCon
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack stack) {
-		return UseAnim.DRINK;
+	public ItemUseAnimation getUseAnimation(ItemStack stack) {
+		return ItemUseAnimation.DRINK;
 	}
 
 	@Override

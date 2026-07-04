@@ -253,7 +253,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 			looniumComponent.setDrop(lootStack);
 		}
 
-		mob.finalizeSpawn(world, world.getCurrentDifficultyAt(mob.blockPosition()), MobSpawnType.SPAWNER, null);
+		mob.finalizeSpawn(world, world.getCurrentDifficultyAt(mob.blockPosition()), EntitySpawnReason.SPAWNER, null);
 		if (Boolean.FALSE.equals(pickedMobType.spawnAsBaby) && mob.isBaby()) {
 			// Note: might have already affected initial equipment/attribute selection, or even caused a special
 			// mob configuration (such as chicken jockey) to spawn, which may look weird when reverting to adult.

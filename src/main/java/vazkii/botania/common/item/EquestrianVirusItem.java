@@ -15,7 +15,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -89,7 +89,7 @@ public class EquestrianVirusItem extends Item {
 				jumpHeight.addPermanentModifier(new AttributeModifier(virusId, jumpHeight.getBaseValue() * 0.5, AttributeModifier.Operation.ADD_VALUE));
 
 				newHorse.playSound(BotaniaSounds.virusInfect, 1.0F + living.level().getRandom().nextFloat(), living.level().getRandom().nextFloat() * 0.7F + 1.3F);
-				newHorse.finalizeSpawn((ServerLevelAccessor) player.level(), player.level().getCurrentDifficultyAt(newHorse.blockPosition()), MobSpawnType.CONVERSION, null);
+				newHorse.finalizeSpawn((ServerLevelAccessor) player.level(), player.level().getCurrentDifficultyAt(newHorse.blockPosition()), EntitySpawnReason.CONVERSION, null);
 				newHorse.setAge(horse.getAge());
 				player.level().addFreshEntity(newHorse);
 				newHorse.spawnAnim();

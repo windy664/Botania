@@ -18,7 +18,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -79,7 +79,7 @@ public class AvatarBlockEntityRenderer implements BlockEntityRenderer<AvatarBloc
 					ms.scale(s, s, s);
 					ms.translate(0F, -0.01F, 0F);
 					float alpha = (float) Math.sin(ClientTickHandler.ticksInGame / 20D) / 2F + 0.5F;
-					model.renderToBuffer(ms, buffer, 0xF000F0, overlay, FastColor.ARGB32.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
+					model.renderToBuffer(ms, buffer, 0xF000F0, overlay, ARGB.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
 					ms.popPose();
 				}
 			}

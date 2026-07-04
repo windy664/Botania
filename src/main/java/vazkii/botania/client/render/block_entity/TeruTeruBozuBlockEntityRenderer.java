@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -58,7 +58,7 @@ public class TeruTeruBozuBlockEntityRenderer implements BlockEntityRenderer<Teru
 		}
 
 		VertexConsumer buffer = buffers.getBuffer(model.renderType(ClientProxy.dootDoot ? textureHalloween : texture));
-		model.renderToBuffer(ms, buffer, light, overlay, FastColor.ARGB32.colorFromFloat(1, 1, 1, 1));
+		model.renderToBuffer(ms, buffer, light, overlay, ARGB.colorFromFloat(1, 1, 1, 1));
 		ms.popPose();
 	}
 

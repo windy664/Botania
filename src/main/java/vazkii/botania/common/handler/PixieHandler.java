@@ -15,7 +15,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
@@ -80,7 +80,7 @@ public final class PixieHandler {
 
 				pixie.setProps(livingSource, player, 0, dmg);
 				pixie.finalizeSpawn((ServerLevelAccessor) player.level(), player.level().getCurrentDifficultyAt(pixie.blockPosition()),
-						MobSpawnType.EVENT, null);
+						EntitySpawnReason.EVENT, null);
 				player.level().addFreshEntity(pixie);
 			}
 		}
