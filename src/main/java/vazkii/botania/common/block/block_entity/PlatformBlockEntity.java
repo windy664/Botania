@@ -15,6 +15,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -117,14 +119,14 @@ public class PlatformBlockEntity extends BotaniaBlockEntity implements Wandable,
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void writePacketNBT(ValueOutput cmp) {
 		if (getCamoState() != null) {
 			cmp.put(TAG_CAMO, NbtUtils.writeBlockState(getCamoState()));
 		}
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput cmp) {
 		HolderGetter<Block> holderGetter = this.level != null ? this.level.holderLookup(Registries.BLOCK) : BuiltInRegistries.BLOCK.asLookup();
 		BlockState state = NbtUtils.readBlockState(holderGetter, cmp.getCompoundOrEmpty(TAG_CAMO));
 		if (state.isAir()) {

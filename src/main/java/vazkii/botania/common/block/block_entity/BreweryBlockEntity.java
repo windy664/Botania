@@ -13,6 +13,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.SimpleContainer;
@@ -213,15 +215,15 @@ public class BreweryBlockEntity extends SimpleInventoryBlockEntity implements Ma
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
-		super.writePacketNBT(tag, registries);
+	public void writePacketNBT(ValueOutput tag) {
+		super.writePacketNBT(tag);
 
 		tag.putInt(TAG_MANA, mana);
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
-		super.readPacketNBT(tag, registries);
+	public void readPacketNBT(ValueInput tag) {
+		super.readPacketNBT(tag);
 
 		mana = tag.getIntOr(TAG_MANA, 0);
 	}

@@ -15,6 +15,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
@@ -151,7 +153,7 @@ public class CocoonBlockEntity extends BotaniaBlockEntity {
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void writePacketNBT(ValueOutput cmp) {
 		cmp.putInt(TAG_TIME_PASSED, timePassed);
 		cmp.putInt(TAG_EMERALDS_GIVEN, emeraldsGiven);
 		cmp.putInt(TAG_CHORUS_FRUIT_GIVEN, chorusFruitGiven);
@@ -159,7 +161,7 @@ public class CocoonBlockEntity extends BotaniaBlockEntity {
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput cmp) {
 		timePassed = cmp.getIntOr(TAG_TIME_PASSED, 0);
 		emeraldsGiven = cmp.getIntOr(TAG_EMERALDS_GIVEN, 0);
 		chorusFruitGiven = cmp.getIntOr(TAG_CHORUS_FRUIT_GIVEN, 0);

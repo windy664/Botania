@@ -14,6 +14,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
@@ -261,8 +263,8 @@ public class ManaSpreaderBlockEntity extends ExposedSimpleInventoryBlockEntity i
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		super.writePacketNBT(cmp, registries);
+	public void writePacketNBT(ValueOutput cmp) {
+		super.writePacketNBT(cmp);
 
 		cmp.putUUID(TAG_UUID, getIdentifier());
 
@@ -297,8 +299,8 @@ public class ManaSpreaderBlockEntity extends ExposedSimpleInventoryBlockEntity i
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		super.readPacketNBT(cmp, registries);
+	public void readPacketNBT(ValueInput cmp) {
+		super.readPacketNBT(cmp);
 
 		if (cmp.hasUUID(TAG_UUID)) {
 			identity = cmp.getUUID(TAG_UUID);

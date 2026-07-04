@@ -18,6 +18,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -457,7 +459,7 @@ public class ManaPoolBlockEntity extends BotaniaBlockEntity implements ManaPool,
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void writePacketNBT(ValueOutput cmp) {
 		cmp.putInt(TAG_MANA, getCurrentMana());
 		cmp.putBoolean(TAG_OUTPUTTING, outputting);
 
@@ -470,7 +472,7 @@ public class ManaPoolBlockEntity extends BotaniaBlockEntity implements ManaPool,
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput cmp) {
 		mana = cmp.getIntOr(TAG_MANA, 0);
 		outputting = cmp.getBooleanOr(TAG_OUTPUTTING, false);
 

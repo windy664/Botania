@@ -20,6 +20,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
@@ -387,7 +389,7 @@ public class ManaEnchanterBlockEntity extends BotaniaBlockEntity implements Mana
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void writePacketNBT(ValueOutput cmp) {
 		cmp.putInt(TAG_MANA, mana);
 		cmp.putInt(TAG_MANA_REQUIRED, manaRequired);
 		cmp.putInt(TAG_STAGE, stage.ordinal());
@@ -395,7 +397,7 @@ public class ManaEnchanterBlockEntity extends BotaniaBlockEntity implements Mana
 		cmp.putInt(TAG_STAGE_3_END_TICKS, stage3EndTicks);
 
 		if (!itemToEnchant.isEmpty()) {
-			cmp.put(TAG_ITEM, itemToEnchant.save(registries));
+			cmp.store(TAG_ITEM, ItemStack.CODEC, itemToEnchant);
 		}
 
 		if (!enchants.isEmpty()) {
@@ -408,15 +410,14 @@ public class ManaEnchanterBlockEntity extends BotaniaBlockEntity implements Mana
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput cmp) {
 		mana = cmp.getIntOr(TAG_MANA, 0);
 		manaRequired = cmp.getIntOr(TAG_MANA_REQUIRED, 0);
 		stage = State.values()[cmp.getIntOr(TAG_STAGE, 0)];
 		stageTicks = cmp.getIntOr(TAG_STAGE_TICKS, 0);
 		stage3EndTicks = cmp.getIntOr(TAG_STAGE_3_END_TICKS, 0);
 
-		CompoundTag itemCmp = cmp.getCompoundOrEmpty(TAG_ITEM);
-		itemToEnchant = itemCmp.isEmpty() ? ItemStack.EMPTY : ItemStack.parseOptional(registries, itemCmp);
+		itemToEnchant = cmp.read(TAG_ITEM, ItemStack.CODEC).orElse(ItemStack.EMPTY);
 
 		enchants.clear();
 		String enchStr = cmp.getStringOr(TAG_ENCHANTS, "");
@@ -427,7 +428,7 @@ public class ManaEnchanterBlockEntity extends BotaniaBlockEntity implements Mana
 				Identifier enchantmentId = Identifier.parse(entryTokens[0]);
 				ResourceKey<Enchantment> enchantmentKey = ResourceKey.create(Registries.ENCHANTMENT, enchantmentId);
 				int lvl = Integer.parseInt(entryTokens[1]);
-				registries.lookupOrThrow(Registries.ENCHANTMENT).get(enchantmentKey)
+				cmp.lookup().lookupOrThrow(Registries.ENCHANTMENT).get(enchantmentKey)
 						.ifPresent(ench -> enchants.add(new EnchantmentInstance(ench, lvl)));
 			}
 		}

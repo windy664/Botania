@@ -16,6 +16,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -203,7 +205,7 @@ public class AnimatedTorchBlockEntity extends BotaniaBlockEntity implements Mana
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void writePacketNBT(ValueOutput cmp) {
 		cmp.putInt(TAG_SIDE, side);
 		cmp.putBoolean(TAG_ROTATING, rotating);
 		cmp.putInt(TAG_ROTATION_TICKS, rotationTicks);
@@ -213,7 +215,7 @@ public class AnimatedTorchBlockEntity extends BotaniaBlockEntity implements Mana
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput cmp) {
 		side = cmp.getIntOr(TAG_SIDE, 0);
 		rotating = cmp.getBooleanOr(TAG_ROTATING, false);
 		if (level != null && !level.isClientSide()) {

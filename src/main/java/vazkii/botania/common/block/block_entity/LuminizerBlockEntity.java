@@ -281,7 +281,7 @@ public class LuminizerBlockEntity extends BotaniaBlockEntity implements WandBind
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput cmp) {
 		bindPos = new BlockPos(
 				cmp.getIntOr(TAG_BIND_X, 0),
 				cmp.getIntOr(TAG_BIND_Y, 0),
@@ -291,7 +291,7 @@ public class LuminizerBlockEntity extends BotaniaBlockEntity implements WandBind
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void writePacketNBT(ValueOutput cmp) {
 		cmp.putInt(TAG_BIND_X, bindPos.getX());
 		cmp.putInt(TAG_BIND_Y, bindPos.getY());
 		cmp.putInt(TAG_BIND_Z, bindPos.getZ());

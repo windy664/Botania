@@ -11,6 +11,8 @@ package vazkii.botania.common.block.block_entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,12 +48,12 @@ public class FloatingFlowerBlockEntity extends BotaniaBlockEntity implements Flo
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void writePacketNBT(ValueOutput cmp) {
 		cmp.put(TAG_FLOATING_DATA, floatingData.writeNBT());
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput cmp) {
 		FloatingFlower.IslandType oldType = floatingData.getIslandType();
 		floatingData.readNBT(cmp.getCompoundOrEmpty(TAG_FLOATING_DATA));
 		if (oldType != floatingData.getIslandType() && level != null && level.isClientSide()) {

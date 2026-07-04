@@ -11,6 +11,8 @@ package vazkii.botania.common.block.block_entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ManaFlameBlockEntity extends BotaniaBlockEntity {
@@ -31,12 +33,12 @@ public class ManaFlameBlockEntity extends BotaniaBlockEntity {
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void writePacketNBT(ValueOutput cmp) {
 		cmp.putInt(TAG_COLOR, color);
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput cmp) {
 		color = cmp.getIntOr(TAG_COLOR, 0);
 	}
 

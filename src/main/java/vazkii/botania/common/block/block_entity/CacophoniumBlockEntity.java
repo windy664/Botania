@@ -12,6 +12,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
@@ -39,19 +41,19 @@ public class CacophoniumBlockEntity extends BotaniaBlockEntity {
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		super.writePacketNBT(cmp, registries);
+	public void writePacketNBT(ValueOutput cmp) {
+		super.writePacketNBT(cmp);
 
 		if (!stack.isEmpty()) {
-			cmp.put(TAG_STACK, stack.save(registries));
+			cmp.store(TAG_STACK, ItemStack.CODEC, stack);
 		}
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		super.readPacketNBT(cmp, registries);
+	public void readPacketNBT(ValueInput cmp) {
+		super.readPacketNBT(cmp);
 
-		stack = ItemStack.parse(registries, cmp.getCompoundOrEmpty(TAG_STACK)).orElse(ItemStack.EMPTY);
+		stack = cmp.read(TAG_STACK, ItemStack.CODEC).orElse(ItemStack.EMPTY);
 	}
 
 }

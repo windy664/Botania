@@ -18,6 +18,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -332,16 +334,16 @@ public class RunicAltarBlockEntity extends SimpleInventoryBlockEntity implements
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
-		super.writePacketNBT(tag, registries);
+	public void writePacketNBT(ValueOutput tag) {
+		super.writePacketNBT(tag);
 
 		tag.putInt(TAG_MANA, mana);
 		tag.putInt(TAG_MANA_TO_GET, manaToGet);
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
-		super.readPacketNBT(tag, registries);
+	public void readPacketNBT(ValueInput tag) {
+		super.readPacketNBT(tag);
 
 		mana = tag.getIntOr(TAG_MANA, 0);
 		manaToGet = tag.getIntOr(TAG_MANA_TO_GET, 0);

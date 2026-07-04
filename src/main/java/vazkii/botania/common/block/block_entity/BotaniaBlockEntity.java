@@ -14,9 +14,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.TagValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -26,27 +30,27 @@ public class BotaniaBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-		super.saveAdditional(tag, registries);
-		writePacketNBT(tag, registries);
+	public void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		writePacketNBT(output);
 	}
 
 	@Override
 	public final CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-		var tag = new CompoundTag();
-		writePacketNBT(tag, registries);
-		return tag;
+		var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
+		writePacketNBT(output);
+		return output.buildResult();
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-		super.loadAdditional(tag, registries);
-		readPacketNBT(tag, registries);
+	public void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
+		readPacketNBT(input);
 	}
 
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {}
+	public void writePacketNBT(ValueOutput cmp) {}
 
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {}
+	public void readPacketNBT(ValueInput cmp) {}
 
 	@Nullable
 	@Override

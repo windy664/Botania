@@ -16,6 +16,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
@@ -51,15 +53,15 @@ public abstract class SimpleInventoryBlockEntity extends BotaniaBlockEntity impl
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput tag) {
 		NonNullList<ItemStack> tmp = NonNullList.withSize(inventorySize(), ItemStack.EMPTY);
-		ContainerHelper.loadAllItems(tag, tmp, registries);
+		ContainerHelper.loadAllItems(tag, tmp);
 		copyToInv(tmp, itemHandler);
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
-		ContainerHelper.saveAllItems(tag, copyFromInv(itemHandler), registries);
+	public void writePacketNBT(ValueOutput tag) {
+		ContainerHelper.saveAllItems(tag, copyFromInv(itemHandler));
 	}
 
 	// NB: Cannot be named the same as the corresponding method in vanilla's interface -- causes obf issues with MCP

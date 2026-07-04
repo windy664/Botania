@@ -13,6 +13,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.SimpleContainer;
@@ -150,15 +152,15 @@ public class IncensePlateBlockEntity extends ExposedSimpleInventoryBlockEntity i
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
-		super.writePacketNBT(tag, registries);
+	public void writePacketNBT(ValueOutput tag) {
+		super.writePacketNBT(tag);
 		tag.putInt(TAG_TIME_LEFT, timeLeft);
 		tag.putBoolean(TAG_BURNING, burning);
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
-		super.readPacketNBT(tag, registries);
+	public void readPacketNBT(ValueInput tag) {
+		super.readPacketNBT(tag);
 		timeLeft = tag.getIntOr(TAG_TIME_LEFT, 0);
 		burning = tag.getBooleanOr(TAG_BURNING, false);
 	}

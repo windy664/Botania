@@ -16,6 +16,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -306,38 +308,36 @@ public class AlfheimPortalBlockEntity extends BotaniaBlockEntity implements Wand
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag cmp, HolderLookup.Provider registries) {
-		super.saveAdditional(cmp, registries);
+	public void saveAdditional(ValueOutput cmp) {
+		super.saveAdditional(cmp);
 
 		cmp.putInt(TAG_STACK_COUNT, stacksIn.size());
 		int i = 0;
 		for (ItemStack stack : stacksIn) {
-			cmp.put(TAG_STACK + i, stack.save(registries));
+			cmp.store(TAG_STACK + i, ItemStack.CODEC, stack);
 			i++;
 		}
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag cmp, HolderLookup.Provider registries) {
-		super.loadAdditional(cmp, registries);
+	public void loadAdditional(ValueInput cmp) {
+		super.loadAdditional(cmp);
 
 		int count = cmp.getIntOr(TAG_STACK_COUNT, 0);
 		stacksIn.clear();
 		for (int i = 0; i < count; i++) {
-			CompoundTag stackcmp = cmp.getCompoundOrEmpty(TAG_STACK + i);
-			ItemStack stack = ItemStack.parse(registries, stackcmp).orElse(ItemStack.EMPTY);
-			stacksIn.add(stack);
+			cmp.read(TAG_STACK + i, ItemStack.CODEC).ifPresent(stacksIn::add);
 		}
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void writePacketNBT(ValueOutput cmp) {
 		cmp.putInt(TAG_TICKS_OPEN, ticksOpen);
 		cmp.putInt(TAG_TICKS_SINCE_LAST_ITEM, ticksSinceLastItem);
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
+	public void readPacketNBT(ValueInput cmp) {
 		ticksOpen = cmp.getIntOr(TAG_TICKS_OPEN, 0);
 		ticksSinceLastItem = cmp.getIntOr(TAG_TICKS_SINCE_LAST_ITEM, 0);
 	}

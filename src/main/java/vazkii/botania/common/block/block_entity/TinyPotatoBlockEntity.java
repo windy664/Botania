@@ -17,6 +17,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -270,18 +272,19 @@ public class TinyPotatoBlockEntity extends ExposedSimpleInventoryBlockEntity imp
 	}
 
 	@Override
-	public void writePacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		super.writePacketNBT(cmp, registries);
+	public void writePacketNBT(ValueOutput cmp) {
+		super.writePacketNBT(cmp);
 		if (name != null) {
-			cmp.putString(TAG_NAME, Component.Serializer.toJson(name, registries));
+			cmp.putString(TAG_NAME, Component.Serializer.toJson(name, cmp.lookup()));
 		}
 	}
 
 	@Override
-	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		super.readPacketNBT(cmp, registries);
-		if (cmp.contains(TAG_NAME, Tag.TAG_STRING)) {
-			name = Component.Serializer.fromJson(cmp.getStringOr(TAG_NAME, ""), registries);
+	public void readPacketNBT(ValueInput cmp) {
+		super.readPacketNBT(cmp);
+		String nameJson = cmp.getStringOr(TAG_NAME, "");
+		if (!nameJson.isEmpty()) {
+			name = Component.Serializer.fromJson(nameJson, cmp.lookup());
 		} else {
 			name = null;
 		}
