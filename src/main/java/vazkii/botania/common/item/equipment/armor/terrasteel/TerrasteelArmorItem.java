@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 import vazkii.botania.api.BotaniaAPI;
@@ -36,7 +37,7 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
 public class TerrasteelArmorItem extends ManasteelArmorItem {
 
-	public TerrasteelArmorItem(Type type, Properties props) {
+	public TerrasteelArmorItem(ArmorType type, Properties props) {
 		super(type, BotaniaAPI.instance().getTerrasteelArmorMaterial(), props);
 	}
 

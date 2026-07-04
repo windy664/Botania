@@ -17,6 +17,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import vazkii.botania.api.block.FloatingFlower;
 import vazkii.botania.api.item.AncientWillContainer;
@@ -195,9 +196,9 @@ public final class BotaniaItems {
 
 	// Equipment
 	public static final Item manasteelHelm = make(LibItemNames.MANASTEEL_HELM, new ManasteelHelmItem(unstackableCustomDamage()));
-	public static final Item manasteelChest = make(LibItemNames.MANASTEEL_CHEST, new ManasteelArmorItem(ArmorItem.Type.CHESTPLATE, unstackableCustomDamage()));
-	public static final Item manasteelLegs = make(LibItemNames.MANASTEEL_LEGS, new ManasteelArmorItem(ArmorItem.Type.LEGGINGS, unstackableCustomDamage()));
-	public static final Item manasteelBoots = make(LibItemNames.MANASTEEL_BOOTS, new ManasteelArmorItem(ArmorItem.Type.BOOTS, unstackableCustomDamage()));
+	public static final Item manasteelChest = make(LibItemNames.MANASTEEL_CHEST, new ManasteelArmorItem(ArmorType.CHESTPLATE, unstackableCustomDamage()));
+	public static final Item manasteelLegs = make(LibItemNames.MANASTEEL_LEGS, new ManasteelArmorItem(ArmorType.LEGGINGS, unstackableCustomDamage()));
+	public static final Item manasteelBoots = make(LibItemNames.MANASTEEL_BOOTS, new ManasteelArmorItem(ArmorType.BOOTS, unstackableCustomDamage()));
 	public static final Item manasteelPick = make(LibItemNames.MANASTEEL_PICK, new ManasteelPickaxeItem(unstackableCustomDamage()));
 	public static final Item manasteelShovel = make(LibItemNames.MANASTEEL_SHOVEL, new ManasteelShovelItem(unstackableCustomDamage()));
 	public static final Item manasteelAxe = make(LibItemNames.MANASTEEL_AXE, new ManasteelAxeItem(unstackableCustomDamage()));
@@ -205,9 +206,9 @@ public final class BotaniaItems {
 	public static final Item manasteelSword = make(LibItemNames.MANASTEEL_SWORD, new ManasteelSwordItem(unstackableCustomDamage()));
 	public static final Item manasteelShears = make(LibItemNames.MANASTEEL_SHEARS, new ManasteelShearsItem(unstackableCustomDamage().durability(238)));
 	public static final Item elementiumHelm = make(LibItemNames.ELEMENTIUM_HELM, new ElementiumHelmItem(unstackableCustomDamage(), 0.11));
-	public static final Item elementiumChest = make(LibItemNames.ELEMENTIUM_CHEST, new ElementiumArmorItem(ArmorItem.Type.CHESTPLATE, unstackableCustomDamage(), 0.17));
-	public static final Item elementiumLegs = make(LibItemNames.ELEMENTIUM_LEGS, new ElementiumArmorItem(ArmorItem.Type.LEGGINGS, unstackableCustomDamage(), 0.15));
-	public static final Item elementiumBoots = make(LibItemNames.ELEMENTIUM_BOOTS, new ElementiumArmorItem(ArmorItem.Type.BOOTS, unstackableCustomDamage(), 0.09));
+	public static final Item elementiumChest = make(LibItemNames.ELEMENTIUM_CHEST, new ElementiumArmorItem(ArmorType.CHESTPLATE, unstackableCustomDamage(), 0.17));
+	public static final Item elementiumLegs = make(LibItemNames.ELEMENTIUM_LEGS, new ElementiumArmorItem(ArmorType.LEGGINGS, unstackableCustomDamage(), 0.15));
+	public static final Item elementiumBoots = make(LibItemNames.ELEMENTIUM_BOOTS, new ElementiumArmorItem(ArmorType.BOOTS, unstackableCustomDamage(), 0.09));
 	public static final Item elementiumPick = make(LibItemNames.ELEMENTIUM_PICK, new ElementiumPickaxeItem(unstackableCustomDamage()));
 	public static final Item elementiumShovel = make(LibItemNames.ELEMENTIUM_SHOVEL, new ElementiumShovelItem(unstackableCustomDamage()));
 	public static final Item elementiumAxe = make(LibItemNames.ELEMENTIUM_AXE, new ElementiumAxeItem(unstackableCustomDamage()));
@@ -215,9 +216,9 @@ public final class BotaniaItems {
 	public static final Item elementiumSword = make(LibItemNames.ELEMENTIUM_SWORD, new ElementiumSwordItem(unstackableCustomDamage()));
 	public static final Item elementiumShears = make(LibItemNames.ELEMENTIUM_SHEARS, new ElementiumShearsItem(unstackableCustomDamage().durability(238)));
 	public static final Item terrasteelHelm = make(LibItemNames.TERRASTEEL_HELM, new TerrasteelHelmItem(unstackableCustomDamage().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item terrasteelChest = make(LibItemNames.TERRASTEEL_CHEST, new TerrasteelArmorItem(ArmorItem.Type.CHESTPLATE, unstackableCustomDamage().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item terrasteelLegs = make(LibItemNames.TERRASTEEL_LEGS, new TerrasteelArmorItem(ArmorItem.Type.LEGGINGS, unstackableCustomDamage().fireResistant().rarity(Rarity.UNCOMMON)));
-	public static final Item terrasteelBoots = make(LibItemNames.TERRASTEEL_BOOTS, new TerrasteelArmorItem(ArmorItem.Type.BOOTS, unstackableCustomDamage().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final Item terrasteelChest = make(LibItemNames.TERRASTEEL_CHEST, new TerrasteelArmorItem(ArmorType.CHESTPLATE, unstackableCustomDamage().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final Item terrasteelLegs = make(LibItemNames.TERRASTEEL_LEGS, new TerrasteelArmorItem(ArmorType.LEGGINGS, unstackableCustomDamage().fireResistant().rarity(Rarity.UNCOMMON)));
+	public static final Item terrasteelBoots = make(LibItemNames.TERRASTEEL_BOOTS, new TerrasteelArmorItem(ArmorType.BOOTS, unstackableCustomDamage().fireResistant().rarity(Rarity.UNCOMMON)));
 	public static final Item terraPick = make(LibItemNames.TERRA_PICK, new TerraShattererItem(unstackableCustomDamage().fireResistant().rarity(Rarity.UNCOMMON)
 			.component(BotaniaDataComponents.MAX_MANA, TerraShattererItem.MAX_MANA)
 			.component(BotaniaDataComponents.CAN_RECEIVE_MANA_FROM_POOL, Unit.INSTANCE)));
@@ -226,9 +227,9 @@ public final class BotaniaItems {
 	public static final Item starSword = make(LibItemNames.STAR_SWORD, new StarcallerItem(unstackableCustomDamage().rarity(Rarity.UNCOMMON)));
 	public static final Item thunderSword = make(LibItemNames.THUNDER_SWORD, new ThundercallerItem(unstackableCustomDamage().rarity(Rarity.UNCOMMON)));
 	public static final Item manaweaveHelm = make(LibItemNames.MANAWEAVE_HELM, new ManaweaveHelmItem(unstackableCustomDamage()));
-	public static final Item manaweaveChest = make(LibItemNames.MANAWEAVE_CHEST, new ManaweaveArmorItem(ArmorItem.Type.CHESTPLATE, unstackableCustomDamage()));
-	public static final Item manaweaveLegs = make(LibItemNames.MANAWEAVE_LEGS, new ManaweaveArmorItem(ArmorItem.Type.LEGGINGS, unstackableCustomDamage()));
-	public static final Item manaweaveBoots = make(LibItemNames.MANAWEAVE_BOOTS, new ManaweaveArmorItem(ArmorItem.Type.BOOTS, unstackableCustomDamage()));
+	public static final Item manaweaveChest = make(LibItemNames.MANAWEAVE_CHEST, new ManaweaveArmorItem(ArmorType.CHESTPLATE, unstackableCustomDamage()));
+	public static final Item manaweaveLegs = make(LibItemNames.MANAWEAVE_LEGS, new ManaweaveArmorItem(ArmorType.LEGGINGS, unstackableCustomDamage()));
+	public static final Item manaweaveBoots = make(LibItemNames.MANAWEAVE_BOOTS, new ManaweaveArmorItem(ArmorType.BOOTS, unstackableCustomDamage()));
 	public static final Item enderDagger = make(LibItemNames.ENDER_DAGGER, new SoulscribeItem(unstackable().durability(69))); // What you looking at?
 	public static final Item glassPick = make(LibItemNames.GLASS_PICK, new VitreousPickaxeItem(unstackableCustomDamage()));
 	public static final Item livingwoodBow = make(LibItemNames.LIVINGWOOD_BOW, new LivingwoodBowItem(defaultBuilderCustomDamage().durability(500)));

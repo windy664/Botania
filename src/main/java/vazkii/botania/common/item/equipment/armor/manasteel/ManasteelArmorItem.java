@@ -11,16 +11,17 @@ package vazkii.botania.common.item.equipment.armor.manasteel;
 import com.google.common.base.Suppliers;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -43,25 +44,27 @@ import java.util.function.Supplier;
 
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
-public class ManasteelArmorItem extends ArmorItem implements CustomDamageItem, PhantomInkable {
+public class ManasteelArmorItem extends Item implements CustomDamageItem, PhantomInkable {
 
-	private static final String TAG_PHANTOM_INK = "phantomInk";
+	public final ArmorType type;
 
-	public final Type type;
-
-	public ManasteelArmorItem(Type type, Properties props) {
+	public ManasteelArmorItem(ArmorType type, Properties props) {
 		this(type, BotaniaAPI.instance().getManasteelArmorMaterial(), props);
 	}
 
-	public ManasteelArmorItem(Type type, Holder<ArmorMaterial> mat, Properties props) {
-		super(mat, type, props);
+	public ManasteelArmorItem(ArmorType type, ArmorMaterial mat, Properties props) {
+		super(props.humanoidArmor(mat, type));
 		this.type = type;
 	}
 
+	public EquipmentSlot getEquipmentSlot() {
+		return type.getSlot();
+	}
+
 	@Override
-	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
+	public void inventoryTick(ItemStack stack, ServerLevel world, Entity entity, EquipmentSlot slot) {
 		if (entity instanceof Player player) {
-			if (!world.isClientSide() && stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExact(stack, player, getManaPerDamage() * 2, true)) {
+			if (stack.getDamageValue() > 0 && ManaItemHandler.instance().requestManaExact(stack, player, getManaPerDamage() * 2, true)) {
 				stack.setDamageValue(stack.getDamageValue() - 1);
 			}
 		}
@@ -76,11 +79,8 @@ public class ManasteelArmorItem extends ArmorItem implements CustomDamageItem, P
 		return 70;
 	}
 
-	@SoftImplement("IItemExtension")
-	public final Identifier getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
-		return hasPhantomInk(stack) ? botaniaRL(ResourcesLib.MODEL_INVISIBLE_ARMOR) : getArmorTextureAfterInk(stack, slot);
-	}
-
+	// 26.2: armor textures are now resolved via the EquipmentAsset json referenced by the ArmorMaterial, so the old
+	// getArmorTexture(...ArmorMaterial.Layer...) render hook is gone. Phantom-ink invisibility now lives in the render layer.
 	public Identifier getArmorTextureAfterInk(ItemStack stack, EquipmentSlot slot) {
 		return Identifier.parse(ResourcesLib.MODEL_MANASTEEL_NEW);
 	}
@@ -97,7 +97,7 @@ public class ManasteelArmorItem extends ArmorItem implements CustomDamageItem, P
 		ItemStack[] stacks = getArmorSetStacks();
 		for (ItemStack armor : stacks) {
 			MutableComponent cmp = Component.literal(" - ").append(armor.getHoverName());
-			EquipmentSlot slot = ((ArmorItem) armor.getItem()).getEquipmentSlot();
+			EquipmentSlot slot = ((ManasteelArmorItem) armor.getItem()).getEquipmentSlot();
 			cmp.withStyle(hasArmorSetItem(player, slot) ? ChatFormatting.GREEN : ChatFormatting.GRAY);
 			list.add(cmp);
 		}

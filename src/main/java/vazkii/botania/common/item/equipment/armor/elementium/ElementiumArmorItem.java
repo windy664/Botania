@@ -20,6 +20,7 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.client.lib.ResourcesLib;
@@ -32,11 +33,11 @@ import java.util.function.Supplier;
 
 public class ElementiumArmorItem extends ManasteelArmorItem {
 
-	public ElementiumArmorItem(Type type, Properties props, double pixieChance) {
+	public ElementiumArmorItem(ArmorType type, Properties props, double pixieChance) {
 		super(type, BotaniaAPI.instance().getElementiumArmorMaterial(),
 				props.component(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.builder()
 						.add(PixieHandler.PIXIE_SPAWN_CHANCE,
-								PixieHandler.makeModifier(Identifier.withDefaultNamespace("armor." + type.getName()), pixieChance),
+								PixieHandler.makeModifier(Identifier.withDefaultNamespace("armor." + type.getSerializedName()), pixieChance),
 								EquipmentSlotGroup.bySlot(type.getSlot()))
 						.build()));
 	}

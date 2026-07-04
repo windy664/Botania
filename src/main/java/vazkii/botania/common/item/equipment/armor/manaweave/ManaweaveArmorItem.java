@@ -18,6 +18,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.TooltipFlag;
 
 import vazkii.botania.api.BotaniaAPI;
@@ -33,7 +34,7 @@ import java.util.function.Supplier;
 
 public class ManaweaveArmorItem extends ManasteelArmorItem {
 
-	public ManaweaveArmorItem(Type type, Properties props) {
+	public ManaweaveArmorItem(ArmorType type, Properties props) {
 		super(type, BotaniaAPI.instance().getManaweaveArmorMaterial(), props);
 	}
 

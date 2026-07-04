@@ -10,6 +10,7 @@ package vazkii.botania.common.item.equipment.armor.manasteel;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -18,7 +19,7 @@ import vazkii.botania.api.mana.ManaDiscountArmor;
 public class ManasteelHelmItem extends ManasteelArmorItem implements ManaDiscountArmor {
 
 	public ManasteelHelmItem(Properties props) {
-		super(Type.HELMET, props);
+		super(ArmorType.HELMET, props);
 	}
 
 	@Override
