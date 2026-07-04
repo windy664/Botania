@@ -44,7 +44,17 @@ public class RenderX implements BlockEntityRenderer<MyBE, RenderX.RenderState> {
 ```
 **EntityRenderer**（`RenderPoisonousLibelle`）：泛型 `<Entity, RenderState, Model>`；RenderState `extends LivingEntityRenderState`（`net.minecraft.client.renderer.entity.state`）放字段；`createRenderState()` + `extractRenderState(entity, state, partialTicks)`（render 里读 state 不读 entity）。
 
-**新包**：`renderer.SubmitNodeCollector`、`renderer.blockentity.state.BlockEntityRenderState`、`renderer.rendertype.RenderTypes`（RenderType 工厂）、`renderer.state.level.CameraRenderState`、`renderer.feature.ModelFeatureRenderer`、`renderer.entity.state.LivingEntityRenderState`。**GUI（GuiGraphics 204）范式待从 EvilCraft screen 抓。**
+**物品渲染**（替代 `ItemRenderer.renderStatic`，EvilCraft `RenderBlockEntityDisplayStand`）：
+```java
+ItemStackRenderState irs = new ItemStackRenderState();
+Minecraft.getInstance().getItemModelResolver().updateForTopItem(irs, stack, ItemDisplayContext.X, level, null, 0);
+irs.submit(poseStack, submitNodeCollector, light, OverlayTexture.NO_OVERLAY, 0);
+```
+（`state.lightCoords` 由 `super.extractRenderState` 自动填充，替代旧 `render(...)` 的 `int light` 参）。
+
+**新包**：`renderer.SubmitNodeCollector`、`renderer.blockentity.state.BlockEntityRenderState`、`renderer.item.ItemStackRenderState`、`renderer.rendertype.RenderTypes`、`renderer.state.level.CameraRenderState`、`renderer.feature.ModelFeatureRenderer`、`renderer.entity.state.LivingEntityRenderState`、`Minecraft.getItemModelResolver()`。**GUI（GuiGraphics 204）范式待从 CyclopsCore/别处抓（EvilCraft screen 走 CyclopsCore 基类）。**
+
+**✅ 已迁移范例**：`SparkTinkererBlockEntityRenderer`（物品渲染，照 DisplayStand 模板）。**注意渲染簇是"全或无"**：`BlockEntityRenderers.register` 注册点引用所有渲染器且泛型 `<T>`→`<T,S>`，单个迁移无法独立 CI 验证，要整簇（28 BE 渲染器 + entity 渲染器 + 注册点）一起改完才编译。剩 27 个 BE 渲染器照此范例逐个迁。
 
 **工作切成两半**：
 - ✅ **逻辑层（推进）**：RecipeSerializer、工具/盔甲数据组件化、NBT 存读档、`spawnAtLocation`（掉落物纯逻辑）、entity 逻辑、方法签名迁移等——probe 反编译稳扎稳打。

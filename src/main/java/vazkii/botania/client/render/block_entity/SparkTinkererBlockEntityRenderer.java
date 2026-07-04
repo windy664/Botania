@@ -11,32 +11,60 @@ package vazkii.botania.client.render.block_entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+
+import org.jetbrains.annotations.Nullable;
 
 import vazkii.botania.common.block.block_entity.SparkTinkererBlockEntity;
 import vazkii.botania.common.helper.VecHelper;
 
-public class SparkTinkererBlockEntityRenderer implements BlockEntityRenderer<SparkTinkererBlockEntity> {
+public class SparkTinkererBlockEntityRenderer implements BlockEntityRenderer<SparkTinkererBlockEntity, SparkTinkererBlockEntityRenderer.RenderState> {
 
 	public SparkTinkererBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {}
 
 	@Override
-	public void render(SparkTinkererBlockEntity tileentity, float pticks, PoseStack ms, MultiBufferSource buffers, int light, int overlay) {
+	public RenderState createRenderState() {
+		return new RenderState();
+	}
+
+	@Override
+	public void extractRenderState(SparkTinkererBlockEntity tileentity, RenderState state, float partialTick,
+			Vec3 cameraPosition, @Nullable ModelFeatureRenderer.CrumblingOverlay breakProgress) {
+		BlockEntityRenderer.super.extractRenderState(tileentity, state, partialTick, cameraPosition, breakProgress);
+		state.item = tileentity.getItemHandler().getItem(0);
+		state.level = tileentity.getLevel();
+	}
+
+	@Override
+	public void submit(RenderState state, PoseStack ms, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
 		ms.pushPose();
 		ms.mulPose(VecHelper.rotateX(90));
 		ms.translate(1.0F, -0.125F, -0.25F);
-		ItemStack stack = tileentity.getItemHandler().getItem(0);
-		if (!stack.isEmpty()) {
+		if (!state.item.isEmpty()) {
 			ms.mulPose(VecHelper.rotateY(180));
 			ms.translate(0.5F, 0.5F, 0);
-			Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.GROUND,
-					light, overlay, ms, buffers, tileentity.getLevel(), 0);
+			ItemStackRenderState itemRenderState = new ItemStackRenderState();
+			Minecraft.getInstance().getItemModelResolver().updateForTopItem(itemRenderState, state.item,
+					ItemDisplayContext.GROUND, state.level, null, 0);
+			itemRenderState.submit(ms, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 		}
 		ms.popPose();
+	}
+
+	public static class RenderState extends BlockEntityRenderState {
+		public ItemStack item = ItemStack.EMPTY;
+		public Level level;
 	}
 
 }
