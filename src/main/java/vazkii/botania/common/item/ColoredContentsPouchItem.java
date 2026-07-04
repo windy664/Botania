@@ -12,7 +12,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.SlotAccess;
@@ -89,7 +88,7 @@ public abstract class ColoredContentsPouchItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		if (!world.isClientSide()) {
 			ItemStack stack = player.getItemInHand(hand);
 			XplatAbstractions.INSTANCE.openMenu((ServerPlayer) player, new MenuProvider() {
@@ -104,7 +103,7 @@ public abstract class ColoredContentsPouchItem extends Item {
 				}
 			}, hand == InteractionHand.MAIN_HAND, ByteBufCodecs.BOOL);
 		}
-		return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), world.isClientSide());
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
@@ -125,7 +124,7 @@ public abstract class ColoredContentsPouchItem extends Item {
 
 			}
 
-			return InteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.PASS;
 	}

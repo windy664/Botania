@@ -13,7 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -62,16 +62,16 @@ public class LuminizerBlock extends BotaniaWaterloggedBlock implements EntityBlo
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		BlockEntity te = world.getBlockEntity(pos);
 		if (te instanceof LuminizerBlockEntity relay) {
 			if (!stack.is(Items.ENDER_PEARL) && !(stack.getItem() instanceof PhantomInkItem)) {
 				relay.mountEntity(player);
-				return ItemInteractionResult.sidedSuccess(world.isClientSide());
+				return InteractionResult.SUCCESS;
 			}
 		}
 
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
 	@Override

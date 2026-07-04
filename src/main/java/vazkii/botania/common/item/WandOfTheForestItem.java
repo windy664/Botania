@@ -20,7 +20,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.*;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -434,7 +433,7 @@ public class WandOfTheForestItem extends Item implements CustomCreativeTabConten
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (player.isSecondaryUseActive()) {
 			if (!world.isClientSide()) {
@@ -444,7 +443,7 @@ public class WandOfTheForestItem extends Item implements CustomCreativeTabConten
 			}
 		}
 
-		return InteractionResultHolder.success(stack);
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override

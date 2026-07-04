@@ -17,7 +17,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -55,7 +55,7 @@ public class ManaBlasterItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		int effCd = COOLDOWN;
 		MobEffectInstance effect = player.getEffect(MobEffects.DIG_SPEED);
@@ -71,7 +71,7 @@ public class ManaBlasterItem extends Item {
 				ItemsRemainingRenderHandler.send(player, lens, -2);
 				setCooldown(stack, effCd);
 			}
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResult.SUCCESS;
 		} else if (getCooldown(stack) <= 0) {
 			ManaBurstEntity burst = getBurst(player, stack, true, hand);
 			if (burst != null && ManaItemHandler.instance().requestManaExact(stack, player, burst.getMana(), true)) {
@@ -86,10 +86,10 @@ public class ManaBlasterItem extends Item {
 			} else {
 				player.playSound(BotaniaSounds.manaBlasterMisfire, 0.6F, (1.0F + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.2F) * 0.7F);
 			}
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return InteractionResultHolder.pass(stack);
+		return InteractionResult.PASS;
 	}
 
 	public BurstProperties getBurstProps(Player player, ItemStack stack, boolean request, InteractionHand hand) {

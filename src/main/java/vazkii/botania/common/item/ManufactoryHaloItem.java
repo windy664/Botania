@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
@@ -66,11 +66,11 @@ public class ManufactoryHaloItem extends AssemblyHaloItem {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (getSegmentLookedAt(stack, player) == 0 && player.isSecondaryUseActive()) {
 			togglePassive(stack, player, world);
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
 		return super.use(world, player, hand);

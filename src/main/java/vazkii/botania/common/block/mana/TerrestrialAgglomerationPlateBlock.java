@@ -10,7 +10,7 @@ package vazkii.botania.common.block.mana;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -52,7 +52,7 @@ public class TerrestrialAgglomerationPlateBlock extends BotaniaWaterloggedBlock 
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
 			Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (usesItem(stack, level)) {
 			if (!level.isClientSide()) {
@@ -63,10 +63,10 @@ public class TerrestrialAgglomerationPlateBlock extends BotaniaWaterloggedBlock 
 				level.addFreshEntity(item);
 			}
 
-			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
 	private static boolean usesItem(ItemStack stack, Level world) {

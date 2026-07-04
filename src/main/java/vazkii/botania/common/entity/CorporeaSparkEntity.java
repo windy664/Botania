@@ -265,7 +265,7 @@ public class CorporeaSparkEntity extends SparkBaseEntity implements CorporeaSpar
 						displayRelatives(player, new ArrayList<>(), master);
 					}
 				}
-				return InteractionResult.sidedSuccess(level().isClientSide());
+				return InteractionResult.SUCCESS;
 			} else if (stack.getItem() instanceof DyeItem dye) {
 				DyeColor color = dye.getDyeColor();
 				if (color != getNetwork()) {
@@ -275,13 +275,13 @@ public class CorporeaSparkEntity extends SparkBaseEntity implements CorporeaSpar
 						stack.shrink(1);
 					}
 
-					return InteractionResult.sidedSuccess(level().isClientSide());
+					return InteractionResult.SUCCESS;
 				}
 			} else if (stack.is(BotaniaItems.phantomInk)) {
 				if (!level().isClientSide()) {
 					setInvisible(true);
 				}
-				return InteractionResult.sidedSuccess(level().isClientSide());
+				return InteractionResult.SUCCESS;
 			}
 		}
 

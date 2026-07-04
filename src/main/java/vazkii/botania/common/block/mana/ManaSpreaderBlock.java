@@ -13,7 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -139,14 +139,14 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack heldItem, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+	protected InteractionResult useItemOn(ItemStack heldItem, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		BlockEntity tile = world.getBlockEntity(pos);
 		if (!(tile instanceof ManaSpreaderBlockEntity spreader)) {
-			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+			return InteractionResult.TRY_WITH_EMPTY_HAND;
 		}
 
 		if (heldItem.getItem() instanceof WandOfTheForestItem) {
-			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+			return InteractionResult.TRY_WITH_EMPTY_HAND;
 		}
 		boolean mainHandEmpty = player.getMainHandItem().isEmpty();
 
@@ -195,7 +195,7 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 
 				world.playSound(player, pos, BotaniaSounds.spreaderScaffold, SoundSource.BLOCKS, 1F, 1F);
 			}
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
 		if (state.getValue(BotaniaStateProperties.HAS_SCAFFOLDING) && player.isSecondaryUseActive()) {
@@ -208,7 +208,7 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 
 			world.playSound(player, pos, BotaniaSounds.spreaderUnScaffold, SoundSource.BLOCKS, 1F, 1F);
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 		if (!lens.isEmpty() && (mainHandEmpty || lensIsSame)) {
 			player.getInventory().placeItemBackInInventory(lens);
@@ -216,7 +216,7 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 
 			world.playSound(player, pos, BotaniaSounds.spreaderRemoveLens, SoundSource.BLOCKS, 1F, 1F);
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 		if (spreader.paddingColor != null && (mainHandEmpty || woolIsSame)) {
 			player.getInventory().placeItemBackInInventory(wool);
@@ -225,10 +225,10 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 
 			world.playSound(player, pos, BotaniaSounds.spreaderUncover, SoundSource.BLOCKS, 1F, 1F);
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
 	@Override

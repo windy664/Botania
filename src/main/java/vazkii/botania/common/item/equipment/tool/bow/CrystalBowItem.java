@@ -14,7 +14,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
@@ -45,15 +45,15 @@ public class CrystalBowItem extends LivingwoodBowItem {
 
 	// [VanillaCopy] super
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+	public InteractionResult use(Level worldIn, Player playerIn, InteractionHand handIn) {
 		ItemStack itemstack = playerIn.getItemInHand(handIn);
 		boolean canMaterializeArrow = canFire(itemstack, playerIn); // Botania - custom check
 
 		if (!playerIn.getAbilities().instabuild && !canMaterializeArrow) {
-			return InteractionResultHolder.fail(itemstack);
+			return InteractionResult.FAIL;
 		} else {
 			playerIn.startUsingItem(handIn);
-			return InteractionResultHolder.consume(itemstack);
+			return InteractionResult.CONSUME;
 		}
 	}
 

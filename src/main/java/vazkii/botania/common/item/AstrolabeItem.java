@@ -18,7 +18,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -67,7 +66,7 @@ public class AstrolabeItem extends Item {
 		if (player != null && player.isSecondaryUseActive()) {
 			if (setBlock(stack, state)) {
 				displayRemainderCounter(player, stack);
-				return InteractionResult.sidedSuccess(player.level().isClientSide());
+				return InteractionResult.SUCCESS;
 			}
 		} else if (player != null) {
 			boolean did = placeAllBlocks(stack, player, ctx.getHand());
@@ -82,7 +81,7 @@ public class AstrolabeItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand hand) {
+	public InteractionResult use(Level worldIn, Player playerIn, InteractionHand hand) {
 		ItemStack stack = playerIn.getItemInHand(hand);
 		if (playerIn.isSecondaryUseActive()) {
 			playerIn.playSound(BotaniaSounds.astrolabeConfigure, 1F, 1F);
@@ -93,10 +92,10 @@ public class AstrolabeItem extends Item {
 				ItemsRemainingRenderHandler.send(playerIn, stack, 0, Component.literal(newSize + "x" + newSize));
 			}
 
-			return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return InteractionResultHolder.pass(stack);
+		return InteractionResult.PASS;
 	}
 
 	public boolean placeAllBlocks(ItemStack requester, Player player, InteractionHand hand) {

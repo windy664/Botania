@@ -11,7 +11,7 @@ package vazkii.botania.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -64,21 +64,21 @@ public class SparkTinkererBlock extends BotaniaWaterloggedBlock implements Entit
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack pstack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+	protected InteractionResult useItemOn(ItemStack pstack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		SparkTinkererBlockEntity changer = (SparkTinkererBlockEntity) world.getBlockEntity(pos);
 		ItemStack cstack = changer.getItemHandler().getItem(0);
 		if (!cstack.isEmpty()) {
 			changer.getItemHandler().setItem(0, ItemStack.EMPTY);
 			player.getInventory().placeItemBackInInventory(cstack);
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.SUCCESS;
 		} else if (!pstack.isEmpty() && pstack.getItem() instanceof SparkAugmentItem) {
 			changer.getItemHandler().setItem(0, pstack.split(1));
 			changer.setChanged();
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
 	@Override

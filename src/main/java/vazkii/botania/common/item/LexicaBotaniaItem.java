@@ -21,7 +21,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -69,7 +69,7 @@ public class LexicaBotaniaItem extends Item implements CustomCreativeTabContents
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+	public InteractionResult use(Level worldIn, Player playerIn, InteractionHand handIn) {
 		ItemStack stack = playerIn.getItemInHand(handIn);
 
 		if (playerIn instanceof ServerPlayer player) {
@@ -78,7 +78,7 @@ public class LexicaBotaniaItem extends Item implements CustomCreativeTabContents
 			playerIn.playSound(BotaniaSounds.lexiconOpen, 1F, (float) (0.7 + Math.random() * 0.4));
 		}
 
-		return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide());
+		return InteractionResult.SUCCESS;
 	}
 
 	public static Component getEdition() {

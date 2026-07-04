@@ -29,7 +29,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.*;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -80,7 +80,7 @@ public class AssemblyHaloItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!world.isClientSide()) {
 			int segment = getSegmentLookedAt(stack, player);
@@ -106,7 +106,7 @@ public class AssemblyHaloItem extends Item {
 			}
 		}
 
-		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override

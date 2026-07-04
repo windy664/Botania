@@ -16,7 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -54,13 +54,13 @@ public class DiceOfFateItem extends RelicItem {
 	);
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		var relic = XplatAbstractions.INSTANCE.findRelic(stack);
 
 		if (relic != null && relic.isRightPlayer(player)) {
 			if (world.isClientSide()) {
-				return InteractionResultHolder.success(stack);
+				return InteractionResult.SUCCESS;
 			}
 
 			world.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.diceOfFate, SoundSource.PLAYERS, 1F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
@@ -76,7 +76,8 @@ public class DiceOfFateItem extends RelicItem {
 				int relicIdx = possible.get(world.getRandom().nextInt(possible.size()));
 				player.sendSystemMessage(Component.translatable("botaniamisc.diceRoll", relicIdx + 1).withStyle(ChatFormatting.DARK_GREEN));
 				var toGive = RELIC_STACKS.get().get(relicIdx).copy();
-				return InteractionResultHolder.consume(toGive);
+				player.setItemInHand(hand, toGive);
+				return InteractionResult.CONSUME;
 			} else {
 				int roll = world.getRandom().nextInt(6) + 1;
 				LootTable table = world.getServer().reloadableRegistries().getLootTable(BotaniaLootTables.getDiceRollTable(roll));
@@ -94,11 +95,11 @@ public class DiceOfFateItem extends RelicItem {
 				player.sendSystemMessage(Component.translatable(langKey, roll).withStyle(ChatFormatting.DARK_GREEN));
 
 				stack.shrink(1);
-				return InteractionResultHolder.consume(stack);
+				return InteractionResult.CONSUME;
 			}
 		}
 
-		return InteractionResultHolder.pass(stack);
+		return InteractionResult.PASS;
 	}
 
 	@Override

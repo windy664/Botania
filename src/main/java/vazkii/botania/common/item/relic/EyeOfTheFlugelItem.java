@@ -15,7 +15,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -75,7 +74,7 @@ public class EyeOfTheFlugelItem extends RelicItem {
 				world.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.flugelEyeBind, SoundSource.PLAYERS, 1F, 1F);
 			}
 
-			return InteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
 		return InteractionResult.PASS;
@@ -93,7 +92,7 @@ public class EyeOfTheFlugelItem extends RelicItem {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		return ItemUtils.startUsingInstantly(world, player, hand);
 	}
 

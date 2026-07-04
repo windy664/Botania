@@ -309,18 +309,18 @@ public class ManaSparkEntity extends SparkBaseEntity implements ManaSpark {
 					}
 				}
 
-				return InteractionResult.sidedSuccess(level().isClientSide());
+				return InteractionResult.SUCCESS;
 			} else if (stack.getItem() instanceof SparkAugmentItem newUpgrade && upgrade == SparkUpgradeType.NONE) {
 				if (!level().isClientSide()) {
 					setUpgrade(newUpgrade.type);
 					stack.shrink(1);
 				}
-				return InteractionResult.sidedSuccess(level().isClientSide());
+				return InteractionResult.SUCCESS;
 			} else if (stack.is(BotaniaItems.phantomInk)) {
 				if (!level().isClientSide()) {
 					setInvisible(true);
 				}
-				return InteractionResult.sidedSuccess(level().isClientSide());
+				return InteractionResult.SUCCESS;
 			} else if (stack.getItem() instanceof DyeItem dye) {
 				DyeColor color = dye.getDyeColor();
 				if (color != getNetwork()) {
@@ -328,7 +328,7 @@ public class ManaSparkEntity extends SparkBaseEntity implements ManaSpark {
 						setNetwork(color);
 						stack.shrink(1);
 					}
-					return InteractionResult.sidedSuccess(level().isClientSide());
+					return InteractionResult.SUCCESS;
 				}
 			}
 		}

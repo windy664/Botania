@@ -11,7 +11,7 @@ package vazkii.botania.common.block.corporea;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -56,10 +56,10 @@ public class CorporeaCrystalCubeBlock extends BotaniaWaterloggedBlock implements
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
 			Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (stack.getItem() instanceof WandOfTheForestItem && player.isSecondaryUseActive()) {
-			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+			return InteractionResult.TRY_WITH_EMPTY_HAND;
 		}
 		CorporeaCrystalCubeBlockEntity cube = (CorporeaCrystalCubeBlockEntity) level.getBlockEntity(pos);
 		if (cube.locked) {
@@ -69,7 +69,7 @@ public class CorporeaCrystalCubeBlock extends BotaniaWaterloggedBlock implements
 		} else {
 			cube.setRequestTarget(stack);
 		}
-		return ItemInteractionResult.sidedSuccess(level.isClientSide());
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override

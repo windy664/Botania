@@ -12,7 +12,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -124,17 +124,17 @@ public class SkiesRodItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		int fly = getFlyCounter(stack);
 		if (fly == 0 && ManaItemHandler.instance().requestManaExactForTool(stack, player, COST, false)) {
 			ManaItemHandler.instance().requestManaExactForTool(stack, player, COST, true);
 			setFlying(stack, true);
 			player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return InteractionResultHolder.pass(stack);
+		return InteractionResult.PASS;
 	}
 
 	public static boolean isFlying(ItemStack stack) {

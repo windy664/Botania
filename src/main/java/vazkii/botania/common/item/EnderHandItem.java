@@ -11,7 +11,6 @@ package vazkii.botania.common.item;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -37,7 +36,7 @@ public class EnderHandItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (ManaItemHandler.instance().requestManaExact(stack, player, COST_SELF, false)) {
 			if (!player.level().isClientSide()) {
@@ -47,9 +46,9 @@ public class EnderHandItem extends Item {
 				ManaItemHandler.instance().requestManaExact(stack, player, COST_SELF, true);
 			}
 			player.playSound(SoundEvents.ENDER_CHEST_OPEN, 1F, 1F);
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
-		return InteractionResultHolder.pass(stack);
+		return InteractionResult.PASS;
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class EnderHandItem extends Item {
 				ManaItemHandler.instance().requestManaExact(stack, player, COST_OTHER, true);
 			}
 			player.playSound(SoundEvents.ENDER_CHEST_OPEN, 1F, 1F);
-			return InteractionResult.sidedSuccess(player.level().isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
 		return InteractionResult.PASS;

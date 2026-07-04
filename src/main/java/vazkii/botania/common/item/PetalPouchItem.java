@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -121,12 +121,12 @@ public class PetalPouchItem extends ColoredContentsPouchItem {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (player.isSecondaryUseActive()) {
 			DataComponentHelper.setFlag(stack, BotaniaDataComponents.ACTIVE, !isActive(stack));
 			level.playSound(player, player.getX(), player.getY(), player.getZ(), BotaniaSounds.petalPouchConfigure, SoundSource.NEUTRAL, 1f, 1f);
-			return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 		return super.use(level, player, hand);
 	}

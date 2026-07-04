@@ -64,7 +64,7 @@ public class HellsRodItem extends Item {
 			}
 		}
 
-		return InteractionResult.sidedSuccess(world.isClientSide());
+		return InteractionResult.SUCCESS;
 	}
 
 	public static class AvatarBehavior implements AvatarWieldable {

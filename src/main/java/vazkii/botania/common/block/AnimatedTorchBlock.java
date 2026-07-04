@@ -45,7 +45,7 @@ public class AnimatedTorchBlock extends BotaniaWaterloggedBlock implements Entit
 	public InteractionResult useWithoutItem(BlockState state, Level worldIn, BlockPos pos, Player playerIn, BlockHitResult hit) {
 		if (playerIn.isSecondaryUseActive()) {
 			((AnimatedTorchBlockEntity) worldIn.getBlockEntity(pos)).handRotate();
-			return InteractionResult.sidedSuccess(worldIn.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
 		return InteractionResult.PASS;

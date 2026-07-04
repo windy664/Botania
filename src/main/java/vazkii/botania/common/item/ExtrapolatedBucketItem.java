@@ -15,7 +15,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -35,13 +35,13 @@ public class ExtrapolatedBucketItem extends Item {
 
 	// [VanillaCopy] BucketItem, only the empty cases
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+	public InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
 		ItemStack itemStack = player.getItemInHand(interactionHand);
 		BlockHitResult blockHitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
 		if (blockHitResult.getType() == HitResult.Type.MISS) {
-			return InteractionResultHolder.pass(itemStack);
+			return InteractionResult.PASS;
 		} else if (blockHitResult.getType() != HitResult.Type.BLOCK) {
-			return InteractionResultHolder.pass(itemStack);
+			return InteractionResult.PASS;
 		} else {
 			BlockPos blockPos = blockHitResult.getBlockPos();
 			Direction direction = blockHitResult.getDirection();
@@ -66,13 +66,13 @@ public class ExtrapolatedBucketItem extends Item {
 							CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, itemStack2);
 						}
 
-						return InteractionResultHolder.sidedSuccess(itemStack3, level.isClientSide());
+						return InteractionResult.SUCCESS;
 					}
 				}
 
-				return InteractionResultHolder.fail(itemStack);
+				return InteractionResult.FAIL;
 			} else {
-				return InteractionResultHolder.fail(itemStack);
+				return InteractionResult.FAIL;
 			}
 		}
 	}

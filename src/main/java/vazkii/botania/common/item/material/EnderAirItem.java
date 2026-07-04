@@ -15,7 +15,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.player.Player;
@@ -43,11 +43,11 @@ public class EnderAirItem extends Item implements ProjectileItem {
 		super(props);
 	}
 
-	public static InteractionResultHolder<ItemStack> onPlayerInteract(Player player, Level world, InteractionHand hand) {
+	public static InteractionResult onPlayerInteract(Player player, Level world, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 
 		if (stack.isEmpty() || !stack.is(Items.GLASS_BOTTLE)) {
-			return InteractionResultHolder.pass(stack);
+			return InteractionResult.PASS;
 		}
 
 		if ((world.dimension() == Level.END && isClearFromDragonBreath(world, player.getBoundingBox().inflate(3.5)) && notAimingAtFluid(world, player))
@@ -61,10 +61,10 @@ public class EnderAirItem extends Item implements ProjectileItem {
 				world.gameEvent(player, GameEvent.FLUID_PICKUP, player.position());
 			}
 
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return InteractionResultHolder.pass(stack);
+		return InteractionResult.PASS;
 	}
 
 	private static boolean notAimingAtFluid(Level world, Player player) {
@@ -93,7 +93,7 @@ public class EnderAirItem extends Item implements ProjectileItem {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!player.getAbilities().instabuild) {
 			stack.shrink(1);
@@ -106,7 +106,7 @@ public class EnderAirItem extends Item implements ProjectileItem {
 			b.shootFromRotation(player, player.getXRot(), player.getYRot(), 0F, 1.5F, 1F);
 			world.addFreshEntity(b);
 		}
-		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override

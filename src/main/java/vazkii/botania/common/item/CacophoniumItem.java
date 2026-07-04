@@ -21,7 +21,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Creeper;
@@ -70,7 +69,7 @@ public class CacophoniumItem extends Item {
 					player.setItemInHand(hand, stack);
 				}
 
-				return InteractionResult.sidedSuccess(player.level().isClientSide());
+				return InteractionResult.SUCCESS;
 			}
 		}
 
@@ -91,7 +90,7 @@ public class CacophoniumItem extends Item {
 					((CacophoniumBlockEntity) world.getBlockEntity(pos)).stack = stack.copy();
 					stack.shrink(1);
 				}
-				return InteractionResult.sidedSuccess(world.isClientSide());
+				return InteractionResult.SUCCESS;
 			}
 		}
 
@@ -117,12 +116,12 @@ public class CacophoniumItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (getSound(stack) != null) {
 			return ItemUtils.startUsingInstantly(world, player, hand);
 		}
-		return InteractionResultHolder.pass(stack);
+		return InteractionResult.PASS;
 	}
 
 	@Override

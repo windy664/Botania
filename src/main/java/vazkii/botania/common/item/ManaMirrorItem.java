@@ -93,7 +93,7 @@ public class ManaMirrorItem extends Item {
 					bindPool(ctx.getItemInHand(), pool);
 					world.playSound(null, player.getX(), player.getY(), player.getZ(), BotaniaSounds.ding, SoundSource.PLAYERS, 1F, 1F);
 				}
-				return InteractionResult.sidedSuccess(world.isClientSide());
+				return InteractionResult.SUCCESS;
 			}
 		}
 

@@ -13,7 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -51,7 +51,7 @@ public class BifrostRodItem extends SelfReturningItem {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!world.isClientSide() && ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_COST, false)) {
 			BlockState bifrost = BotaniaBlocks.bifrost.defaultBlockState();
@@ -111,7 +111,7 @@ public class BifrostRodItem extends SelfReturningItem {
 			}
 		}
 
-		return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+		return InteractionResult.SUCCESS;
 	}
 
 	private static boolean placeBridgeSegment(Level world, BlockPos center, BlockPos.MutableBlockPos placePos, int time) {

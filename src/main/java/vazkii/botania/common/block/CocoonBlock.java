@@ -12,7 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -68,11 +68,11 @@ public class CocoonBlock extends BotaniaWaterloggedBlock implements EntityBlock 
 	}
 
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+	public InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		return addStack(level, pos, stack, player.getAbilities().instabuild);
 	}
 
-	private ItemInteractionResult addStack(Level world, BlockPos pos, ItemStack stack, boolean creative) {
+	private InteractionResult addStack(Level world, BlockPos pos, ItemStack stack, boolean creative) {
 		CocoonBlockEntity cocoon = (CocoonBlockEntity) world.getBlockEntity(pos);
 
 		if (cocoon != null && (stack.is(Items.EMERALD) || stack.is(Items.CHORUS_FRUIT) || stack.is(BotaniaItems.lifeEssence))) {
@@ -99,10 +99,10 @@ public class CocoonBlock extends BotaniaWaterloggedBlock implements EntityBlock 
 				}
 			}
 
-			return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
 	@Override

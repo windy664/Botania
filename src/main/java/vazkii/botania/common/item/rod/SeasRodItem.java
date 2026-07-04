@@ -14,7 +14,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -40,13 +40,13 @@ public class SeasRodItem extends Item {
 
 	// [VanillaCopy] BucketItem, placement case
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+	public InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
 		ItemStack itemStack = player.getItemInHand(interactionHand);
 		BlockHitResult blockHitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
 		if (blockHitResult.getType() == HitResult.Type.MISS) {
-			return InteractionResultHolder.pass(itemStack);
+			return InteractionResult.PASS;
 		} else if (blockHitResult.getType() != HitResult.Type.BLOCK) {
-			return InteractionResultHolder.pass(itemStack);
+			return InteractionResult.PASS;
 		} else {
 			BlockPos blockPos = blockHitResult.getBlockPos();
 			Direction direction = blockHitResult.getDirection();
@@ -71,12 +71,12 @@ public class SeasRodItem extends Item {
 					for (int i = 0; i < 6; i++) {
 						player.level().addParticle(data, blockPos3.getX() + Math.random(), blockPos3.getY() + Math.random(), blockPos3.getZ() + Math.random(), 0, 0, 0);
 					}
-					return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+					return InteractionResult.SUCCESS;
 				} else {
-					return InteractionResultHolder.fail(itemStack);
+					return InteractionResult.FAIL;
 				}
 			} else {
-				return InteractionResultHolder.fail(itemStack);
+				return InteractionResult.FAIL;
 			}
 		}
 	}

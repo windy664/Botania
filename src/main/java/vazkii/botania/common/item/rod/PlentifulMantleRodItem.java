@@ -13,7 +13,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,7 +45,7 @@ public class PlentifulMantleRodItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player p, InteractionHand hand) {
+	public InteractionResult use(Level world, Player p, InteractionHand hand) {
 		ItemStack stack = p.getItemInHand(hand);
 		if (ManaItemHandler.instance().requestManaExactForTool(stack, p, COST, true)) {
 			if (world.isClientSide()) {
@@ -56,10 +56,10 @@ public class PlentifulMantleRodItem extends Item {
 				world.playSound(null, p.getX(), p.getY(), p.getZ(), BotaniaSounds.divinationRod, SoundSource.PLAYERS, 1F, 1F);
 				p.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
 			}
-			return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return InteractionResultHolder.pass(stack);
+		return InteractionResult.PASS;
 	}
 
 	private static void doHighlight(Level world, BlockPos pos, int range, long seedxor) {

@@ -254,7 +254,7 @@ public class RunicAltarBlockEntity extends SimpleInventoryBlockEntity implements
 		// lastRecipe is not synced. If we're calling this method we already checked that
 		// the altar has no items, so just optimistically assume success on the client.
 		if (player.level().isClientSide()) {
-			return InteractionResult.sidedSuccess(true);
+			return InteractionResult.SUCCESS;
 		}
 		boolean success = InventoryHelper.tryToSetLastRecipe(player, getItemHandler(), lastRecipe, null);
 		if (success) {
@@ -262,7 +262,7 @@ public class RunicAltarBlockEntity extends SimpleInventoryBlockEntity implements
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 		}
 		return success
-				? InteractionResult.sidedSuccess(false)
+				? InteractionResult.CONSUME
 				: InteractionResult.PASS;
 	}
 

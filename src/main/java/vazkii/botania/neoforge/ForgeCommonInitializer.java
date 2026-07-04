@@ -18,7 +18,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -331,10 +330,10 @@ public class ForgeCommonInitializer {
 			RingOfLokiItem.onPlayerInteract(e.getEntity(), e.getLevel(), e.getHand(), e.getHitVec());
 		});
 		bus.addListener((PlayerInteractEvent.RightClickItem e) -> {
-			InteractionResultHolder<ItemStack> result = EnderAirItem.onPlayerInteract(e.getEntity(), e.getLevel(), e.getHand());
-			if (result.getResult().consumesAction()) {
+			InteractionResult result = EnderAirItem.onPlayerInteract(e.getEntity(), e.getLevel(), e.getHand());
+			if (result.consumesAction()) {
 				e.setCanceled(true);
-				e.setCancellationResult(result.getResult());
+				e.setCancellationResult(result);
 			}
 		});
 

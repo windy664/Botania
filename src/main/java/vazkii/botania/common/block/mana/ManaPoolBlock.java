@@ -12,7 +12,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -134,7 +134,7 @@ public class ManaPoolBlock extends BotaniaWaterloggedBlock implements EntityBloc
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
 			Player player, InteractionHand hand, BlockHitResult hitResult) {
 		BlockEntity be = level.getBlockEntity(pos);
 		Optional<DyeColor> itemColor = Optional.empty();
@@ -150,7 +150,7 @@ public class ManaPoolBlock extends BotaniaWaterloggedBlock implements EntityBloc
 				if (!player.getAbilities().instabuild) {
 					stack.shrink(1);
 				}
-				return ItemInteractionResult.sidedSuccess(level.isClientSide());
+				return InteractionResult.SUCCESS;
 			}
 		}
 		if (stack.is(Items.CLAY_BALL) && be instanceof ManaPoolBlockEntity pool && pool.getColor().isPresent()) {
@@ -158,9 +158,9 @@ public class ManaPoolBlock extends BotaniaWaterloggedBlock implements EntityBloc
 			if (!player.getAbilities().instabuild) {
 				stack.shrink(1);
 			}
-			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
 	@Override
