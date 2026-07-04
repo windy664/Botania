@@ -97,3 +97,18 @@ jobs:
           javap -p -cp "$J" net.minecraft.core.particles.ItemParticleOption 2>&1 | grep -iE "public" | head -10
           echo "===== Level spawnAtLocation (on Entity) ====="
           javap -p -cp "$J" net.minecraft.world.entity.Entity 2>&1 | grep -iE "spawnAtLocation" | head
+          echo "===== NBT-batch: ItemStack codecs / UUIDUtil / ValueOut list / BlockEntity save sig ====="
+          echo "#### ItemStack static codec fields ####"
+          javap -p -cp "$J" net.minecraft.world.item.ItemStack 2>&1 | grep -iE "public static final .*Codec|CODEC" | head
+          echo "#### UUIDUtil codecs ####"
+          javap -p -cp "$J" net.minecraft.core.UUIDUtil 2>&1 | grep -iE "public static final|CODEC" | head
+          echo "#### ValueOutput.list / TypedOutputList ####"
+          javap -p -cp "$J" net.minecraft.world.level.storage.ValueOutput 2>&1 | grep -iE "list|store|child|putIntArray" | head -20
+          javap -p -cp "$J" 'net.minecraft.world.level.storage.ValueOutput$TypedOutputList' 2>&1 | grep -iE "public|add" | head
+          echo "#### ValueInput.list / listOrEmpty / TypedInputList (iterable?) ####"
+          javap -p -cp "$J" net.minecraft.world.level.storage.ValueInput 2>&1 | grep -iE "list|read|child" | head -20
+          javap -p -cp "$J" 'net.minecraft.world.level.storage.ValueInput$TypedInputList' 2>&1 | grep -iE "public|iterator|stream|forEach" | head
+          echo "#### BlockEntity full saveAdditional/loadAdditional signatures ####"
+          javap -p -cp "$J" net.minecraft.world.level.block.entity.BlockEntity 2>&1 | grep -iE "Additional|getUpdateTag|handleUpdateTag" | head
+          echo "#### storeNullable / store variants on ValueOutput ####"
+          javap -p -cp "$J" net.minecraft.world.level.storage.ValueOutput 2>&1 | grep -iE "storeNullable|putBoolean|putUUID|discard" | head
