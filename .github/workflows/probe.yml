@@ -268,4 +268,11 @@ jobs:
           javap -public -cp "$J" 'net.minecraft.world.item.Item$Properties' 2>&1 | grep -iE "useBlockDescription|useItemDescription|overrideDescription|BlockName|useName" | head
           echo "#### MobEffects field names (renames) ####"
           javap -public -cp "$J" net.minecraft.world.effect.MobEffects 2>&1 | grep -iE "SPEED|SLOW|HASTE|FATIGUE|STRENGTH|RESIST|NAUSEA|JUMP|INSTANT|WEAK|MOVEMENT|DIG|DAMAGE|CONFUSION|HARM|HEAL" | head -40
+          echo "#### BlockBehaviour onRemove / affectNeighborsAfterRemoval ####"
+          javap -p -cp "$J" net.minecraft.world.level.block.state.BlockBehaviour 2>&1 | grep -iE "onRemove|affectNeighbors|Remove" | head
+          javap -p -cp "$J" 'net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase' 2>&1 | grep -iE "onRemove|affectNeighbors" | head
+          echo "#### Block onRemove/affectNeighborsAfterRemoval ####"
+          javap -public -cp "$J" net.minecraft.world.level.block.Block 2>&1 | grep -iE "onRemove|affectNeighbors" | head
+          echo "#### BlockState onRemove signature ####"
+          javap -public -cp "$J" net.minecraft.world.level.block.state.BlockState 2>&1 | grep -iE "onRemove|affectNeighbors" | head
           echo "@@@@ END RECIPE @@@@"
