@@ -258,4 +258,6 @@ jobs:
           grep -iE "/[A-Za-z]*Dye[A-Za-z]*\.class$" /tmp/idx.txt | grep -iE 'net/minecraft/world/item' | sed 's#\.class$##; s#/#.#g' | sort -u | head
           echo "#### ItemTags dye tags ####"
           javap -public -cp "$J" net.minecraft.tags.ItemTags 2>&1 | grep -iE "DYE" | head
+          echo "#### ColorCollection API (get/getColor/reverse) ####"
+          javap -public -cp "$J" net.minecraft.world.level.block.ColorCollection 2>&1 | head -25
           echo "@@@@ END RECIPE @@@@"
