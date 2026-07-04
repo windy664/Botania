@@ -42,7 +42,7 @@ public class WaterBottleMatchingRecipe extends ShapedRecipe {
 		final var testPotion = new ItemStack(Items.POTION);
 		final List<Optional<Ingredient>> ingredients = pattern.ingredients().stream()
 				.map(opt -> opt.map(i -> i.test(testPotion)
-						? Ingredient.of(PotionContents.createItemStack(Items.POTION, Potions.WATER))
+						? Ingredient.of(Items.POTION)
 						: i))
 				.toList();
 		return new ShapedRecipePattern(pattern.width(), pattern.height(), ingredients,

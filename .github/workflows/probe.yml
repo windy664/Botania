@@ -234,4 +234,18 @@ jobs:
           javap -public -cp "$J" net.minecraft.core.NonNullList 2>&1 | grep -iE "public static|createWithCapacity|of\(|copyOf" | head
           echo "#### Ingredient.of + display/getItems replacement ####"
           javap -public -cp "$J" net.minecraft.world.item.crafting.Ingredient 2>&1 | grep -iE "getStackingIds|items\(\)|values\(\)|public net.minecraft.world.item.ItemStack" | head
+          echo "#### ItemStack getCraftingRemainder ####"
+          javap -public -cp "$J" net.minecraft.world.item.ItemStack 2>&1 | grep -iE "raftingRemain|Remainder|USE_REMAINDER" | head
+          echo "#### Item craftingRemainder ####"
+          javap -public -cp "$J" net.minecraft.world.item.Item 2>&1 | grep -iE "raftingRemain|Remainder" | head
+          echo "#### DataComponents USE_REMAINDER ####"
+          javap -public -cp "$J" net.minecraft.core.component.DataComponents 2>&1 | grep -iE "REMAINDER" | head
+          echo "#### DyeItem byColor / dye lookup ####"
+          javap -public -cp "$J" net.minecraft.world.item.DyeItem 2>&1 | grep -iE "byColor|getDyeColor|public static|public net" | head
+          echo "#### Items dye sample (grep DYE) ####"
+          javap -public -cp "$J" net.minecraft.world.item.Items 2>&1 | grep -iE "_DYE" | head
+          echo "#### RecipeAccess API (byKey?) ####"
+          javap -public -cp "$J" net.minecraft.world.item.crafting.RecipeAccess 2>&1 | head -20
+          echo "#### RecipeManager byKey ####"
+          javap -public -cp "$J" net.minecraft.world.item.crafting.RecipeManager 2>&1 | grep -iE "byKey|getRecipeFor|public" | head -15
           echo "@@@@ END RECIPE @@@@"
