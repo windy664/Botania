@@ -19,10 +19,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DiggerItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -37,7 +36,19 @@ import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.mana.ManaItemHandler;
 import vazkii.botania.common.item.BotaniaItems;
+import vazkii.botania.common.item.equipment.tool.elementium.ElementiumAxeItem;
+import vazkii.botania.common.item.equipment.tool.elementium.ElementiumHoeItem;
+import vazkii.botania.common.item.equipment.tool.elementium.ElementiumPickaxeItem;
+import vazkii.botania.common.item.equipment.tool.elementium.ElementiumShovelItem;
+import vazkii.botania.common.item.equipment.tool.elementium.ElementiumSwordItem;
+import vazkii.botania.common.item.equipment.tool.manasteel.ManasteelAxeItem;
+import vazkii.botania.common.item.equipment.tool.manasteel.ManasteelHoeItem;
+import vazkii.botania.common.item.equipment.tool.manasteel.ManasteelPickaxeItem;
+import vazkii.botania.common.item.equipment.tool.manasteel.ManasteelShovelItem;
+import vazkii.botania.common.item.equipment.tool.manasteel.ManasteelSwordItem;
+import vazkii.botania.common.item.equipment.tool.terrasteel.TerraBladeItem;
 import vazkii.botania.common.item.equipment.tool.terrasteel.TerraShattererItem;
+import vazkii.botania.common.item.equipment.tool.terrasteel.TerraTruncatorItem;
 
 import java.util.function.Predicate;
 
@@ -116,20 +127,21 @@ public final class ToolCommons {
 		}
 
 		Item item = stack.getItem();
-		if (!(item instanceof DiggerItem tool)) {
+		if (!stack.has(DataComponents.TOOL)) {
 			return 0;
 		}
 
-		Tier material = tool.getTier();
+		// 26.2: Tier/DiggerItem removed and ToolMaterial can't be read back off the stack, so key off the concrete
+		// Botania tool classes. Elementium/Terra tools extend the Manasteel ones, so check those first.
 		int materialLevel = 0;
-		if (material == BotaniaAPI.instance().getManasteelItemTier()) {
-			materialLevel = 10;
-		}
-		if (material == BotaniaAPI.instance().getElementiumItemTier()) {
-			materialLevel = 11;
-		}
-		if (material == BotaniaAPI.instance().getTerrasteelItemTier()) {
+		if (item instanceof TerraShattererItem || item instanceof TerraBladeItem || item instanceof TerraTruncatorItem) {
 			materialLevel = 20;
+		} else if (item instanceof ElementiumPickaxeItem || item instanceof ElementiumSwordItem || item instanceof ElementiumAxeItem
+				|| item instanceof ElementiumShovelItem || item instanceof ElementiumHoeItem) {
+			materialLevel = 11;
+		} else if (item instanceof ManasteelPickaxeItem || item instanceof ManasteelSwordItem || item instanceof ManasteelAxeItem
+				|| item instanceof ManasteelShovelItem || item instanceof ManasteelHoeItem) {
+			materialLevel = 10;
 		}
 
 		int modifier = 0;

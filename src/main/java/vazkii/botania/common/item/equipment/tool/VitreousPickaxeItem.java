@@ -11,22 +11,22 @@ package vazkii.botania.common.item.equipment.tool;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.Tool;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 import vazkii.botania.common.component.BotaniaDataComponents;
@@ -38,52 +38,22 @@ import java.util.List;
 public class VitreousPickaxeItem extends ManasteelPickaxeItem implements
 		vazkii.botania.api.item.SpecialBlockBreakingHandler {
 	private static final int MANA_PER_DAMAGE = 160;
-	private static final Tier MATERIAL = new Tier() {
-		@Override
-		public int getUses() {
-			return 125;
-		}
+	private static final float SPEED = 3.9f;
+	private static final ToolMaterial MATERIAL = new ToolMaterial(
+			BlockTags.INCORRECT_FOR_WOODEN_TOOL, 125, SPEED, 0, 10, BotaniaTags.Items.MANASTEEL_TOOL_REPAIR);
 
-		@Override
-		public float getSpeed() {
-			return 3.9f;
-		}
-
-		@Override
-		public float getAttackDamageBonus() {
-			return 0;
-		}
-
-		@Override
-		public TagKey<Block> getIncorrectBlocksForDrops() {
-			return BlockTags.INCORRECT_FOR_WOODEN_TOOL;
-		}
-
-		@Override
-		public int getEnchantmentValue() {
-			return 10;
-		}
-
-		@Override
-		public Ingredient getRepairIngredient() {
-			return Ingredient.of(Blocks.GLASS);
-		}
-
-		@Override
-		public Tool createToolProperties(TagKey<Block> block) {
-			return new Tool(
-					List.of(
-							// always correct tool for silktouched blocks, relevant e.g. for copper bulb
-							Tool.Rule.minesAndDrops(BotaniaTags.Blocks.VITREOUS_PICKAXE_SILKTOUCHED, this.getSpeed()),
-							Tool.Rule.deniesDrops(this.getIncorrectBlocksForDrops()),
-							Tool.Rule.minesAndDrops(BotaniaTags.Blocks.MINEABLE_WITH_VITREOUS_PICKAXE, this.getSpeed())
-					),
-					1.0F, 1);
-		}
-	};
+	// 26.2: ToolMaterial no longer builds the Tool component, so set the custom mining rules directly on the properties.
+	private static final Tool VITREOUS_TOOL = new Tool(
+			List.of(
+					// always correct tool for silktouched blocks, relevant e.g. for copper bulb
+					Tool.Rule.minesAndDrops(BotaniaTags.Blocks.VITREOUS_PICKAXE_SILKTOUCHED, SPEED),
+					Tool.Rule.deniesDrops(BlockTags.INCORRECT_FOR_WOODEN_TOOL),
+					Tool.Rule.minesAndDrops(BotaniaTags.Blocks.MINEABLE_WITH_VITREOUS_PICKAXE, SPEED)
+			),
+			1.0F, 1);
 
 	public VitreousPickaxeItem(Properties props) {
-		super(MATERIAL, props, -1);
+		super(MATERIAL, props.component(DataComponents.TOOL, VITREOUS_TOOL), -1);
 	}
 
 	/*
@@ -105,8 +75,8 @@ public class VitreousPickaxeItem extends ManasteelPickaxeItem implements
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, Level level, Entity player, int slot, boolean selected) {
-		super.inventoryTick(stack, level, player, slot, selected);
+	public void inventoryTick(ItemStack stack, ServerLevel level, Entity player, EquipmentSlot slot) {
+		super.inventoryTick(stack, level, player, slot);
 
 		if (stack.has(BotaniaDataComponents.SILK_HACK)) {
 			stack.remove(BotaniaDataComponents.SILK_HACK);
