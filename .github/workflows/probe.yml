@@ -134,6 +134,11 @@ jobs:
           echo "@@@@ ValueInputExtension UNFILTERED @@@@"
           javap -public -cp "$J" net.neoforged.neoforge.common.extensions.ValueInputExtension 2>&1
           echo "@@@@ END EXT @@@@"
+          echo "@@@@ SimpleCraftingRecipeSerializer locate + special recipe API @@@@"
+          grep -iE "/SimpleCraftingRecipeSerializer\.class$|/CustomRecipe\.class$|/SpecialRecipeSerializer\.class$" /tmp/idx.txt | grep -iE 'net/minecraft' | sed 's#\.class$##; s#/#.#g' | sort -u | head
+          echo "#### CustomRecipe (special recipe base) methods ####"
+          javap -public -cp "$J" net.minecraft.world.item.crafting.CustomRecipe 2>&1 | grep -iE "Serializer|Factory|CustomRecipe\(" | head
+          echo "@@@@ END SPECIAL @@@@"
           echo "#### BlockEntity getUpdateTag / handleUpdateTag ####"
           javap -p -cp "$J" net.minecraft.world.level.block.entity.BlockEntity 2>&1 | grep -iE "getUpdateTag|handleUpdateTag|ValueInput|ValueOutput" | head
           echo "#### ProblemReporter (for TagValueOutput ctx) ####"
