@@ -19,7 +19,7 @@ java {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    options.compilerArgs << "-Xmaxerrs" << "100000" << "-Xmaxwarns" << "100000"
+    options.compilerArgs << "-Xmaxerrs" << "20000" << "-Xmaxwarns" << "0"
 }
 
 sourceSets.main.resources {
