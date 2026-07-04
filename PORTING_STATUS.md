@@ -30,7 +30,7 @@
 
 ## 建议推进顺序（后续会话）
 
-1. **InteractionResultHolder→InteractionResult**（328 错误，语义清晰，半机械，杠杆最高）
+1. ~~**InteractionResultHolder→InteractionResult**~~ ✅ **已完成**（commit 4af3469，80 文件）。要点：`use`/`useItemOn` 直接返回 `InteractionResult`；`sidedSuccess(...)`→`SUCCESS`（硬编码 `sidedSuccess(false)`→`CONSUME` 保留不挥手）；`PASS_TO_DEFAULT_BLOCK_INTERACTION`→`TRY_WITH_EMPTY_HAND`（**只有它触发 useWithoutItem 回落**，官方 interactions 文档核实，NeoForge primer 摘要说的→PASS 是错的）；`SKIP_DEFAULT_BLOCK_INTERACTION`→`PASS`；`Holder.pass/fail/success/consume(stack)`→常量；换手场景（DiceOfFate）用 `player.setItemInHand` 而非 `heldItemTransformedTo`。⚠️ 未本地编译，待 CI 验证。
 2. **工具/盔甲数据组件化**（解锁 BotaniaItems 大量级联）
 3. **渲染器 `<T,S>` + MultiBufferSource→SubmitNodeCollector**（参考 Patchouli PiP + Curios ICurioRenderer 已验证做法）
 4. **GUI extract 管线**（GuiGraphics→GuiGraphicsExtractor）
