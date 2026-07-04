@@ -219,4 +219,19 @@ jobs:
           javap -public -cp "$J" net.minecraft.world.item.crafting.Ingredient 2>&1 | grep -iE "EMPTY|CODEC|getItems|items\(|test|public static|of\(" | head -30
           echo "#### ItemStack SIMPLE_ITEM_CODEC/LIST_STREAM_CODEC ####"
           javap -public -cp "$J" net.minecraft.world.item.ItemStack 2>&1 | grep -iE "SIMPLE_ITEM_CODEC|LIST_STREAM_CODEC|CODEC|STREAM_CODEC" | head
+          echo "#### ItemStack craftingRemainingItem ####"
+          javap -public -cp "$J" net.minecraft.world.item.ItemStack 2>&1 | grep -iE "raftingRemaining|remainder|getItemHolder" | head
+          echo "#### Items WHITE_DYE exists? ####"
+          javap -public -cp "$J" net.minecraft.world.item.Items 2>&1 | grep -iE "WHITE_DYE|BLACK_DYE|RED_DYE" | head
+          echo "#### DyeItem locate ####"
+          grep -iE "/DyeItem\.class$" /tmp/idx.txt | grep -iE 'net/minecraft' | sed 's#\.class$##; s#/#.#g' | sort -u | head
+          echo "#### Level getRecipeManager / recipe access ####"
+          javap -public -cp "$J" net.minecraft.world.level.Level 2>&1 | grep -iE "RecipeManager|recipeAccess|getRecipe" | head
+          javap -public -cp "$J" net.minecraft.server.level.ServerLevel 2>&1 | grep -iE "RecipeManager|recipeAccess|getServer" | head
+          echo "#### RecipeManager access via Level.recipeAccess()? ####"
+          grep -iE "/RecipeAccess\.class$|/RecipeManager\.class$" /tmp/idx.txt | grep -iE 'net/minecraft' | sed 's#\.class$##; s#/#.#g' | sort -u | head
+          echo "#### NonNullList.of / createWithCapacity ####"
+          javap -public -cp "$J" net.minecraft.core.NonNullList 2>&1 | grep -iE "public static|createWithCapacity|of\(|copyOf" | head
+          echo "#### Ingredient.of + display/getItems replacement ####"
+          javap -public -cp "$J" net.minecraft.world.item.crafting.Ingredient 2>&1 | grep -iE "getStackingIds|items\(\)|values\(\)|public net.minecraft.world.item.ItemStack" | head
           echo "@@@@ END RECIPE @@@@"
