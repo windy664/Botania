@@ -10,6 +10,9 @@
 - **NBT Optional API**（223 处）：`getInt/getBoolean/getLong/getFloat/getDouble/getString(key)` 返回 `Optional` → 改 `getXOr(key, default)`；`getCompound` → `getCompoundOrEmpty`。**验证：Optional 相关错误已归零。**
 - **`Level.random` 变 protected**：所有 `xxx.level().random` / `getLevel().random` → `.getRandom()`。**验证：random 错误已归零。**
 - **CI 稳定化**：`-Xmaxerrs 2000`（过高会撑爆 runner 导致 compile 挂死 1 小时）、job `timeout-minutes: 20`、`--no-configuration-cache`。
+- **InteractionResult 全面刷新**（commit 4af3469，80 文件）：见下方速查表；CI 验证清零无回归。
+- **类型改名**（commit aaf14bf）：`UseAnim→ItemUseAnimation`、`MobSpawnType→EntitySpawnReason`、`FastColor→ARGB`（枚举值/方法名 probe 核实一致，25 文件）；CI 验证清零。
+- **Entity save/load → ValueInput/ValueOutput**（commit ee72103 + a99378c，15 文件全部实体）：`readAdditionalSaveData(CompoundTag,provider?)`→`(ValueInput)`、`addAdditionalSaveData`→`(ValueOutput)`。原语 `getIntOr/putInt/...` 同名沿用；`contains(k)`→`getInt(k).isPresent()` 或直接用默认值；`ItemStack.save/parse`→`store/read(k, ItemStack.OPTIONAL_CODEC)`；UUID→`UUIDUtil.CODEC`；BlockPos→`store/read(k, BlockPos.CODEC)`/`storeNullable`；`ListTag` of BlockPos→`out.list(k,codec).add(v)` + `in.listOrEmpty(k,codec)`（`TypedInputList extends Iterable<T>`）；Motion 重读 hack→`read("Motion", Codec.DOUBLE.listOf())`。**CI 验证：我的 save/load 无 override 报错、零回归**（这些文件残留的错是 moveTo/ThrowableProjectile 构造器/addParticle/canChangeDimensions 等**其它** API，属别的簇）。
 
 ## 剩余：架构级重写（非单日可完成，需逐文件）
 
