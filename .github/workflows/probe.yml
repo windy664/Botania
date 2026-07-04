@@ -129,6 +129,10 @@ jobs:
           javap -p -cp "$J" net.minecraft.world.level.storage.ValueInput 2>&1 | head -45
           echo "#### ValueOutputExtension (all) ####"
           javap -p -cp "$J" net.neoforged.neoforge.common.extensions.ValueOutputExtension 2>&1 | head -25
+          echo "#### ValueInput methods containing Tag ####"
+          javap -public -cp "$J" net.minecraft.world.level.storage.ValueInput 2>&1 | grep -in "tag" | head
+          echo "#### TagValueInput backing-tag getter? ####"
+          javap -p -cp "$J" net.minecraft.world.level.storage.TagValueInput 2>&1 | grep -inE "CompoundTag|input" | head
           echo "#### BlockEntity getUpdateTag / handleUpdateTag ####"
           javap -p -cp "$J" net.minecraft.world.level.block.entity.BlockEntity 2>&1 | grep -iE "getUpdateTag|handleUpdateTag|ValueInput|ValueOutput" | head
           echo "#### ProblemReporter (for TagValueOutput ctx) ####"
