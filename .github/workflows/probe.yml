@@ -81,3 +81,19 @@ jobs:
           javap -p -cp "$J" net.minecraft.world.entity.Entity 2>&1 | grep -iE "addAdditionalSaveData|readAdditionalSaveData|SaveData|load|save" | head -20
           echo "===== BlockEntity save/load ====="
           javap -p -cp "$J" net.minecraft.world.level.block.entity.BlockEntity 2>&1 | grep -iE "loadAdditional|saveAdditional|load|save" | head -20
+          echo "===== ENUM VALUES & METHOD NAMES ====="
+          for C in \
+            net.minecraft.world.item.ItemUseAnimation \
+            net.minecraft.world.item.equipment.ArmorType \
+            net.minecraft.world.entity.EntitySpawnReason \
+            net.minecraft.util.ARGB \
+            net.minecraft.world.entity.EquipmentSlot ; do
+            echo "################ $C ################"
+            javap -p -cp "$J" "$C" 2>&1 | grep -iE "public static final|public static |enum |class |interface " | head -40
+          done
+          echo "===== EntityType.Builder / SpawnPlacements create ====="
+          javap -p -cp "$J" 'net.minecraft.world.entity.EntityType$Builder' 2>&1 | grep -iE "public|create|build|of" | head -30
+          echo "===== ItemParticleOption ctor ====="
+          javap -p -cp "$J" net.minecraft.core.particles.ItemParticleOption 2>&1 | grep -iE "public" | head -10
+          echo "===== Level spawnAtLocation (on Entity) ====="
+          javap -p -cp "$J" net.minecraft.world.entity.Entity 2>&1 | grep -iE "spawnAtLocation" | head
