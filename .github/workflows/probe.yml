@@ -140,9 +140,12 @@ jobs:
           javap -public -cp "$J" net.minecraft.world.item.crafting.CustomRecipe 2>&1 | grep -iE "Serializer|Factory|CustomRecipe\(" | head
           echo "@@@@ END SPECIAL @@@@"
           echo "@@@@ TOOL/ARMOR batch @@@@"
-          echo "#### AxeItem/HoeItem/ShovelItem ctors ####"
+          echo "#### AxeItem ctor ####"
           javap -public -cp "$J" net.minecraft.world.item.AxeItem 2>&1 | grep -iE "AxeItem\(" | head
-          javap -public -cp "$J" net.minecraft.world.item.HoeItem 2>&1 | grep -iE "HoeItem\(" | head
+          echo "#### ArmorType methods ####"
+          javap -public -cp "$J" net.minecraft.world.item.equipment.ArmorType 2>&1 | head -25
+          echo "#### humanoidArmor props ####"
+          javap -public -cp "$J" 'net.minecraft.world.item.Item$Properties' 2>&1 | grep -iE "humanoidArmor" | head
           echo "#### ItemTags REPAIRS_* constants ####"
           javap -public -cp "$J" net.minecraft.tags.ItemTags 2>&1 | grep -iE "REPAIR|TagKey" | head -20
           echo "#### EquipmentAssets / EquipmentAsset locate ####"
