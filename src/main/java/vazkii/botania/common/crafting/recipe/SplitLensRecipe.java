@@ -74,7 +74,7 @@ public class SplitLensRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<SplitLensRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 }

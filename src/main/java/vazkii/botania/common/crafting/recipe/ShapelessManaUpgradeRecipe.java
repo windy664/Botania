@@ -10,11 +10,11 @@ package vazkii.botania.common.crafting.recipe;
 
 import com.mojang.serialization.MapCodec;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
@@ -27,23 +27,26 @@ public class ShapelessManaUpgradeRecipe extends ShapelessRecipe {
 	public static final WrappingRecipeSerializer<ShapelessManaUpgradeRecipe> SERIALIZER = new Serializer();
 
 	private ShapelessManaUpgradeRecipe(ShapelessRecipe recipe) {
-		super(recipe.getGroup(), recipe.category(), ((ShapelessRecipeAccessor) recipe).botania_getResult(), recipe.getIngredients());
+		super(new Recipe.CommonInfo(recipe.showNotification()),
+				new CraftingRecipe.CraftingBookInfo(recipe.category(), recipe.group()),
+				((ShapelessRecipeAccessor) recipe).botania_getResult(),
+				((ShapelessRecipeAccessor) recipe).botania_getIngredients());
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
-		return ManaUpgradeRecipe.output(super.assemble(inv, registries), inv);
+	public ItemStack assemble(CraftingInput inv) {
+		return ManaUpgradeRecipe.output(super.assemble(inv), inv);
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<ShapelessManaUpgradeRecipe> getSerializer() {
 		return SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<ShapelessManaUpgradeRecipe> {
-		public static final MapCodec<ShapelessManaUpgradeRecipe> CODEC = SHAPELESS_RECIPE.codec()
+		public static final MapCodec<ShapelessManaUpgradeRecipe> CODEC = ShapelessRecipe.MAP_CODEC
 				.xmap(ShapelessManaUpgradeRecipe::new, Function.identity());
-		public static final StreamCodec<RegistryFriendlyByteBuf, ShapelessManaUpgradeRecipe> STREAM_CODEC = SHAPELESS_RECIPE.streamCodec()
+		public static final StreamCodec<RegistryFriendlyByteBuf, ShapelessManaUpgradeRecipe> STREAM_CODEC = ShapelessRecipe.STREAM_CODEC
 				.map(ShapelessManaUpgradeRecipe::new, Function.identity());
 
 		Serializer() {

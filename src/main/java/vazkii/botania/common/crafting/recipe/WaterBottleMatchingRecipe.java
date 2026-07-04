@@ -15,11 +15,13 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -47,12 +49,15 @@ public class WaterBottleMatchingRecipe extends ShapedRecipe {
 	}
 
 	public WaterBottleMatchingRecipe(String group, CraftingBookCategory category, ShapedRecipePattern pattern, ItemStack result) {
-		super(group, category, transformPattern(pattern), result);
+		super(new Recipe.CommonInfo(true), new CraftingRecipe.CraftingBookInfo(category, group),
+				transformPattern(pattern), ItemStackTemplate.fromStack(result));
 	}
 
 	private WaterBottleMatchingRecipe(ShapedRecipe recipe) {
-		super(recipe.getGroup(), recipe.category(), transformPattern(((ShapedRecipeAccessor) recipe).botania_getPattern()),
-				((ShapedRecipeAccessor) recipe).botania_getResult(), recipe.showNotification());
+		super(new Recipe.CommonInfo(recipe.showNotification()),
+				new CraftingRecipe.CraftingBookInfo(recipe.category(), recipe.group()),
+				transformPattern(((ShapedRecipeAccessor) recipe).botania_getPattern()),
+				((ShapedRecipeAccessor) recipe).botania_getResult());
 	}
 
 	@Override
@@ -70,14 +75,14 @@ public class WaterBottleMatchingRecipe extends ShapedRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<WaterBottleMatchingRecipe> getSerializer() {
 		return SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<WaterBottleMatchingRecipe> {
-		public static final MapCodec<WaterBottleMatchingRecipe> CODEC = SHAPED_RECIPE.codec()
+		public static final MapCodec<WaterBottleMatchingRecipe> CODEC = ShapedRecipe.MAP_CODEC
 				.xmap(WaterBottleMatchingRecipe::new, Function.identity());
-		public static final StreamCodec<RegistryFriendlyByteBuf, WaterBottleMatchingRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()
+		public static final StreamCodec<RegistryFriendlyByteBuf, WaterBottleMatchingRecipe> STREAM_CODEC = ShapedRecipe.STREAM_CODEC
 				.map(WaterBottleMatchingRecipe::new, Function.identity());
 
 		Serializer() {

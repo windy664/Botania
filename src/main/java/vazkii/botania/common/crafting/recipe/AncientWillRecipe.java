@@ -79,7 +79,7 @@ public class AncientWillRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<AncientWillRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 }

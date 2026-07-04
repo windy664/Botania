@@ -67,7 +67,7 @@ public class ManaBlasterRemoveLensRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<ManaBlasterRemoveLensRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

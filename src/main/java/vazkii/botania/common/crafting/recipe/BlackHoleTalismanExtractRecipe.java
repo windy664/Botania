@@ -78,7 +78,7 @@ public class BlackHoleTalismanExtractRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<BlackHoleTalismanExtractRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

@@ -75,7 +75,7 @@ public class LaputaShardUpgradeRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<LaputaShardUpgradeRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 }

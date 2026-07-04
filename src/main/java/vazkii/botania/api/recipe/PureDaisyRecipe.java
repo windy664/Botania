@@ -66,9 +66,10 @@ public interface PureDaisyRecipe extends Recipe<RecipeInput> {
 	 */
 	int getTime();
 
+	@SuppressWarnings("unchecked")
 	@Override
-	default RecipeType<?> getType() {
-		return Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.get(TYPE_ID));
+	default RecipeType<? extends PureDaisyRecipe> getType() {
+		return (RecipeType<? extends PureDaisyRecipe>) (RecipeType<?>) Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.getValue(TYPE_ID));
 	}
 
 	/**

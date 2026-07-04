@@ -10,7 +10,6 @@ package vazkii.botania.common.crafting.recipe;
 
 import com.mojang.serialization.MapCodec;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.BlockItem;
@@ -18,6 +17,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
@@ -33,12 +33,14 @@ public class WandOfTheForestRecipe extends ShapedRecipe {
 	public static final WrappingRecipeSerializer<WandOfTheForestRecipe> SERIALIZER = new Serializer();
 
 	private WandOfTheForestRecipe(ShapedRecipe recipe) {
-		super(recipe.getGroup(), recipe.category(), ((ShapedRecipeAccessor) recipe).botania_getPattern(),
-				((ShapedRecipeAccessor) recipe).botania_getResult(), recipe.showNotification());
+		super(new Recipe.CommonInfo(recipe.showNotification()),
+				new CraftingRecipe.CraftingBookInfo(recipe.category(), recipe.group()),
+				((ShapedRecipeAccessor) recipe).botania_getPattern(),
+				((ShapedRecipeAccessor) recipe).botania_getResult());
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
+	public ItemStack assemble(CraftingInput inv) {
 		DyeColor first = null;
 		for (int i = 0; i < inv.size(); i++) {
 			ItemStack stack = inv.getItem(i);
@@ -55,21 +57,21 @@ public class WandOfTheForestRecipe extends ShapedRecipe {
 			if (first == null) {
 				first = colorId;
 			} else {
-				return WandOfTheForestItem.setColors(getResultItem(registries).copy(), first, colorId);
+				return WandOfTheForestItem.setColors(((ShapedRecipeAccessor) this).botania_getResult().create(), first, colorId);
 			}
 		}
-		return WandOfTheForestItem.setColors(getResultItem(registries).copy(), first != null ? first : DyeColor.WHITE, DyeColor.WHITE);
+		return WandOfTheForestItem.setColors(((ShapedRecipeAccessor) this).botania_getResult().create(), first != null ? first : DyeColor.WHITE, DyeColor.WHITE);
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<WandOfTheForestRecipe> getSerializer() {
 		return SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<WandOfTheForestRecipe> {
-		public static final MapCodec<WandOfTheForestRecipe> CODEC = SHAPED_RECIPE.codec()
+		public static final MapCodec<WandOfTheForestRecipe> CODEC = ShapedRecipe.MAP_CODEC
 				.xmap(WandOfTheForestRecipe::new, Function.identity());
-		public static final StreamCodec<RegistryFriendlyByteBuf, WandOfTheForestRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()
+		public static final StreamCodec<RegistryFriendlyByteBuf, WandOfTheForestRecipe> STREAM_CODEC = ShapedRecipe.STREAM_CODEC
 				.map(WandOfTheForestRecipe::new, Function.identity());
 
 		Serializer() {

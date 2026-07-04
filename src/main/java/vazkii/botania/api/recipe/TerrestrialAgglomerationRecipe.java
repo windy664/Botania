@@ -28,9 +28,10 @@ public interface TerrestrialAgglomerationRecipe extends Recipe<RecipeInput> {
 
 	int getMana();
 
+	@SuppressWarnings("unchecked")
 	@Override
-	default RecipeType<?> getType() {
-		return Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.get(TYPE_ID));
+	default RecipeType<? extends TerrestrialAgglomerationRecipe> getType() {
+		return (RecipeType<? extends TerrestrialAgglomerationRecipe>) (RecipeType<?>) Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.getValue(TYPE_ID));
 	}
 
 	default ItemStack getToastSymbol() {

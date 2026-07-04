@@ -27,7 +27,7 @@ public class TerraShattererTippingRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<TerraShattererTippingRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

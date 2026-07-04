@@ -87,7 +87,7 @@ public class CompositeLensRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<CompositeLensRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 }

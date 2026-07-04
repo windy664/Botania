@@ -80,7 +80,7 @@ public class CosmeticAttachRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<CosmeticAttachRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 }

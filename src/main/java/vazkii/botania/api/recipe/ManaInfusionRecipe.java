@@ -67,9 +67,10 @@ public interface ManaInfusionRecipe extends Recipe<RecipeInput> {
 	 */
 	int getManaToConsume();
 
+	@SuppressWarnings("unchecked")
 	@Override
-	default RecipeType<?> getType() {
-		return Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.get(TYPE_ID));
+	default RecipeType<? extends ManaInfusionRecipe> getType() {
+		return (RecipeType<? extends ManaInfusionRecipe>) (RecipeType<?>) Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.getValue(TYPE_ID));
 	}
 
 	// Ignored IRecipe stuff

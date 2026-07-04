@@ -61,9 +61,10 @@ public interface ElvenTradeRecipe extends Recipe<RecipeInput> {
 	 */
 	List<ItemStack> getOutputs(List<ItemStack> inputs);
 
+	@SuppressWarnings("unchecked")
 	@Override
-	default RecipeType<?> getType() {
-		return Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.get(TYPE_ID));
+	default RecipeType<? extends ElvenTradeRecipe> getType() {
+		return (RecipeType<? extends ElvenTradeRecipe>) (RecipeType<?>) Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.getValue(TYPE_ID));
 	}
 
 	// Ignored IRecipe boilerplate

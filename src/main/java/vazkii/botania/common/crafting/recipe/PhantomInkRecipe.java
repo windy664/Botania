@@ -70,7 +70,7 @@ public class PhantomInkRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<PhantomInkRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 }

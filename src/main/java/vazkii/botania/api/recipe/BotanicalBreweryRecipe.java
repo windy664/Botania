@@ -34,9 +34,10 @@ public interface BotanicalBreweryRecipe extends Recipe<RecipeInput> {
 
 	ItemStack getOutput(ItemStack container);
 
+	@SuppressWarnings("unchecked")
 	@Override
-	default RecipeType<?> getType() {
-		return Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.get(TYPE_ID));
+	default RecipeType<? extends BotanicalBreweryRecipe> getType() {
+		return (RecipeType<? extends BotanicalBreweryRecipe>) (RecipeType<?>) Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.getValue(TYPE_ID));
 	}
 
 	default ItemStack getResultItem(HolderLookup.Provider registries) {

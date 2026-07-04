@@ -66,9 +66,10 @@ public class GogAlternationRecipe<C extends RecipeInput> implements Recipe<C> {
 		return getRecipe().assemble(container);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public RecipeSerializer<?> getSerializer() {
-		return SERIALIZER;
+	public RecipeSerializer<? extends Recipe<C>> getSerializer() {
+		return (RecipeSerializer<? extends Recipe<C>>) (RecipeSerializer<?>) SERIALIZER;
 	}
 
 	@Override

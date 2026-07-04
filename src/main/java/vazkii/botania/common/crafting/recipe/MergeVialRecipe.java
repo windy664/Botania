@@ -119,7 +119,7 @@ public class MergeVialRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<MergeVialRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 }

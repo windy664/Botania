@@ -69,7 +69,7 @@ public class CosmeticRemoveRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<CosmeticRemoveRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

@@ -10,11 +10,11 @@ package vazkii.botania.common.crafting.recipe;
 
 import com.mojang.serialization.MapCodec;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
@@ -28,8 +28,10 @@ public class ManaUpgradeRecipe extends ShapedRecipe {
 	public static final WrappingRecipeSerializer<ManaUpgradeRecipe> SERIALIZER = new Serializer();
 
 	private ManaUpgradeRecipe(ShapedRecipe recipe) {
-		super(recipe.getGroup(), recipe.category(), ((ShapedRecipeAccessor) recipe).botania_getPattern(),
-				((ShapedRecipeAccessor) recipe).botania_getResult(), recipe.showNotification());
+		super(new Recipe.CommonInfo(recipe.showNotification()),
+				new CraftingRecipe.CraftingBookInfo(recipe.category(), recipe.group()),
+				((ShapedRecipeAccessor) recipe).botania_getPattern(),
+				((ShapedRecipeAccessor) recipe).botania_getResult());
 	}
 
 	public static ItemStack output(ItemStack output, CraftingInput inv) {
@@ -49,19 +51,19 @@ public class ManaUpgradeRecipe extends ShapedRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registries) {
-		return output(super.assemble(inv, registries), inv);
+	public ItemStack assemble(CraftingInput inv) {
+		return output(super.assemble(inv), inv);
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<ManaUpgradeRecipe> getSerializer() {
 		return SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<ManaUpgradeRecipe> {
-		public static final MapCodec<ManaUpgradeRecipe> CODEC = SHAPED_RECIPE.codec()
+		public static final MapCodec<ManaUpgradeRecipe> CODEC = ShapedRecipe.MAP_CODEC
 				.xmap(ManaUpgradeRecipe::new, Function.identity());
-		public static final StreamCodec<RegistryFriendlyByteBuf, ManaUpgradeRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()
+		public static final StreamCodec<RegistryFriendlyByteBuf, ManaUpgradeRecipe> STREAM_CODEC = ShapedRecipe.STREAM_CODEC
 				.map(ManaUpgradeRecipe::new, Function.identity());
 
 		Serializer() {

@@ -87,7 +87,7 @@ public class ElvenTradeRecipe implements vazkii.botania.api.recipe.ElvenTradeRec
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<ElvenTradeRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

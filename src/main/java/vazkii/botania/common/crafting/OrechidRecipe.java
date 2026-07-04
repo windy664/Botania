@@ -103,11 +103,11 @@ public class OrechidRecipe implements vazkii.botania.api.recipe.OrechidRecipe {
 	@SuppressWarnings("unchecked")
 	@Override
 	public RecipeType<? extends vazkii.botania.api.recipe.OrechidRecipe> getType() {
-		return (RecipeType<? extends vazkii.botania.api.recipe.OrechidRecipe>) BuiltInRegistries.RECIPE_TYPE.get(TYPE_ID);
+		return (RecipeType<? extends vazkii.botania.api.recipe.OrechidRecipe>) BuiltInRegistries.RECIPE_TYPE.getValue(TYPE_ID);
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends vazkii.botania.api.recipe.OrechidRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

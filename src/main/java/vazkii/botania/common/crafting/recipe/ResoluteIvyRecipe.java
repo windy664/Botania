@@ -68,7 +68,7 @@ public class ResoluteIvyRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<ResoluteIvyRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 }

@@ -50,7 +50,7 @@ public class LensDyeingRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<LensDyeingRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

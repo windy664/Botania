@@ -30,8 +30,9 @@ public interface RunicAltarRecipe extends RecipeWithReagent {
 
 	NonNullList<ItemStack> getRemainingItems(RecipeInput container);
 
+	@SuppressWarnings("unchecked")
 	@Override
-	default RecipeType<?> getType() {
-		return Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.get(TYPE_ID));
+	default RecipeType<? extends RunicAltarRecipe> getType() {
+		return (RecipeType<? extends RunicAltarRecipe>) (RecipeType<?>) Objects.requireNonNull(BuiltInRegistries.RECIPE_TYPE.getValue(TYPE_ID));
 	}
 }

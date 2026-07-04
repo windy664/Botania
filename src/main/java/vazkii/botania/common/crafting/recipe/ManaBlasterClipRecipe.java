@@ -73,7 +73,7 @@ public class ManaBlasterClipRecipe extends CustomRecipe {
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<ManaBlasterClipRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 }

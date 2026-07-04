@@ -105,7 +105,7 @@ public class TiaraWingsRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<TiaraWingsRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 
