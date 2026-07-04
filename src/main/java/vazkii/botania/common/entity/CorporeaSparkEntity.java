@@ -14,6 +14,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -213,7 +214,7 @@ public class CorporeaSparkEntity extends SparkBaseEntity implements CorporeaSpar
 
 	@Override
 	public void onItemExtracted(ItemStack stack) {
-		((ServerLevel) level()).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), getX(), getY(), getZ(), 10, 0.125, 0.125, 0.125, 0.05);
+		((ServerLevel) level()).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, ItemStackTemplate.fromStack(stack)), getX(), getY(), getZ(), 10, 0.125, 0.125, 0.125, 0.05);
 	}
 
 	@Override
@@ -222,7 +223,7 @@ public class CorporeaSparkEntity extends SparkBaseEntity implements CorporeaSpar
 		for (ItemStack stack : stacks) {
 			if (!shownItems.contains(stack.getItem())) {
 				shownItems.add(stack.getItem());
-				((ServerLevel) level()).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), getX(), getY(), getZ(), 10, 0.125, 0.125, 0.125, 0.05);
+				((ServerLevel) level()).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, ItemStackTemplate.fromStack(stack)), getX(), getY(), getZ(), 10, 0.125, 0.125, 0.125, 0.05);
 			}
 		}
 	}

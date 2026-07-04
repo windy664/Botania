@@ -10,6 +10,7 @@ package vazkii.botania.common.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
@@ -98,7 +99,7 @@ public class EnderAirBottleEntity extends ThrowableProjectile implements ItemSup
 			Vec3 vec = new Vec3(lookVec.x(), 0, lookVec.z()).normalize();
 
 			// Position chosen to appear roughly in the ghast's face
-			((ServerLevel) this.level()).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.GHAST_TEAR)),
+			((ServerLevel) this.level()).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, ItemStackTemplate.fromStack(new ItemStack(Items.GHAST_TEAR))),
 					entity.getX() + (2.3 * vec.x), entity.getY() + vec.y + 2.6, entity.getZ() + (2.3 * vec.z),
 					40,
 					Math.abs(vec.z) + 0.15, 0.2, Math.abs(vec.x) + 0.15, 0.2);
