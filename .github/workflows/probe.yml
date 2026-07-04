@@ -142,8 +142,10 @@ jobs:
           echo "@@@@ TOOL/ARMOR batch @@@@"
           echo "#### AxeItem ctor ####"
           javap -public -cp "$J" net.minecraft.world.item.AxeItem 2>&1 | grep -iE "AxeItem\(" | head
-          echo "#### ArmorType methods ####"
-          javap -public -cp "$J" net.minecraft.world.item.equipment.ArmorType 2>&1 | head -25
+          echo "#### ArmorType methods (getSlot/getName/getSerializedName) ####"
+          javap -public -cp "$J" net.minecraft.world.item.equipment.ArmorType 2>&1 | grep -iE "getSlot|getName|getSerializedName|EquipmentSlot|public " | head -20
+          echo "#### EquipmentSlot.Type enum (HUMANOID_ARMOR?) ####"
+          javap -public -cp "$J" 'net.minecraft.world.entity.EquipmentSlot$Type' 2>&1 | head -12
           echo "#### humanoidArmor props ####"
           javap -public -cp "$J" 'net.minecraft.world.item.Item$Properties' 2>&1 | grep -iE "humanoidArmor" | head
           echo "#### ItemTags REPAIRS_* constants ####"
