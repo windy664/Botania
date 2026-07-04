@@ -121,6 +121,10 @@ jobs:
           javap -p -cp "$J" net.minecraft.world.level.storage.TagValueInput 2>&1 | grep -iE "public|static" | head -20
           echo "#### ValueInputContextHelper ctor ####"
           javap -p -cp "$J" net.minecraft.world.level.storage.ValueInputContextHelper 2>&1 | grep -iE "public" | head
+          echo "#### NeoForge ValueOutputExtension (CompoundTag interop?) ####"
+          javap -p -cp "$J" net.neoforged.neoforge.common.extensions.ValueOutputExtension 2>&1 | grep -iE "public|CompoundTag|Tag" | head -20
+          echo "#### NeoForge ValueInputExtension ####"
+          javap -p -cp "$J" net.neoforged.neoforge.common.extensions.ValueInputExtension 2>&1 | grep -iE "public|CompoundTag|Tag" | head -20
           echo "#### BlockEntity getUpdateTag / handleUpdateTag ####"
           javap -p -cp "$J" net.minecraft.world.level.block.entity.BlockEntity 2>&1 | grep -iE "getUpdateTag|handleUpdateTag|ValueInput|ValueOutput" | head
           echo "#### ProblemReporter (for TagValueOutput ctx) ####"
