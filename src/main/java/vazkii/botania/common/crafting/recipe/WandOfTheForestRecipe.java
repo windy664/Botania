@@ -63,9 +63,10 @@ public class WandOfTheForestRecipe extends ShapedRecipe {
 		return WandOfTheForestItem.setColors(((ShapedRecipeAccessor) this).botania_getResult().create(), first != null ? first : DyeColor.WHITE, DyeColor.WHITE);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public RecipeSerializer<WandOfTheForestRecipe> getSerializer() {
-		return SERIALIZER.serializer;
+	public RecipeSerializer<ShapedRecipe> getSerializer() {
+		return (RecipeSerializer<ShapedRecipe>) (RecipeSerializer<?>) SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<WandOfTheForestRecipe> {

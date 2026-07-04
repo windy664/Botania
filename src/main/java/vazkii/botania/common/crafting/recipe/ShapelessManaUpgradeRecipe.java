@@ -38,9 +38,10 @@ public class ShapelessManaUpgradeRecipe extends ShapelessRecipe {
 		return ManaUpgradeRecipe.output(super.assemble(inv), inv);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public RecipeSerializer<ShapelessManaUpgradeRecipe> getSerializer() {
-		return SERIALIZER.serializer;
+	public RecipeSerializer<ShapelessRecipe> getSerializer() {
+		return (RecipeSerializer<ShapelessRecipe>) (RecipeSerializer<?>) SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<ShapelessManaUpgradeRecipe> {

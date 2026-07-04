@@ -74,9 +74,10 @@ public class WaterBottleMatchingRecipe extends ShapedRecipe {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public RecipeSerializer<WaterBottleMatchingRecipe> getSerializer() {
-		return SERIALIZER.serializer;
+	public RecipeSerializer<ShapedRecipe> getSerializer() {
+		return (RecipeSerializer<ShapedRecipe>) (RecipeSerializer<?>) SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<WaterBottleMatchingRecipe> {

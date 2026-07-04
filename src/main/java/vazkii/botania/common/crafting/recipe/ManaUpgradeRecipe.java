@@ -55,9 +55,10 @@ public class ManaUpgradeRecipe extends ShapedRecipe {
 		return output(super.assemble(inv), inv);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public RecipeSerializer<ManaUpgradeRecipe> getSerializer() {
-		return SERIALIZER.serializer;
+	public RecipeSerializer<ShapedRecipe> getSerializer() {
+		return (RecipeSerializer<ShapedRecipe>) (RecipeSerializer<?>) SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<ManaUpgradeRecipe> {

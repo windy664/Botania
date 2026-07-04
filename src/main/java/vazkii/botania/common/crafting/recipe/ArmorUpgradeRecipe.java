@@ -51,9 +51,10 @@ public class ArmorUpgradeRecipe extends ShapedRecipe {
 		return out;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public RecipeSerializer<ArmorUpgradeRecipe> getSerializer() {
-		return SERIALIZER.serializer;
+	public RecipeSerializer<ShapedRecipe> getSerializer() {
+		return (RecipeSerializer<ShapedRecipe>) (RecipeSerializer<?>) SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<ArmorUpgradeRecipe> {
