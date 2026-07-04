@@ -34,12 +34,12 @@ public class ElvenTradeRecipe implements vazkii.botania.api.recipe.ElvenTradeRec
 
 	public ElvenTradeRecipe(ItemStack[] outputs, Ingredient... inputs) {
 		this.outputs = ImmutableList.copyOf(outputs);
-		this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
+		this.inputs = NonNullList.copyOf(java.util.Arrays.asList(inputs));
 	}
 
 	public ElvenTradeRecipe(List<ItemStack> outputs, List<Ingredient> ingredients) {
 		this.outputs = ImmutableList.copyOf(outputs);
-		this.inputs = NonNullList.of(Ingredient.EMPTY, ingredients.toArray(Ingredient[]::new));
+		this.inputs = NonNullList.copyOf(ingredients);
 	}
 
 	@Override
@@ -112,11 +112,11 @@ public class ElvenTradeRecipe implements vazkii.botania.api.recipe.ElvenTradeRec
 
 	public static class Serializer {
 		public static final MapCodec<ElvenTradeRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-				ExtraCodecs.nonEmptyList(ItemStack.SIMPLE_ITEM_CODEC.listOf()).fieldOf("output").forGetter(ElvenTradeRecipe::getOutputs),
-				ExtraCodecs.nonEmptyList(Ingredient.CODEC_NONEMPTY.listOf()).fieldOf("ingredients").forGetter(ElvenTradeRecipe::getIngredients)
+				ExtraCodecs.nonEmptyList(ItemStack.CODEC.listOf()).fieldOf("output").forGetter(ElvenTradeRecipe::getOutputs),
+				ExtraCodecs.nonEmptyList(Ingredient.CODEC.listOf()).fieldOf("ingredients").forGetter(ElvenTradeRecipe::getIngredients)
 		).apply(instance, ElvenTradeRecipe::new));
 		public static final StreamCodec<RegistryFriendlyByteBuf, ElvenTradeRecipe> STREAM_CODEC = StreamCodec.composite(
-				ItemStack.LIST_STREAM_CODEC, ElvenTradeRecipe::getOutputs,
+				ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), ElvenTradeRecipe::getOutputs,
 				Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), ElvenTradeRecipe::getIngredients,
 				ElvenTradeRecipe::new
 		);

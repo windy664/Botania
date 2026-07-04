@@ -36,7 +36,7 @@ public class PetalApothecaryRecipe implements vazkii.botania.api.recipe.PetalApo
 	public PetalApothecaryRecipe(ItemStack output, Ingredient reagent, Ingredient... ingredients) {
 		this.output = output;
 		this.reagent = reagent;
-		this.ingredients = NonNullList.of(Ingredient.EMPTY, ingredients);
+		this.ingredients = NonNullList.copyOf(java.util.Arrays.asList(ingredients));
 	}
 
 	private static PetalApothecaryRecipe of(ItemStack output, Ingredient reagent, List<Ingredient> ingredients) {

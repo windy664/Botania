@@ -17,6 +17,7 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -52,8 +53,8 @@ public class RunicAltarRecipe implements vazkii.botania.api.recipe.RunicAltarRec
 		validateNoCatalystsInIngredients(ingredients, catalysts);
 		this.output = output;
 		this.reagent = reagent;
-		this.ingredients = NonNullList.of(Ingredient.EMPTY, ingredients);
-		this.catalysts = NonNullList.of(Ingredient.EMPTY, catalysts);
+		this.ingredients = NonNullList.copyOf(java.util.Arrays.asList(ingredients));
+		this.catalysts = NonNullList.copyOf(java.util.Arrays.asList(catalysts));
 		this.mana = mana;
 	}
 
@@ -64,10 +65,10 @@ public class RunicAltarRecipe implements vazkii.botania.api.recipe.RunicAltarRec
 
 		var ingredientItems = new ReferenceOpenHashSet<Item>(ingredients.length);
 		var catalystItems = new ReferenceOpenHashSet<Item>(catalysts.length);
-		Stream.of(ingredients).flatMap(ingredient -> Stream.of(ingredient.getItems()))
-				.map(ItemStack::getItem).forEach(ingredientItems::add);
-		Stream.of(catalysts).flatMap(catalyst -> Stream.of(catalyst.getItems()))
-				.map(ItemStack::getItem).forEach(catalystItems::add);
+		Stream.of(ingredients).flatMap(Ingredient::items)
+				.map(Holder::value).forEach(ingredientItems::add);
+		Stream.of(catalysts).flatMap(Ingredient::items)
+				.map(Holder::value).forEach(catalystItems::add);
 
 		catalystItems.retainAll(ingredientItems);
 		if (!catalystItems.isEmpty()) {
@@ -140,11 +141,11 @@ public class RunicAltarRecipe implements vazkii.botania.api.recipe.RunicAltarRec
 
 	public static class Serializer {
 		private static final MapCodec<RunicAltarRecipe> RAW_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-				Ingredient.CODEC_NONEMPTY.listOf().fieldOf("ingredients").forGetter(RunicAltarRecipe::getIngredients),
-				Ingredient.CODEC_NONEMPTY.listOf().fieldOf("catalysts").forGetter(RunicAltarRecipe::getCatalysts),
-				Ingredient.CODEC_NONEMPTY.fieldOf("reagent").forGetter(RunicAltarRecipe::getReagent),
+				Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(RunicAltarRecipe::getIngredients),
+				Ingredient.CODEC.listOf().fieldOf("catalysts").forGetter(RunicAltarRecipe::getCatalysts),
+				Ingredient.CODEC.fieldOf("reagent").forGetter(RunicAltarRecipe::getReagent),
 				ExtraCodecs.POSITIVE_INT.fieldOf("mana").forGetter(RunicAltarRecipe::getMana),
-				ItemStack.SIMPLE_ITEM_CODEC.fieldOf("output").forGetter(RunicAltarRecipe::getOutput)
+				ItemStack.CODEC.fieldOf("output").forGetter(RunicAltarRecipe::getOutput)
 		).apply(instance, RunicAltarRecipe::of));
 		public static final MapCodec<RunicAltarRecipe> CODEC = RAW_CODEC.validate(recipe -> {
 			if (recipe.getIngredients().size() + recipe.getCatalysts().size() == 0) {

@@ -31,7 +31,7 @@ import vazkii.botania.common.block.block_entity.mana.ManaPoolBlockEntity;
 public class ManaInfusionRecipe implements vazkii.botania.api.recipe.ManaInfusionRecipe {
 	public static final MapCodec<ManaInfusionRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			ItemStack.CODEC.fieldOf("output").forGetter(ManaInfusionRecipe::getOutput),
-			Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(ManaInfusionRecipe::getInput),
+			Ingredient.CODEC.fieldOf("input").forGetter(ManaInfusionRecipe::getInput),
 			// Leaving wiggle room for a certain modpack having creative-pool-only recipes
 			ExtraCodecs.intRange(1, ManaPoolBlockEntity.MAX_MANA + 1).fieldOf("mana")
 					.forGetter(ManaInfusionRecipe::getManaToConsume),
@@ -88,7 +88,7 @@ public class ManaInfusionRecipe implements vazkii.botania.api.recipe.ManaInfusio
 	}
 
 	public NonNullList<Ingredient> getIngredients() {
-		return NonNullList.of(Ingredient.EMPTY, input);
+		return NonNullList.copyOf(java.util.List.of(input));
 	}
 
 	@Override

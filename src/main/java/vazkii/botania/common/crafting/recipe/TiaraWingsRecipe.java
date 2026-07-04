@@ -80,8 +80,8 @@ public class TiaraWingsRecipe extends CustomRecipe {
 
 	public NonNullList<Ingredient> getIngredients() {
 		return material.isEmpty()
-				? NonNullList.of(Ingredient.EMPTY, Ingredient.of(BotaniaItems.flightTiara))
-				: NonNullList.of(Ingredient.EMPTY, Ingredient.of(BotaniaItems.flightTiara), material);
+				? NonNullList.copyOf(java.util.List.of(Ingredient.of(BotaniaItems.flightTiara)))
+				: NonNullList.copyOf(java.util.List.of(Ingredient.of(BotaniaItems.flightTiara), material));
 	}
 
 	public ItemStack getResultItem(HolderLookup.Provider registries) {

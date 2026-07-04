@@ -46,7 +46,7 @@ public class RotatingRecipeComponent extends RotatingItemListComponentBase {
 			}
 			var ingredients = new ArrayList<>(recipe.get().value().getIngredients());
 			ingredients.addAll(recipe.get().value().getCatalysts());
-			return NonNullList.of(Ingredient.EMPTY, ingredients.toArray(Ingredient[]::new));
+			return NonNullList.copyOf(ingredients);
 		} else if ("petal_apothecary".equals(recipeType)) {
 			var recipe = BotaniaRecipeTypes.getRecipe(world,
 					Identifier.parse(recipeName), BotaniaRecipeTypes.PETAL_TYPE);

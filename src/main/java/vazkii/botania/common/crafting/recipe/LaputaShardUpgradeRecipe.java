@@ -52,9 +52,9 @@ public class LaputaShardUpgradeRecipe extends CustomRecipe {
 	}
 
 	public NonNullList<Ingredient> getIngredients() {
-		return NonNullList.of(Ingredient.EMPTY,
+		return NonNullList.copyOf(java.util.List.of(
 				Ingredient.of(BotaniaItems.laputaShard),
-				Ingredient.of(BotaniaItems.lifeEssence));
+				Ingredient.of(BotaniaItems.lifeEssence)));
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class TerrestrialAgglomerationRecipe implements vazkii.botania.api.recipe
 
 	public TerrestrialAgglomerationRecipe(int mana, ItemStack output, Ingredient... ingredients) {
 		this.mana = mana;
-		this.ingredients = NonNullList.of(Ingredient.EMPTY, ingredients);
+		this.ingredients = NonNullList.copyOf(java.util.Arrays.asList(ingredients));
 		this.output = output;
 	}
 
@@ -90,7 +90,7 @@ public class TerrestrialAgglomerationRecipe implements vazkii.botania.api.recipe
 
 	public static class Serializer {
 		public static final MapCodec<TerrestrialAgglomerationRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-				ExtraCodecs.nonEmptyList(Ingredient.CODEC_NONEMPTY.listOf()).fieldOf("ingredients")
+				ExtraCodecs.nonEmptyList(Ingredient.CODEC.listOf()).fieldOf("ingredients")
 						.forGetter(TerrestrialAgglomerationRecipe::getIngredients),
 				ExtraCodecs.POSITIVE_INT.fieldOf("mana").forGetter(TerrestrialAgglomerationRecipe::getMana),
 				ItemStack.CODEC.fieldOf("result").forGetter(TerrestrialAgglomerationRecipe::getOutput)

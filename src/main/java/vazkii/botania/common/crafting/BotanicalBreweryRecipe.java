@@ -40,7 +40,7 @@ public class BotanicalBreweryRecipe implements vazkii.botania.api.recipe.Botanic
 
 	public BotanicalBreweryRecipe(Brew brew, Ingredient... inputs) {
 		this.brew = brew;
-		this.inputs = NonNullList.of(Ingredient.EMPTY, inputs);
+		this.inputs = NonNullList.copyOf(java.util.Arrays.asList(inputs));
 	}
 
 	public BotanicalBreweryRecipe(Brew brew, List<Ingredient> ingredients) {
@@ -128,7 +128,7 @@ public class BotanicalBreweryRecipe implements vazkii.botania.api.recipe.Botanic
 	public static class Serializer {
 		public static final MapCodec<BotanicalBreweryRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				BotaniaAPI.instance().getBrewRegistry().byNameCodec().fieldOf("brew").forGetter(BotanicalBreweryRecipe::getBrew),
-				ExtraCodecs.nonEmptyList(Ingredient.CODEC_NONEMPTY.listOf()).fieldOf("ingredients").forGetter(BotanicalBreweryRecipe::getIngredients)
+				ExtraCodecs.nonEmptyList(Ingredient.CODEC.listOf()).fieldOf("ingredients").forGetter(BotanicalBreweryRecipe::getIngredients)
 		).apply(instance, BotanicalBreweryRecipe::new));
 		public static final StreamCodec<RegistryFriendlyByteBuf, BotanicalBreweryRecipe> STREAM_CODEC = StreamCodec.composite(
 				ByteBufCodecs.registry(BotaniaRegistries.BREWS), BotanicalBreweryRecipe::getBrew,
