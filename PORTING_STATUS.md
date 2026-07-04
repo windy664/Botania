@@ -18,7 +18,33 @@
 
 **MC 26.2 底层渲染换成了 Vulkan**（GPU 后端从 OpenGL immediate-mode 转 retained/命令缓冲模型）。这解释了最大的一坨错误簇（`MultiBufferSource` 340 / `GuiGraphics` 204 / `BakedModel` 174 / `RenderType` / `ShaderInstance` / `BlockEntityRenderer<T,S>` / `ItemRenderer` / `ModelData` ≈ 700+ 错）——**不是 API 改名，是整个渲染范式换了**。extract/submit 两阶段、RenderState 怎么建、命令怎么提交都是**设计**不是签名，javap 拿到签名也推不出正确用法，硬写能编译也是错的（跑起来黑屏/崩）。
 
-**决策：渲染簇全部 PARKED，不硬移植**，等一个已完成 26.2 Vulkan 迁移的参考实现（同 [[mi-guideme-262-port]] 里 GuideME 因渲染 GPU 重构 parked 等 AE2 官方的做法）。
+**🎯 参考实现已找到：`github.com/CyclopsMC/EvilCraft` 分支 `master-26`** —— MC 26.2 + NeoForge **26.2.0.6-beta（和 Botania 版本完全一致）**，2026-06-28 更新，渲染层已全部迁到 Vulkan。用 `gh api repos/CyclopsMC/EvilCraft/contents/<path>?ref=master-26` 读源码。**它的 BlockEntityRenderer 直接用原版 API（不依赖 CyclopsCore 基类），可直接照抄。** 决策从"parked"改为"**照 EvilCraft 逐渲染器迁移**"，但仍排在逻辑层之后（40+ 渲染器各需定制）。
+
+### 26.2 渲染范式速查（实测 EvilCraft master-26）
+
+**BlockEntityRenderer**（`RenderBlockEntityDarkTank`）：
+```java
+public class RenderX implements BlockEntityRenderer<MyBE, RenderX.RenderState> {
+    public RenderX(BlockEntityRendererProvider.Context context) {}
+    @Override public RenderState createRenderState() { return new RenderState(); }
+    @Override public void extractRenderState(MyBE be, RenderState s, float partialTick,
+            Vec3 camPos, @Nullable ModelFeatureRenderer.CrumblingOverlay break) {
+        BlockEntityRenderer.super.extractRenderState(be, s, partialTick, camPos, break);
+        s.myField = be.getX();          // 把 BE 数据抽进 state
+    }
+    @Override public void submit(RenderState s, PoseStack pose,
+            SubmitNodeCollector col, CameraRenderState cam) {
+        col.submitCustomGeometry(pose, RenderTypes.text(atlasLoc), (p, vb) ->
+            vb.addVertex(p, x,y,z).setColor(r,g,b,a).setUv(u,v).setUv2(l2,i3));
+    }
+    public static class RenderState extends BlockEntityRenderState {
+        public MyType myField;          // 有内置 lightCoords 等字段
+    }
+}
+```
+**EntityRenderer**（`RenderPoisonousLibelle`）：泛型 `<Entity, RenderState, Model>`；RenderState `extends LivingEntityRenderState`（`net.minecraft.client.renderer.entity.state`）放字段；`createRenderState()` + `extractRenderState(entity, state, partialTicks)`（render 里读 state 不读 entity）。
+
+**新包**：`renderer.SubmitNodeCollector`、`renderer.blockentity.state.BlockEntityRenderState`、`renderer.rendertype.RenderTypes`（RenderType 工厂）、`renderer.state.level.CameraRenderState`、`renderer.feature.ModelFeatureRenderer`、`renderer.entity.state.LivingEntityRenderState`。**GUI（GuiGraphics 204）范式待从 EvilCraft screen 抓。**
 
 **工作切成两半**：
 - ✅ **逻辑层（推进）**：RecipeSerializer、工具/盔甲数据组件化、NBT 存读档、`spawnAtLocation`（掉落物纯逻辑）、entity 逻辑、方法签名迁移等——probe 反编译稳扎稳打。
