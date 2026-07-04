@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -22,7 +23,7 @@ jobs:
 
       - name: Build
         run: |
-          ./gradlew compileJava --no-daemon --stacktrace 2>&1 | tee build.log
+          ./gradlew compileJava --no-daemon --no-configuration-cache --stacktrace 2>&1 | tee build.log
         continue-on-error: true
 
       - name: Show errors
