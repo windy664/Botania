@@ -266,4 +266,6 @@ jobs:
           javap -public -cp "$J" net.minecraft.world.item.BlockItem 2>&1 | grep -iE "BlockItem\(|getBlock|public " | head -15
           echo "#### Item.Properties useItemName/overrideDescription (ItemNameBlockItem behavior) ####"
           javap -public -cp "$J" 'net.minecraft.world.item.Item$Properties' 2>&1 | grep -iE "useBlockDescription|useItemDescription|overrideDescription|BlockName|useName" | head
+          echo "#### MobEffects field names (renames) ####"
+          javap -public -cp "$J" net.minecraft.world.effect.MobEffects 2>&1 | grep -iE "SPEED|SLOW|HASTE|FATIGUE|STRENGTH|RESIST|NAUSEA|JUMP|INSTANT|WEAK|MOVEMENT|DIG|DAMAGE|CONFUSION|HARM|HEAL" | head -40
           echo "@@@@ END RECIPE @@@@"
