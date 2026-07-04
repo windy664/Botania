@@ -117,8 +117,10 @@ jobs:
           grep -iE "/(TagValueOutput|TagValueInput)\.class$" /tmp/idx.txt | grep -iE 'net/minecraft' | sed 's#\.class$##; s#/#.#g' | sort -u | head
           echo "#### TagValueOutput API ####"
           javap -p -cp "$J" net.minecraft.world.level.storage.TagValueOutput 2>&1 | grep -iE "public static|public net|createWithContext|createWithoutContext|buildResult|CompoundTag" | head -15
-          echo "#### TagValueInput API ####"
-          javap -p -cp "$J" net.minecraft.world.level.storage.TagValueInput 2>&1 | grep -iE "public static|create|CompoundTag" | head -15
+          echo "#### TagValueInput API (full) ####"
+          javap -p -cp "$J" net.minecraft.world.level.storage.TagValueInput 2>&1 | grep -iE "public|static" | head -20
+          echo "#### ValueInputContextHelper ctor ####"
+          javap -p -cp "$J" net.minecraft.world.level.storage.ValueInputContextHelper 2>&1 | grep -iE "public" | head
           echo "#### BlockEntity getUpdateTag / handleUpdateTag ####"
           javap -p -cp "$J" net.minecraft.world.level.block.entity.BlockEntity 2>&1 | grep -iE "getUpdateTag|handleUpdateTag|ValueInput|ValueOutput" | head
           echo "#### ProblemReporter (for TagValueOutput ctx) ####"
