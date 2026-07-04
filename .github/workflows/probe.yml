@@ -1,6 +1,9 @@
 name: Probe 26.2 API
 on:
   workflow_dispatch:
+  push:
+    branches: [ "26.2" ]
+    paths: [ ".github/workflows/probe.yml" ]
 
 jobs:
   probe:
@@ -32,3 +35,11 @@ jobs:
             echo "${C} => ${HITS}"
           done < probe_classes.txt
           echo "===== MAPPING END ====="
+      - name: CompoundTag + other API signatures
+        run: |
+          set +e
+          J=$(find /home/runner/work -name 'minecraft-patched-*.jar' | grep -v sources | head -1)
+          echo "################ CompoundTag getX / getXOr ################"
+          javap -p -cp "$J" net.minecraft.nbt.CompoundTag 2>&1 | grep -iE "getInt|getBoolean|getLong|getFloat|getDouble|getString|getList|getCompound|getShort|getByte" | head -60
+          echo "################ ListTag getCompound/getList ################"
+          javap -p -cp "$J" net.minecraft.nbt.ListTag 2>&1 | grep -iE "getCompound|getList|getInt|public" | head -20
