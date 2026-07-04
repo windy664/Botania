@@ -10,6 +10,7 @@ package vazkii.botania.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -48,14 +49,12 @@ public class CacophoniumBlock extends BotaniaBlock implements EntityBlock {
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.is(newState.getBlock())) {
-			BlockEntity te = world.getBlockEntity(pos);
-			if (te instanceof CacophoniumBlockEntity cacophonium) {
-				Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), cacophonium.stack);
-			}
+	protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean movedByPiston) {
+		BlockEntity te = world.getBlockEntity(pos);
+		if (te instanceof CacophoniumBlockEntity cacophonium) {
+			Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), cacophonium.stack);
 		}
-		super.onRemove(state, world, pos, newState, isMoving);
+		super.affectNeighborsAfterRemoval(state, world, pos, movedByPiston);
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -232,27 +233,25 @@ public class ManaSpreaderBlock extends BotaniaWaterloggedBlock implements Entity
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.is(newState.getBlock())) {
-			BlockEntity tile = world.getBlockEntity(pos);
-			if (!(tile instanceof ManaSpreaderBlockEntity spreader)) {
-				return;
-			}
-
-			if (spreader.paddingColor != null) {
-				ItemStack padding = new ItemStack(ColorHelper.WOOL_MAP.apply(spreader.paddingColor));
-				Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), padding);
-			}
-
-			if (state.getValue(BotaniaStateProperties.HAS_SCAFFOLDING)) {
-				ItemStack scaffolding = new ItemStack(Items.SCAFFOLDING);
-				Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), scaffolding);
-			}
-
-			Containers.dropContents(world, pos, spreader.getItemHandler());
-
-			super.onRemove(state, world, pos, newState, isMoving);
+	protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean movedByPiston) {
+		BlockEntity tile = world.getBlockEntity(pos);
+		if (!(tile instanceof ManaSpreaderBlockEntity spreader)) {
+			return;
 		}
+
+		if (spreader.paddingColor != null) {
+			ItemStack padding = new ItemStack(ColorHelper.WOOL_MAP.apply(spreader.paddingColor));
+			Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), padding);
+		}
+
+		if (state.getValue(BotaniaStateProperties.HAS_SCAFFOLDING)) {
+			ItemStack scaffolding = new ItemStack(Items.SCAFFOLDING);
+			Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), scaffolding);
+		}
+
+		Containers.dropContents(world, pos, spreader.getItemHandler());
+
+		super.affectNeighborsAfterRemoval(state, world, pos, movedByPiston);
 	}
 
 	@Override

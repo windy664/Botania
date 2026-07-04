@@ -16,6 +16,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -88,18 +89,16 @@ public class ManaEnchanterBlock extends BotaniaBlock implements EntityBlock {
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.is(newState.getBlock())) {
-			BlockEntity tile = world.getBlockEntity(pos);
+	protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean movedByPiston) {
+		BlockEntity tile = world.getBlockEntity(pos);
 
-			if (tile instanceof ManaEnchanterBlockEntity enchanter) {
+		if (tile instanceof ManaEnchanterBlockEntity enchanter) {
 
-				if (!enchanter.itemToEnchant.isEmpty()) {
-					Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), enchanter.itemToEnchant);
-				}
+			if (!enchanter.itemToEnchant.isEmpty()) {
+				Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), enchanter.itemToEnchant);
 			}
-
-			super.onRemove(state, world, pos, newState, isMoving);
 		}
+
+		super.affectNeighborsAfterRemoval(state, world, pos, movedByPiston);
 	}
 }
