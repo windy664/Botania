@@ -12,6 +12,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -397,12 +399,12 @@ public class LuminizerBlockEntity extends BotaniaBlockEntity implements WandBind
 		}
 
 		@Override
-		protected void readAdditionalSaveData(CompoundTag cmp) {
+		protected void readAdditionalSaveData(ValueInput cmp) {
 			setExit(new BlockPos(cmp.getIntOr(TAG_EXIT_X, 0), cmp.getIntOr(TAG_EXIT_Y, 0), cmp.getIntOr(TAG_EXIT_Z, 0)));
 		}
 
 		@Override
-		protected void addAdditionalSaveData(CompoundTag cmp) {
+		protected void addAdditionalSaveData(ValueOutput cmp) {
 			BlockPos exit = getExitPos();
 			cmp.putInt(TAG_EXIT_X, exit.getX());
 			cmp.putInt(TAG_EXIT_Y, exit.getY());

@@ -10,7 +10,8 @@ package vazkii.botania.common.entity;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -211,20 +212,18 @@ public class ThornChakramEntity extends ThrowableProjectile implements ItemSuppl
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(ValueOutput compound) {
 		super.addAdditionalSaveData(compound);
 		if (!stack.isEmpty()) {
-			compound.put("fly_stack", stack.save(level().registryAccess()));
+			compound.store("fly_stack", ItemStack.CODEC, stack);
 		}
 		compound.putBoolean("flare", isFire());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(ValueInput compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("fly_stack")) {
-			stack = ItemStack.parse(level().registryAccess(), compound.getCompoundOrEmpty("fly_stack")).orElse(ItemStack.EMPTY);
-		}
+		stack = compound.read("fly_stack", ItemStack.CODEC).orElse(ItemStack.EMPTY);
 		setFire(compound.getBooleanOr("flare", false));
 	}
 
