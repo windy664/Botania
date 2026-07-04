@@ -442,7 +442,7 @@ public final class BotaniaItems {
 
 	private static MysticalPetalItem makePetal(DyeColor dyeColor) {
 		return make(dyeColor.getName() + LibItemNames.PETAL_SUFFIX,
-				new MysticalPetalItem(BotaniaBlocks.getBuriedPetal(dyeColor), dyeColor, defaultBuilder()));
+				new MysticalPetalItem(BotaniaBlocks.getBuriedPetal(dyeColor), dyeColor, defaultBuilder().useItemDescriptionPrefix()));
 	}
 
 	public static Item.Properties defaultBuilder() {
