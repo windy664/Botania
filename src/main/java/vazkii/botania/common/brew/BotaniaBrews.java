@@ -24,14 +24,14 @@ import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 public class BotaniaBrews {
 
 	public static final Brew fallbackBrew = new Brew(0, 0).setNotBloodPendantInfusable().setNotIncenseInfusable();
-	public static final Brew speed = new Brew(0x59B7FF, 4000, new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1800, 1));
-	public static final Brew strength = new Brew(0xEE3F3F, 4000, new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1800, 1));
-	public static final Brew haste = new Brew(0xF4A432, 4000, new MobEffectInstance(MobEffects.DIG_SPEED, 1800, 1));
-	public static final Brew healing = new Brew(0xFF5ECC, 6000, new MobEffectInstance(MobEffects.HEAL, 1, 1));
-	public static final Brew jumpBoost = new Brew(0x32F46D, 4000, new MobEffectInstance(MobEffects.JUMP, 1800, 1));
+	public static final Brew speed = new Brew(0x59B7FF, 4000, new MobEffectInstance(MobEffects.SPEED, 1800, 1));
+	public static final Brew strength = new Brew(0xEE3F3F, 4000, new MobEffectInstance(MobEffects.STRENGTH, 1800, 1));
+	public static final Brew haste = new Brew(0xF4A432, 4000, new MobEffectInstance(MobEffects.HASTE, 1800, 1));
+	public static final Brew healing = new Brew(0xFF5ECC, 6000, new MobEffectInstance(MobEffects.INSTANT_HEALTH, 1, 1));
+	public static final Brew jumpBoost = new Brew(0x32F46D, 4000, new MobEffectInstance(MobEffects.JUMP_BOOST, 1800, 1));
 	public static final Brew regen = new Brew(0xFD6488, 7000, new MobEffectInstance(MobEffects.REGENERATION, 500, 1));
 	public static final Brew regenWeak = new Brew(0xFD6488, 9000, new MobEffectInstance(MobEffects.REGENERATION, 2400, 0));
-	public static final Brew resistance = new Brew(0xB44E17, 4000, new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1800, 1));
+	public static final Brew resistance = new Brew(0xB44E17, 4000, new MobEffectInstance(MobEffects.RESISTANCE, 1800, 1));
 	public static final Brew fireResistance = new Brew(0xF86900, 4000, new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 9600, 0));
 	public static final Brew waterBreathing = new Brew(0x84A7CF, 4000, new MobEffectInstance(MobEffects.WATER_BREATHING, 9600, 0));
 	public static final Brew invisibility = new Brew(0xAEAEAE, 8000, new MobEffectInstance(MobEffects.INVISIBILITY, 9600, 0)).setNotBloodPendantInfusable();
@@ -43,7 +43,7 @@ public class BotaniaBrews {
 	public static final Brew featherfeet = make(7000, new MobEffectInstance(BotaniaMobEffects.FEATHER_FEET, 1800, 0));
 	public static final Brew emptiness = make(30000, new MobEffectInstance(BotaniaMobEffects.EMPTINESS, 7200, 0));
 	public static final Brew bloodthirst = make(20000, new MobEffectInstance(BotaniaMobEffects.BLOODTHRST, 7200, 0));
-	public static final Brew overload = new Brew(0x232323, 12000, new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1800, 3), new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1800, 2), new MobEffectInstance(MobEffects.WEAKNESS, 3600, 1), new MobEffectInstance(MobEffects.HUNGER, 200, 2));
+	public static final Brew overload = new Brew(0x232323, 12000, new MobEffectInstance(MobEffects.STRENGTH, 1800, 3), new MobEffectInstance(MobEffects.SPEED, 1800, 2), new MobEffectInstance(MobEffects.WEAKNESS, 3600, 1), new MobEffectInstance(MobEffects.HUNGER, 200, 2));
 	public static final Brew clear = make(4000, new MobEffectInstance(BotaniaMobEffects.CLEAR, 0, 0));
 
 	public static void submitRegistrations(BiConsumer<Brew, Identifier> r) {

@@ -38,7 +38,7 @@ public class MedumoneBlockEntity extends FunctionalFlowerBlockEntity {
 
 			for (LivingEntity entity : entities) {
 				if (!(entity instanceof Player)) {
-					entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 2, 100));
+					entity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 2, 100));
 					addMana(-1);
 					if (getMana() == 0) {
 						return;

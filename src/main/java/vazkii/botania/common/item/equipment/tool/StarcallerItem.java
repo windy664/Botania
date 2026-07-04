@@ -51,7 +51,7 @@ public class StarcallerItem extends ManasteelSwordItem {
 			stack.set(BotaniaDataComponents.LAST_TRIGGER_TIME, world.getGameTime());
 		}
 
-		MobEffectInstance haste = player.getEffect(MobEffects.DIG_SPEED);
+		MobEffectInstance haste = player.getEffect(MobEffects.HASTE);
 		float check = haste == null ? 0.16666667F : haste.getAmplifier() == 1 ? 0.5F : 0.4F;
 
 		long timeSinceLast = world.getGameTime() - stack.getOrDefault(BotaniaDataComponents.LAST_TRIGGER_TIME, world.getGameTime());

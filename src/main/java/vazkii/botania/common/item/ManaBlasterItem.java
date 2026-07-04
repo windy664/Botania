@@ -58,7 +58,7 @@ public class ManaBlasterItem extends Item {
 	public InteractionResult use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		int effCd = COOLDOWN;
-		MobEffectInstance effect = player.getEffect(MobEffects.DIG_SPEED);
+		MobEffectInstance effect = player.getEffect(MobEffects.HASTE);
 		if (effect != null) {
 			effCd = Math.max(2, COOLDOWN - (effect.getAmplifier() + 1) * 8);
 		}

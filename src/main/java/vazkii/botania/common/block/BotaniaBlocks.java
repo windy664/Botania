@@ -304,7 +304,7 @@ public final class BotaniaBlocks {
 	public static final Block hydroangeasFloating = make(floating(LibBlockNames.SUBTILE_HYDROANGEAS), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.HYDROANGEAS));
 	public static final Block hydroangeasPotted = make(potted(LibBlockNames.SUBTILE_HYDROANGEAS), BotaniaBlocks.flowerPot(hydroangeas, 0));
 
-	public static final Block endoflame = make(LibBlockNames.SUBTILE_ENDOFLAME, new SpecialFlowerBlock(MobEffects.MOVEMENT_SLOWDOWN, 10, FLOWER_PROPS, () -> BotaniaBlockEntities.ENDOFLAME));
+	public static final Block endoflame = make(LibBlockNames.SUBTILE_ENDOFLAME, new SpecialFlowerBlock(MobEffects.SLOWNESS, 10, FLOWER_PROPS, () -> BotaniaBlockEntities.ENDOFLAME));
 	public static final Block endoflameFloating = make(floating(LibBlockNames.SUBTILE_ENDOFLAME), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.ENDOFLAME));
 	public static final Block endoflamePotted = make(potted(LibBlockNames.SUBTILE_ENDOFLAME), BotaniaBlocks.flowerPot(endoflame, 0));
 
@@ -320,7 +320,7 @@ public final class BotaniaBlocks {
 	public static final Block munchdewFloating = make(floating(LibBlockNames.SUBTILE_MUNCHDEW), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.MUNCHDEW));
 	public static final Block munchdewPotted = make(potted(LibBlockNames.SUBTILE_MUNCHDEW), BotaniaBlocks.flowerPot(munchdew, 0));
 
-	public static final Block entropinnyum = make(LibBlockNames.SUBTILE_ENTROPINNYUM, new SpecialFlowerBlock(MobEffects.DAMAGE_RESISTANCE, 72, FLOWER_PROPS, () -> BotaniaBlockEntities.ENTROPINNYUM));
+	public static final Block entropinnyum = make(LibBlockNames.SUBTILE_ENTROPINNYUM, new SpecialFlowerBlock(MobEffects.RESISTANCE, 72, FLOWER_PROPS, () -> BotaniaBlockEntities.ENTROPINNYUM));
 	public static final Block entropinnyumFloating = make(floating(LibBlockNames.SUBTILE_ENTROPINNYUM), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.ENTROPINNYUM));
 	public static final Block entropinnyumPotted = make(potted(LibBlockNames.SUBTILE_ENTROPINNYUM), BotaniaBlocks.flowerPot(entropinnyum, 0));
 
@@ -340,7 +340,7 @@ public final class BotaniaBlocks {
 	public static final Block spectrolusFloating = make(floating(LibBlockNames.SUBTILE_SPECTROLUS), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.SPECTROLUS));
 	public static final Block spectrolusPotted = make(potted(LibBlockNames.SUBTILE_SPECTROLUS), BotaniaBlocks.flowerPot(spectrolus, 0));
 
-	public static final Block dandelifeon = make(LibBlockNames.SUBTILE_DANDELIFEON, new SpecialFlowerBlock(MobEffects.CONFUSION, 240, FLOWER_PROPS, () -> BotaniaBlockEntities.DANDELIFEON));
+	public static final Block dandelifeon = make(LibBlockNames.SUBTILE_DANDELIFEON, new SpecialFlowerBlock(MobEffects.NAUSEA, 240, FLOWER_PROPS, () -> BotaniaBlockEntities.DANDELIFEON));
 	public static final Block dandelifeonFloating = make(floating(LibBlockNames.SUBTILE_DANDELIFEON), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.DANDELIFEON));
 	public static final Block dandelifeonPotted = make(potted(LibBlockNames.SUBTILE_DANDELIFEON), BotaniaBlocks.flowerPot(dandelifeon, 0));
 
@@ -371,15 +371,15 @@ public final class BotaniaBlocks {
 	public static final Block heiseiDreamFloating = make(floating(LibBlockNames.SUBTILE_HEISEI_DREAM), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.HEISEI_DREAM));
 	public static final Block heiseiDreamPotted = make(potted(LibBlockNames.SUBTILE_HEISEI_DREAM), BotaniaBlocks.flowerPot(heiseiDream, 0));
 
-	public static final Block tigerseye = make(LibBlockNames.SUBTILE_TIGERSEYE, new SpecialFlowerBlock(MobEffects.DAMAGE_BOOST, 90, FLOWER_PROPS, () -> BotaniaBlockEntities.TIGERSEYE));
+	public static final Block tigerseye = make(LibBlockNames.SUBTILE_TIGERSEYE, new SpecialFlowerBlock(MobEffects.STRENGTH, 90, FLOWER_PROPS, () -> BotaniaBlockEntities.TIGERSEYE));
 	public static final Block tigerseyeFloating = make(floating(LibBlockNames.SUBTILE_TIGERSEYE), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.TIGERSEYE));
 	public static final Block tigerseyePotted = make(potted(LibBlockNames.SUBTILE_TIGERSEYE), BotaniaBlocks.flowerPot(tigerseye, 0));
 
-	public static final Block jadedAmaranthus = make(LibBlockNames.SUBTILE_JADED_AMARANTHUS, new SpecialFlowerBlock(MobEffects.HEAL, 1, FLOWER_PROPS, () -> BotaniaBlockEntities.JADED_AMARANTHUS));
+	public static final Block jadedAmaranthus = make(LibBlockNames.SUBTILE_JADED_AMARANTHUS, new SpecialFlowerBlock(MobEffects.INSTANT_HEALTH, 1, FLOWER_PROPS, () -> BotaniaBlockEntities.JADED_AMARANTHUS));
 	public static final Block jadedAmaranthusFloating = make(floating(LibBlockNames.SUBTILE_JADED_AMARANTHUS), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.JADED_AMARANTHUS));
 	public static final Block jadedAmaranthusPotted = make(potted(LibBlockNames.SUBTILE_JADED_AMARANTHUS), BotaniaBlocks.flowerPot(jadedAmaranthus, 0));
 
-	public static final Block orechid = make(LibBlockNames.SUBTILE_ORECHID, new SpecialFlowerBlock(MobEffects.DIG_SPEED, 10, FLOWER_PROPS, () -> BotaniaBlockEntities.ORECHID));
+	public static final Block orechid = make(LibBlockNames.SUBTILE_ORECHID, new SpecialFlowerBlock(MobEffects.HASTE, 10, FLOWER_PROPS, () -> BotaniaBlockEntities.ORECHID));
 	public static final Block orechidFloating = make(floating(LibBlockNames.SUBTILE_ORECHID), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.ORECHID));
 	public static final Block orechidPotted = make(potted(LibBlockNames.SUBTILE_ORECHID), BotaniaBlocks.flowerPot(orechid, 0));
 
@@ -387,7 +387,7 @@ public final class BotaniaBlocks {
 	public static final Block fallenKanadeFloating = make(floating(LibBlockNames.SUBTILE_FALLEN_KANADE), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.FALLEN_KANADE));
 	public static final Block fallenKanadePotted = make(potted(LibBlockNames.SUBTILE_FALLEN_KANADE), BotaniaBlocks.flowerPot(fallenKanade, 0));
 
-	public static final Block exoflame = make(LibBlockNames.SUBTILE_EXOFLAME, new SpecialFlowerBlock(MobEffects.MOVEMENT_SPEED, 240, FLOWER_PROPS, () -> BotaniaBlockEntities.EXOFLAME));
+	public static final Block exoflame = make(LibBlockNames.SUBTILE_EXOFLAME, new SpecialFlowerBlock(MobEffects.SPEED, 240, FLOWER_PROPS, () -> BotaniaBlockEntities.EXOFLAME));
 	public static final Block exoflameFloating = make(floating(LibBlockNames.SUBTILE_EXOFLAME), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.EXOFLAME));
 	public static final Block exoflamePotted = make(potted(LibBlockNames.SUBTILE_EXOFLAME), BotaniaBlocks.flowerPot(exoflame, 0));
 
@@ -398,8 +398,8 @@ public final class BotaniaBlocks {
 	public static final Block agricarnationPotted = make(potted(LibBlockNames.SUBTILE_AGRICARNATION), BotaniaBlocks.flowerPot(agricarnation, 0));
 	public static final Block agricarnationChibiPotted = make(chibi(potted(LibBlockNames.SUBTILE_AGRICARNATION)), BotaniaBlocks.flowerPot(agricarnationChibi, 0));
 
-	public static final Block hopperhock = make(LibBlockNames.SUBTILE_HOPPERHOCK, new SpecialFlowerBlock(MobEffects.MOVEMENT_SPEED, 30, FLOWER_PROPS, () -> BotaniaBlockEntities.HOPPERHOCK));
-	public static final Block hopperhockChibi = make(chibi(LibBlockNames.SUBTILE_HOPPERHOCK), new SpecialFlowerBlock(MobEffects.MOVEMENT_SPEED, 30, FLOWER_PROPS, () -> BotaniaBlockEntities.HOPPERHOCK_CHIBI));
+	public static final Block hopperhock = make(LibBlockNames.SUBTILE_HOPPERHOCK, new SpecialFlowerBlock(MobEffects.SPEED, 30, FLOWER_PROPS, () -> BotaniaBlockEntities.HOPPERHOCK));
+	public static final Block hopperhockChibi = make(chibi(LibBlockNames.SUBTILE_HOPPERHOCK), new SpecialFlowerBlock(MobEffects.SPEED, 30, FLOWER_PROPS, () -> BotaniaBlockEntities.HOPPERHOCK_CHIBI));
 	public static final Block hopperhockFloating = make(floating(LibBlockNames.SUBTILE_HOPPERHOCK), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.HOPPERHOCK));
 	public static final Block hopperhockChibiFloating = make(chibi(floating(LibBlockNames.SUBTILE_HOPPERHOCK)), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.HOPPERHOCK_CHIBI));
 	public static final Block hopperhockPotted = make(potted(LibBlockNames.SUBTILE_HOPPERHOCK), BotaniaBlocks.flowerPot(hopperhock, 0));
@@ -419,8 +419,8 @@ public final class BotaniaBlocks {
 	public static final Block jiyuuliaPotted = make(potted(LibBlockNames.SUBTILE_JIYUULIA), BotaniaBlocks.flowerPot(jiyuulia, 0));
 	public static final Block jiyuuliaChibiPotted = make(chibi(potted(LibBlockNames.SUBTILE_JIYUULIA)), BotaniaBlocks.flowerPot(jiyuuliaChibi, 0));
 
-	public static final Block rannuncarpus = make(LibBlockNames.SUBTILE_RANNUNCARPUS, new SpecialFlowerBlock(MobEffects.JUMP, 30, FLOWER_PROPS, () -> BotaniaBlockEntities.RANNUNCARPUS));
-	public static final Block rannuncarpusChibi = make(chibi(LibBlockNames.SUBTILE_RANNUNCARPUS), new SpecialFlowerBlock(MobEffects.JUMP, 30, FLOWER_PROPS, () -> BotaniaBlockEntities.RANNUNCARPUS_CHIBI));
+	public static final Block rannuncarpus = make(LibBlockNames.SUBTILE_RANNUNCARPUS, new SpecialFlowerBlock(MobEffects.JUMP_BOOST, 30, FLOWER_PROPS, () -> BotaniaBlockEntities.RANNUNCARPUS));
+	public static final Block rannuncarpusChibi = make(chibi(LibBlockNames.SUBTILE_RANNUNCARPUS), new SpecialFlowerBlock(MobEffects.JUMP_BOOST, 30, FLOWER_PROPS, () -> BotaniaBlockEntities.RANNUNCARPUS_CHIBI));
 	public static final Block rannuncarpusFloating = make(floating(LibBlockNames.SUBTILE_RANNUNCARPUS), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.RANNUNCARPUS));
 	public static final Block rannuncarpusChibiFloating = make(chibi(floating(LibBlockNames.SUBTILE_RANNUNCARPUS)), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.RANNUNCARPUS_CHIBI));
 	public static final Block rannuncarpusPotted = make(potted(LibBlockNames.SUBTILE_RANNUNCARPUS), BotaniaBlocks.flowerPot(rannuncarpus, 0));
@@ -430,7 +430,7 @@ public final class BotaniaBlocks {
 	public static final Block hyacidusFloating = make(floating(LibBlockNames.SUBTILE_HYACIDUS), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.HYACIDUS));
 	public static final Block hyacidusPotted = make(potted(LibBlockNames.SUBTILE_HYACIDUS), BotaniaBlocks.flowerPot(hyacidus, 0));
 
-	public static final Block pollidisiac = make(LibBlockNames.SUBTILE_POLLIDISIAC, new SpecialFlowerBlock(MobEffects.DIG_SPEED, 369, FLOWER_PROPS, () -> BotaniaBlockEntities.POLLIDISIAC));
+	public static final Block pollidisiac = make(LibBlockNames.SUBTILE_POLLIDISIAC, new SpecialFlowerBlock(MobEffects.HASTE, 369, FLOWER_PROPS, () -> BotaniaBlockEntities.POLLIDISIAC));
 	public static final Block pollidisiacFloating = make(floating(LibBlockNames.SUBTILE_POLLIDISIAC), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.POLLIDISIAC));
 	public static final Block pollidisiacPotted = make(potted(LibBlockNames.SUBTILE_POLLIDISIAC), BotaniaBlocks.flowerPot(pollidisiac, 0));
 
@@ -457,12 +457,12 @@ public final class BotaniaBlocks {
 	public static final Block spectranthemumFloating = make(floating(LibBlockNames.SUBTILE_SPECTRANTHEMUM), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.SPECTRANTHEMUM));
 	public static final Block spectranthemumPotted = make(potted(LibBlockNames.SUBTILE_SPECTRANTHEMUM), BotaniaBlocks.flowerPot(spectranthemum, 0));
 
-	public static final Block medumone = make(LibBlockNames.SUBTILE_MEDUMONE, new SpecialFlowerBlock(MobEffects.MOVEMENT_SLOWDOWN, 3600, FLOWER_PROPS, () -> BotaniaBlockEntities.MEDUMONE));
+	public static final Block medumone = make(LibBlockNames.SUBTILE_MEDUMONE, new SpecialFlowerBlock(MobEffects.SLOWNESS, 3600, FLOWER_PROPS, () -> BotaniaBlockEntities.MEDUMONE));
 	public static final Block medumoneFloating = make(floating(LibBlockNames.SUBTILE_MEDUMONE), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.MEDUMONE));
 	public static final Block medumonePotted = make(potted(LibBlockNames.SUBTILE_MEDUMONE), BotaniaBlocks.flowerPot(medumone, 0));
 
-	public static final Block marimorphosis = make(LibBlockNames.SUBTILE_MARIMORPHOSIS, new SpecialFlowerBlock(MobEffects.DIG_SLOWDOWN, 60, FLOWER_PROPS, () -> BotaniaBlockEntities.MARIMORPHOSIS));
-	public static final Block marimorphosisChibi = make(chibi(LibBlockNames.SUBTILE_MARIMORPHOSIS), new SpecialFlowerBlock(MobEffects.DIG_SLOWDOWN, 60, FLOWER_PROPS, () -> BotaniaBlockEntities.MARIMORPHOSIS_CHIBI));
+	public static final Block marimorphosis = make(LibBlockNames.SUBTILE_MARIMORPHOSIS, new SpecialFlowerBlock(MobEffects.MINING_FATIGUE, 60, FLOWER_PROPS, () -> BotaniaBlockEntities.MARIMORPHOSIS));
+	public static final Block marimorphosisChibi = make(chibi(LibBlockNames.SUBTILE_MARIMORPHOSIS), new SpecialFlowerBlock(MobEffects.MINING_FATIGUE, 60, FLOWER_PROPS, () -> BotaniaBlockEntities.MARIMORPHOSIS_CHIBI));
 	public static final Block marimorphosisFloating = make(floating(LibBlockNames.SUBTILE_MARIMORPHOSIS), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.MARIMORPHOSIS));
 	public static final Block marimorphosisChibiFloating = make(chibi(floating(LibBlockNames.SUBTILE_MARIMORPHOSIS)), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.MARIMORPHOSIS_CHIBI));
 	public static final Block marimorphosisPotted = make(potted(LibBlockNames.SUBTILE_MARIMORPHOSIS), BotaniaBlocks.flowerPot(marimorphosis, 0));
@@ -475,8 +475,8 @@ public final class BotaniaBlocks {
 	public static final Block bubbellPotted = make(potted(LibBlockNames.SUBTILE_BUBBELL), BotaniaBlocks.flowerPot(bubbell, 0));
 	public static final Block bubbellChibiPotted = make(chibi(potted(LibBlockNames.SUBTILE_BUBBELL)), BotaniaBlocks.flowerPot(bubbellChibi, 0));
 
-	public static final Block solegnolia = make(LibBlockNames.SUBTILE_SOLEGNOLIA, new SpecialFlowerBlock(MobEffects.HARM, 1, FLOWER_PROPS, () -> BotaniaBlockEntities.SOLEGNOLIA));
-	public static final Block solegnoliaChibi = make(chibi(LibBlockNames.SUBTILE_SOLEGNOLIA), new SpecialFlowerBlock(MobEffects.HARM, 1, FLOWER_PROPS, () -> BotaniaBlockEntities.SOLEGNOLIA_CHIBI));
+	public static final Block solegnolia = make(LibBlockNames.SUBTILE_SOLEGNOLIA, new SpecialFlowerBlock(MobEffects.INSTANT_DAMAGE, 1, FLOWER_PROPS, () -> BotaniaBlockEntities.SOLEGNOLIA));
+	public static final Block solegnoliaChibi = make(chibi(LibBlockNames.SUBTILE_SOLEGNOLIA), new SpecialFlowerBlock(MobEffects.INSTANT_DAMAGE, 1, FLOWER_PROPS, () -> BotaniaBlockEntities.SOLEGNOLIA_CHIBI));
 	public static final Block solegnoliaFloating = make(floating(LibBlockNames.SUBTILE_SOLEGNOLIA), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.SOLEGNOLIA));
 	public static final Block solegnoliaChibiFloating = make(chibi(floating(LibBlockNames.SUBTILE_SOLEGNOLIA)), new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> BotaniaBlockEntities.SOLEGNOLIA_CHIBI));
 	public static final Block solegnoliaPotted = make(potted(LibBlockNames.SUBTILE_SOLEGNOLIA), BotaniaBlocks.flowerPot(solegnolia, 0));
@@ -1784,21 +1784,21 @@ public final class BotaniaBlocks {
 
 	private static Holder<MobEffect> effectForFlower(DyeColor color) {
 		return switch (color) {
-			case WHITE -> MobEffects.MOVEMENT_SPEED;
+			case WHITE -> MobEffects.SPEED;
 			case ORANGE -> MobEffects.FIRE_RESISTANCE;
-			case MAGENTA -> MobEffects.DIG_SLOWDOWN;
-			case LIGHT_BLUE -> MobEffects.JUMP;
+			case MAGENTA -> MobEffects.MINING_FATIGUE;
+			case LIGHT_BLUE -> MobEffects.JUMP_BOOST;
 			case YELLOW -> MobEffects.ABSORPTION;
 			case LIME -> MobEffects.POISON;
 			case PINK -> MobEffects.REGENERATION;
-			case GRAY -> MobEffects.DAMAGE_RESISTANCE;
+			case GRAY -> MobEffects.RESISTANCE;
 			case LIGHT_GRAY -> MobEffects.WEAKNESS;
 			case CYAN -> MobEffects.WATER_BREATHING;
-			case PURPLE -> MobEffects.CONFUSION;
+			case PURPLE -> MobEffects.NAUSEA;
 			case BLUE -> MobEffects.NIGHT_VISION;
 			case BROWN -> MobEffects.WITHER;
 			case GREEN -> MobEffects.HUNGER;
-			case RED -> MobEffects.DAMAGE_BOOST;
+			case RED -> MobEffects.STRENGTH;
 			case BLACK -> MobEffects.BLINDNESS;
 		};
 	}

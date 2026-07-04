@@ -94,8 +94,8 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 					.effectsToApply(
 							LooniumMobEffectToApply.effect(MobEffects.REGENERATION).build(),
 							LooniumMobEffectToApply.effect(MobEffects.FIRE_RESISTANCE).build(),
-							LooniumMobEffectToApply.effect(MobEffects.DAMAGE_RESISTANCE).build(),
-							LooniumMobEffectToApply.effect(MobEffects.DAMAGE_BOOST).build()
+							LooniumMobEffectToApply.effect(MobEffects.RESISTANCE).build(),
+							LooniumMobEffectToApply.effect(MobEffects.STRENGTH).build()
 					)
 					.build());
 

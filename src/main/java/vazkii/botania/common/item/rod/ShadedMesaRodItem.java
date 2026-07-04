@@ -171,8 +171,8 @@ public class ShadedMesaRodItem extends Item {
 
 					if (target instanceof LivingEntity living) {
 						living.fallDistance = 0.0F;
-						if (living.getEffect(MobEffects.MOVEMENT_SLOWDOWN) == null) {
-							living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
+						if (living.getEffect(MobEffects.SLOWNESS) == null) {
+							living.addEffect(new MobEffectInstance(MobEffects.SLOWNESS,
 									targetIsPlayer ? 20 : 2, targetIsPlayer ? 1 : 3, true, true));
 						}
 					}
