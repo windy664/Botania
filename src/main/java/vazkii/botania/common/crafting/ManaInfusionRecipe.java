@@ -29,7 +29,25 @@ import vazkii.botania.common.block.BotaniaBlocks;
 import vazkii.botania.common.block.block_entity.mana.ManaPoolBlockEntity;
 
 public class ManaInfusionRecipe implements vazkii.botania.api.recipe.ManaInfusionRecipe {
-	public static final RecipeSerializer<ManaInfusionRecipe> SERIALIZER = new Serializer();
+	public static final MapCodec<ManaInfusionRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			ItemStack.CODEC.fieldOf("output").forGetter(ManaInfusionRecipe::getOutput),
+			Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(ManaInfusionRecipe::getInput),
+			// Leaving wiggle room for a certain modpack having creative-pool-only recipes
+			ExtraCodecs.intRange(1, ManaPoolBlockEntity.MAX_MANA + 1).fieldOf("mana")
+					.forGetter(ManaInfusionRecipe::getManaToConsume),
+			Codec.STRING.optionalFieldOf("group", "").forGetter(ManaInfusionRecipe::getGroup),
+			StateIngredients.TYPED_CODEC.optionalFieldOf("catalyst", StateIngredients.NONE)
+					.forGetter(ManaInfusionRecipe::getRecipeCatalyst)
+	).apply(instance, ManaInfusionRecipe::new));
+	public static final StreamCodec<RegistryFriendlyByteBuf, ManaInfusionRecipe> STREAM_CODEC = StreamCodec.composite(
+			ItemStack.STREAM_CODEC, ManaInfusionRecipe::getOutput,
+			Ingredient.CONTENTS_STREAM_CODEC, ManaInfusionRecipe::getInput,
+			ByteBufCodecs.VAR_INT, ManaInfusionRecipe::getManaToConsume,
+			ByteBufCodecs.STRING_UTF8, ManaInfusionRecipe::getGroup,
+			StateIngredients.TYPED_STREAM_CODEC, ManaInfusionRecipe::getRecipeCatalyst,
+			ManaInfusionRecipe::new
+	);
+	public static final RecipeSerializer<ManaInfusionRecipe> SERIALIZER = new RecipeSerializer<>(CODEC, STREAM_CODEC);
 	private final ItemStack output;
 	private final Ingredient input;
 	private final int mana;
@@ -92,34 +110,4 @@ public class ManaInfusionRecipe implements vazkii.botania.api.recipe.ManaInfusio
 		return output;
 	}
 
-	public static class Serializer extends RecipeSerializer<ManaInfusionRecipe> {
-		public static final MapCodec<ManaInfusionRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-				ItemStack.CODEC.fieldOf("output").forGetter(ManaInfusionRecipe::getOutput),
-				Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(ManaInfusionRecipe::getInput),
-				// Leaving wiggle room for a certain modpack having creative-pool-only recipes
-				ExtraCodecs.intRange(1, ManaPoolBlockEntity.MAX_MANA + 1).fieldOf("mana")
-						.forGetter(ManaInfusionRecipe::getManaToConsume),
-				Codec.STRING.optionalFieldOf("group", "").forGetter(ManaInfusionRecipe::getGroup),
-				StateIngredients.TYPED_CODEC.optionalFieldOf("catalyst", StateIngredients.NONE)
-						.forGetter(ManaInfusionRecipe::getRecipeCatalyst)
-		).apply(instance, ManaInfusionRecipe::new));
-		public static final StreamCodec<RegistryFriendlyByteBuf, ManaInfusionRecipe> STREAM_CODEC = StreamCodec.composite(
-				ItemStack.STREAM_CODEC, ManaInfusionRecipe::getOutput,
-				Ingredient.CONTENTS_STREAM_CODEC, ManaInfusionRecipe::getInput,
-				ByteBufCodecs.VAR_INT, ManaInfusionRecipe::getManaToConsume,
-				ByteBufCodecs.STRING_UTF8, ManaInfusionRecipe::getGroup,
-				StateIngredients.TYPED_STREAM_CODEC, ManaInfusionRecipe::getRecipeCatalyst,
-				ManaInfusionRecipe::new
-		);
-
-		@Override
-		public MapCodec<ManaInfusionRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, ManaInfusionRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
-	}
 }
