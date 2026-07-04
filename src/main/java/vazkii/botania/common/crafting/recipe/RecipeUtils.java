@@ -19,7 +19,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Function;
 
 public class RecipeUtils {
@@ -83,8 +82,11 @@ public class RecipeUtils {
 			ItemStack special = specialHandler.apply(item);
 			if (special != null) {
 				ret.set(i, special);
-			} else if (item.getItem().hasCraftingRemainingItem()) {
-				ret.set(i, new ItemStack(Objects.requireNonNull(item.getItem().getCraftingRemainingItem())));
+			} else {
+				ItemStack remainder = item.getItem().getCraftingRemainder().create();
+				if (!remainder.isEmpty()) {
+					ret.set(i, remainder);
+				}
 			}
 		}
 
