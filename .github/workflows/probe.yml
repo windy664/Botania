@@ -44,11 +44,40 @@ jobs:
             echo "### $base ###"
             grep -iE "/${base}[A-Za-z0-9_]*\.class$" /tmp/idx.txt | grep -iE 'net/minecraft|net/neoforged|com/mojang' | sed 's#\.class$##; s#/#.#g' | sort -u | head -6
           done
-      - name: CompoundTag + other API signatures
+      - name: Signature dump for tool/armor/recipe/nbt batches
         run: |
           set +e
           J=$(find /home/runner/work -name 'minecraft-patched-*.jar' | grep -v sources | head -1)
-          echo "################ CompoundTag getX / getXOr ################"
-          javap -p -cp "$J" net.minecraft.nbt.CompoundTag 2>&1 | grep -iE "getInt|getBoolean|getLong|getFloat|getDouble|getString|getList|getCompound|getShort|getByte" | head -60
-          echo "################ ListTag getCompound/getList ################"
-          javap -p -cp "$J" net.minecraft.nbt.ListTag 2>&1 | grep -iE "getCompound|getList|getInt|public" | head -20
+          unzip -l "$J" 2>/dev/null | grep -oE '[a-zA-Z0-9/_$]+\.class' > /tmp/idx.txt
+          # 1) Locate simple names -> FQN
+          echo "===== LOCATE ====="
+          for base in ToolMaterial ToolMaterials ArmorType EquipmentType EquipmentSlotGroup ArmorItem ItemUseAnimation UseAnim ValueInput ValueOutput ARGB FastColor EntitySpawnReason MobSpawnType SwordItem PickaxeItem AxeItem ShovelItem HoeItem DiggerItem MaceItem BlockItem ClientItem ItemModelResolver; do
+            echo "### $base ###"
+            grep -iE "(^|/)${base}\.class$" /tmp/idx.txt | grep -iE 'net/minecraft|net/neoforged|com/mojang' | sed 's#\.class$##; s#/#.#g' | sort -u | head -6
+          done
+          # 2) javap dumps (try likely FQNs; javap prints error if wrong, harmless)
+          echo "===== JAVAP ====="
+          for C in \
+            net.minecraft.world.item.equipment.ArmorMaterial \
+            net.minecraft.world.item.equipment.ArmorMaterials \
+            net.minecraft.world.item.ToolMaterial \
+            net.minecraft.world.item.equipment.ToolMaterial \
+            net.minecraft.world.item.Item \
+            'net.minecraft.world.item.Item$Properties' \
+            net.minecraft.world.item.SwordItem \
+            net.minecraft.world.item.PickaxeItem \
+            net.minecraft.world.item.DiggerItem \
+            net.minecraft.world.item.crafting.RecipeSerializer \
+            net.minecraft.world.item.crafting.Recipe \
+            net.minecraft.world.level.storage.ValueInput \
+            net.minecraft.world.level.storage.ValueOutput \
+            net.minecraft.world.entity.Entity \
+            net.minecraft.util.ARGB ; do
+            echo "################ $C ################"
+            javap -p -cp "$J" "$C" 2>&1 | grep -iE "public|protected|static final|class |interface |enum |record " | head -50
+          done
+          # 3) Entity save/load signatures (ValueInput/Output refactor)
+          echo "===== ENTITY SAVE/LOAD ====="
+          javap -p -cp "$J" net.minecraft.world.entity.Entity 2>&1 | grep -iE "addAdditionalSaveData|readAdditionalSaveData|SaveData|load|save" | head -20
+          echo "===== BlockEntity save/load ====="
+          javap -p -cp "$J" net.minecraft.world.level.block.entity.BlockEntity 2>&1 | grep -iE "loadAdditional|saveAdditional|load|save" | head -20
