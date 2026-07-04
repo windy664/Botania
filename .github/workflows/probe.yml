@@ -184,4 +184,14 @@ jobs:
           javap -public -cp "$J" net.minecraft.world.item.crafting.ShapelessRecipe 2>&1
           echo "#### RecipeBookCategories constants ####"
           javap -public -cp "$J" net.minecraft.world.item.crafting.RecipeBookCategories 2>&1 | grep -iE "public static final" | head -30
+          echo "#### Recipe.CommonInfo ####"
+          javap -public -cp "$J" 'net.minecraft.world.item.crafting.Recipe$CommonInfo' 2>&1
+          echo "#### CraftingRecipe.CraftingBookInfo ####"
+          javap -public -cp "$J" 'net.minecraft.world.item.crafting.CraftingRecipe$CraftingBookInfo' 2>&1
+          echo "#### ItemStackTemplate ####"
+          javap -public -cp "$J" net.minecraft.world.item.ItemStackTemplate 2>&1
+          echo "#### NormalCraftingRecipe (super of Shaped/Shapeless) ####"
+          javap -public -cp "$J" net.minecraft.world.item.crafting.NormalCraftingRecipe 2>&1
+          echo "#### ShapedRecipePattern ####"
+          javap -public -cp "$J" net.minecraft.world.item.crafting.ShapedRecipePattern 2>&1 | grep -iE "public|ingredients|width|height" | head -20
           echo "@@@@ END RECIPE @@@@"
