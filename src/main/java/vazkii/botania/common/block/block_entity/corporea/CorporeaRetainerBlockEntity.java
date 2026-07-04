@@ -37,7 +37,7 @@ import vazkii.botania.common.block.block_entity.BotaniaBlockEntity;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class CorporeaRetainerBlockEntity extends BotaniaBlockEntity implements Wandable {
 	private static final String TAG_REQUEST_X = "requestX";
@@ -47,7 +47,7 @@ public class CorporeaRetainerBlockEntity extends BotaniaBlockEntity implements W
 	private static final String TAG_REQUEST_COUNT = "requestCount";
 	private static final String TAG_RETAIN_MISSING = "retainMissing";
 
-	private static final Map<Identifier, BiFunction<CompoundTag, HolderLookup.Provider, ? extends CorporeaRequestMatcher>> corporeaMatcherDeserializers = new ConcurrentHashMap<>();
+	private static final Map<Identifier, Function<ValueInput, ? extends CorporeaRequestMatcher>> corporeaMatcherDeserializers = new ConcurrentHashMap<>();
 	private static final Map<Class<? extends CorporeaRequestMatcher>, Identifier> corporeaMatcherSerializers = new ConcurrentHashMap<>();
 
 	private BlockPos requestPos = Bound.UNBOUND_POS;
@@ -111,7 +111,7 @@ public class CorporeaRetainerBlockEntity extends BotaniaBlockEntity implements W
 
 		if (reqType != null) {
 			cmp.putString(TAG_REQUEST_TYPE, reqType.toString());
-			request.writeToNBT(cmp, registries);
+			request.writeToNBT(cmp);
 			cmp.putInt(TAG_REQUEST_COUNT, requestCount);
 		}
 		cmp.putBoolean(TAG_RETAIN_MISSING, retainMissing);
@@ -128,7 +128,7 @@ public class CorporeaRetainerBlockEntity extends BotaniaBlockEntity implements W
 
 		Identifier reqType = Identifier.tryParse(cmp.getStringOr(TAG_REQUEST_TYPE, ""));
 		if (reqType != null && corporeaMatcherDeserializers.containsKey(reqType)) {
-			request = corporeaMatcherDeserializers.get(reqType).apply(cmp, registries);
+			request = corporeaMatcherDeserializers.get(reqType).apply(cmp);
 		} else {
 			request = null;
 		}
@@ -136,7 +136,7 @@ public class CorporeaRetainerBlockEntity extends BotaniaBlockEntity implements W
 		retainMissing = cmp.getBooleanOr(TAG_RETAIN_MISSING, false);
 	}
 
-	public static <T extends CorporeaRequestMatcher> void addCorporeaRequestMatcher(Identifier id, Class<T> clazz, BiFunction<CompoundTag, HolderLookup.Provider, T> deserializer) {
+	public static <T extends CorporeaRequestMatcher> void addCorporeaRequestMatcher(Identifier id, Class<T> clazz, Function<ValueInput, T> deserializer) {
 		corporeaMatcherSerializers.put(clazz, id);
 		corporeaMatcherDeserializers.put(id, deserializer);
 	}

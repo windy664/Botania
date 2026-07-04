@@ -16,6 +16,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -33,7 +34,7 @@ import vazkii.botania.common.block.block_entity.corporea.CorporeaRetainerBlockEn
 import vazkii.botania.xplat.XplatAbstractions;
 
 import java.util.*;
-import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class CorporeaHelperImpl implements CorporeaHelper {
 	private final WeakHashMap<CorporeaSpark, Set<CorporeaNode>> cachedNetworks = new WeakHashMap<>();
@@ -129,7 +130,7 @@ public class CorporeaHelperImpl implements CorporeaHelper {
 	}
 
 	@Override
-	public <T extends CorporeaRequestMatcher> void registerRequestMatcher(Identifier id, Class<T> clazz, BiFunction<CompoundTag, HolderLookup.Provider, T> deserializer) {
+	public <T extends CorporeaRequestMatcher> void registerRequestMatcher(Identifier id, Class<T> clazz, Function<ValueInput, T> deserializer) {
 		CorporeaRetainerBlockEntity.addCorporeaRequestMatcher(id, clazz, deserializer);
 	}
 

@@ -8,10 +8,9 @@
  */
 package vazkii.botania.api.corporea;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import java.util.function.Predicate;
 
@@ -31,7 +30,7 @@ public interface CorporeaRequestMatcher extends Predicate<ItemStack> {
 	/**
 	 * Serialize to NBT data, for the Corporea Retainer's benefit.
 	 */
-	default void writeToNBT(CompoundTag tag, HolderLookup.Provider registries) {}
+	default void writeToNBT(ValueOutput tag) {}
 
 	/**
 	 * Returns the pretty name of the requested item, for printing request feedback on Corporea Indexes.
