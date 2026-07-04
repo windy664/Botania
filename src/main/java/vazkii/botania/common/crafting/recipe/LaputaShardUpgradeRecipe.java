@@ -11,7 +11,6 @@ package vazkii.botania.common.crafting.recipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -25,9 +24,7 @@ import vazkii.botania.common.item.LaputaShardItem;
 public class LaputaShardUpgradeRecipe extends CustomRecipe {
 	public static final RecipeSerializer<LaputaShardUpgradeRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(LaputaShardUpgradeRecipe::new);
 
-	public LaputaShardUpgradeRecipe(CraftingBookCategory craftingBookCategory) {
-		super(craftingBookCategory);
-	}
+	public LaputaShardUpgradeRecipe() {}
 
 	@Override
 	public boolean matches(CraftingInput inv, Level worldIn) {

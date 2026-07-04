@@ -10,7 +10,6 @@ package vazkii.botania.common.crafting.recipe;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -22,9 +21,7 @@ import vazkii.botania.api.item.CosmeticBauble;
 public class CosmeticAttachRecipe extends CustomRecipe {
 	public static final RecipeSerializer<CosmeticAttachRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(CosmeticAttachRecipe::new);
 
-	public CosmeticAttachRecipe(CraftingBookCategory craftingBookCategory) {
-		super(craftingBookCategory);
-	}
+	public CosmeticAttachRecipe() {}
 
 	@Override
 	public boolean matches(CraftingInput inv, Level world) {

@@ -10,7 +10,6 @@ package vazkii.botania.common.crafting.recipe;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -22,9 +21,7 @@ import vazkii.botania.common.item.equipment.tool.terrasteel.TerraShattererItem;
 public class TerraShattererTippingRecipe extends CustomRecipe {
 	public static final RecipeSerializer<TerraShattererTippingRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(TerraShattererTippingRecipe::new);
 
-	public TerraShattererTippingRecipe(CraftingBookCategory craftingBookCategory) {
-		super(craftingBookCategory);
-	}
+	public TerraShattererTippingRecipe() {}
 
 	@Override
 	public RecipeSerializer<TerraShattererTippingRecipe> getSerializer() {

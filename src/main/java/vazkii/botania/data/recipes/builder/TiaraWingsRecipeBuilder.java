@@ -58,7 +58,7 @@ public class TiaraWingsRecipeBuilder {
 				.rewards(AdvancementRewards.Builder.recipe(id))
 				.requirements(AdvancementRequirements.Strategy.OR);
 		this.criteria.forEach(builder::addCriterion);
-		TiaraWingsRecipe recipe = new TiaraWingsRecipe(RecipeBuilder.determineBookCategory(category), material, variant);
+		TiaraWingsRecipe recipe = new TiaraWingsRecipe(material, variant);
 		recipeOutput.accept(id, recipe, builder.build(id.withPrefix("recipes/" + this.category.getFolderName() + "/")));
 	}
 }

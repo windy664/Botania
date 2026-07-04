@@ -11,7 +11,6 @@ package vazkii.botania.common.crafting.recipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -23,9 +22,7 @@ import vazkii.botania.common.item.BotaniaItems;
 public class ResoluteIvyRecipe extends CustomRecipe {
 	public static final RecipeSerializer<ResoluteIvyRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(ResoluteIvyRecipe::new);
 
-	public ResoluteIvyRecipe(CraftingBookCategory craftingBookCategory) {
-		super(craftingBookCategory);
-	}
+	public ResoluteIvyRecipe() {}
 
 	@Override
 	public boolean matches(CraftingInput inv, Level world) {

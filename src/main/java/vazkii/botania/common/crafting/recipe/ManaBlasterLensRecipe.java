@@ -10,7 +10,6 @@ package vazkii.botania.common.crafting.recipe;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -22,9 +21,7 @@ import vazkii.botania.common.item.ManaBlasterItem;
 public class ManaBlasterLensRecipe extends CustomRecipe {
 	public static final RecipeSerializer<ManaBlasterLensRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(ManaBlasterLensRecipe::new);
 
-	public ManaBlasterLensRecipe(CraftingBookCategory craftingBookCategory) {
-		super(craftingBookCategory);
-	}
+	public ManaBlasterLensRecipe() {}
 
 	@Override
 	public boolean matches(CraftingInput inv, Level world) {

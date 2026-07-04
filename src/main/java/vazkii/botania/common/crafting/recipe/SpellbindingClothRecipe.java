@@ -12,7 +12,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -23,9 +22,7 @@ import vazkii.botania.common.item.BotaniaItems;
 public class SpellbindingClothRecipe extends CustomRecipe {
 	public static final RecipeSerializer<SpellbindingClothRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(SpellbindingClothRecipe::new);
 
-	public SpellbindingClothRecipe(CraftingBookCategory craftingBookCategory) {
-		super(craftingBookCategory);
-	}
+	public SpellbindingClothRecipe() {}
 
 	@Override
 	public boolean matches(CraftingInput inv, Level world) {

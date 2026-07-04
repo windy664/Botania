@@ -10,7 +10,6 @@ package vazkii.botania.common.crafting.recipe;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -24,9 +23,7 @@ import java.util.Objects;
 public class AncientWillRecipe extends CustomRecipe {
 	public static final RecipeSerializer<AncientWillRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(AncientWillRecipe::new);
 
-	public AncientWillRecipe(CraftingBookCategory craftingBookCategory) {
-		super(craftingBookCategory);
-	}
+	public AncientWillRecipe() {}
 
 	@Override
 	public boolean matches(CraftingInput inv, Level world) {

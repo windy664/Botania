@@ -10,7 +10,6 @@ package vazkii.botania.common.crafting.recipe;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -22,9 +21,7 @@ import vazkii.botania.common.item.BotaniaItems;
 public class PhantomInkRecipe extends CustomRecipe {
 	public static final RecipeSerializer<PhantomInkRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(PhantomInkRecipe::new);
 
-	public PhantomInkRecipe(CraftingBookCategory craftingBookCategory) {
-		super(craftingBookCategory);
-	}
+	public PhantomInkRecipe() {}
 
 	@Override
 	public boolean matches(CraftingInput var1, Level var2) {

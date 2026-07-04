@@ -10,7 +10,6 @@ package vazkii.botania.common.crafting.recipe;
 
 import com.mojang.serialization.MapCodec;
 
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -32,6 +31,8 @@ import net.minecraft.world.level.Level;
 import vazkii.botania.mixin.ShapedRecipeAccessor;
 import vazkii.botania.mixin.ShapedRecipePatternAccessor;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class WaterBottleMatchingRecipe extends ShapedRecipe {
@@ -39,10 +40,11 @@ public class WaterBottleMatchingRecipe extends ShapedRecipe {
 
 	private static ShapedRecipePattern transformPattern(ShapedRecipePattern pattern) {
 		final var testPotion = new ItemStack(Items.POTION);
-		final NonNullList<Ingredient> ingredients = NonNullList.of(Ingredient.EMPTY,
-				pattern.ingredients().stream().map(i -> i.test(testPotion)
+		final List<Optional<Ingredient>> ingredients = pattern.ingredients().stream()
+				.map(opt -> opt.map(i -> i.test(testPotion)
 						? Ingredient.of(PotionContents.createItemStack(Items.POTION, Potions.WATER))
-						: i).toArray(Ingredient[]::new));
+						: i))
+				.toList();
 		return new ShapedRecipePattern(pattern.width(), pattern.height(), ingredients,
 				// TODO: verify
 				((ShapedRecipePatternAccessor) (Object) pattern).getData());

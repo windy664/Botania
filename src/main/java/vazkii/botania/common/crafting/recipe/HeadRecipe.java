@@ -8,7 +8,6 @@
  */
 package vazkii.botania.common.crafting.recipe;
 
-import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.component.DataComponents;
@@ -25,7 +24,6 @@ import net.minecraft.world.level.Level;
 
 import vazkii.botania.common.crafting.RunicAltarRecipe;
 
-import java.util.Optional;
 import java.util.function.Function;
 
 public class HeadRecipe extends RunicAltarRecipe {
@@ -74,8 +72,7 @@ public class HeadRecipe extends RunicAltarRecipe {
 		for (int i = 0; i < inv.size(); i++) {
 			ItemStack ingr = inv.getItem(i);
 			if (ingr.is(Items.NAME_TAG)) {
-				stack.set(DataComponents.PROFILE, new ResolvableProfile(Optional.of(ingr.getHoverName().getString()),
-						Optional.empty(), new PropertyMap()));
+				stack.set(DataComponents.PROFILE, ResolvableProfile.createUnresolved(ingr.getHoverName().getString()));
 				break;
 			}
 		}

@@ -32,8 +32,7 @@ public class TiaraWingsRecipe extends CustomRecipe {
 	private final Ingredient material;
 	private final int variant;
 
-	public TiaraWingsRecipe(CraftingBookCategory category, Ingredient material, int variant) {
-		super(category);
+	public TiaraWingsRecipe(Ingredient material, int variant) {
 		if (material.test(BotaniaItems.flightTiara.getDefaultInstance())) {
 			throw new IllegalArgumentException("Material cannot be a Flügel Tiara");
 		}
@@ -111,12 +110,10 @@ public class TiaraWingsRecipe extends CustomRecipe {
 
 	private static class Serializer {
 		private static final MapCodec<TiaraWingsRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-				CraftingBookCategory.CODEC.fieldOf("category").orElse(CraftingBookCategory.EQUIPMENT).forGetter(TiaraWingsRecipe::category),
 				Ingredient.CODEC.fieldOf("material").forGetter(TiaraWingsRecipe::material),
 				ExtraCodecs.intRange(0, FlugelTiaraItem.WING_TYPES).fieldOf("variant").forGetter(TiaraWingsRecipe::variant)
 		).apply(instance, TiaraWingsRecipe::new));
 		private static final StreamCodec<RegistryFriendlyByteBuf, TiaraWingsRecipe> STREAM_CODEC = StreamCodec.composite(
-				CraftingBookCategory.STREAM_CODEC, TiaraWingsRecipe::category,
 				Ingredient.CONTENTS_STREAM_CODEC, TiaraWingsRecipe::material,
 				ByteBufCodecs.VAR_INT, TiaraWingsRecipe::variant,
 				TiaraWingsRecipe::new
