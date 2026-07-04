@@ -200,4 +200,11 @@ jobs:
           javap -p -cp "$J" net.minecraft.world.item.crafting.ShapelessRecipe 2>&1 | grep -iE "private|result|ingredient" | head
           echo "#### Registry accessors (get/getOptional/getValue/getOrThrow) ####"
           javap -public -cp "$J" net.minecraft.core.Registry 2>&1 | grep -iE "getOptional|getValue|getValueOrThrow| get\(| getOrThrow| wrapAsHolder|Optional" | head -30
+          echo "#### Equippable component + slot (armor detection) ####"
+          grep -iE "/Equippable\.class$" /tmp/idx.txt | grep -iE 'net/minecraft' | sed 's#\.class$##; s#/#.#g' | sort -u | head
+          javap -public -cp "$J" net.minecraft.world.item.equipment.Equippable 2>&1 | grep -iE "public|slot" | head -15
+          echo "#### DataComponents EQUIPPABLE ####"
+          javap -public -cp "$J" net.minecraft.core.component.DataComponents 2>&1 | grep -iE "EQUIPPABLE" | head
+          echo "#### EquipmentSlot isArmor/getType ####"
+          javap -public -cp "$J" net.minecraft.world.entity.EquipmentSlot 2>&1 | grep -iE "isArmor|getType|public " | head -20
           echo "@@@@ END RECIPE @@@@"
