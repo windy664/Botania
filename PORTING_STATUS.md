@@ -14,9 +14,19 @@
 - **类型改名**（commit aaf14bf）：`UseAnim→ItemUseAnimation`、`MobSpawnType→EntitySpawnReason`、`FastColor→ARGB`（枚举值/方法名 probe 核实一致，25 文件）；CI 验证清零。
 - **Entity save/load → ValueInput/ValueOutput**（commit ee72103 + a99378c，15 文件全部实体）：`readAdditionalSaveData(CompoundTag,provider?)`→`(ValueInput)`、`addAdditionalSaveData`→`(ValueOutput)`。原语 `getIntOr/putInt/...` 同名沿用；`contains(k)`→`getInt(k).isPresent()` 或直接用默认值；`ItemStack.save/parse`→`store/read(k, ItemStack.OPTIONAL_CODEC)`；UUID→`UUIDUtil.CODEC`；BlockPos→`store/read(k, BlockPos.CODEC)`/`storeNullable`；`ListTag` of BlockPos→`out.list(k,codec).add(v)` + `in.listOrEmpty(k,codec)`（`TypedInputList extends Iterable<T>`）；Motion 重读 hack→`read("Motion", Codec.DOUBLE.listOf())`。**CI 验证：我的 save/load 无 override 报错、零回归**（这些文件残留的错是 moveTo/ThrowableProjectile 构造器/addParticle/canChangeDimensions 等**其它** API，属别的簇）。
 
-## 剩余：架构级重写（非单日可完成，需逐文件）
+## ⚠️ 重大战略：26.2 = Vulkan 渲染 → 渲染层全部 PARKED（2026-07-04 定）
 
-当前 `cannot find symbol` 仍约 2800（javac 截断在 2000，真实更高）。经反编译探针确认，绝大多数来自以下被**删除/深度重构**的 API，每项都需要按 26.2 新设计逐文件重写，不是改 import 能解决：
+**MC 26.2 底层渲染换成了 Vulkan**（GPU 后端从 OpenGL immediate-mode 转 retained/命令缓冲模型）。这解释了最大的一坨错误簇（`MultiBufferSource` 340 / `GuiGraphics` 204 / `BakedModel` 174 / `RenderType` / `ShaderInstance` / `BlockEntityRenderer<T,S>` / `ItemRenderer` / `ModelData` ≈ 700+ 错）——**不是 API 改名，是整个渲染范式换了**。extract/submit 两阶段、RenderState 怎么建、命令怎么提交都是**设计**不是签名，javap 拿到签名也推不出正确用法，硬写能编译也是错的（跑起来黑屏/崩）。
+
+**决策：渲染簇全部 PARKED，不硬移植**，等一个已完成 26.2 Vulkan 迁移的参考实现（同 [[mi-guideme-262-port]] 里 GuideME 因渲染 GPU 重构 parked 等 AE2 官方的做法）。
+
+**工作切成两半**：
+- ✅ **逻辑层（推进）**：RecipeSerializer、工具/盔甲数据组件化、NBT 存读档、`spawnAtLocation`（掉落物纯逻辑）、entity 逻辑、方法签名迁移等——probe 反编译稳扎稳打。
+- ⏸️ **渲染层（PARKED）**：`MultiBufferSource`/`GuiGraphics`/`BakedModel`/`ShaderInstance`/`RenderType`/`ItemRenderer`/`ModelData`/所有 `*Renderer`/`client.model.geometry`/`client.model.data`——标记搁置。粒子 `Level.addParticle`（去 force 参）算逻辑侧边缘，可做。
+
+## 剩余逻辑层（可推进，按杠杆）
+
+以下来自被**删除/重构**的**非渲染** API，逐项 probe 确认签名后逐文件改：
 
 | 类别 | 规模 | 说明 |
 |---|---|---|
