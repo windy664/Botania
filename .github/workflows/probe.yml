@@ -139,6 +139,16 @@ jobs:
           echo "#### CustomRecipe (special recipe base) methods ####"
           javap -public -cp "$J" net.minecraft.world.item.crafting.CustomRecipe 2>&1 | grep -iE "Serializer|Factory|CustomRecipe\(" | head
           echo "@@@@ END SPECIAL @@@@"
+          echo "@@@@ TOOL/ARMOR batch @@@@"
+          echo "#### ItemTags REPAIRS_* constants ####"
+          javap -public -cp "$J" net.minecraft.tags.ItemTags 2>&1 | grep -iE "REPAIR|TagKey" | head -20
+          echo "#### EquipmentAssets / EquipmentAsset locate ####"
+          grep -iE "/(EquipmentAsset|EquipmentAssets)\.class$" /tmp/idx.txt | grep -iE 'net/minecraft' | sed 's#\.class$##; s#/#.#g' | sort -u | head
+          echo "#### EquipmentAssets vanilla keys ####"
+          javap -public -cp "$J" net.minecraft.world.item.equipment.EquipmentAssets 2>&1 | grep -iE "ResourceKey|createId|public static" | head -20
+          echo "#### CustomDamageItem/Item durability hook: setDamageValue/hurtAndBreak ####"
+          javap -public -cp "$J" net.minecraft.world.item.ItemStack 2>&1 | grep -iE "hurtAndBreak|setDamageValue|getDamageValue|isDamaged" | head
+          echo "@@@@ END TOOLARMOR @@@@"
           echo "#### BlockEntity getUpdateTag / handleUpdateTag ####"
           javap -p -cp "$J" net.minecraft.world.level.block.entity.BlockEntity 2>&1 | grep -iE "getUpdateTag|handleUpdateTag|ValueInput|ValueOutput" | head
           echo "#### ProblemReporter (for TagValueOutput ctx) ####"
