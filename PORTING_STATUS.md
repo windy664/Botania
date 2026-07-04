@@ -101,8 +101,18 @@ irs.submit(poseStack, submitNodeCollector, light, OverlayTexture.NO_OVERLAY, 0);
 - 甲物品：`new Item(props.humanoidArmor(armorMaterial, armorType))`。旧 `ArmorMaterial.Layer` 概念没了（贴图走 EquipmentAsset json）。
 - `BotaniaArmorMaterials.java` 整个要按新 record 重写（现用 `Holder<ArmorMaterial>`+`.Layer`+`Map<ArmorItem.Type,>`）。
 
-**配方序列化（final 化）**：
-- `RecipeSerializer<T>` 现为 `final record RecipeSerializer(MapCodec<T> codec, StreamCodec<RegistryFriendlyByteBuf,T> streamCodec)`。**不能继承**——每个 Botania serializer 从"类+方法"改成 `new RecipeSerializer<>(mapCodec, streamCodec)`，配方类自身提供静态 MapCodec/StreamCodec。
+**Botania 工具材质具体值**（从 BotaniaAPIImpl.ItemTier enum，改 ToolMaterial record 用）：
+`ToolMaterial(incorrectBlocks, durability, speed, atkBonus, enchantValue, repairTag)`：
+- MANASTEEL：`INCORRECT_FOR_DIAMOND_TOOL, 300, 6.2F, 2, 20, 修=manaSteel`
+- ELEMENTIUM：`INCORRECT_FOR_DIAMOND_TOOL, 720, 6.2F, 2, 20, 修=elementium`
+- TERRASTEEL：`INCORRECT_FOR_NETHERITE_TOOL, 2300, 9, 4, 26, 修=terrasteel`
+（repairItems 现在是 `TagKey<Item>` 不是 Ingredient/Item——需给每种材质建 tag。`BotaniaAPI.getManasteelItemTier()` 返回 `Tier`→`ToolMaterial`；`BotaniaAPIImpl.ItemTier` enum implements Tier 要重构成持 ToolMaterial 或改 static 常量。）
+
+**✅ 配方序列化（final 化）已全部完成**（commits ab71a0e/a04a059/02dca2e/289e8a5）：
+- 标准型（10）：删 `extends RecipeSerializer`，CODEC/STREAM_CODEC 提类级，`SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC)`，删 codec()/streamCodec() override。
+- Wrapping 型（8）：`WrappingRecipeSerializer<T>` 改成**持有** `RecipeSerializer<T> serializer` + 抽象 `wrap()`；子类构造 `super(CODEC, STREAM_CODEC)`；注册点用 `.SERIALIZER.serializer`。
+- Special 型（16）：`SimpleCraftingRecipeSerializer` **已删** → 新建 `SimpleRecipeSerializerHelper.of(factory)`（category-only codec）。
+- CI 确认配方序列化簇零残留。⚠️ `Recipe.assemble`(14) 签名变化是别的簇。
 
 **NBT ValueInput/ValueOutput（CompoundTag 重构）**：
 - Entity：`protected void readAdditionalSaveData(ValueInput)` / `addAdditionalSaveData(ValueOutput)`（去掉了 CompoundTag+HolderLookup.Provider 两参）。
