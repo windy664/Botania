@@ -63,7 +63,7 @@ public class WandOfTheForestRecipe extends ShapedRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SERIALIZER;
+		return SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<WandOfTheForestRecipe> {
@@ -72,22 +72,16 @@ public class WandOfTheForestRecipe extends ShapedRecipe {
 		public static final StreamCodec<RegistryFriendlyByteBuf, WandOfTheForestRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()
 				.map(WandOfTheForestRecipe::new, Function.identity());
 
+		Serializer() {
+			super(CODEC, STREAM_CODEC);
+		}
+
 		@Override
 		public WandOfTheForestRecipe wrap(Recipe<?> recipe) {
 			if (!(recipe instanceof ShapedRecipe shapedRecipe)) {
 				throw new IllegalArgumentException("Unsupported recipe type to wrap: " + recipe.getType());
 			}
 			return new WandOfTheForestRecipe(shapedRecipe);
-		}
-
-		@Override
-		public MapCodec<WandOfTheForestRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, WandOfTheForestRecipe> streamCodec() {
-			return STREAM_CODEC;
 		}
 	}
 }

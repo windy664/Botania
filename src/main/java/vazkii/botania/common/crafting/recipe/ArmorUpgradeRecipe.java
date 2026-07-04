@@ -48,7 +48,7 @@ public class ArmorUpgradeRecipe extends ShapedRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SERIALIZER;
+		return SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<ArmorUpgradeRecipe> {
@@ -57,22 +57,16 @@ public class ArmorUpgradeRecipe extends ShapedRecipe {
 		public static final StreamCodec<RegistryFriendlyByteBuf, ArmorUpgradeRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()
 				.map(ArmorUpgradeRecipe::new, Function.identity());
 
+		Serializer() {
+			super(CODEC, STREAM_CODEC);
+		}
+
 		@Override
 		public ArmorUpgradeRecipe wrap(Recipe<?> recipe) {
 			if (!(recipe instanceof ShapedRecipe shapedRecipe)) {
 				throw new IllegalArgumentException("Unsupported recipe type to wrap: " + recipe.getType());
 			}
 			return new ArmorUpgradeRecipe(shapedRecipe);
-		}
-
-		@Override
-		public MapCodec<ArmorUpgradeRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, ArmorUpgradeRecipe> streamCodec() {
-			return STREAM_CODEC;
 		}
 	}
 }

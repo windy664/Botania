@@ -71,7 +71,7 @@ public class WaterBottleMatchingRecipe extends ShapedRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SERIALIZER;
+		return SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<WaterBottleMatchingRecipe> {
@@ -80,22 +80,16 @@ public class WaterBottleMatchingRecipe extends ShapedRecipe {
 		public static final StreamCodec<RegistryFriendlyByteBuf, WaterBottleMatchingRecipe> STREAM_CODEC = SHAPED_RECIPE.streamCodec()
 				.map(WaterBottleMatchingRecipe::new, Function.identity());
 
+		Serializer() {
+			super(CODEC, STREAM_CODEC);
+		}
+
 		@Override
 		public WaterBottleMatchingRecipe wrap(Recipe<?> recipe) {
 			if (!(recipe instanceof ShapedRecipe shapedRecipe)) {
 				throw new IllegalArgumentException("Unsupported recipe type to wrap: " + recipe.getType());
 			}
 			return new WaterBottleMatchingRecipe(shapedRecipe);
-		}
-
-		@Override
-		public MapCodec<WaterBottleMatchingRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, WaterBottleMatchingRecipe> streamCodec() {
-			return STREAM_CODEC;
 		}
 	}
 }

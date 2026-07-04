@@ -31,7 +31,7 @@ import java.util.function.Supplier;
 
 @Deprecated(forRemoval = true)
 public class GogAlternationRecipe<C extends RecipeInput> implements Recipe<C> {
-	public static final RecipeSerializer<GogAlternationRecipe<?>> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<GogAlternationRecipe<?>> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 
 	private final Supplier<Boolean> isGog = Suppliers.memoize(XplatAbstractions.INSTANCE::gogLoaded);
 	private final Recipe<?> baseRecipe;
@@ -85,7 +85,7 @@ public class GogAlternationRecipe<C extends RecipeInput> implements Recipe<C> {
 		return getRecipe().getType();
 	}
 
-	private static class Serializer extends RecipeSerializer<GogAlternationRecipe<?>> {
+	private static class Serializer {
 		private static final MapCodec<GogAlternationRecipe<?>> RAW_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				Recipe.CODEC.fieldOf("base").forGetter(GogAlternationRecipe::getBaseRecipe),
 				Recipe.CODEC.fieldOf("gog").forGetter(GogAlternationRecipe::getGogRecipe)
@@ -101,15 +101,5 @@ public class GogAlternationRecipe<C extends RecipeInput> implements Recipe<C> {
 				Recipe.STREAM_CODEC, GogAlternationRecipe::getGogRecipe,
 				GogAlternationRecipe::new
 		);
-
-		@Override
-		public MapCodec<GogAlternationRecipe<?>> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, GogAlternationRecipe<?>> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 }

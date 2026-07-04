@@ -30,7 +30,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class HeadRecipe extends RunicAltarRecipe {
-	public static final RecipeSerializer<HeadRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<HeadRecipe> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 
 	public HeadRecipe(ItemStack output, Ingredient reagent, int mana, Ingredient... inputs) {
 		super(output, reagent, mana, inputs, new Ingredient[0]);
@@ -83,21 +83,11 @@ public class HeadRecipe extends RunicAltarRecipe {
 		return stack;
 	}
 
-	public static class Serializer extends RecipeSerializer<HeadRecipe> {
+	public static class Serializer {
 		public static final MapCodec<HeadRecipe> CODEC = RunicAltarRecipe.Serializer.CODEC
 				.xmap(HeadRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, HeadRecipe> STREAM_CODEC = RunicAltarRecipe.Serializer.STREAM_CODEC
 				.map(HeadRecipe::new, Function.identity());
-
-		@Override
-		public MapCodec<HeadRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, HeadRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 
 }

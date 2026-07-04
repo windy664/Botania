@@ -37,7 +37,7 @@ public class ShapelessManaUpgradeRecipe extends ShapelessRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SERIALIZER;
+		return SERIALIZER.serializer;
 	}
 
 	private static class Serializer extends WrappingRecipeSerializer<ShapelessManaUpgradeRecipe> {
@@ -46,22 +46,16 @@ public class ShapelessManaUpgradeRecipe extends ShapelessRecipe {
 		public static final StreamCodec<RegistryFriendlyByteBuf, ShapelessManaUpgradeRecipe> STREAM_CODEC = SHAPELESS_RECIPE.streamCodec()
 				.map(ShapelessManaUpgradeRecipe::new, Function.identity());
 
+		Serializer() {
+			super(CODEC, STREAM_CODEC);
+		}
+
 		@Override
 		public ShapelessManaUpgradeRecipe wrap(Recipe<?> recipe) {
 			if (!(recipe instanceof ShapelessRecipe shapelessRecipe)) {
 				throw new IllegalArgumentException("Unsupported recipe type to wrap: " + recipe.getType());
 			}
 			return new ShapelessManaUpgradeRecipe(shapelessRecipe);
-		}
-
-		@Override
-		public MapCodec<ShapelessManaUpgradeRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, ShapelessManaUpgradeRecipe> streamCodec() {
-			return STREAM_CODEC;
 		}
 	}
 }

@@ -27,7 +27,7 @@ import vazkii.botania.common.item.BotaniaItems;
 import vazkii.botania.common.item.equipment.bauble.FlugelTiaraItem;
 
 public class TiaraWingsRecipe extends CustomRecipe {
-	public static final RecipeSerializer<TiaraWingsRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<TiaraWingsRecipe> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 
 	private final Ingredient material;
 	private final int variant;
@@ -115,7 +115,7 @@ public class TiaraWingsRecipe extends CustomRecipe {
 		return SERIALIZER;
 	}
 
-	private static class Serializer extends RecipeSerializer<TiaraWingsRecipe> {
+	private static class Serializer {
 		private static final MapCodec<TiaraWingsRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				CraftingBookCategory.CODEC.fieldOf("category").orElse(CraftingBookCategory.EQUIPMENT).forGetter(TiaraWingsRecipe::category),
 				Ingredient.CODEC.fieldOf("material").forGetter(TiaraWingsRecipe::material),
@@ -127,15 +127,5 @@ public class TiaraWingsRecipe extends CustomRecipe {
 				ByteBufCodecs.VAR_INT, TiaraWingsRecipe::variant,
 				TiaraWingsRecipe::new
 		);
-
-		@Override
-		public MapCodec<TiaraWingsRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, TiaraWingsRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 }
