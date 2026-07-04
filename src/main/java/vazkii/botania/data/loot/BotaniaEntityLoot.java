@@ -10,7 +10,7 @@
 
 package vazkii.botania.data.loot;
 
-import net.minecraft.advancements.critereon.EntityEquipmentPredicate;
+import net.minecraft.advancements.predicates.entity.EntityEquipmentPredicate;
 import net.minecraft.advancements.predicates.entity.EntityPredicate;
 import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.core.HolderLookup;
