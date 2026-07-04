@@ -161,3 +161,19 @@ jobs:
           javap -p -cp "$J" net.minecraft.world.level.block.entity.BlockEntity 2>&1 | grep -iE "getUpdateTag|handleUpdateTag|ValueInput|ValueOutput" | head
           echo "#### ProblemReporter (for TagValueOutput ctx) ####"
           javap -p -cp "$J" net.minecraft.util.ProblemReporter 2>&1 | grep -iE "public static|DISCARDING|ScopedCollector|interface" | head
+          echo "@@@@ RECIPE REDESIGN (1.21.4 recipe-book/display) @@@@"
+          echo "#### Recipe interface FULL ####"
+          javap -public -cp "$J" net.minecraft.world.item.crafting.Recipe 2>&1
+          echo "#### RecipeBookCategory / locate ####"
+          grep -iE "/(RecipeBookCategory|RecipeBookCategories)\.class$" /tmp/idx.txt | grep -iE 'net/minecraft' | sed 's#\.class$##; s#/#.#g' | sort -u | head
+          javap -public -cp "$J" net.minecraft.world.item.crafting.RecipeBookCategory 2>&1 | head -20
+          echo "#### PlacementInfo ####"
+          grep -iE "/PlacementInfo\.class$" /tmp/idx.txt | grep -iE 'net/minecraft' | sed 's#\.class$##; s#/#.#g' | sort -u | head
+          javap -public -cp "$J" net.minecraft.world.item.crafting.PlacementInfo 2>&1 | grep -iE "public static|create|NOT_PLACEABLE|Ingredient" | head -20
+          echo "#### RecipeDisplay / SlotDisplay locate ####"
+          grep -iE "/(RecipeDisplay|SlotDisplay)\.class$" /tmp/idx.txt | grep -iE 'net/minecraft' | sed 's#\.class$##; s#/#.#g' | sort -u | head
+          echo "#### CraftingRecipe interface (reference override set) ####"
+          javap -public -cp "$J" net.minecraft.world.item.crafting.CraftingRecipe 2>&1
+          echo "#### RecipeInput ####"
+          javap -public -cp "$J" net.minecraft.world.item.crafting.RecipeInput 2>&1 | head -15
+          echo "@@@@ END RECIPE @@@@"
