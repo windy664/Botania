@@ -80,7 +80,7 @@ public class OrechidBlockEntity extends FunctionalFlowerBlockEntity {
 		for (OrechidRecipe recipe : OrechidManager.getMatchingRecipes(getLevel().getRecipeManager(), getRecipeType(), input)) {
 			values.add(WeightedEntry.wrap(recipe, recipe.getWeight(getLevel(), coords)));
 		}
-		return WeightedRandom.getRandomItem(getLevel().random, values)
+		return WeightedRandom.getRandomItem(getLevel().getRandom(), values)
 				.map(WeightedEntry.Wrapper::data)
 				.orElse(null);
 	}
@@ -126,7 +126,7 @@ public class OrechidBlockEntity extends FunctionalFlowerBlockEntity {
 		if (possibleCoords.isEmpty()) {
 			return null;
 		}
-		return possibleCoords.get(getLevel().random.nextInt(possibleCoords.size()));
+		return possibleCoords.get(getLevel().getRandom().nextInt(possibleCoords.size()));
 	}
 
 	public boolean canOperate() {

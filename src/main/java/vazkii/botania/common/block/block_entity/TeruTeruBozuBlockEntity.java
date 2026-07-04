@@ -35,7 +35,7 @@ public class TeruTeruBozuBlockEntity extends BotaniaBlockEntity {
 	}
 
 	public static void resetRainTime(Level w) {
-		int time = w.random.nextInt(w.getLevelData().isRaining() ? 12000 : 168000) + 12000;
+		int time = w.getRandom().nextInt(w.getLevelData().isRaining() ? 12000 : 168000) + 12000;
 		LevelData info = w.getLevelData();
 		if (info instanceof ServerLevelData serverInfo) {
 			serverInfo.setRainTime(time);

@@ -52,7 +52,7 @@ public class EndoflameBlockEntity extends GeneratingFlowerBlockEntity {
 		}
 
 		if (getLevel().isClientSide()) {
-			if (burnTime > 0 && getLevel().random.nextInt(10) == 0) {
+			if (burnTime > 0 && getLevel().getRandom().nextInt(10) == 0) {
 				emitParticle(ParticleTypes.FLAME, 0.4 + Math.random() * 0.2, 0.7, 0.4 + Math.random() * 0.2, 0.0D, 0.0D, 0.0D);
 			}
 			return;

@@ -104,7 +104,7 @@ public class RannuncarpusBlockEntity extends FunctionalFlowerBlockEntity impleme
 				}
 
 				if (stackItem instanceof BlockItem || stackItem instanceof FlowerPlaceable) {
-					BlockPos coords = getCandidatePosition(getLevel().random, stack);
+					BlockPos coords = getCandidatePosition(getLevel().getRandom(), stack);
 					if (coords == null) {
 						continue;
 					}

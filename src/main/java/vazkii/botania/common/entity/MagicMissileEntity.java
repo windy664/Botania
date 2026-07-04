@@ -109,7 +109,7 @@ public class MagicMissileEntity extends ThrowableProjectile {
 		for (int i = 0; i < steps; i++) {
 			level().addParticle(data, particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
 
-			if (level().random.nextInt(steps) <= 1) {
+			if (level().getRandom().nextInt(steps) <= 1) {
 				level().addParticle(data, particlePos.x + (Math.random() - 0.5) * 0.4, particlePos.y + (Math.random() - 0.5) * 0.4, particlePos.z + (Math.random() - 0.5) * 0.4, 0, 0, 0);
 			}
 
@@ -196,7 +196,7 @@ public class MagicMissileEntity extends ThrowableProjectile {
 		}
 
 		if (!entities.isEmpty()) {
-			target = entities.get(level().random.nextInt(entities.size()));
+			target = entities.get(level().getRandom().nextInt(entities.size()));
 			setTarget(target);
 		}
 

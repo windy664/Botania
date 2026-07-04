@@ -39,15 +39,15 @@ public class JadedAmaranthusBlockEntity extends FunctionalFlowerBlockEntity {
 
 		if (ticksExisted % 30 == 0 && getMana() >= COST) {
 			BlockPos pos = new BlockPos(
-					getEffectivePos().getX() - RANGE + getLevel().random.nextInt(RANGE * 2 + 1),
+					getEffectivePos().getX() - RANGE + getLevel().getRandom().nextInt(RANGE * 2 + 1),
 					getEffectivePos().getY() + RANGE,
-					getEffectivePos().getZ() - RANGE + getLevel().random.nextInt(RANGE * 2 + 1)
+					getEffectivePos().getZ() - RANGE + getLevel().getRandom().nextInt(RANGE * 2 + 1)
 			);
 
 			BlockPos up = pos.above();
 
 			for (int i = 0; i < RANGE * 2; i++) {
-				DyeColor color = DyeColor.byId(getLevel().random.nextInt(16));
+				DyeColor color = DyeColor.byId(getLevel().getRandom().nextInt(16));
 				BlockState flower = BotaniaBlocks.getFlower(color).defaultBlockState();
 
 				if (getLevel().isEmptyBlock(up) && flower.canSurvive(getLevel(), up)) {

@@ -67,8 +67,8 @@ public class SnowflakePendantItem extends BaubleItem {
 				}
 			}
 		} else if (entity.level().isClientSide() && !entity.isShiftKeyDown()) {
-			if (entity.level().random.nextFloat() >= 0.25F) {
-				entity.level().addParticle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SNOW_BLOCK.defaultBlockState()), entity.getX() + entity.level().random.nextFloat() * 0.6 - 0.3, entity.getY() + 1.1, entity.getZ() + entity.level().random.nextFloat() * 0.6 - 0.3, 0, -0.15, 0);
+			if (entity.level().getRandom().nextFloat() >= 0.25F) {
+				entity.level().addParticle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SNOW_BLOCK.defaultBlockState()), entity.getX() + entity.level().getRandom().nextFloat() * 0.6 - 0.3, entity.getY() + 1.1, entity.getZ() + entity.level().getRandom().nextFloat() * 0.6 - 0.3, 0, -0.15, 0);
 			}
 		}
 	}

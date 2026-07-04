@@ -105,13 +105,13 @@ public record BotaniaEffectPacket(EffectType effectType, double x, double y, dou
 
 							for (int i = 0; i < p; i++) {
 								double m = 0.01;
-								double d0 = item.level().random.nextGaussian() * m;
-								double d1 = item.level().random.nextGaussian() * m;
-								double d2 = item.level().random.nextGaussian() * m;
+								double d0 = item.level().getRandom().nextGaussian() * m;
+								double d1 = item.level().getRandom().nextGaussian() * m;
+								double d2 = item.level().getRandom().nextGaussian() * m;
 								double d3 = 10.0D;
 								item.level().addParticle(ParticleTypes.POOF,
-										x + item.level().random.nextFloat() * item.getBbWidth() * 2.0F - item.getBbWidth() - d0 * d3, y + item.level().random.nextFloat() * item.getBbHeight() - d1 * d3,
-										z + item.level().random.nextFloat() * item.getBbWidth() * 2.0F - item.getBbWidth() - d2 * d3, d0, d1, d2);
+										x + item.level().getRandom().nextFloat() * item.getBbWidth() * 2.0F - item.getBbWidth() - d0 * d3, y + item.level().getRandom().nextFloat() * item.getBbHeight() - d1 * d3,
+										z + item.level().getRandom().nextFloat() * item.getBbWidth() * 2.0F - item.getBbWidth() - d2 * d3, d0, d1, d2);
 							}
 						}
 						case SPARK_NET_INDICATOR -> {

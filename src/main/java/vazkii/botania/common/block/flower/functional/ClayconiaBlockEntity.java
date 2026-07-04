@@ -86,7 +86,7 @@ public class ClayconiaBlockEntity extends FunctionalFlowerBlockEntity {
 		if (possibleCoords.isEmpty()) {
 			return null;
 		}
-		return possibleCoords.get(getLevel().random.nextInt(possibleCoords.size()));
+		return possibleCoords.get(getLevel().getRandom().nextInt(possibleCoords.size()));
 	}
 
 	@Override

@@ -55,7 +55,7 @@ public class DaffomillBlockEntity extends FunctionalFlowerBlockEntity implements
 	public void tickFlower() {
 		super.tickFlower();
 
-		if (getLevel().random.nextInt(4) == 0) {
+		if (getLevel().getRandom().nextInt(4) == 0) {
 			WispParticleData data = WispParticleData.wisp(0.25F + (float) Math.random() * 0.15F, 0.05F, 0.05F, 0.05F);
 			emitParticle(data, Math.random(), Math.random(), Math.random(), orientation.getStepX() * 0.1F, orientation.getStepY() * 0.1F, orientation.getStepZ() * 0.1F);
 		}

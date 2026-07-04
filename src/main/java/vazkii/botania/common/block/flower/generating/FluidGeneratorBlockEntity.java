@@ -115,7 +115,7 @@ public abstract class FluidGeneratorBlockEntity extends GeneratingFlowerBlockEnt
 				}
 			}
 		} else {
-			if (getLevel().random.nextInt(8) == 0) {
+			if (getLevel().getRandom().nextInt(8) == 0) {
 				doBurnParticles();
 			}
 			burnTime--;

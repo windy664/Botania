@@ -44,7 +44,7 @@ public class EntropinnyumBlockEntity extends GeneratingFlowerBlockEntity {
 				FluidState fluid = getLevel().getFluidState(tnt.blockPosition());
 				if (tnt.getFuse() == 1 && tnt.isAlive() && fluid.isEmpty()) {
 					boolean unethical = XplatAbstractions.INSTANCE.ethicalComponent(tnt).isUnethical();
-					tnt.playSound(unethical ? BotaniaSounds.entropinnyumAngry : BotaniaSounds.entropinnyumHappy, 1F, (1F + (getLevel().random.nextFloat() - getLevel().random.nextFloat()) * 0.2F) * 0.7F);
+					tnt.playSound(unethical ? BotaniaSounds.entropinnyumAngry : BotaniaSounds.entropinnyumHappy, 1F, (1F + (getLevel().getRandom().nextFloat() - getLevel().getRandom().nextFloat()) * 0.2F) * 0.7F);
 					tnt.discard();
 					addMana(unethical ? 3 : getMaxMana());
 					sync();
