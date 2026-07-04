@@ -11,100 +11,73 @@
 package vazkii.botania.common.item;
 
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 
 import vazkii.botania.common.handler.BotaniaSounds;
-import vazkii.botania.common.helper.RegistryHelper;
-
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
+import vazkii.botania.common.lib.BotaniaTags;
 
 import static vazkii.botania.api.BotaniaAPI.botaniaRL;
 
+import java.util.Map;
+
+/**
+ * 26.2: ArmorMaterial is now a plain record (no registry, no Layer). Each material references an EquipmentAsset key
+ * that points at the equipment texture json.
+ */
 public class BotaniaArmorMaterials {
-	private static final List<RegistryHelper.HolderProxy<ArmorMaterial>> ALL = new ArrayList<>();
+	public static final ResourceKey<EquipmentAsset> MANASTEEL_ASSET = ResourceKey.create(EquipmentAssets.ROOT_ID, botaniaRL("manasteel"));
+	public static final ResourceKey<EquipmentAsset> MANAWEAVE_ASSET = ResourceKey.create(EquipmentAssets.ROOT_ID, botaniaRL("manaweave"));
+	public static final ResourceKey<EquipmentAsset> ELEMENTIUM_ASSET = ResourceKey.create(EquipmentAssets.ROOT_ID, botaniaRL("elementium"));
+	public static final ResourceKey<EquipmentAsset> TERRASTEEL_ASSET = ResourceKey.create(EquipmentAssets.ROOT_ID, botaniaRL("terrasteel"));
 
-	public static final Holder<ArmorMaterial> MANASTEEL = create("manasteel",
+	public static final ArmorMaterial MANASTEEL = new ArmorMaterial(
+			15,
 			Map.of(
-					ArmorItem.Type.BOOTS, 2,
-					ArmorItem.Type.LEGGINGS, 5,
-					ArmorItem.Type.CHESTPLATE, 6,
-					ArmorItem.Type.HELMET, 2
+					ArmorType.BOOTS, 2,
+					ArmorType.LEGGINGS, 5,
+					ArmorType.CHESTPLATE, 6,
+					ArmorType.HELMET, 2,
+					ArmorType.BODY, 5
 			),
-			18, BotaniaSounds.equipManasteel, () -> Ingredient.of(BotaniaItems.manaSteel), 0);
+			18, BotaniaSounds.equipManasteel, 0F, 0F, BotaniaTags.Items.MANASTEEL_ARMOR_REPAIR, MANASTEEL_ASSET);
 
-	public static final Holder<ArmorMaterial> MANAWEAVE = create("manaweave",
+	public static final ArmorMaterial MANAWEAVE = new ArmorMaterial(
+			5,
 			Map.of(
-					ArmorItem.Type.BOOTS, 1,
-					ArmorItem.Type.LEGGINGS, 2,
-					ArmorItem.Type.CHESTPLATE, 3,
-					ArmorItem.Type.HELMET, 1
+					ArmorType.BOOTS, 1,
+					ArmorType.LEGGINGS, 2,
+					ArmorType.CHESTPLATE, 3,
+					ArmorType.HELMET, 1,
+					ArmorType.BODY, 2
 			),
-			18, BotaniaSounds.equipManaweave, () -> Ingredient.of(BotaniaItems.manaweaveCloth), 0);
-	public static final Holder<ArmorMaterial> ELEMENTIUM = create("elementium",
+			18, BotaniaSounds.equipManaweave, 0F, 0F, BotaniaTags.Items.MANAWEAVE_ARMOR_REPAIR, MANAWEAVE_ASSET);
+
+	public static final ArmorMaterial ELEMENTIUM = new ArmorMaterial(
+			18,
 			Map.of(
-					ArmorItem.Type.BOOTS, 2,
-					ArmorItem.Type.LEGGINGS, 5,
-					ArmorItem.Type.CHESTPLATE, 6,
-					ArmorItem.Type.HELMET, 2
+					ArmorType.BOOTS, 2,
+					ArmorType.LEGGINGS, 5,
+					ArmorType.CHESTPLATE, 6,
+					ArmorType.HELMET, 2,
+					ArmorType.BODY, 5
 			),
-			18, BotaniaSounds.equipElementium, () -> Ingredient.of(BotaniaItems.elementium), 0);
-	public static final Holder<ArmorMaterial> TERRASTEEL = create("terrasteel",
+			18, BotaniaSounds.equipElementium, 0F, 0F, BotaniaTags.Items.ELEMENTIUM_ARMOR_REPAIR, ELEMENTIUM_ASSET);
+
+	public static final ArmorMaterial TERRASTEEL = new ArmorMaterial(
+			34,
 			Map.of(
-					ArmorItem.Type.BOOTS, 3,
-					ArmorItem.Type.LEGGINGS, 6,
-					ArmorItem.Type.CHESTPLATE, 8,
-					ArmorItem.Type.HELMET, 3
+					ArmorType.BOOTS, 3,
+					ArmorType.LEGGINGS, 6,
+					ArmorType.CHESTPLATE, 8,
+					ArmorType.HELMET, 3,
+					ArmorType.BODY, 6
 			),
-			26, BotaniaSounds.equipTerrasteel, () -> Ingredient.of(BotaniaItems.terrasteel), 3);
-
-	private static Supplier<Holder<SoundEvent>> getSoundEventHolder(SoundEvent soundEvent) {
-		return () -> BuiltInRegistries.SOUND_EVENT.getHolder(soundEvent.getLocation()).orElseThrow();
-	}
-
-	private static Holder<ArmorMaterial> create(
-			String name,
-			Map<ArmorItem.Type, Integer> defense,
-			int enchantmentValue,
-			Holder<SoundEvent> equipSound,
-			Supplier<Ingredient> repairIngredient,
-			float toughness) {
-		List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(botaniaRL(name)));
-		return create(name, defense, enchantmentValue, equipSound, toughness, repairIngredient, list);
-	}
-
-	private static Holder<ArmorMaterial> create(
-			String name,
-			Map<ArmorItem.Type, Integer> defense,
-			int enchantmentValue,
-			Holder<SoundEvent> equipSound,
-			float toughness,
-			Supplier<Ingredient> repairIngredient,
-			List<ArmorMaterial.Layer> layers) {
-		EnumMap<ArmorItem.Type, Integer> enummap = new EnumMap<>(ArmorItem.Type.class);
-
-		for (ArmorItem.Type armoritem$type : ArmorItem.Type.values()) {
-			enummap.put(armoritem$type, defense.get(armoritem$type));
-		}
-
-		Identifier id = botaniaRL(name);
-		RegistryHelper.HolderProxy<ArmorMaterial> proxy = RegistryHelper.lazyHolderProxy(Registries.ARMOR_MATERIAL, id,
-				() -> new ArmorMaterial(enummap, enchantmentValue, equipSound, repairIngredient, layers, toughness, 0));
-		ALL.add(proxy);
-		return proxy;
-	}
-
-	public static void registerArmorMaterials(Registry<ArmorMaterial> registry) {
-		ALL.forEach(proxy -> proxy.register(registry));
-	}
+			26, BotaniaSounds.equipTerrasteel, 3F, 0F, BotaniaTags.Items.TERRASTEEL_ARMOR_REPAIR, TERRASTEEL_ASSET);
 }

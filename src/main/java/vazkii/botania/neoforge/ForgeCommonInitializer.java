@@ -194,7 +194,7 @@ public class ForgeCommonInitializer {
 	private void registryInit(RegisterEvent event) {
 		// Core item/block/BE
 		runRegistration(event, Registries.SOUND_EVENT, BotaniaSounds::init);
-		runRegistration(event, Registries.ARMOR_MATERIAL, BotaniaArmorMaterials::registerArmorMaterials);
+		// 26.2: ArmorMaterial is a plain record now, no longer a registry object.
 		bind(event, Registries.DATA_COMPONENT_TYPE, BotaniaDataComponents::registerComponents);
 		bind(event, Registries.BLOCK, consumer -> {
 			BotaniaBlocks.registerBlocks(consumer);

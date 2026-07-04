@@ -14,6 +14,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
@@ -23,6 +24,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -100,24 +102,24 @@ public interface BotaniaAPI {
 
 	}
 
-	Holder<ArmorMaterial> DUMMY_ARMOR_MATERIAL = Holder.direct(new ArmorMaterial(Map.of(), 0, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.EMPTY, List.of(), 0, 0));
-
 	TagKey<Item> DUMMY_REPAIR_TAG = TagKey.create(BuiltInRegistries.ITEM.key(), Identifier.fromNamespaceAndPath(MODID, "dummy_tool_repair"));
+	ArmorMaterial DUMMY_ARMOR_MATERIAL = new ArmorMaterial(0, Map.of(), 0, SoundEvents.ARMOR_EQUIP_LEATHER, 0, 0,
+			DUMMY_REPAIR_TAG, ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(MODID, "dummy")));
 	ToolMaterial DUMMY_ITEM_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0, 0, 0, DUMMY_REPAIR_TAG);
 
-	default Holder<ArmorMaterial> getManasteelArmorMaterial() {
+	default ArmorMaterial getManasteelArmorMaterial() {
 		return DUMMY_ARMOR_MATERIAL;
 	}
 
-	default Holder<ArmorMaterial> getElementiumArmorMaterial() {
+	default ArmorMaterial getElementiumArmorMaterial() {
 		return DUMMY_ARMOR_MATERIAL;
 	}
 
-	default Holder<ArmorMaterial> getManaweaveArmorMaterial() {
+	default ArmorMaterial getManaweaveArmorMaterial() {
 		return DUMMY_ARMOR_MATERIAL;
 	}
 
-	default Holder<ArmorMaterial> getTerrasteelArmorMaterial() {
+	default ArmorMaterial getTerrasteelArmorMaterial() {
 		return DUMMY_ARMOR_MATERIAL;
 	}
 

@@ -131,6 +131,10 @@ public class BotaniaTags {
 		public static final TagKey<Item> MANASTEEL_TOOL_REPAIR = tag("manasteel_tool_repair");
 		public static final TagKey<Item> ELEMENTIUM_TOOL_REPAIR = tag("elementium_tool_repair");
 		public static final TagKey<Item> TERRASTEEL_TOOL_REPAIR = tag("terrasteel_tool_repair");
+		public static final TagKey<Item> MANASTEEL_ARMOR_REPAIR = tag("manasteel_armor_repair");
+		public static final TagKey<Item> ELEMENTIUM_ARMOR_REPAIR = tag("elementium_armor_repair");
+		public static final TagKey<Item> TERRASTEEL_ARMOR_REPAIR = tag("terrasteel_armor_repair");
+		public static final TagKey<Item> MANAWEAVE_ARMOR_REPAIR = tag("manaweave_armor_repair");
 
 		private static TagKey<Item> tag(String name) {
 			return TagKey.create(Registries.ITEM, botaniaRL(name));

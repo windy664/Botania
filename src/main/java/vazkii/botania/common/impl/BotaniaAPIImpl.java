@@ -69,22 +69,22 @@ public class BotaniaAPIImpl implements BotaniaAPI {
 	}
 
 	@Override
-	public Holder<ArmorMaterial> getManasteelArmorMaterial() {
+	public ArmorMaterial getManasteelArmorMaterial() {
 		return BotaniaArmorMaterials.MANASTEEL;
 	}
 
 	@Override
-	public Holder<ArmorMaterial> getElementiumArmorMaterial() {
+	public ArmorMaterial getElementiumArmorMaterial() {
 		return BotaniaArmorMaterials.ELEMENTIUM;
 	}
 
 	@Override
-	public Holder<ArmorMaterial> getManaweaveArmorMaterial() {
+	public ArmorMaterial getManaweaveArmorMaterial() {
 		return BotaniaArmorMaterials.MANAWEAVE;
 	}
 
 	@Override
-	public Holder<ArmorMaterial> getTerrasteelArmorMaterial() {
+	public ArmorMaterial getTerrasteelArmorMaterial() {
 		return BotaniaArmorMaterials.TERRASTEEL;
 	}
 
