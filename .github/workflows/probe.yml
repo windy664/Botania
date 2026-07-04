@@ -198,4 +198,6 @@ jobs:
           javap -p -cp "$J" net.minecraft.world.item.crafting.ShapedRecipe 2>&1 | grep -iE "private|result|pattern|ingredient" | head
           echo "#### ShapelessRecipe PRIVATE fields (result/ingredients) ####"
           javap -p -cp "$J" net.minecraft.world.item.crafting.ShapelessRecipe 2>&1 | grep -iE "private|result|ingredient" | head
+          echo "#### Registry accessors (get/getOptional/getValue/getOrThrow) ####"
+          javap -public -cp "$J" net.minecraft.core.Registry 2>&1 | grep -iE "getOptional|getValue|getValueOrThrow| get\(| getOrThrow| wrapAsHolder|Optional" | head -30
           echo "@@@@ END RECIPE @@@@"
