@@ -248,4 +248,14 @@ jobs:
           javap -public -cp "$J" net.minecraft.world.item.crafting.RecipeAccess 2>&1 | head -20
           echo "#### RecipeManager byKey ####"
           javap -public -cp "$J" net.minecraft.world.item.crafting.RecipeManager 2>&1 | grep -iE "byKey|getRecipeFor|public" | head -15
+          echo "#### Items ALL dye-ish (unfiltered grep dye) ####"
+          javap -public -cp "$J" net.minecraft.world.item.Items 2>&1 | grep -i "dye" | head -20
+          echo "#### DyeColor methods (getItem?/getDyeItem?) ####"
+          javap -public -cp "$J" net.minecraft.world.item.DyeColor 2>&1 | grep -iE "public|getItem|dye" | head -30
+          echo "#### DyeItem statics via idx (DyeItem fields) ####"
+          javap -p -cp "$J" net.minecraft.world.item.DyeItem 2>&1 | grep -iE "static|byColor|DYES|get" | head
+          echo "#### idx: any *Dye* item-ish classes ####"
+          grep -iE "/[A-Za-z]*Dye[A-Za-z]*\.class$" /tmp/idx.txt | grep -iE 'net/minecraft/world/item' | sed 's#\.class$##; s#/#.#g' | sort -u | head
+          echo "#### ItemTags dye tags ####"
+          javap -public -cp "$J" net.minecraft.tags.ItemTags 2>&1 | grep -iE "DYE" | head
           echo "@@@@ END RECIPE @@@@"
