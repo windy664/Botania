@@ -36,8 +36,36 @@
 4. **GUI extract 管线**（GuiGraphics→GuiGraphicsExtractor）
 5. RecipeSerializer 组合化 → data gen → GameTest
 
+## 26.2 API 速查（probe javap 实测确认，2026-07-04）
+
+**当前真实错误：CI build.log 4001（download `gh run download <id> -n build-log`）。** 前几大簇：
+`cannot find symbol` 2646、`method does not override` 392、`bad return type in lambda` 88、`wrong number of type arguments` 71（渲染泛型）。缺失符号 Top：MultiBufferSource 340 / GameTest 226 / GuiGraphics 204 / BakedModel 174（**均渲染架构，留最后**）、RenderType 72、UseAnim 72、Tier 46、ArmorMaterial 22。
+
+**工具（Tier 删除）**：
+- `Tier` → `net.minecraft.world.item.ToolMaterial`（record）。构造 `ToolMaterial(TagKey<Block> incorrectBlocksForDrops, int durability, float speed, float attackDamageBonus, int enchantmentValue, TagKey<Item> repairItems)`。内置 WOOD/STONE/COPPER/IRON/DIAMOND/GOLD/NETHERITE。
+- **`SwordItem`/`PickaxeItem`/`DiggerItem` 已删**（`AxeItem`/`ShovelItem`/`HoeItem`/`MaceItem` 保留）。剑/镐改用 `new Item(props)` + props 赋工具组件。
+- `Item.Properties` 流式（全部返回 Properties）：`.sword(ToolMaterial,float atk,float spd)`、`.pickaxe(mat,atk,spd)`、`.axe/.shovel/.hoe(mat,atk,spd)`、`.tool(mat, TagKey<Block> mineable, atk, spd, float)`、`.durability(int)`、`.enchantable(int)`、`.repairable(Item|TagKey)`、`.component(DataComponentType<T>,T)`、`.equippable(EquipmentSlot)`、`.attributes(ItemAttributeModifiers)`。
+
+**盔甲（ArmorItem 删除）**：
+- `ArmorItem.Type` → `net.minecraft.world.item.equipment.ArmorType`。`ArmorMaterial` → `net.minecraft.world.item.equipment.ArmorMaterial`（record，非 Holder）。
+- `ArmorMaterial(int durability, Map<ArmorType,Integer> defense, int enchantmentValue, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, TagKey<Item> repairIngredient, ResourceKey<EquipmentAsset> assetId)`；`.createAttributes(ArmorType)`。**新增硬依赖 `ResourceKey<EquipmentAsset>`（assetId，指向装备贴图资产）**——Botania 每套甲要建一个 EquipmentAsset key。
+- 甲物品：`new Item(props.humanoidArmor(armorMaterial, armorType))`。旧 `ArmorMaterial.Layer` 概念没了（贴图走 EquipmentAsset json）。
+- `BotaniaArmorMaterials.java` 整个要按新 record 重写（现用 `Holder<ArmorMaterial>`+`.Layer`+`Map<ArmorItem.Type,>`）。
+
+**配方序列化（final 化）**：
+- `RecipeSerializer<T>` 现为 `final record RecipeSerializer(MapCodec<T> codec, StreamCodec<RegistryFriendlyByteBuf,T> streamCodec)`。**不能继承**——每个 Botania serializer 从"类+方法"改成 `new RecipeSerializer<>(mapCodec, streamCodec)`，配方类自身提供静态 MapCodec/StreamCodec。
+
+**NBT ValueInput/ValueOutput（CompoundTag 重构）**：
+- Entity：`protected void readAdditionalSaveData(ValueInput)` / `addAdditionalSaveData(ValueOutput)`（去掉了 CompoundTag+HolderLookup.Provider 两参）。
+- BlockEntity：`protected void loadAdditional(ValueInput)` / `saveAdditional(ValueOutput)`。
+- `ValueInput`（`net.minecraft.world.level.storage`）：`getIntOr(k,def)`/`getBooleanOr`/`getStringOr`/`getDoubleOr`/`getFloatOr`/`getLongOr`/`getByteOr`/`getShortOr`；`getInt(k)→Optional`；`read(k,Codec)→Optional<T>`；`child(k)→Optional<ValueInput>`；`childOrEmpty(k)`；`listOrEmpty(k,codec)`；`lookup()→HolderLookup.Provider`（替代原 provider 入参）。
+- `ValueOutput`：`putInt/putBoolean/putString/putDouble/putFloat/putLong/putByte/putShort`；`store(k,Codec,T)`/`storeNullable`；`child(k)→ValueOutput`；`list(k,codec)`。
+- 读写方法名基本沿用（此前已把 CompoundTag getX→getXOr），主要改**方法签名 + 嵌套 compound（getCompound→childOrEmpty / put(tag)→child）+ 删 provider 参数**。
+
+**杂项 rename（probe 定位）**：`UseAnim`→`net.minecraft.world.item.ItemUseAnimation`（`getUseAnimation` 返回它）；`FastColor`→`net.minecraft.util.ARGB`；`MobSpawnType`→`net.minecraft.world.entity.EntitySpawnReason`；`ResourceLocation`→`net.minecraft.resources.Identifier`（Item 里已见 `Identifier`）。枚举常量值/ARGB 方法名见下一轮 probe（enum values 段）。
+
 ## 复用资源
 
-- 26.2 API 映射速查见记忆 `reference-mc-mod-port-ci-probe`。
-- 云端探针：`.github/workflows/probe.yml`（改 `probe_classes.txt` 或 fuzzy 段，push 触发，反编译 patched jar 定位真 API）。
+- 云端探针：`.github/workflows/probe.yml`（LOCATE 段定位 simple name→FQN，JAVAP 段 dump 签名，enum values 段 dump 常量；push 或 `gh workflow run probe.yml --ref 26.2` 触发）。读结果：`gh run view <id> --log`。
+- CI 真编译：`build.yml` 每次 push 到 26.2 自动跑 `compileJava`（**`continue-on-error` 令 job 恒 success，真伪看 build.log 里 `BUILD SUCCESSFUL` 与 error 数**）。`gh run download <id> -n build-log`。
 - Curios 的 `ICurioRenderer`（SubmitNodeCollector 渲染）、Patchouli 的 `MultiblockPiPRenderer`（PiP 迁移）是现成参考实现。
