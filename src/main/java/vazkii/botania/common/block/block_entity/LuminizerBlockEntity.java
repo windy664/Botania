@@ -281,11 +281,11 @@ public class LuminizerBlockEntity extends BotaniaBlockEntity implements WandBind
 	@Override
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		bindPos = new BlockPos(
-				cmp.getInt(TAG_BIND_X),
-				cmp.getInt(TAG_BIND_Y),
-				cmp.getInt(TAG_BIND_Z)
+				cmp.getIntOr(TAG_BIND_X, 0),
+				cmp.getIntOr(TAG_BIND_Y, 0),
+				cmp.getIntOr(TAG_BIND_Z, 0)
 		);
-		noParticle = cmp.getBoolean(TAG_NO_PARTICLE);
+		noParticle = cmp.getBooleanOr(TAG_NO_PARTICLE, false);
 	}
 
 	@Override
@@ -398,7 +398,7 @@ public class LuminizerBlockEntity extends BotaniaBlockEntity implements WandBind
 
 		@Override
 		protected void readAdditionalSaveData(CompoundTag cmp) {
-			setExit(new BlockPos(cmp.getInt(TAG_EXIT_X), cmp.getInt(TAG_EXIT_Y), cmp.getInt(TAG_EXIT_Z)));
+			setExit(new BlockPos(cmp.getIntOr(TAG_EXIT_X, 0), cmp.getIntOr(TAG_EXIT_Y, 0), cmp.getIntOr(TAG_EXIT_Z, 0)));
 		}
 
 		@Override

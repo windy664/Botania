@@ -136,11 +136,11 @@ public class CorporeaCrystalCubeBlockEntity extends BaseCorporeaBlockEntity impl
 	@Override
 	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
 		super.readPacketNBT(tag, registries);
-		CompoundTag cmp = tag.getCompound(TAG_REQUEST_TARGET);
+		CompoundTag cmp = tag.getCompoundOrEmpty(TAG_REQUEST_TARGET);
 		requestTarget = ItemStack.parse(registries, cmp).orElse(ItemStack.EMPTY);
-		setCount(tag.getInt(TAG_ITEM_COUNT));
-		locked = tag.getBoolean(TAG_LOCK);
-		hideCount = tag.getBoolean(TAG_HIDE_COUNT);
+		setCount(tag.getIntOr(TAG_ITEM_COUNT, 0));
+		locked = tag.getBooleanOr(TAG_LOCK, false);
+		hideCount = tag.getBooleanOr(TAG_HIDE_COUNT, false);
 	}
 
 	public int getComparatorValue() {

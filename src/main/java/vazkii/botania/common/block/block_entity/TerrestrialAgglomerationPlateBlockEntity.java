@@ -229,7 +229,7 @@ public class TerrestrialAgglomerationPlateBlockEntity extends BotaniaBlockEntity
 
 	@Override
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		mana = cmp.getInt(TAG_MANA);
+		mana = cmp.getIntOr(TAG_MANA, 0);
 	}
 
 	@Override

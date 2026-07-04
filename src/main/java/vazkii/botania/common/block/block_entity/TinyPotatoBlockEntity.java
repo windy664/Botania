@@ -281,7 +281,7 @@ public class TinyPotatoBlockEntity extends ExposedSimpleInventoryBlockEntity imp
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readPacketNBT(cmp, registries);
 		if (cmp.contains(TAG_NAME, Tag.TAG_STRING)) {
-			name = Component.Serializer.fromJson(cmp.getString(TAG_NAME), registries);
+			name = Component.Serializer.fromJson(cmp.getStringOr(TAG_NAME, ""), registries);
 		} else {
 			name = null;
 		}

@@ -95,6 +95,6 @@ public class ThermalilyBlockEntity extends FluidGeneratorBlockEntity {
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
 
-		cooldownStrength = cmp.getInt(TAG_COOLDOWN_MAGNITUDE);
+		cooldownStrength = cmp.getIntOr(TAG_COOLDOWN_MAGNITUDE, 0);
 	}
 }

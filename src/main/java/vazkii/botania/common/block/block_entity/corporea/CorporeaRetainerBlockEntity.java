@@ -119,19 +119,19 @@ public class CorporeaRetainerBlockEntity extends BotaniaBlockEntity implements W
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readPacketNBT(cmp, registries);
 
-		int x = cmp.getInt(TAG_REQUEST_X);
-		int y = cmp.getInt(TAG_REQUEST_Y);
-		int z = cmp.getInt(TAG_REQUEST_Z);
+		int x = cmp.getIntOr(TAG_REQUEST_X, 0);
+		int y = cmp.getIntOr(TAG_REQUEST_Y, 0);
+		int z = cmp.getIntOr(TAG_REQUEST_Z, 0);
 		requestPos = new BlockPos(x, y, z);
 
-		Identifier reqType = Identifier.tryParse(cmp.getString(TAG_REQUEST_TYPE));
+		Identifier reqType = Identifier.tryParse(cmp.getStringOr(TAG_REQUEST_TYPE, ""));
 		if (reqType != null && corporeaMatcherDeserializers.containsKey(reqType)) {
 			request = corporeaMatcherDeserializers.get(reqType).apply(cmp, registries);
 		} else {
 			request = null;
 		}
-		requestCount = cmp.getInt(TAG_REQUEST_COUNT);
-		retainMissing = cmp.getBoolean(TAG_RETAIN_MISSING);
+		requestCount = cmp.getIntOr(TAG_REQUEST_COUNT, 0);
+		retainMissing = cmp.getBooleanOr(TAG_RETAIN_MISSING, false);
 	}
 
 	public static <T extends CorporeaRequestMatcher> void addCorporeaRequestMatcher(Identifier id, Class<T> clazz, BiFunction<CompoundTag, HolderLookup.Provider, T> deserializer) {

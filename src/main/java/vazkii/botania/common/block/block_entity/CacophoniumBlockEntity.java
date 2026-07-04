@@ -51,7 +51,7 @@ public class CacophoniumBlockEntity extends BotaniaBlockEntity {
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readPacketNBT(cmp, registries);
 
-		stack = ItemStack.parse(registries, cmp.getCompound(TAG_STACK)).orElse(ItemStack.EMPTY);
+		stack = ItemStack.parse(registries, cmp.getCompoundOrEmpty(TAG_STACK)).orElse(ItemStack.EMPTY);
 	}
 
 }

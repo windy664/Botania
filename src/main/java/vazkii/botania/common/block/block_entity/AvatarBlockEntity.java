@@ -84,15 +84,15 @@ public class AvatarBlockEntity extends SimpleInventoryBlockEntity implements Ava
 	@Override
 	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
 		super.readPacketNBT(tag, registries);
-		enabled = tag.getBoolean(TAG_ENABLED);
-		ticksElapsed = tag.getInt(TAG_TICKS_ELAPSED);
-		mana = tag.getInt(TAG_MANA);
+		enabled = tag.getBooleanOr(TAG_ENABLED, false);
+		ticksElapsed = tag.getIntOr(TAG_TICKS_ELAPSED, 0);
+		mana = tag.getIntOr(TAG_MANA, 0);
 		boostCooldowns.clear();
 		ListTag boostCooldowns = tag.getList(TAG_COOLDOWNS, Tag.TAG_COMPOUND);
 		for (Tag nbt : boostCooldowns) {
 			CompoundTag cmp = ((CompoundTag) nbt);
 			UUID id = cmp.getUUID("id");
-			int cooldown = cmp.getInt("cooldown");
+			int cooldown = cmp.getIntOr("cooldown", 0);
 			this.boostCooldowns.put(id, cooldown);
 		}
 	}

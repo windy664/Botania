@@ -300,15 +300,15 @@ public class ManaBurstEntity extends ThrowableProjectile implements ManaBurst {
 	@Override
 	public void readAdditionalSaveData(CompoundTag cmp) {
 		super.readAdditionalSaveData(cmp);
-		setTicksExisted(cmp.getInt(TAG_TICKS_EXISTED));
-		setColor(cmp.getInt(TAG_COLOR));
-		setMana(cmp.getInt(TAG_MANA));
-		setStartingMana(cmp.getInt(TAG_STARTING_MANA));
-		setMinManaLoss(cmp.getInt(TAG_MIN_MANA_LOSS));
-		setManaLossPerTick(cmp.getFloat(TAG_TICK_MANA_LOSS));
-		setGravity(cmp.getFloat(TAG_GRAVITY));
+		setTicksExisted(cmp.getIntOr(TAG_TICKS_EXISTED, 0));
+		setColor(cmp.getIntOr(TAG_COLOR, 0));
+		setMana(cmp.getIntOr(TAG_MANA, 0));
+		setStartingMana(cmp.getIntOr(TAG_STARTING_MANA, 0));
+		setMinManaLoss(cmp.getIntOr(TAG_MIN_MANA_LOSS, 0));
+		setManaLossPerTick(cmp.getFloatOr(TAG_TICK_MANA_LOSS, 0.0F));
+		setGravity(cmp.getFloatOr(TAG_GRAVITY, 0.0F));
 
-		CompoundTag lensCmp = cmp.getCompound(TAG_LENS_STACK);
+		CompoundTag lensCmp = cmp.getCompoundOrEmpty(TAG_LENS_STACK);
 		ItemStack stack = ItemStack.parse(level().registryAccess(), lensCmp).orElse(ItemStack.EMPTY);
 		if (!stack.isEmpty()) {
 			setSourceLens(stack);
@@ -316,24 +316,24 @@ public class ManaBurstEntity extends ThrowableProjectile implements ManaBurst {
 			setSourceLens(ItemStack.EMPTY);
 		}
 
-		int x = cmp.getInt(TAG_SPREADER_X);
-		int y = cmp.getInt(TAG_SPREADER_Y);
-		int z = cmp.getInt(TAG_SPREADER_Z);
+		int x = cmp.getIntOr(TAG_SPREADER_X, 0);
+		int y = cmp.getIntOr(TAG_SPREADER_Y, 0);
+		int z = cmp.getIntOr(TAG_SPREADER_Z, 0);
 
 		setBurstSourceCoords(new BlockPos(x, y, z));
 
 		if (cmp.contains(TAG_LAST_COLLISION_X)) {
-			x = cmp.getInt(TAG_LAST_COLLISION_X);
-			y = cmp.getInt(TAG_LAST_COLLISION_Y);
-			z = cmp.getInt(TAG_LAST_COLLISION_Z);
+			x = cmp.getIntOr(TAG_LAST_COLLISION_X, 0);
+			y = cmp.getIntOr(TAG_LAST_COLLISION_Y, 0);
+			z = cmp.getIntOr(TAG_LAST_COLLISION_Z, 0);
 			lastCollision = new BlockPos(x, y, z);
 		}
 
 		// Reread Motion because Entity.load clamps it to +/-10
 		ListTag motion = cmp.getList("Motion", Tag.TAG_DOUBLE);
-		setDeltaMovement(motion.getDouble(0), motion.getDouble(1), motion.getDouble(2));
+		setDeltaMovement(motion.getDoubleOr(0, 0.0), motion.getDoubleOr(1, 0.0), motion.getDoubleOr(2, 0.0));
 
-		boolean hasShooter = cmp.getBoolean(TAG_HAS_SHOOTER);
+		boolean hasShooter = cmp.getBooleanOr(TAG_HAS_SHOOTER, false);
 		if (hasShooter) {
 			UUID serializedUuid = cmp.getUUID(TAG_SHOOTER);
 			UUID identity = getShooterUUID();
@@ -341,15 +341,15 @@ public class ManaBurstEntity extends ThrowableProjectile implements ManaBurst {
 				setShooterUUID(serializedUuid);
 			}
 		}
-		warped = cmp.getBoolean(TAG_WARPED);
-		orbitTime = cmp.getInt(TAG_ORBIT_TIME);
-		tripped = cmp.getBoolean(TAG_TRIPPED);
+		warped = cmp.getBooleanOr(TAG_WARPED, false);
+		orbitTime = cmp.getIntOr(TAG_ORBIT_TIME, 0);
+		tripped = cmp.getBooleanOr(TAG_TRIPPED, false);
 		if (cmp.contains(TAG_MAGNETIZE_POS)) {
 			magnetizePos = BlockPos.CODEC.parse(NbtOps.INSTANCE, cmp.get(TAG_MAGNETIZE_POS)).getOrThrow();
 		} else {
 			magnetizePos = null;
 		}
-		entityData.set(LEFT_SOURCE_POS, cmp.getBoolean(TAG_LEFT_SOURCE));
+		entityData.set(LEFT_SOURCE_POS, cmp.getBooleanOr(TAG_LEFT_SOURCE, false));
 
 		this.alreadyCollidedAt.clear();
 		for (var tag : cmp.getList(TAG_ALREADY_COLLIDED_AT, Tag.TAG_INT_ARRAY)) {

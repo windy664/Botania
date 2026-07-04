@@ -150,7 +150,7 @@ public final class SkyblockWorldEvents {
 
 		BlockPos offset;
 		var infoOptional = structureBlockInfos.stream()
-				.filter(info -> "spawn_point".equals(info.nbt().getString("metadata")))
+				.filter(info -> "spawn_point".equals(info.nbt().getStringOr("metadata", "")))
 				.findFirst();
 		if (infoOptional.isPresent()) {
 			offset = infoOptional.get().pos();
@@ -168,7 +168,7 @@ public final class SkyblockWorldEvents {
 				level.getRandom(),
 				Block.UPDATE_ALL);
 		for (var info : structureBlockInfos) {
-			if ("light".equals(info.nbt().getString("metadata"))) {
+			if ("light".equals(info.nbt().getStringOr("metadata", ""))) {
 				BlockPos lightPos = startPoint.offset(info.pos());
 				if (level.setBlockAndUpdate(lightPos, BotaniaBlocks.manaFlame.defaultBlockState())) {
 					int r = 70 + level.getRandom().nextInt(185);

@@ -151,6 +151,6 @@ public class SpectrolusBlockEntity extends GeneratingFlowerBlockEntity {
 	@Override
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
-		nextColor = DyeColor.byId(cmp.getInt(TAG_NEXT_COLOR));
+		nextColor = DyeColor.byId(cmp.getIntOr(TAG_NEXT_COLOR, 0));
 	}
 }

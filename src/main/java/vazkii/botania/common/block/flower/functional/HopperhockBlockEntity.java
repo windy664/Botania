@@ -238,7 +238,7 @@ public class HopperhockBlockEntity extends FunctionalFlowerBlockEntity implement
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
 
-		filterType = cmp.getInt(TAG_FILTER_TYPE);
+		filterType = cmp.getIntOr(TAG_FILTER_TYPE, 0);
 	}
 
 	public static class WandHud extends BindableFlowerWandHud<HopperhockBlockEntity> {

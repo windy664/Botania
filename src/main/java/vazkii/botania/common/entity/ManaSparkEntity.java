@@ -339,7 +339,7 @@ public class ManaSparkEntity extends SparkBaseEntity implements ManaSpark {
 	@Override
 	protected void readAdditionalSaveData(CompoundTag cmp) {
 		super.readAdditionalSaveData(cmp);
-		setUpgrade(SparkUpgradeType.values()[cmp.getInt(TAG_UPGRADE)]);
+		setUpgrade(SparkUpgradeType.values()[cmp.getIntOr(TAG_UPGRADE, 0)]);
 	}
 
 	@Override

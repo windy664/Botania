@@ -133,7 +133,7 @@ public class EndoflameBlockEntity extends GeneratingFlowerBlockEntity {
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
 
-		burnTime = cmp.getInt(TAG_BURN_TIME);
+		burnTime = cmp.getIntOr(TAG_BURN_TIME, 0);
 	}
 
 	private int getBurnTime(ItemStack stack) {

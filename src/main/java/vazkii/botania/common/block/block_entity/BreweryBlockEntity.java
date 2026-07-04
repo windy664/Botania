@@ -223,7 +223,7 @@ public class BreweryBlockEntity extends SimpleInventoryBlockEntity implements Ma
 	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
 		super.readPacketNBT(tag, registries);
 
-		mana = tag.getInt(TAG_MANA);
+		mana = tag.getIntOr(TAG_MANA, 0);
 	}
 
 	@Override

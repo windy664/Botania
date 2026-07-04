@@ -64,8 +64,8 @@ public class SpreaderTurntableBlockEntity extends BotaniaBlockEntity implements 
 
 	@Override
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		speed = cmp.getInt(TAG_SPEED);
-		backwards = cmp.getBoolean(TAG_BACKWARDS);
+		speed = cmp.getIntOr(TAG_SPEED, 0);
+		backwards = cmp.getBooleanOr(TAG_BACKWARDS, false);
 	}
 
 	@Override

@@ -132,8 +132,8 @@ public class MunchdewBlockEntity extends GeneratingFlowerBlockEntity {
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
 
-		cooldown = cmp.getInt(TAG_COOLDOWN);
-		ateOnce = cmp.getBoolean(TAG_ATE_ONCE);
+		cooldown = cmp.getIntOr(TAG_COOLDOWN, 0);
+		ateOnce = cmp.getBooleanOr(TAG_ATE_ONCE, false);
 	}
 
 	@Override

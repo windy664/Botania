@@ -52,7 +52,7 @@ public class EnderAirEntity extends Entity {
 
 	@Override
 	protected void readAdditionalSaveData(CompoundTag tag) {
-		tickCount = tag.getInt(TAG_AGE);
+		tickCount = tag.getIntOr(TAG_AGE, 0);
 	}
 
 	@Override

@@ -49,9 +49,9 @@ public class FakeAirBlockEntity extends BotaniaBlockEntity {
 	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.loadAdditional(tag, registries);
 		flowerPos = new BlockPos(
-				tag.getInt(TAG_FLOWER_X),
-				tag.getInt(TAG_FLOWER_Y),
-				tag.getInt(TAG_FLOWER_Z)
+				tag.getIntOr(TAG_FLOWER_X, 0),
+				tag.getIntOr(TAG_FLOWER_Y, 0),
+				tag.getIntOr(TAG_FLOWER_Z, 0)
 		);
 	}
 

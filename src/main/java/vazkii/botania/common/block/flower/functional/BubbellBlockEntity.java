@@ -90,7 +90,7 @@ public class BubbellBlockEntity extends FunctionalFlowerBlockEntity {
 	@Override
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
-		range = cmp.getInt(TAG_RANGE);
+		range = cmp.getIntOr(TAG_RANGE, 0);
 	}
 
 	@Override

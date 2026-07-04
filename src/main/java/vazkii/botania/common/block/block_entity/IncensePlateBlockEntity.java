@@ -159,8 +159,8 @@ public class IncensePlateBlockEntity extends ExposedSimpleInventoryBlockEntity i
 	@Override
 	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
 		super.readPacketNBT(tag, registries);
-		timeLeft = tag.getInt(TAG_TIME_LEFT);
-		burning = tag.getBoolean(TAG_BURNING);
+		timeLeft = tag.getIntOr(TAG_TIME_LEFT, 0);
+		burning = tag.getBooleanOr(TAG_BURNING, false);
 	}
 
 	public boolean acceptsItem(ItemStack stack) {

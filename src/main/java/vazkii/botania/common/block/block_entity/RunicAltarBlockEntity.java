@@ -343,8 +343,8 @@ public class RunicAltarBlockEntity extends SimpleInventoryBlockEntity implements
 	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
 		super.readPacketNBT(tag, registries);
 
-		mana = tag.getInt(TAG_MANA);
-		manaToGet = tag.getInt(TAG_MANA_TO_GET);
+		mana = tag.getIntOr(TAG_MANA, 0);
+		manaToGet = tag.getIntOr(TAG_MANA_TO_GET, 0);
 	}
 
 	@Override

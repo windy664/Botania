@@ -183,10 +183,10 @@ public class PureDaisyBlockEntity extends SpecialFlowerBlockEntity {
 	@Override
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
-		positionAt = cmp.getInt(TAG_POSITION);
+		positionAt = cmp.getIntOr(TAG_POSITION, 0);
 
 		for (int i = 0; i < ticksRemaining.length; i++) {
-			ticksRemaining[i] = cmp.getInt(TAG_TICKS_REMAINING + i);
+			ticksRemaining[i] = cmp.getIntOr(TAG_TICKS_REMAINING + i, 0);
 		}
 	}
 

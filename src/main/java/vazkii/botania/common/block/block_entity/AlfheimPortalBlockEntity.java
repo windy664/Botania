@@ -321,10 +321,10 @@ public class AlfheimPortalBlockEntity extends BotaniaBlockEntity implements Wand
 	public void loadAdditional(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.loadAdditional(cmp, registries);
 
-		int count = cmp.getInt(TAG_STACK_COUNT);
+		int count = cmp.getIntOr(TAG_STACK_COUNT, 0);
 		stacksIn.clear();
 		for (int i = 0; i < count; i++) {
-			CompoundTag stackcmp = cmp.getCompound(TAG_STACK + i);
+			CompoundTag stackcmp = cmp.getCompoundOrEmpty(TAG_STACK + i);
 			ItemStack stack = ItemStack.parse(registries, stackcmp).orElse(ItemStack.EMPTY);
 			stacksIn.add(stack);
 		}
@@ -338,8 +338,8 @@ public class AlfheimPortalBlockEntity extends BotaniaBlockEntity implements Wand
 
 	@Override
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		ticksOpen = cmp.getInt(TAG_TICKS_OPEN);
-		ticksSinceLastItem = cmp.getInt(TAG_TICKS_SINCE_LAST_ITEM);
+		ticksOpen = cmp.getIntOr(TAG_TICKS_OPEN, 0);
+		ticksSinceLastItem = cmp.getIntOr(TAG_TICKS_SINCE_LAST_ITEM, 0);
 	}
 
 	@Nullable

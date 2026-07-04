@@ -105,7 +105,7 @@ public abstract class GeneratingFlowerBlockEntity extends BindableSpecialFlowerB
 	@Override
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
-		mana = cmp.getInt(TAG_MANA);
+		mana = cmp.getIntOr(TAG_MANA, 0);
 	}
 
 	@Override

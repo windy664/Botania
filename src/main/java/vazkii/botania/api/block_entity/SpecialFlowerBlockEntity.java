@@ -148,7 +148,7 @@ public abstract class SpecialFlowerBlockEntity extends BlockEntity implements Fl
 	public final void loadAdditional(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.loadAdditional(cmp, registries);
 		if (cmp.contains(TAG_TICKS_EXISTED)) {
-			ticksExisted = cmp.getInt(TAG_TICKS_EXISTED);
+			ticksExisted = cmp.getIntOr(TAG_TICKS_EXISTED, 0);
 		}
 		if (getBlockState().getBlock() instanceof FloatingFlowerBlock) {
 			setFloating(true);
@@ -193,7 +193,7 @@ public abstract class SpecialFlowerBlockEntity extends BlockEntity implements Fl
 	 */
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		if (cmp.contains(TAG_FLOATING_DATA)) {
-			floatingData.readNBT(cmp.getCompound(TAG_FLOATING_DATA));
+			floatingData.readNBT(cmp.getCompoundOrEmpty(TAG_FLOATING_DATA));
 		}
 	}
 

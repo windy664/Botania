@@ -481,7 +481,7 @@ public class ForgeXplatImpl implements XplatAbstractions {
 
 	@Override
 	public boolean preventsRemoteMovement(ItemEntity entity) {
-		return entity.getPersistentData().getBoolean("PreventRemoteMovement");
+		return entity.getPersistentData().getBooleanOr("PreventRemoteMovement", false);
 	}
 
 	public static final Map<Block, Block> CUSTOM_STRIPPABLES = new HashMap<>();

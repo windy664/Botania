@@ -200,12 +200,12 @@ public class HoveringHourglassBlockEntity extends ExposedSimpleInventoryBlockEnt
 	@Override
 	public void readPacketNBT(CompoundTag tag, HolderLookup.Provider registries) {
 		super.readPacketNBT(tag, registries);
-		time = tag.getInt(TAG_TIME);
-		timeFraction = tag.getFloat(TAG_TIME_FRACTION);
-		flip = tag.getBoolean(TAG_FLIP);
-		flipTicks = tag.getInt(TAG_FLIP_TICKS);
-		move = tag.getBoolean(TAG_MOVE);
-		lock = tag.getBoolean(TAG_LOCK);
+		time = tag.getIntOr(TAG_TIME, 0);
+		timeFraction = tag.getFloatOr(TAG_TIME_FRACTION, 0.0F);
+		flip = tag.getBooleanOr(TAG_FLIP, false);
+		flipTicks = tag.getIntOr(TAG_FLIP_TICKS, 0);
+		move = tag.getBooleanOr(TAG_MOVE, false);
+		lock = tag.getBooleanOr(TAG_LOCK, false);
 	}
 
 	public static class WandHud implements WandHUD {

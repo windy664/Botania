@@ -214,15 +214,15 @@ public class AnimatedTorchBlockEntity extends BotaniaBlockEntity implements Mana
 
 	@Override
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		side = cmp.getInt(TAG_SIDE);
-		rotating = cmp.getBoolean(TAG_ROTATING);
+		side = cmp.getIntOr(TAG_SIDE, 0);
+		rotating = cmp.getBooleanOr(TAG_ROTATING, false);
 		if (level != null && !level.isClientSide()) {
-			rotationTicks = cmp.getInt(TAG_ROTATION_TICKS);
+			rotationTicks = cmp.getIntOr(TAG_ROTATION_TICKS, 0);
 		}
-		anglePerTick = cmp.getDouble(TAG_ANGLE_PER_TICK);
-		nextRandomRotation = cmp.getInt(TAG_NEXT_RANDOM_ROTATION);
+		anglePerTick = cmp.getDoubleOr(TAG_ANGLE_PER_TICK, 0.0);
+		nextRandomRotation = cmp.getIntOr(TAG_NEXT_RANDOM_ROTATION, 0);
 
-		int modeOrdinal = cmp.getInt(TAG_TORCH_MODE);
+		int modeOrdinal = cmp.getIntOr(TAG_TORCH_MODE, 0);
 		TorchMode[] modes = TorchMode.values();
 		torchMode = modes[modeOrdinal % modes.length];
 	}

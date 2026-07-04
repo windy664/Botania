@@ -269,7 +269,7 @@ public class DandelifeonBlockEntity extends GeneratingFlowerBlockEntity {
 	@Override
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
-		radius = cmp.contains(TAG_RADIUS) ? cmp.getInt(TAG_RADIUS) : RANGE;
+		radius = cmp.contains(TAG_RADIUS) ? cmp.getIntOr(TAG_RADIUS, 0) : RANGE;
 	}
 
 }

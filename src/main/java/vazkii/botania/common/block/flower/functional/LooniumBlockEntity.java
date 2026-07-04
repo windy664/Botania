@@ -464,7 +464,7 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 				Identifier structureId =
 						world.registryAccess().registryOrThrow(Registries.STRUCTURE).getKey(structure);
 				boolean insidePiece = structureManager.structureHasPieceAt(pos, start);
-				if (insidePiece || !structureMap.getBoolean(structureId)) {
+				if (insidePiece || !structureMap.getBooleanOr(structureId, false)) {
 					structureMap.put(structureId, insidePiece);
 				}
 			}
@@ -505,16 +505,16 @@ public class LooniumBlockEntity extends FunctionalFlowerBlockEntity {
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
 		if (cmp.contains(TAG_LOOT_TABLE)) {
-			lootTableOverride = ResourceKey.create(Registries.LOOT_TABLE, Identifier.parse(cmp.getString(TAG_LOOT_TABLE)));
+			lootTableOverride = ResourceKey.create(Registries.LOOT_TABLE, Identifier.parse(cmp.getStringOr(TAG_LOOT_TABLE, "")));
 		}
 		if (cmp.contains(TAG_CONFIG_OVERRIDE)) {
-			configOverride = Identifier.parse(cmp.getString(TAG_CONFIG_OVERRIDE));
+			configOverride = Identifier.parse(cmp.getStringOr(TAG_CONFIG_OVERRIDE, ""));
 		}
 		if (cmp.contains(TAG_ATTUNE_DISPLAY_OVERRIDE)) {
-			attuneDisplayOverride = cmp.getString(TAG_ATTUNE_DISPLAY_OVERRIDE);
+			attuneDisplayOverride = cmp.getStringOr(TAG_ATTUNE_DISPLAY_OVERRIDE, "");
 		}
 		if (cmp.contains(TAG_DETECTED_STRUCTURE)) {
-			String rawString = cmp.getString(TAG_DETECTED_STRUCTURE);
+			String rawString = cmp.getStringOr(TAG_DETECTED_STRUCTURE, "");
 			if (rawString.isEmpty()) {
 				detectedStructures = Object2BooleanMaps.emptyMap();
 			} else {

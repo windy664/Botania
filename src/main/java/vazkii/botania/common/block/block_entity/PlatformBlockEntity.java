@@ -126,7 +126,7 @@ public class PlatformBlockEntity extends BotaniaBlockEntity implements Wandable,
 	@Override
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		HolderGetter<Block> holderGetter = this.level != null ? this.level.holderLookup(Registries.BLOCK) : BuiltInRegistries.BLOCK.asLookup();
-		BlockState state = NbtUtils.readBlockState(holderGetter, cmp.getCompound(TAG_CAMO));
+		BlockState state = NbtUtils.readBlockState(holderGetter, cmp.getCompoundOrEmpty(TAG_CAMO));
 		if (state.isAir()) {
 			state = null;
 		}

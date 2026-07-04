@@ -471,24 +471,24 @@ public class ManaPoolBlockEntity extends BotaniaBlockEntity implements ManaPool,
 
 	@Override
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		mana = cmp.getInt(TAG_MANA);
-		outputting = cmp.getBoolean(TAG_OUTPUTTING);
+		mana = cmp.getIntOr(TAG_MANA, 0);
+		outputting = cmp.getBooleanOr(TAG_OUTPUTTING, false);
 
 		if (cmp.contains(TAG_MANA_CAP)) {
-			manaCap = cmp.getInt(TAG_MANA_CAP);
+			manaCap = cmp.getIntOr(TAG_MANA_CAP, 0);
 		}
 		if (cmp.contains(TAG_CAN_ACCEPT)) {
-			canAccept = cmp.getBoolean(TAG_CAN_ACCEPT);
+			canAccept = cmp.getBooleanOr(TAG_CAN_ACCEPT, false);
 		}
 		if (cmp.contains(TAG_CAN_SPARE)) {
-			canSpare = cmp.getBoolean(TAG_CAN_SPARE);
+			canSpare = cmp.getBooleanOr(TAG_CAN_SPARE, false);
 		}
 
 		if (cmp.contains(TAG_INPUT_KEY)) {
-			inputKey = cmp.getString(TAG_INPUT_KEY);
+			inputKey = cmp.getStringOr(TAG_INPUT_KEY, "");
 		}
 		if (cmp.contains(TAG_OUTPUT_KEY)) {
-			inputKey = cmp.getString(TAG_OUTPUT_KEY);
+			inputKey = cmp.getStringOr(TAG_OUTPUT_KEY, "");
 		}
 
 	}

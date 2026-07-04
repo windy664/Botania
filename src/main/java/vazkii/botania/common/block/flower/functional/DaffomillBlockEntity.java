@@ -162,9 +162,9 @@ public class DaffomillBlockEntity extends FunctionalFlowerBlockEntity implements
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
 
-		orientation = Direction.from3DDataValue(cmp.getInt(TAG_ORIENTATION));
-		windTicks = cmp.getInt(TAG_WIND_TICKS);
-		redstonePowered = cmp.getBoolean(TAG_POWERED);
+		orientation = Direction.from3DDataValue(cmp.getIntOr(TAG_ORIENTATION, 0));
+		windTicks = cmp.getIntOr(TAG_WIND_TICKS, 0);
+		redstonePowered = cmp.getBooleanOr(TAG_POWERED, false);
 	}
 
 	private boolean isRedstonePowered() {

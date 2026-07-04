@@ -197,7 +197,7 @@ public class RannuncarpusBlockEntity extends FunctionalFlowerBlockEntity impleme
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
 		if (cmp.contains(TAG_STATE_SENSITIVE)) {
-			stateSensitive = cmp.getBoolean(TAG_STATE_SENSITIVE);
+			stateSensitive = cmp.getBooleanOr(TAG_STATE_SENSITIVE, false);
 		} else {
 			// old flowers stay state sensitive, new flowers are state insensitive
 			stateSensitive = true;

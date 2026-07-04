@@ -197,7 +197,7 @@ public class PollidisiacBlockEntity extends FunctionalFlowerBlockEntity implemen
 	@Override
 	public void readFromPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
 		super.readFromPacketNBT(cmp, registries);
-		this.mode = Mode.forName(cmp.getString(TAG_FEEDING_MODE));
+		this.mode = Mode.forName(cmp.getStringOr(TAG_FEEDING_MODE, ""));
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class CorporeaItemStackMatcher implements CorporeaRequestMatcher {
 	}
 
 	public static CorporeaItemStackMatcher createFromNBT(CompoundTag tag, HolderLookup.Provider registries) {
-		return new CorporeaItemStackMatcher(ItemStack.parseOptional(registries, tag.getCompound(TAG_REQUEST_STACK)), tag.getBoolean(TAG_REQUEST_CHECK_NBT));
+		return new CorporeaItemStackMatcher(ItemStack.parseOptional(registries, tag.getCompoundOrEmpty(TAG_REQUEST_STACK)), tag.getBooleanOr(TAG_REQUEST_CHECK_NBT, false));
 	}
 
 	@Override

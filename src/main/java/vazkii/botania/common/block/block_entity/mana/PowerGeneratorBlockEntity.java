@@ -79,7 +79,7 @@ public class PowerGeneratorBlockEntity extends BotaniaBlockEntity implements Man
 
 	@Override
 	public void readPacketNBT(CompoundTag cmp, HolderLookup.Provider registries) {
-		energy = cmp.getInt(TAG_MANA);
+		energy = cmp.getIntOr(TAG_MANA, 0);
 	}
 
 	public int getEnergy() {
