@@ -15,7 +15,6 @@ import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import vazkii.botania.api.brew.Brew;
@@ -24,7 +23,7 @@ import vazkii.botania.common.item.brew.BaseBrewItem;
 import java.util.Objects;
 
 public class MergeVialRecipe extends CustomRecipe {
-	public static final RecipeSerializer<MergeVialRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(MergeVialRecipe::new);
+	public static final RecipeSerializer<MergeVialRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(MergeVialRecipe::new);
 
 	public MergeVialRecipe(CraftingBookCategory craftingBookCategory) {
 		super(craftingBookCategory);

@@ -14,14 +14,13 @@ import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import vazkii.botania.api.item.CosmeticAttachable;
 import vazkii.botania.api.item.CosmeticBauble;
 
 public class CosmeticAttachRecipe extends CustomRecipe {
-	public static final RecipeSerializer<CosmeticAttachRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(CosmeticAttachRecipe::new);
+	public static final RecipeSerializer<CosmeticAttachRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(CosmeticAttachRecipe::new);
 
 	public CosmeticAttachRecipe(CraftingBookCategory craftingBookCategory) {
 		super(craftingBookCategory);

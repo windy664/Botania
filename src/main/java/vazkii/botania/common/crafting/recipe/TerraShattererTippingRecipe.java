@@ -14,14 +14,13 @@ import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import vazkii.botania.common.item.BotaniaItems;
 import vazkii.botania.common.item.equipment.tool.terrasteel.TerraShattererItem;
 
 public class TerraShattererTippingRecipe extends CustomRecipe {
-	public static final RecipeSerializer<TerraShattererTippingRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(TerraShattererTippingRecipe::new);
+	public static final RecipeSerializer<TerraShattererTippingRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(TerraShattererTippingRecipe::new);
 
 	public TerraShattererTippingRecipe(CraftingBookCategory craftingBookCategory) {
 		super(craftingBookCategory);

@@ -14,7 +14,6 @@ import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import vazkii.botania.api.item.AncientWillContainer;
@@ -23,7 +22,7 @@ import vazkii.botania.common.item.AncientWillItem;
 import java.util.Objects;
 
 public class AncientWillRecipe extends CustomRecipe {
-	public static final RecipeSerializer<AncientWillRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(AncientWillRecipe::new);
+	public static final RecipeSerializer<AncientWillRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(AncientWillRecipe::new);
 
 	public AncientWillRecipe(CraftingBookCategory craftingBookCategory) {
 		super(craftingBookCategory);

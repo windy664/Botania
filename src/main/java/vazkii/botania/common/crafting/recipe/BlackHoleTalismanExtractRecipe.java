@@ -15,7 +15,6 @@ import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
@@ -24,7 +23,7 @@ import vazkii.botania.common.item.BlackHoleTalismanItem;
 import vazkii.botania.common.item.BotaniaItems;
 
 public class BlackHoleTalismanExtractRecipe extends CustomRecipe {
-	public static final RecipeSerializer<BlackHoleTalismanExtractRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(BlackHoleTalismanExtractRecipe::new);
+	public static final RecipeSerializer<BlackHoleTalismanExtractRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(BlackHoleTalismanExtractRecipe::new);
 
 	public BlackHoleTalismanExtractRecipe(CraftingBookCategory craftingBookCategory) {
 		super(craftingBookCategory);

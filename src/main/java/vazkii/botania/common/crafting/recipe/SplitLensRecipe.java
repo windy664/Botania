@@ -16,13 +16,12 @@ import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import vazkii.botania.api.mana.BasicLensItem;
 
 public class SplitLensRecipe extends CustomRecipe {
-	public static final RecipeSerializer<SplitLensRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(SplitLensRecipe::new);
+	public static final RecipeSerializer<SplitLensRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(SplitLensRecipe::new);
 
 	public SplitLensRecipe(CraftingBookCategory craftingBookCategory) {
 		super(craftingBookCategory);

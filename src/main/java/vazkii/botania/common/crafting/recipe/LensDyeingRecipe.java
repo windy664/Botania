@@ -20,7 +20,6 @@ import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import vazkii.botania.api.mana.BasicLensItem;
@@ -32,7 +31,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class LensDyeingRecipe extends CustomRecipe {
-	public static final RecipeSerializer<LensDyeingRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(LensDyeingRecipe::new);
+	public static final RecipeSerializer<LensDyeingRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(LensDyeingRecipe::new);
 
 	private final Supplier<List<Ingredient>> dyes = Suppliers.memoize(() -> Arrays.asList(
 			Ingredient.of(Items.WHITE_DYE), Ingredient.of(Items.ORANGE_DYE),

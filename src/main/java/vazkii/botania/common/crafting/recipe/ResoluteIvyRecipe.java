@@ -15,14 +15,13 @@ import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import vazkii.botania.common.component.BotaniaDataComponents;
 import vazkii.botania.common.item.BotaniaItems;
 
 public class ResoluteIvyRecipe extends CustomRecipe {
-	public static final RecipeSerializer<ResoluteIvyRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(ResoluteIvyRecipe::new);
+	public static final RecipeSerializer<ResoluteIvyRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(ResoluteIvyRecipe::new);
 
 	public ResoluteIvyRecipe(CraftingBookCategory craftingBookCategory) {
 		super(craftingBookCategory);

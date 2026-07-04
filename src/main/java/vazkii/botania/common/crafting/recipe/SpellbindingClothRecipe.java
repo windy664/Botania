@@ -16,13 +16,12 @@ import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 
 import vazkii.botania.common.item.BotaniaItems;
 
 public class SpellbindingClothRecipe extends CustomRecipe {
-	public static final RecipeSerializer<SpellbindingClothRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(SpellbindingClothRecipe::new);
+	public static final RecipeSerializer<SpellbindingClothRecipe> SERIALIZER = SimpleRecipeSerializerHelper.of(SpellbindingClothRecipe::new);
 
 	public SpellbindingClothRecipe(CraftingBookCategory craftingBookCategory) {
 		super(craftingBookCategory);
