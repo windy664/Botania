@@ -102,37 +102,8 @@ public interface BotaniaAPI {
 
 	Holder<ArmorMaterial> DUMMY_ARMOR_MATERIAL = Holder.direct(new ArmorMaterial(Map.of(), 0, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.EMPTY, List.of(), 0, 0));
 
-	Tier DUMMY_ITEM_TIER = new Tier() {
-		@Override
-		public int getUses() {
-			return 0;
-		}
-
-		@Override
-		public float getSpeed() {
-			return 0;
-		}
-
-		@Override
-		public float getAttackDamageBonus() {
-			return 0;
-		}
-
-		@Override
-		public TagKey<Block> getIncorrectBlocksForDrops() {
-			return BlockTags.INCORRECT_FOR_WOODEN_TOOL;
-		}
-
-		@Override
-		public int getEnchantmentValue() {
-			return 0;
-		}
-
-		@Override
-		public Ingredient getRepairIngredient() {
-			return Ingredient.EMPTY;
-		}
-	};
+	TagKey<Item> DUMMY_REPAIR_TAG = TagKey.create(BuiltInRegistries.ITEM.key(), Identifier.fromNamespaceAndPath(MODID, "dummy_tool_repair"));
+	ToolMaterial DUMMY_ITEM_TIER = new ToolMaterial(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0, 0, 0, DUMMY_REPAIR_TAG);
 
 	default Holder<ArmorMaterial> getManasteelArmorMaterial() {
 		return DUMMY_ARMOR_MATERIAL;
@@ -150,15 +121,15 @@ public interface BotaniaAPI {
 		return DUMMY_ARMOR_MATERIAL;
 	}
 
-	default Tier getManasteelItemTier() {
+	default ToolMaterial getManasteelItemTier() {
 		return DUMMY_ITEM_TIER;
 	}
 
-	default Tier getElementiumItemTier() {
+	default ToolMaterial getElementiumItemTier() {
 		return DUMMY_ITEM_TIER;
 	}
 
-	default Tier getTerrasteelItemTier() {
+	default ToolMaterial getTerrasteelItemTier() {
 		return DUMMY_ITEM_TIER;
 	}
 

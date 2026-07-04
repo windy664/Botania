@@ -38,6 +38,7 @@ import vazkii.botania.common.helper.RegistryHelper;
 import vazkii.botania.common.integration.corporea.CorporeaNodeDetectors;
 import vazkii.botania.common.item.BotaniaArmorMaterials;
 import vazkii.botania.common.item.BotaniaItems;
+import vazkii.botania.common.lib.BotaniaTags;
 import vazkii.botania.common.item.relic.RingOfLokiItem;
 
 import java.util.*;
@@ -47,61 +48,13 @@ import java.util.function.Supplier;
 
 public class BotaniaAPIImpl implements BotaniaAPI {
 
-	private enum ItemTier implements Tier {
-		MANASTEEL(300, 6.2F, 2, 20,
-				() -> BotaniaItems.manaSteel, BlockTags.INCORRECT_FOR_DIAMOND_TOOL),
-		ELEMENTIUM(720, 6.2F, 2, 20,
-				() -> BotaniaItems.elementium, BlockTags.INCORRECT_FOR_DIAMOND_TOOL),
-		TERRASTEEL(2300, 9, 4, 26,
-				() -> BotaniaItems.terrasteel, BlockTags.INCORRECT_FOR_NETHERITE_TOOL);
-
-		private final int maxUses;
-		private final float efficiency;
-		private final float attackDamage;
-		private final int enchantability;
-		private final Supplier<Item> repairItem;
-		private final TagKey<Block> incorrectBlockForDrops;
-
-		ItemTier(int maxUses, float efficiency, float attackDamage, int enchantability,
-				Supplier<Item> repairItem, TagKey<Block> incorrectBlockForDrops) {
-			this.maxUses = maxUses;
-			this.efficiency = efficiency;
-			this.attackDamage = attackDamage;
-			this.enchantability = enchantability;
-			this.repairItem = repairItem;
-			this.incorrectBlockForDrops = incorrectBlockForDrops;
-		}
-
-		@Override
-		public int getUses() {
-			return maxUses;
-		}
-
-		@Override
-		public float getSpeed() {
-			return efficiency;
-		}
-
-		@Override
-		public float getAttackDamageBonus() {
-			return attackDamage;
-		}
-
-		@Override
-		public TagKey<Block> getIncorrectBlocksForDrops() {
-			return incorrectBlockForDrops;
-		}
-
-		@Override
-		public int getEnchantmentValue() {
-			return enchantability;
-		}
-
-		@Override
-		public Ingredient getRepairIngredient() {
-			return Ingredient.of(repairItem.get());
-		}
-	}
+	// 26.2: Tier interface removed, replaced by the ToolMaterial record. Repair ingredient is now a TagKey<Item>.
+	private static final ToolMaterial MANASTEEL_TIER = new ToolMaterial(
+			BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 300, 6.2F, 2, 20, BotaniaTags.Items.MANASTEEL_TOOL_REPAIR);
+	private static final ToolMaterial ELEMENTIUM_TIER = new ToolMaterial(
+			BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 720, 6.2F, 2, 20, BotaniaTags.Items.ELEMENTIUM_TOOL_REPAIR);
+	private static final ToolMaterial TERRASTEEL_TIER = new ToolMaterial(
+			BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2300, 9, 4, 26, BotaniaTags.Items.TERRASTEEL_TOOL_REPAIR);
 
 	private ConfigDataManager configDataManager = new ConfigDataManagerImpl();
 
@@ -136,18 +89,18 @@ public class BotaniaAPIImpl implements BotaniaAPI {
 	}
 
 	@Override
-	public Tier getManasteelItemTier() {
-		return ItemTier.MANASTEEL;
+	public ToolMaterial getManasteelItemTier() {
+		return MANASTEEL_TIER;
 	}
 
 	@Override
-	public Tier getElementiumItemTier() {
-		return ItemTier.ELEMENTIUM;
+	public ToolMaterial getElementiumItemTier() {
+		return ELEMENTIUM_TIER;
 	}
 
 	@Override
-	public Tier getTerrasteelItemTier() {
-		return ItemTier.TERRASTEEL;
+	public ToolMaterial getTerrasteelItemTier() {
+		return TERRASTEEL_TIER;
 	}
 
 	@Override
