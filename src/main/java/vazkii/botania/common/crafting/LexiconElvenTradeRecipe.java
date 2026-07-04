@@ -29,7 +29,9 @@ import java.util.Optional;
 
 public class LexiconElvenTradeRecipe implements ElvenTradeRecipe {
 	public static final LexiconElvenTradeRecipe INSTANCE = new LexiconElvenTradeRecipe();
-	public static final RecipeSerializer<LexiconElvenTradeRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<LexiconElvenTradeRecipe> SERIALIZER = new RecipeSerializer<>(
+			MapCodec.unit(() -> LexiconElvenTradeRecipe.INSTANCE),
+			StreamCodec.unit(LexiconElvenTradeRecipe.INSTANCE));
 
 	private LexiconElvenTradeRecipe() {}
 
@@ -77,15 +79,4 @@ public class LexiconElvenTradeRecipe implements ElvenTradeRecipe {
 		return SERIALIZER;
 	}
 
-	public static class Serializer extends RecipeSerializer<LexiconElvenTradeRecipe> {
-		@Override
-		public MapCodec<LexiconElvenTradeRecipe> codec() {
-			return MapCodec.unit(() -> LexiconElvenTradeRecipe.INSTANCE);
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, LexiconElvenTradeRecipe> streamCodec() {
-			return StreamCodec.unit(LexiconElvenTradeRecipe.INSTANCE);
-		}
-	}
 }

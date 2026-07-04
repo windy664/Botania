@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ElvenTradeRecipe implements vazkii.botania.api.recipe.ElvenTradeRecipe {
-	public static final RecipeSerializer<ElvenTradeRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<ElvenTradeRecipe> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 	private final ImmutableList<ItemStack> outputs;
 	private final NonNullList<Ingredient> inputs;
 
@@ -111,7 +111,7 @@ public class ElvenTradeRecipe implements vazkii.botania.api.recipe.ElvenTradeRec
 		return getOutputs();
 	}
 
-	public static class Serializer extends RecipeSerializer<ElvenTradeRecipe> {
+	public static class Serializer {
 		public static final MapCodec<ElvenTradeRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				ExtraCodecs.nonEmptyList(ItemStack.SIMPLE_ITEM_CODEC.listOf()).fieldOf("output").forGetter(ElvenTradeRecipe::getOutputs),
 				ExtraCodecs.nonEmptyList(Ingredient.CODEC_NONEMPTY.listOf()).fieldOf("ingredients").forGetter(ElvenTradeRecipe::getIngredients)
@@ -121,15 +121,5 @@ public class ElvenTradeRecipe implements vazkii.botania.api.recipe.ElvenTradeRec
 				Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), ElvenTradeRecipe::getIngredients,
 				ElvenTradeRecipe::new
 		);
-
-		@Override
-		public MapCodec<ElvenTradeRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, ElvenTradeRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 }

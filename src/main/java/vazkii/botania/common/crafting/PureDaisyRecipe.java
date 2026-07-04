@@ -31,7 +31,7 @@ import java.util.Optional;
 public class PureDaisyRecipe implements vazkii.botania.api.recipe.PureDaisyRecipe {
 
 	public static final int DEFAULT_TIME = 150;
-	public static final RecipeSerializer<PureDaisyRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<PureDaisyRecipe> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 
 	private final StateIngredient input;
 	private final StateIngredient output;
@@ -90,7 +90,7 @@ public class PureDaisyRecipe implements vazkii.botania.api.recipe.PureDaisyRecip
 		return SERIALIZER;
 	}
 
-	public static class Serializer extends RecipeSerializer<PureDaisyRecipe> {
+	public static class Serializer {
 		public static final MapCodec<PureDaisyRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				StateIngredients.TYPED_CODEC.fieldOf("input").forGetter(PureDaisyRecipe::getInput),
 				StateIngredients.TYPED_CODEC.fieldOf("output").forGetter(PureDaisyRecipe::getOutput),
@@ -105,15 +105,5 @@ public class PureDaisyRecipe implements vazkii.botania.api.recipe.PureDaisyRecip
 				ByteBufCodecs.BOOL, PureDaisyRecipe::isCopyInputProperties,
 				(input, output, time, copyInputProperties) -> new PureDaisyRecipe(input, output, time, copyInputProperties, null)
 		);
-
-		@Override
-		public MapCodec<PureDaisyRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, PureDaisyRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 }

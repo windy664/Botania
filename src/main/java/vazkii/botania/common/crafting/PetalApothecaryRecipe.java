@@ -28,7 +28,7 @@ import vazkii.botania.common.crafting.recipe.RecipeUtils;
 import java.util.List;
 
 public class PetalApothecaryRecipe implements vazkii.botania.api.recipe.PetalApothecaryRecipe {
-	public static final RecipeSerializer<PetalApothecaryRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<PetalApothecaryRecipe> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 	private final ItemStack output;
 	private final Ingredient reagent;
 	private final NonNullList<Ingredient> ingredients;
@@ -82,7 +82,7 @@ public class PetalApothecaryRecipe implements vazkii.botania.api.recipe.PetalApo
 		return SERIALIZER;
 	}
 
-	public static class Serializer extends RecipeSerializer<PetalApothecaryRecipe> {
+	public static class Serializer {
 		public final MapCodec<PetalApothecaryRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				ItemStack.CODEC.fieldOf("output").forGetter(PetalApothecaryRecipe::getOutput),
 				Ingredient.CODEC_NONEMPTY.fieldOf("reagent").forGetter(PetalApothecaryRecipe::getReagent),
@@ -94,15 +94,5 @@ public class PetalApothecaryRecipe implements vazkii.botania.api.recipe.PetalApo
 				Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), PetalApothecaryRecipe::getIngredients,
 				PetalApothecaryRecipe::of
 		);
-
-		@Override
-		public MapCodec<PetalApothecaryRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, PetalApothecaryRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 }

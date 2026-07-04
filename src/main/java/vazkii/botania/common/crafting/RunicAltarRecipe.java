@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class RunicAltarRecipe implements vazkii.botania.api.recipe.RunicAltarRecipe {
-	public static final RecipeSerializer<RunicAltarRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<RunicAltarRecipe> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 	private final ItemStack output;
 	private final Ingredient reagent;
 	private final NonNullList<Ingredient> ingredients;
@@ -141,7 +141,7 @@ public class RunicAltarRecipe implements vazkii.botania.api.recipe.RunicAltarRec
 		return reagent;
 	}
 
-	public static class Serializer extends RecipeSerializer<RunicAltarRecipe> {
+	public static class Serializer {
 		private static final MapCodec<RunicAltarRecipe> RAW_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				Ingredient.CODEC_NONEMPTY.listOf().fieldOf("ingredients").forGetter(RunicAltarRecipe::getIngredients),
 				Ingredient.CODEC_NONEMPTY.listOf().fieldOf("catalysts").forGetter(RunicAltarRecipe::getCatalysts),
@@ -166,15 +166,5 @@ public class RunicAltarRecipe implements vazkii.botania.api.recipe.RunicAltarRec
 				ItemStack.STREAM_CODEC, RunicAltarRecipe::getOutput,
 				RunicAltarRecipe::of
 		);
-
-		@Override
-		public MapCodec<RunicAltarRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, RunicAltarRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 }

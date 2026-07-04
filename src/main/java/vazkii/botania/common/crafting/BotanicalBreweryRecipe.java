@@ -34,7 +34,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class BotanicalBreweryRecipe implements vazkii.botania.api.recipe.BotanicalBreweryRecipe {
-	public static final RecipeSerializer<BotanicalBreweryRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<BotanicalBreweryRecipe> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 	private final Brew brew;
 	private final NonNullList<Ingredient> inputs;
 
@@ -127,7 +127,7 @@ public class BotanicalBreweryRecipe implements vazkii.botania.api.recipe.Botanic
 				&& inputs.equals(brewRecipe.inputs);
 	}
 
-	public static class Serializer extends RecipeSerializer<BotanicalBreweryRecipe> {
+	public static class Serializer {
 		public static final MapCodec<BotanicalBreweryRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				BotaniaAPI.instance().getBrewRegistry().byNameCodec().fieldOf("brew").forGetter(BotanicalBreweryRecipe::getBrew),
 				ExtraCodecs.nonEmptyList(Ingredient.CODEC_NONEMPTY.listOf()).fieldOf("ingredients").forGetter(BotanicalBreweryRecipe::getIngredients)
@@ -137,15 +137,5 @@ public class BotanicalBreweryRecipe implements vazkii.botania.api.recipe.Botanic
 				Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), BotanicalBreweryRecipe::getIngredients,
 				BotanicalBreweryRecipe::new
 		);
-
-		@Override
-		public MapCodec<BotanicalBreweryRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, BotanicalBreweryRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 }

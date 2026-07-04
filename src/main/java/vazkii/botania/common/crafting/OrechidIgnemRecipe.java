@@ -26,7 +26,7 @@ import vazkii.botania.api.recipe.StateIngredient;
 import java.util.function.Function;
 
 public class OrechidIgnemRecipe extends OrechidRecipe {
-	public static final RecipeSerializer<OrechidIgnemRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<OrechidIgnemRecipe> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 
 	public OrechidIgnemRecipe(StateIngredient input, StateIngredient output, int weight,
 			@Nullable CacheableFunction successFunction, int weightBonus, @Nullable TagKey<Biome> biomes) {
@@ -55,20 +55,10 @@ public class OrechidIgnemRecipe extends OrechidRecipe {
 		return SERIALIZER;
 	}
 
-	public static class Serializer extends RecipeSerializer<OrechidIgnemRecipe> {
+	public static class Serializer {
 		public static final MapCodec<OrechidIgnemRecipe> CODEC = OrechidRecipe.SERIALIZER.codec()
 				.xmap(OrechidIgnemRecipe::new, Function.identity());
 		public static final StreamCodec<RegistryFriendlyByteBuf, OrechidIgnemRecipe> STREAM_CODEC = OrechidRecipe.SERIALIZER.streamCodec()
 				.map(OrechidIgnemRecipe::new, Function.identity());
-
-		@Override
-		public MapCodec<OrechidIgnemRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, OrechidIgnemRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 }

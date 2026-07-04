@@ -35,7 +35,7 @@ import vazkii.botania.api.recipe.StateIngredient;
 import java.util.Optional;
 
 public class OrechidRecipe implements vazkii.botania.api.recipe.OrechidRecipe {
-	public static final RecipeSerializer<OrechidRecipe> SERIALIZER = new Serializer();
+	public static final RecipeSerializer<OrechidRecipe> SERIALIZER = new RecipeSerializer<>(Serializer.CODEC, Serializer.STREAM_CODEC);
 	private final StateIngredient input;
 	private final StateIngredient output;
 	private final int weight;
@@ -111,7 +111,7 @@ public class OrechidRecipe implements vazkii.botania.api.recipe.OrechidRecipe {
 		return SERIALIZER;
 	}
 
-	public static class Serializer extends RecipeSerializer<OrechidRecipe> {
+	public static class Serializer {
 		private static final MapCodec<OrechidRecipe> RAW_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				StateIngredients.TYPED_CODEC.fieldOf("input").forGetter(OrechidRecipe::getInput),
 				StateIngredients.TYPED_CODEC.fieldOf("output").forGetter(OrechidRecipe::getOutput),
@@ -139,15 +139,5 @@ public class OrechidRecipe implements vazkii.botania.api.recipe.OrechidRecipe {
 				)), OrechidRecipe::getBiomes,
 				(in, out, weight, weightBonus, biomes) -> new OrechidRecipe(in, out, weight, null, weightBonus, biomes.orElse(null))
 		);
-
-		@Override
-		public MapCodec<OrechidRecipe> codec() {
-			return CODEC;
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, OrechidRecipe> streamCodec() {
-			return STREAM_CODEC;
-		}
 	}
 }
