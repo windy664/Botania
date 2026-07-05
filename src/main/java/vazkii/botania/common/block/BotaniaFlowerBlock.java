@@ -42,7 +42,7 @@ public abstract class BotaniaFlowerBlock extends FlowerBlock implements Colored 
 		int r = (hex & 0xFF0000) >> 16;
 		int g = (hex & 0xFF00) >> 8;
 		int b = hex & 0xFF;
-		Vec3 offset = state.getOffset(world, pos);
+		Vec3 offset = state.getOffset(pos);
 		double x = pos.getX() + offset.x;
 		double y = pos.getY() + offset.y;
 		double z = pos.getZ() + offset.z;

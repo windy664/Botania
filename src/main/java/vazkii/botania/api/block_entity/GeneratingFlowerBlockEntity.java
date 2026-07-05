@@ -53,7 +53,7 @@ public abstract class GeneratingFlowerBlockEntity extends BindableSpecialFlowerB
 			float blue = (color & 0xFF) / 255F;
 
 			if (Math.random() > particleChance) {
-				Vec3 offset = getLevel().getBlockState(getBlockPos()).getOffset(getLevel(), getBlockPos());
+				Vec3 offset = getLevel().getBlockState(getBlockPos()).getOffset(getBlockPos());
 				double x = getBlockPos().getX() + offset.x;
 				double y = getBlockPos().getY() + offset.y;
 				double z = getBlockPos().getZ() + offset.z;
