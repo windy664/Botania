@@ -277,4 +277,7 @@ jobs:
           javap -public -cp "$J" net.minecraft.world.level.block.state.BlockState 2>&1 | grep -iE "onRemove|affectNeighbors" | head
           echo "#### ItemParticleOption ctor (current) ####"
           javap -public -cp "$J" net.minecraft.core.particles.ItemParticleOption 2>&1 | head -15
+          echo "#### BlockStateBase getOffset signature ####"
+          javap -public -cp "$J" net.minecraft.world.level.block.state.BlockBehaviour 2>&1 | grep -iE "getOffset" | head
+          javap -public -cp "$J" 'net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase' 2>&1 | grep -iE "getOffset" | head
           echo "@@@@ END RECIPE @@@@"
