@@ -86,13 +86,6 @@ public class SpecialFlowerBlock extends FlowerBlock implements EntityBlock {
 		((SpecialFlowerBlockEntity) level.getBlockEntity(pos)).setPlacedBy(level, pos, state, placer, stack);
 	}
 
-	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-		if (hasComparatorOutput && !newState.hasAnalogOutputSignal()) {
-			level.updateNeighbourForOutputSignal(pos, newState.getBlock());
-		}
-		super.onRemove(state, level, pos, newState, movedByPiston);
-	}
 
 	@Override
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource rand) {
